@@ -33,7 +33,7 @@ const alertRemover = {
 const frameManager = {
     images: [],
     getFrameUrl(index) {
-        return `${options.FRAME_BASE_URL}/dframe_${index.toString().padStart(4, '0')}.webp`;
+        return `${options.FRAME_BASE_URL}/drframe_${index.toString().padStart(4, '0')}.webp`;
     },
     setCanvasSize(img) {
         elements.canvas.width = img.naturalWidth;
