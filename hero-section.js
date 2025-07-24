@@ -2,7 +2,7 @@
 
 const options = {
     FRAME_COUNT: 125,
-    FRAME_BASE_URL: 'https://raw.githubusercontent.com/restarea92/ju/main/media/webp_frames',
+    FRAME_BASE_URL: 'https://raw.githubusercontent.com/restarea92/ju/main/media',
 };
 
 const elements = {
@@ -33,7 +33,7 @@ const alertRemover = {
 const frameManager = {
     images: [],
     getFrameUrl(index) {
-        return `${options.FRAME_BASE_URL}/rdframe_${index.toString().padStart(4, '0')}.webp`;
+        return `${options.FRAME_BASE_URL}/dframe_${index.toString().padStart(4, '0')}.webp`;
     },
     setCanvasSize(img) {
         elements.canvas.width = img.naturalWidth;
