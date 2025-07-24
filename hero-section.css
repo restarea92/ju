@@ -1,46 +1,45 @@
+#doz_header_wrap {
+  position: absolute;
+  width: 100%;
+}
 
-  #doz_header_wrap {
-  	position:absolute;
-	width:100%;
-  }
-  
-  .canvas-wrapper {
-    min-height: 200dvh;
-  }
-  
-  .canvas-container {
-    position: sticky;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100dvh;
-    overflow: hidden;
-  }
-  
-  canvas {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  
-  svg#center-svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: fit-content;
-    height: fit-content;
-    z-index: 10;
-    pointer-events: none;
-    width: 100%;
-    overflow: visible;
-    transform: translateX(-50%) translateY(-50%) scale(0.04);
-    opacity:0.25;
-  }
-  
-  svg text {
-    font-size: 100vw;
-    font-weight: 700;
-    fill: white;
-  }
-  
+.canvas-wrapper {
+  min-height: 200dvh;
+}
+
+.canvas-container {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  object-position: 60% top;
+}
+
+svg#center-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: fit-content;
+  height: fit-content;
+  z-index: 10;
+  pointer-events: none;
+  width: 100%;
+  overflow: visible;
+  transform: translateX(-50%) translateY(-50%) scale(0.04);
+  opacity: 0.25;
+}
+
+svg text {
+  font-size: 100vw;
+  font-weight: 700;
+  fill: white;
+}
