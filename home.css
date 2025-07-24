@@ -211,6 +211,9 @@
       a {
         font-size: 0.875rem;
       }
+      a:hover {
+          font-size: 0.875rem;
+      }
     }
   }
 
