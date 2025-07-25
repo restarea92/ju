@@ -161,9 +161,13 @@ const scrollHandler = {
     }
 };
 
-export function initApp() {
-    alertRemover.init();
-    frameManager.init();
-    scrollHandler.init();
-    scrollHandler.handleScroll();
-}
+const app = {
+    init() {
+        alertRemover.init();
+        frameManager.init();
+        scrollHandler.init();
+        scrollHandler.handleScroll();
+    }
+};
+
+export default app;
