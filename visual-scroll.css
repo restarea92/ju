@@ -54,3 +54,21 @@
     transform: translateX(-50%);
     z-index: -1;
 }
+
+@media (max-width: 1280px) and (min-width: 1025px) {
+  /* 1025 ~ 1280 */
+   
+.sticky-element {
+    position: sticky;
+    top:4rem;
+    padding:4rem 0;
+}
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* 769 ~ 1024 */
+}
+
+@media (max-width: 768px) {
+  /* 최대 768 */
+}
