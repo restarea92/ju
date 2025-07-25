@@ -1,5 +1,5 @@
 // infinite-scroll.js 
-export const app = {
+const app = {
   options: {
     itemsPerView: 5,
     flowScrollPadding: '0.75rem',
@@ -137,3 +137,5 @@ export const app = {
     this.oldScrollY = this.y;
   }
 };
+
+export default app;
