@@ -1,4 +1,44 @@
-.sticky-element {
+/*!
+ * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
+ * 
+ * This Software is licensed by Hscomm Web dev Team ("Licensor") to the end user ("Licensee").
+ * 
+ * 1. License Grants
+ *    1.1 Licensee is granted a non-exclusive, non-transferable license to use one copy of the Software
+ *        solely on a single website domain owned or controlled by Licensee.
+ *    1.2 Third-party library components included are subject to their respective open source licenses
+ *        (e.g., GPL, LGPL, MIT, Apache), which take precedence as applicable.
+ *    1.3 However, GSAP library components are subject to the GSAP Standard "No Charge" License by Webflow.
+ *        Licensee agrees to comply with the GSAP license terms (https://greensock.com/licensing/).
+ *    1.4 For any matters not explicitly covered by third-party licenses, this EULA applies as the final
+ *        governing license, except when conflicting with third-party licenses which take precedence.
+ * 
+ * 2. Usage Restrictions
+ *    - No reproduction, distribution, sale, sublicensing, or transfer of Licensor's original Software parts
+ *      to third parties.
+ *    - No modification, adaptation, or derivative works of Licensor's original Software parts for redistribution.
+ *    - Use limited to one domain; additional licenses required for multiple domains or projects.
+ *    - No third-party use of Licensor's Software components allowed.
+ *    - Proprietary notices or branding of third-party components must not be removed or altered.
+ * 
+ * 3. Ownership
+ *    - Licensor retains all intellectual property rights in original code (excluding third-party components).
+ *    - Third-party components remain property of their respective owners.
+ * 
+ * 4. Limitation of Liability
+ *    - Licensor is not liable for damages from use or inability to use the Software, including third-party parts.
+ * 
+ * 5. Termination
+ *    - License terminates immediately upon violation; Licensee must cease use and delete all copies.
+ * 
+ * 6. Governing Law
+ *    - Governed by the laws of [Jurisdiction].
+ * 
+ * Hscomm Web dev Team
+ * Date: 07/25/2025
+ */
+ 
+ .sticky-element {
     position: sticky;
     top:0;
 }

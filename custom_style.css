@@ -1,0 +1,227 @@
+/*!
+ * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
+ * 
+ * This Software is licensed by Hscomm Web dev Team ("Licensor") to the end user ("Licensee").
+ * 
+ * 1. License Grants
+ *    1.1 Licensee is granted a non-exclusive, non-transferable license to use one copy of the Software
+ *        solely on a single website domain owned or controlled by Licensee.
+ *    1.2 Third-party library components included are subject to their respective open source licenses
+ *        (e.g., GPL, LGPL, MIT, Apache), which take precedence as applicable.
+ *    1.3 However, GSAP library components are subject to the GSAP Standard "No Charge" License by Webflow.
+ *        Licensee agrees to comply with the GSAP license terms (https://greensock.com/licensing/).
+ *    1.4 For any matters not explicitly covered by third-party licenses, this EULA applies as the final
+ *        governing license, except when conflicting with third-party licenses which take precedence.
+ * 
+ * 2. Usage Restrictions
+ *    - No reproduction, distribution, sale, sublicensing, or transfer of Licensor's original Software parts
+ *      to third parties.
+ *    - No modification, adaptation, or derivative works of Licensor's original Software parts for redistribution.
+ *    - Use limited to one domain; additional licenses required for multiple domains or projects.
+ *    - No third-party use of Licensor's Software components allowed.
+ *    - Proprietary notices or branding of third-party components must not be removed or altered.
+ * 
+ * 3. Ownership
+ *    - Licensor retains all intellectual property rights in original code (excluding third-party components).
+ *    - Third-party components remain property of their respective owners.
+ * 
+ * 4. Limitation of Liability
+ *    - Licensor is not liable for damages from use or inability to use the Software, including third-party parts.
+ * 
+ * 5. Termination
+ *    - License terminates immediately upon violation; Licensee must cease use and delete all copies.
+ * 
+ * 6. Governing Law
+ *    - Governed by the laws of [Jurisdiction].
+ * 
+ * Hscomm Web dev Team
+ * Date: 07/25/2025
+ */
+
+@-webkit-keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+
+:root {
+  --logo-width: 100px;
+  --default-container-width: 1280px;
+  --default-content-width: 1200px;
+  --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
+  --default-logo-margin: 20px;
+  --default-navbar-padding: 12px;
+}
+
+html {
+  font-size:17px;
+}
+body {
+  padding-bottom:0!important;
+}
+
+
+/* Header */
+#s20250721b75480cc5aa0f .inline-inside {
+    max-width: var(--default-content-width);
+}
+
+#w20250721c225b846009a0 {
+    margin-right: var(--default-logo-margin);
+    padding:.5rem 0;
+}
+
+#w2025072190d07aa84cf05 {
+    font-weight:400;
+}
+#w2025072190d07aa84cf05 li.dropdown > ul.dropdown-menu {
+  ul, li, a {
+      --webkit-transition:.1s;
+      transition:.1s;
+  }
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a.active, 
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a.active {
+  font-weight:750;
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a:hover, 
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a:hover {
+    opacity: 0.5;
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a, #w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a {
+  transition:unset;
+  padding: 0 var(--default-navbar-padding);
+}
+
+
+#dropdown_w2025072190d07aa84cf05 {
+    .tse-content {
+        max-width:var(--default-content-width);
+        width:100%;
+        margin: 0 auto;
+        > div {
+            display:contents;
+        } 
+        .mega_dropdown {
+              width:100%;
+              padding-left: calc(var(--logo-width) + var(--default-logo-margin) + var(--default-navbar-padding));
+        }
+    }
+}
+  
+#dropdown_w2025072190d07aa84cf05 .mega_dropdown_wrap {
+  .mega_dropdown {
+      display: grid; 
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, 128px);   
+        .title_menu > a {
+            font-size:15px;
+            font-weight:750;
+        }
+        .sub_menu li {
+            line-height:1;
+            height:fit-content;
+        }
+        .sub_menu a {
+            font-size:13px;
+        }
+      &.clearfix:after, &.clearfix:before {
+        content:unset;
+      }
+    > div {
+        float: unset;
+    }
+  }
+}
+  
+#doz_footer_wrap {
+  margin-top:4rem;
+}
+/* Footer Content */
+footer#custom-footer {
+  display: flex;
+  justify-content:center;
+  padding:1rem;
+  > div.footer-content {
+      width:100%;
+      max-width: var(--default-content-width);
+      font-size:12px;
+      line-height:1;
+      color:#666;
+      display:flex;
+      flex-direction:column;
+      gap:0.5rem;
+      .copyright-wrapper {
+          display:flex;
+          align-items:center;
+          gap:1rem;
+          nav {
+            display:flex;
+          }
+          nav a {
+              padding:0 0.5rem;
+              font-weight: 600;
+              line-height:1;
+          }
+          nav a:not(:first-of-type) {
+              border-left:1px solid #666;            
+          }
+      }
+      p {
+        line-height:1.47;
+      }
+      p span {
+         white-space: nowrap;
+      }
+  }
+}
+  
+@media (max-width: 1024px) and (min-width: 767px) {
+    body:not(.video_fullpage) {
+        zoom: unset;
+    }
+}
+  
+@media (max-width: 768px) {
+footer#custom-footer {
+  display: flex;
+  justify-content:center;
+  padding:1rem;
+  > div.footer-content {
+      font-size:10px;
+      gap:0.25rem;
+      .copyright-wrapper {
+          gap:1rem;
+          flex-direction:column;
+          align-items:flex-start;
+          justify-content:flex-start;
+          nav a:first-of-type {
+              padding-left:0;       
+          }
+      }
+  }
+}
+}
