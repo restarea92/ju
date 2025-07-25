@@ -97,7 +97,7 @@ const app = {
 
         const resizeObserver = new ResizeObserver(() => {
             const height = stickyElement.getBoundingClientRect().height;
-            stickyWrapper.style.height = `${height * 2}px`;
+            stickyWrapper.style.height = `${height * 1.5}px`;
         });
 
         resizeObserver.observe(stickyElement);
