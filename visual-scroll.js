@@ -1,5 +1,5 @@
 // visual-scroll.js
-// GSAP 코어와 필요한 플러그인들을 전역 script 태그로 불러와야 합니다:
+// GSAP 코어와 필요한 플러그인들을 전역 script 태그로 불러와야 함:
 // <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 // <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 
@@ -46,7 +46,6 @@ const app = {
                 // 콘솔에 진행률 출력 (디버깅용)
                 console.log(`Visual section progress: ${progress.toFixed(1)}%`);
 
-                // 여기서 진행률에 따른 애니메이션 또는 효과를 추가할 수 있습니다
                 this.handleScrollProgress(progress, visualSection);
             }
         });
@@ -56,22 +55,9 @@ const app = {
     handleScrollProgress(progress, element) {
         // 예시: 배경 투명도 변화
         const background = element.querySelector('.visual-section-background');
-        if (background) {
-            gsap.set(background, {
-                opacity: progress / 100
-            });
-        }
 
-        // 예시: 컨텐츠 페이드인 효과
-        const contentWrapper = element.querySelector('.content-wrapper');
-        if (contentWrapper) {
-            gsap.set(contentWrapper, {
-                opacity: Math.min(1, (progress - 20) / 60), // 20%부터 80%까지 페이드인
-                y: Math.max(0, 50 - (progress * 0.5)) // 위로 이동 효과
-            });
-        }
 
-        // 커스텀 이벤트 발생 (다른 모듈에서 사용할 수 있도록)
+        // 커스텀 이벤트 발생 (다른 모듈 연동용)
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
             detail: { progress, element }
         }));
