@@ -137,6 +137,7 @@ const app = {
                 backgroundPadding = 1;
                 radius = 0;
             }
+            console.log({ size, backgroundPadding, radius });
 
             gsap.set(background, {
                 clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round ${radius}px)`
