@@ -102,6 +102,10 @@ const app = {
 
         resizeObserver.observe(stickyElement);
     },
+    
+    easeOutSine(t) {
+        return Math.sin(t * Math.PI / 2);
+    },
 
     // 스크롤 진행률에 따른 효과를 처리하는 메서드
     handleScrollProgress(progress, element) {
@@ -124,18 +128,18 @@ const app = {
             } else if (progress < 60) {
                 // 30~60% 사이에서 size를 확장 (선형 보간)
                 const localProgress = (progress - 30) / 30; // 0~1
-                size = startSizePercent + (100 - startSizePercent) * localProgress;
-                backgroundPadding = (100 - startSizePercent) * localProgress;
-                console.log(backgroundPadding);
+                size = startSizePercent + (100 - startSizePercent) * this.easeOutSine(localProgress);;
+                backgroundPadding = this.easeOutSine(localProgress);
                 radius = 128 - ( 128 * localProgress);
             } else {
                 // 이후 고정 상태 또는 새로운 애니메이션
                 size = 100;
+                backgroundPadding = 1;
                 radius = 0;
             }
 
             gsap.set(background, {
-                clipPath: `inset(${0.04 * (100 - size)}rem ${50 - size / 2}% ${0.04 * (100 - size)}rem ${50 - size / 2}% round ${radius}px)`
+                clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round ${radius}px)`
             });
         }
 
