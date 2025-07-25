@@ -82,6 +82,8 @@
   }
 
   .content-wrapper {
+      width: calc(100% - var(--default-container-padding) * 2);
+      max-width: var(--default-container-width);
       margin: 0 auto;
   }
   .content {
