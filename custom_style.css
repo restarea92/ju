@@ -1,7 +1,7 @@
 /*!
  * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
  * 
- * This Software is licensed by Hscomm Web dev Team ("Licensor") to the end user ("Licensee").
+ * This Software is licensed by HScomm Web dev Team ("Licensor") to the end user ("Licensee").
  * 
  * 1. License Grants
  *    1.1 Licensee is granted a non-exclusive, non-transferable license to use one copy of the Software
@@ -34,38 +34,15 @@
  * 6. Governing Law
  *    - Governed by the laws of [Jurisdiction].
  * 
- * Hscomm Web dev Team
+ * HScomm Web dev Team
  * Date: 07/25/2025
  */
 
-@-webkit-keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-            transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-            transform-origin: 50% 16%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-            transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-  }
-}
-@keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-            transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-            transform-origin: 50% 16%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-            transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-  }
-}
+
+
+/* ----------------------------------------------
+ * init default style
+ * ---------------------------------------------- */
 
 :root {
   --logo-width: 100px;
@@ -76,15 +53,21 @@
   --default-navbar-padding: 12px;
 }
 
-html {
-  font-size:17px;
-}
 body {
   padding-bottom:0!important;
 }
 
 
-/* Header */
+/* ----------------------------------------------
+ * common header default style
+ * header id         - #doz_header_wrap
+ * header wrapper id - #s20250721b75480cc5aa0f
+ * header inner id   - #s20250721b75480cc5aa0f
+ *
+ * menu widget id    - #w2025072190d07aa84cf05
+ * login widget id   - #w20250721c82ad2c991d45
+ *
+ * ---------------------------------------------- */
 #s20250721b75480cc5aa0f .inline-inside {
     max-width: var(--default-content-width);
 }
@@ -160,7 +143,23 @@ body {
 #doz_footer_wrap {
   margin-top:4rem;
 }
-/* Footer Content */
+
+/* ----------------------------------------------
+ * common header default style
+ * header id         - #doz_header_wrap
+ * header wrapper id - #s20250721b75480cc5aa0f
+ * header inner id   - #s20250721b75480cc5aa0f
+ *
+ * menu widget id    - #w2025072190d07aa84cf05
+ * login widget id   - #w20250721c82ad2c991d45
+ *
+ * ---------------------------------------------- */
+
+
+
+/* ----------------------------------------------
+ * common Footer default style
+ * ---------------------------------------------- */
 footer#custom-footer {
   display: flex;
   justify-content:center;

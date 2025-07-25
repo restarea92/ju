@@ -1,7 +1,7 @@
 /**
  * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
  * 
- * This Software is licensed by Hscomm Web dev Team ("Licensor") to the end user ("Licensee").
+ * This Software is licensed by HScomm Web dev Team ("Licensor") to the end user ("Licensee").
  * 
  * 1. License Grants
  *    1.1 Licensee is granted a non-exclusive, non-transferable license to use one copy of the Software
@@ -34,7 +34,7 @@
  * 6. Governing Law
  *    - Governed by the laws of [Jurisdiction].
  * 
- * Hscomm Web dev Team
+ * HScomm Web dev Team
  * Date: 07/25/2025
  */
 
