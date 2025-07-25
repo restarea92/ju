@@ -38,7 +38,11 @@
  * Date: 07/25/2025
  */
  
- .sticky-element {
+.sticky-element {
     position: sticky;
     top:8rem;
+}
+
+.sticky-element-background {
+    background-color:beige;
 }
