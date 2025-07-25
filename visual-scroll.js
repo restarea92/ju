@@ -97,7 +97,7 @@ const app = {
 
         const resizeObserver = new ResizeObserver(() => {
             const height = stickyElement.getBoundingClientRect().height;
-            stickyWrapper.style.height = `${height * 1.5}px`;
+            stickyWrapper.style.height = `${height * 2}px`;
         });
 
         resizeObserver.observe(stickyElement);
@@ -131,7 +131,7 @@ const app = {
             }
 
             gsap.set(background, {
-                clipPath: `inset(${90 - size / 2}% ${90 - size / 2}% ${50 - size / 2}% ${50 - size / 2}% round ${radius}px)`
+                clipPath: `inset(${90 - size / 2}% ${50 - size / 2}% ${90 - size / 2}% ${50 - size / 2}% round ${radius}px)`
             });
         }
 
