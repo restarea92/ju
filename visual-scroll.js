@@ -86,6 +86,24 @@ const app = {
                 
                 // 여기서 진행률에 따른 애니메이션 또는 효과를 추가할 수 있습니다
                 this.handleScrollProgress(progress, visualSection);
+            },
+            // 스크롤이 완료되었을 때 (끝에 도달했을 때) 한 번만 실행
+            onComplete: () => {
+                const wrapper = document.querySelector('.content-wrapper');
+                if (wrapper && !this.isScrollWrapperActive) {
+                    wrapper.classList.add('active');
+                    this.isScrollWrapperActive = true;
+                    console.log('ScrollTrigger completed - active class added');
+                }
+            },
+            // 스크롤이 역방향으로 진행되어 시작점으로 돌아갔을 때
+            onReverseComplete: () => {
+                const wrapper = document.querySelector('.content-wrapper');
+                if (wrapper && this.isScrollWrapperActive) {
+                    wrapper.classList.remove('active');
+                    this.isScrollWrapperActive = false;
+                    console.log('ScrollTrigger reverse completed - active class removed');
+                }
             }
         });
     },
@@ -111,6 +129,7 @@ const app = {
     handleScrollProgress(progress, element) {
         const background = element.querySelector('.sticky-element-background');
         const stickyElementContent = element.querySelector('.sticky-element-content');
+        const title = element.querySelector('.title');
 
         if (background) {
             const stickyElementContentWidth = stickyElementContent.getBoundingClientRect().width || 1;
@@ -149,16 +168,17 @@ const app = {
             });
         }
 
-        const wrapper = document.querySelector('.content-wrapper');
-        if (wrapper) {
-            if (progress >= 50 && !this.isScrollWrapperActive) {
-                wrapper.classList.add('active');
-                this.isScrollWrapperActive = true;
-            } else if (progress < 50 && this.isScrollWrapperActive) {
-                wrapper.classList.remove('active');
-                this.isScrollWrapperActive = false;
-            }
-        }
+        // 기존의 50% 체크 로직을 제거 (onComplete/onReverseComplete로 이동)
+        // const wrapper = document.querySelector('.content-wrapper');
+        // if (wrapper) {
+        //     if (progress >= 50 && !this.isScrollWrapperActive) {
+        //         wrapper.classList.add('active');
+        //         this.isScrollWrapperActive = true;
+        //     } else if (progress < 50 && this.isScrollWrapperActive) {
+        //         wrapper.classList.remove('active');
+        //         this.isScrollWrapperActive = false;
+        //     }
+        // }
 
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
             detail: { progress, element }
