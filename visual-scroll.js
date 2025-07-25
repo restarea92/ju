@@ -8,7 +8,7 @@ if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-export const app = {
+const app = {
     init() {
         this.initVisualSectionScroll();
     },
@@ -72,3 +72,4 @@ export const app = {
         }));
     }
 };
+export default app;
