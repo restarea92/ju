@@ -82,7 +82,6 @@
   }
 
   .content-wrapper {
-      max-width: var(--default-container-width);
       margin: 0 auto;
   }
   .content {
