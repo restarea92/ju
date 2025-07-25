@@ -77,6 +77,10 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .content-wrapper {
+      max-width: var(--default-content-width);
+  }
   .content {
     margin-top: 4rem;
     display: grid;
