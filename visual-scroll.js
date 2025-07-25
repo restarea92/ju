@@ -119,7 +119,7 @@ const app = {
             // 작은 쪽 기준으로
             const effectiveWidth = Math.min(defaultWidthPx, viewportWidth);
             const startSizePercent = (effectiveWidth / containerWidth) * 100;
-            
+            console.log({ defaultWidthPx, viewportWidth, effectiveWidth, startSizePercent });
             let size;
             let radius;
             let backgroundPadding;
