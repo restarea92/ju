@@ -131,7 +131,7 @@ const app = {
             }
 
             gsap.set(background, {
-                clipPath: `inset(${50 - size / 2}%  ${50 - size / 2}% ${50 - size / 2}% ${50 - size / 2}% round ${radius}px)`
+                clipPath: `inset(${100 - size / 2}%  ${50 - size / 2}% ${100 - size / 2}% ${50 - size / 2}% round ${radius}px)`
             });
         }
 
