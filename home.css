@@ -85,6 +85,7 @@
       width: calc(100% - var(--default-container-padding) * 2);
       max-width: var(--default-container-width);
       margin: 0 auto;
+      padding: var(--default-container-padding);
   }
   .content {
     margin-top: 4rem;
