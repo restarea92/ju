@@ -105,7 +105,7 @@ const app = {
 
     // 스크롤 진행률에 따른 효과를 처리하는 메서드
     handleScrollProgress(progress, element) {
-        const background = element.querySelector('.visual-section-background');
+        const background = element.querySelector('.sticky-element-background');
 
         if (background) {
             const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-content-width')) + 80;
