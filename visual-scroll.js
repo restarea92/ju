@@ -92,6 +92,7 @@ const app = {
                 const wrapper = document.querySelector('.content-wrapper');
                 if (wrapper && !this.isScrollWrapperActive) {
                     wrapper.classList.add('active');
+                    wrapper.classList.remove('inactive');
                     this.isScrollWrapperActive = true;
                     console.log('ScrollTrigger completed - active class added');
                 }
@@ -101,6 +102,7 @@ const app = {
                 const wrapper = document.querySelector('.content-wrapper');
                 if (wrapper && this.isScrollWrapperActive) {
                     wrapper.classList.remove('active');
+                    wrapper.classList.add('inactive');
                     this.isScrollWrapperActive = false;
                     console.log('ScrollTrigger reverse completed - active class removed');
                 }
@@ -168,17 +170,6 @@ const app = {
             });
         }
 
-        // 기존의 50% 체크 로직을 제거 (onComplete/onReverseComplete로 이동)
-        // const wrapper = document.querySelector('.content-wrapper');
-        // if (wrapper) {
-        //     if (progress >= 50 && !this.isScrollWrapperActive) {
-        //         wrapper.classList.add('active');
-        //         this.isScrollWrapperActive = true;
-        //     } else if (progress < 50 && this.isScrollWrapperActive) {
-        //         wrapper.classList.remove('active');
-        //         this.isScrollWrapperActive = false;
-        //     }
-        // }
 
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
             detail: { progress, element }
