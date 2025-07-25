@@ -29,11 +29,15 @@
 
 #visual-section {
   h2 {
-    background-image: linear-gradient(130deg, rgba(67, 0, 148, 1) 0%, rgba(41, 103, 196, 1) 100%);
+    background-image: linear-gradient(
+      130deg,
+      rgba(67, 0, 148, 1) 0%,
+      rgba(41, 103, 196, 1) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  > .content {
+  .content {
     margin-top: 4rem;
     display: grid;
     justify-content: center;
@@ -72,7 +76,8 @@
   }
 }
 
-#visual-section2, #visual-section3 {
+#visual-section2,
+#visual-section3 {
   .content-wrapper {
     display: flex;
     gap: 1rem;
@@ -149,7 +154,7 @@
   }
 
   #visual-section {
-    > .content {
+    .content {
       grid-template-columns: 1fr;
       margin-top: 2rem;
       gap: 1rem;
@@ -212,7 +217,7 @@
         font-size: 0.875rem;
       }
       a:hover {
-          font-size: 0.875rem;
+        font-size: 0.875rem;
       }
     }
   }
