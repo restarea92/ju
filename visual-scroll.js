@@ -3,7 +3,7 @@ if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-const visualScrollApp = {
+const app = {
     isScrollWrapperActive: false, // ← 추가
 
     init() {
@@ -116,3 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resizeObserver.observe(stickyElement);
 });
+export default app;
