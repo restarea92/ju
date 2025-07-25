@@ -113,9 +113,13 @@ const app = {
 
         if (background) {
             const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-container-width'));
+            const viewportWidth = window.innerWidth;
             const containerWidth = background.offsetWidth || 1;
-            const startSizePercent = (defaultWidthPx / containerWidth) * 100;
 
+            // 작은 쪽 기준으로
+            const effectiveWidth = Math.min(defaultWidthPx, viewportWidth);
+            const startSizePercent = (effectiveWidth / containerWidth) * 100;
+            
             let size;
             let radius;
             let backgroundPadding;
