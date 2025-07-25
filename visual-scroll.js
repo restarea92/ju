@@ -82,7 +82,7 @@ const app = {
                 const progress = self.progress * 100;
                 
                 // 콘솔에 진행률 출력 (디버깅용)
-                console.log(`Visual section progress: ${progress.toFixed(1)}%`);
+                console.log(`Visual section2 progress: ${progress.toFixed(1)}%`);
                 
                 // 여기서 진행률에 따른 애니메이션 또는 효과를 추가할 수 있습니다
                 this.handleScrollProgress(progress, visualSection);
