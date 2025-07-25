@@ -80,6 +80,7 @@
 
   .content-wrapper {
       max-width: var(--default-content-width);
+      margin: 0 auto;
   }
   .content {
     margin-top: 4rem;
