@@ -4,6 +4,8 @@ if (typeof gsap !== 'undefined') {
 }
 
 const visualScrollApp = {
+    isScrollWrapperActive: false, // ← 추가
+
     init() {
         this.initVisualSectionScroll();
     },
@@ -77,6 +79,17 @@ const visualScrollApp = {
             gsap.set(background, {
                 clipPath: `inset(0% ${50 - size / 2}% 0% ${50 - size / 2}% round ${radius}px)`
             });
+        }
+
+        const wrapper = document.querySelector('.content-wrapper');
+        if (wrapper) {
+            if (progress >= 50 && !this.isScrollWrapperActive) {
+                wrapper.classList.add('active');
+                this.isScrollWrapperActive = true;
+            } else if (progress < 50 && this.isScrollWrapperActive) {
+                wrapper.classList.remove('active');
+                this.isScrollWrapperActive = false;
+            }
         }
 
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
