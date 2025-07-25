@@ -164,6 +164,7 @@ const app = {
                     const videoScrollFraction = app.scrollCalculator.getVideoScrollFraction();
                     const frameIndex = Math.min(app.options.FRAME_COUNT - 1, Math.ceil(videoScrollFraction * app.options.FRAME_COUNT));
                     app.frameManager.updateImage(frameIndex + 1);
+                    app.elements.canvas.style.opacity = videoScrollFraction;
                     const textOutFraction = app.scrollCalculator.getTextOutScrollFraction();
                     if (textOutFraction > 0) {
                         app.animations.updateTextOut(textOutFraction);
