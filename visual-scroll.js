@@ -126,7 +126,7 @@ const app = {
                 const localProgress = (progress - 30) / 30; // 0~1
                 size = startSizePercent + (100 - startSizePercent) * localProgress;
                 backgroundPadding = (100 - startSizePercent) * localProgress;
-                console.log(localProgress);
+                console.log(backgroundPadding);
                 radius = 128 - ( 128 * localProgress);
             } else {
                 // 이후 고정 상태 또는 새로운 애니메이션
