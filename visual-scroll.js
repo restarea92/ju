@@ -110,16 +110,17 @@ const app = {
     // 스크롤 진행률에 따른 효과를 처리하는 메서드
     handleScrollProgress(progress, element) {
         const background = element.querySelector('.sticky-element-background');
+        const stickyElementContent = element.querySelector('.sticky-element-content');
 
         if (background) {
-            const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-container-width'));
+            const stickyElementContentWidth = stickyElementContent.getBoundingClientRect().width || 1;
             const viewportWidth = window.innerWidth;
             const containerWidth = background.getBoundingClientRect().width || 1;
 
             // 작은 쪽 기준으로
-            const effectiveWidth = Math.min(defaultWidthPx, viewportWidth);
+            const effectiveWidth = Math.min(stickyElementContentWidth, viewportWidth);
             const startSizePercent = (effectiveWidth / containerWidth) * 100;
-            console.log({ defaultWidthPx, viewportWidth, effectiveWidth, containerWidth, startSizePercent });
+            console.log({ stickyElementContentWidth, viewportWidth, effectiveWidth, containerWidth, startSizePercent });
             let size;
             let radius;
             let backgroundPadding;
