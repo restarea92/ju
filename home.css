@@ -83,6 +83,7 @@
 
   .content-wrapper {
       max-width: var(--default-container-width);
+      padding: 0 calc(var(--default-container-width) - var(--small-content-width));
       margin: 0 auto;
   }
   .content {
