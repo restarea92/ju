@@ -8,6 +8,7 @@ const app = {
 
     init() {
         this.initVisualSectionScroll();
+        this.initStickyWrapper();
     },
 
     initVisualSectionScroll() {
@@ -47,6 +48,19 @@ const app = {
                 this.handleScrollProgress(progress, visualSection);
             }
         });
+    },
+
+    initStickyWrapper() {
+        const stickyWrapper = document.querySelector('.sticky-wrapper');
+        const stickyElement = stickyWrapper?.querySelector('.sticky-element');
+        if (!stickyWrapper || !stickyElement) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            const height = stickyElement.getBoundingClientRect().height;
+            stickyWrapper.style.height = `${height * 2}px`;
+        });
+
+        resizeObserver.observe(stickyElement);
     },
 
     // 스크롤 진행률에 따른 효과를 처리하는 메서드
@@ -96,24 +110,6 @@ const app = {
             detail: { progress, element }
         }));
     }
-
-
-
 };
 
-// DOM 로드 후 실행
-document.addEventListener('DOMContentLoaded', () => {
-    visualScrollApp.init();
-    const stickyWrapper = document.querySelector('.sticky-wrapper');
-    const stickyElement = stickyWrapper.querySelector('.sticky-element');;
-
-    if (!stickyWrapper || !stickyElement) return;
-
-    const resizeObserver = new ResizeObserver(() => {
-        const height = stickyElement.getBoundingClientRect().height;
-        stickyWrapper.style.height = `${height * 2}px`;
-    });
-
-    resizeObserver.observe(stickyElement);
-});
 export default app;
