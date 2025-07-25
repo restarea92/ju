@@ -145,9 +145,6 @@ const app = {
             let scrollProgress = (viewportBottom - targetBottom) / (viewportHeight * 2);
             scrollProgress = Math.min(Math.max(scrollProgress, 0), 1);
             const insetValue = scrollProgress * 20;
-            const easedT = this.easeOutSine(scrollFraction);
-            const opacity = 0.25 + (1 - 0.25) * easedT;
-            app.elements.canvasWrapper.style.opacity = opacity;        
             app.elements.maskLayer.style.clipPath = `inset(${insetValue}% ${insetValue}% ${insetValue}% ${insetValue}% round ${insetValue}vw)`;
         },
         init() {
