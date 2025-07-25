@@ -1,14 +1,9 @@
-// visual-scroll.js
-// GSAP 코어와 필요한 플러그인들을 전역 script 태그로 불러와야 합니다:
-// <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-// <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-
 // GSAP 플러그인 등록
 if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-const app = {
+const visualScrollApp = {
     init() {
         this.initVisualSectionScroll();
     },
@@ -37,7 +32,7 @@ const app = {
         ScrollTrigger.create({
             trigger: visualSection,
             start: "top bottom", // 섹션의 상단이 뷰포트 하단에 닿을 때 시작
-            end: "top top",      // 섹션의 상단이 뷰포트 상단에 닿을 때 끝
+            end: "bottom top",      // 섹션의 상단이 뷰포트 상단에 닿을 때 끝
             scrub: true,         // 스크롤과 동기화
             onUpdate: (self) => {
                 // 진행률을 0~100%로 계산
@@ -55,21 +50,56 @@ const app = {
     // 스크롤 진행률에 따른 효과를 처리하는 메서드
     handleScrollProgress(progress, element) {
         const background = element.querySelector('.visual-section-background');
-        
+
         if (background) {
-            // radius가 있는 사각형에서 꽉찬 사각형으로 확장
-            const size = progress; // 0~100%
-            const radius = Math.max(0, 20 - (progress * 0.2)); // 20px에서 0px로 감소
-            
+            const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-content-width')) + 80;
+            const containerWidth = background.offsetWidth || 1;
+            const startSizePercent = (defaultWidthPx / containerWidth) * 100;
+
+            let size;
+            let radius;
+
+            if (progress < 30) {
+                // 초기 상태 유지
+                size = startSizePercent;
+                radius = 64;
+            } else if (progress < 60) {
+                // 30~60% 사이에서 size를 확장 (선형 보간)
+                const localProgress = (progress - 30) / 30; // 0~1
+                size = startSizePercent + (100 - startSizePercent) * localProgress;
+                radius = 64 - ( 64 * localProgress);
+            } else {
+                // 이후 고정 상태 또는 새로운 애니메이션
+                size = 100;
+                radius = 0;
+            }
+
             gsap.set(background, {
-                clipPath: `inset(${50 - size/2}% ${50 - size/2}% ${50 - size/2}% ${50 - size/2}% round ${radius}px)`
+                clipPath: `inset(0% ${50 - size / 2}% 0% ${50 - size / 2}% round ${radius}px)`
             });
         }
 
-        // 커스텀 이벤트 발생 (다른 모듈 연동용)
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
             detail: { progress, element }
         }));
     }
+
+
+
 };
-export default app;
+
+// DOM 로드 후 실행
+document.addEventListener('DOMContentLoaded', () => {
+    visualScrollApp.init();
+    const stickyWrapper = document.querySelector('.sticky-wrapper');
+    const stickyElement = stickyWrapper.querySelector('.sticky-element');;
+
+    if (!stickyWrapper || !stickyElement) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+        const height = stickyElement.getBoundingClientRect().height;
+        stickyWrapper.style.height = `${height * 2}px`;
+    });
+
+    resizeObserver.observe(stickyElement);
+});
