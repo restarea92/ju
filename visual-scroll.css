@@ -56,7 +56,8 @@
 }
 
 .sticky-element-content {
-    padding:0 var(--default-container-padding);
+    width: 100%;
+    max-width: calc(100% - var(--default-container-padding) * 2);
 }
 
 @media (max-width: 1280px) and (min-width: 1025px) {
