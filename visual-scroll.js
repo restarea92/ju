@@ -124,13 +124,13 @@ const app = {
                 // 초기 상태 유지
                 size = startSizePercent;
                 backgroundPadding = 0;
-                radius = 64;
+                radius = 25;
             } else if (progress < 60) {
                 // 30~60% 사이에서 size를 확장 (선형 보간)
                 const localProgress = (progress - 30) / 30; // 0~1
                 size = startSizePercent + (100 - startSizePercent) * this.easeOutSine(localProgress);;
                 backgroundPadding = this.easeOutSine(localProgress);
-                radius = 128 - ( 128 * localProgress);
+                radius = 25 - ( 25 * localProgress);
             } else {
                 // 이후 고정 상태 또는 새로운 애니메이션
                 size = 100;
@@ -140,7 +140,7 @@ const app = {
             console.log({ size, backgroundPadding, radius });
 
             gsap.set(background, {
-                clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round ${radius}px)`
+                clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round ${radius}vw)`
             });
         }
 
