@@ -123,7 +123,7 @@ const app = {
                 // 30~60% 사이에서 size를 확장 (선형 보간)
                 const localProgress = (progress - 30) / 30; // 0~1
                 size = startSizePercent + (100 - startSizePercent) * localProgress;
-                radius = 64 - ( 64 * localProgress);
+                radius = 128 - ( 128 * localProgress);
             } else {
                 // 이후 고정 상태 또는 새로운 애니메이션
                 size = 100;
