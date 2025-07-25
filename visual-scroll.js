@@ -108,7 +108,7 @@ const app = {
         const background = element.querySelector('.sticky-element-background');
 
         if (background) {
-            const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-content-width')) + 80;
+            const defaultWidthPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--default-container-width'));
             const containerWidth = background.offsetWidth || 1;
             const startSizePercent = (defaultWidthPx / containerWidth) * 100;
 
