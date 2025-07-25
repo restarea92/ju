@@ -41,7 +41,7 @@
 .sticky-element {
     position: sticky;
     top:8rem;
-    padding:8rem 4rem;
+    padding:8rem 0;
 }
 
 .sticky-element-background {
