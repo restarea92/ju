@@ -50,10 +50,9 @@ const app = {
     lastActiveState: null, // 마지막 활성 상태 저장
 
     init() {
-        
         const version = '1.0.0';
         console.log(version);
-
+        
         this.initVisualSectionScroll();
         this.initStickyWrapper();
     },

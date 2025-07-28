@@ -42,6 +42,17 @@
     position: sticky;
     top:8rem;
     padding:8rem 0;
+    transition: 0.3s transform cubic-bezier(0.075, 0.82, 0.165, 1);
+    &.inactive {
+        .title {
+            transform: scale(0.75);
+        }
+    }
+    &.active {
+        .title {
+            transform: scale(1);
+        }
+    }
 }
 
 .sticky-element-background {
@@ -60,8 +71,7 @@
 }
 
 @media (max-width: 1280px) and (min-width: 1025px) {
-  /* 1025 ~ 1280 */
-   
+    /* 1025 ~ 1280 */
     .sticky-element {
         position: sticky;
         top:4rem;
