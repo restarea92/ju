@@ -100,8 +100,8 @@
     /* 1025 ~ 1280 */
     .sticky-element {
         position: sticky;
-        top:4rem;
-        padding:4rem 0;
+        top:6rem;
+        padding:6rem 0;
     }
     #visual-section {
         --h2-font-size: 3rem;
