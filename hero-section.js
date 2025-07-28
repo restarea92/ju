@@ -164,7 +164,7 @@ const app = {
                     const videoScrollFraction = app.scrollCalculator.getVideoScrollFraction();
                     const frameIndex = Math.min(app.options.FRAME_COUNT - 1, Math.ceil(videoScrollFraction * app.options.FRAME_COUNT));
                     app.frameManager.updateImage(frameIndex + 1);
-                    app.elements.canvas.style.filter = `brightness(${1 - videoScrollFraction * 0.5})`;
+                    app.elements.canvas.style.filter = `brightness(${1 - videoScrollFraction * 0.9})`;
                     const textOutFraction = app.scrollCalculator.getTextOutScrollFraction();
                     if (textOutFraction > 0) {
                         app.animations.updateTextOut(textOutFraction);
@@ -189,6 +189,7 @@ const app = {
             app.elements.maskLayer.style.clipPath = `inset(${insetValue}% ${insetValue}% ${insetValue}% ${insetValue}% round ${insetValue}vw)`;
         },
         init() {
+            this.handleScrollMask();
             window.addEventListener('scroll', () => this.handleScroll());
             window.addEventListener('scroll', () => this.handleScrollMask());
         }
