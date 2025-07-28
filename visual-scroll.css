@@ -40,18 +40,26 @@
 
 #visual-section {
     .title {
-        transition: 0.3s transform cubic-bezier(0.3, 0.1, 0.1);
+        h2, h3 {
+            transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0.1);
+        }
     }
     &.inactive {
         .title {
             h2 {
-                font-size: 6rem;
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 0.75rem;
             }
         }
     }
     &.active {
             h2 {
-                font-size: 3rem;
+                font-size: 4rem;
+            }
+            h3 {
+                font-size: 1.5rem;
             }
     }
 }
