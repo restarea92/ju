@@ -55,7 +55,7 @@ const app = {
 
     // Configuration constants
     _config: {
-        activationThreshold: 50,
+        activationThreshold: 15,
         scrollDebounceDelay: 150,
         stickyHeightMultiplier: 1.75,
         clipPathConfig: {
