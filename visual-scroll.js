@@ -59,7 +59,7 @@ const app = {
         scrollDebounceDelay: 150,
         stickyHeightMultiplier: 1.75,
         clipPathConfig: {
-            initialRadius: 10,
+            initialRadius: 5,
             padding: 4,
             animationBreakpoints: [10, 90]
         }
