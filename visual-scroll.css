@@ -45,7 +45,7 @@
         font-size: 4rem;
         height: 4rem;
         display: flex;
-        align-items: baseline;
+        align-items: end;
         white-space: pre;
     }
     .title {
