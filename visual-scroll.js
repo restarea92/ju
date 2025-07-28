@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.34',
+        version: '1.0.32',
         updateProgressCallCount: 0  // 호출 횟수 카운터
     },
 
@@ -93,13 +93,6 @@ const app = {
         
         this._initVisualSection();
         this._initStickyWrapper();
-
-         // 창 크기 변경 시 clip-path 재계산 및 적용
-        window.addEventListener('resize', () => {
-            const section = document.querySelector('#visual-section');
-            if (!section) return;
-            this._renderVisualEffects(this._state.progress, section);
-        });
     },
 
     _initVisualSection() {
@@ -192,10 +185,10 @@ const app = {
     _calculateClipPath(progress, section) {
         const dimensions = this._getDimensions(section);
         const startSize = this._getInitialSize(dimensions);
-        const { size, radius } = this._getAnimationValues(progress, startSize);
-
+        const { size, padding, radius } = this._getAnimationValues(progress, startSize);
+        
         const { padding: paddingMultiplier } = this._config.clipPathConfig;
-
+        
         return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
