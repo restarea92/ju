@@ -109,13 +109,16 @@
 
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
-      #visual-section {
+    #visual-section {
         --h2-font-size: min(5vw, 5vh);
         --h3-font-size: min(2vw, 2vh);
     }
 }
 
 @media (max-width: 768px) {
-
+    #visual-section {
+        --h2-font-size: min(5vw, 5vh);
+        --h3-font-size: min(2vw, 2vh);
+    }
   /* 최대 768 */
 }
