@@ -74,39 +74,19 @@ const app = {
         // ScrollTrigger를 사용해서 섹션이 하단에 보이기 시작할 때부터 상단에 닿을 때까지 추적
         ScrollTrigger.create({
             trigger: visualSection,
-            start: "top bottom", // 섹션의 상단이 뷰포트 하단에 닿을 때 시작
-            end: "bottom top",      // 섹션의 상단이 뷰포트 상단에 닿을 때 끝
+            start: "top top", // 섹션의 상단이 뷰포트 하단에 닿을 때 시작
+            end: "bottom bottom",      // 섹션의 상단이 뷰포트 상단에 닿을 때 끝
             scrub: true,         // 스크롤과 동기화
             onUpdate: (self) => {
                 // 진행률을 0~100%로 계산
                 const progress = self.progress * 100;
                 
                 // 콘솔에 진행률 출력 (디버깅용)
-                console.log(`Visual section2 progress: ${progress.toFixed(1)}%`);
+                console.log(`Visual section progress: ${progress.toFixed(1)}%`);
                 
                 // 여기서 진행률에 따른 애니메이션 또는 효과를 추가할 수 있습니다
                 this.handleScrollProgress(progress, visualSection);
             },
-            // 스크롤이 완료되었을 때 (끝에 도달했을 때) 한 번만 실행
-            onComplete: () => {
-                const wrapper = document.querySelector('.content-wrapper');
-                if (wrapper && !this.isScrollWrapperActive) {
-                    wrapper.classList.add('active');
-                    wrapper.classList.remove('inactive');
-                    this.isScrollWrapperActive = true;
-                    console.log('ScrollTrigger completed - active class added');
-                }
-            },
-            // 스크롤이 역방향으로 진행되어 시작점으로 돌아갔을 때
-            onReverseComplete: () => {
-                const wrapper = document.querySelector('.content-wrapper');
-                if (wrapper && this.isScrollWrapperActive) {
-                    wrapper.classList.remove('active');
-                    wrapper.classList.add('inactive');
-                    this.isScrollWrapperActive = false;
-                    console.log('ScrollTrigger reverse completed - active class removed');
-                }
-            }
         });
     },
 
@@ -141,7 +121,6 @@ const app = {
             // 작은 쪽 기준으로
             const effectiveWidth = Math.min(stickyElementContentWidth, viewportWidth);
             const startSizePercent = (effectiveWidth / containerWidth) * 100;
-            console.log({ stickyElementContentWidth, viewportWidth, effectiveWidth, containerWidth, startSizePercent });
             let size;
             let radius;
             let backgroundPadding;
@@ -163,7 +142,6 @@ const app = {
                 backgroundPadding = 0;
                 radius = 0;
             }
-            console.log({ size, backgroundPadding, radius });
 
             gsap.set(background, {
                 clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw)`
