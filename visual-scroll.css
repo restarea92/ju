@@ -63,7 +63,7 @@
         }
         h3 {
             font-size: var(--h3-font-size);
-            padding-top: 0.75rem;
+            padding-top: calc(var(--h3-font-size) / 1.5);
         }
     }
     &.inactive {
