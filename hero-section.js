@@ -186,11 +186,9 @@ const app = {
             let scrollProgress = (viewportBottom - targetBottom) / (viewportHeight * 2);
             scrollProgress = Math.min(Math.max(scrollProgress, 0), 1);
             const insetValue = scrollProgress * 20;
-            console.log(insetValue);
             app.elements.maskLayer.style.clipPath = `inset(${insetValue}% ${insetValue}% ${insetValue}% ${insetValue}% round ${insetValue}vw)`;
         },
         init() {
-            this.handleScrollMask();
             window.addEventListener('scroll', () => this.handleScroll());
             window.addEventListener('scroll', () => this.handleScrollMask());
         }
