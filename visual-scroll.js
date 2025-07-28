@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.32',
+        version: '1.0.33',
         updateProgressCallCount: 0  // 호출 횟수 카운터
     },
 
@@ -185,12 +185,13 @@ const app = {
     _calculateClipPath(progress, section) {
         const dimensions = this._getDimensions(section);
         const startSize = this._getInitialSize(dimensions);
-        const { size, padding, radius } = this._getAnimationValues(progress, startSize);
-        
+        const { size, radius } = this._getAnimationValues(progress, startSize);
+
         const { padding: paddingMultiplier } = this._config.clipPathConfig;
-        
-        return `inset(0 ${50 - size / 2}% 0 ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+
+        return `inset(calc(var(--h2-font-size) * ${paddingMultiplier}) ${50 - size / 2}% calc(var(--h2-font-size) * ${paddingMultiplier}) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
+
 
     _getDimensions(section) {
         const content = section.querySelector('.sticky-element-content');
