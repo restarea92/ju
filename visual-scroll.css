@@ -39,25 +39,25 @@
  */
 
 #visual-section {
-
+    --h2-font-size: 4rem;
+    --h3-font-size: 1.25rem;
     .title {
         position: relative;
         h2 {
             transition: 0.3s transform cubic-bezier(0.3, 0.1, 0, 1);
         }
         h2 {
-                width: 100%;
-                justify-content: center;
-                align-content: flex-end;
-                font-size: 4rem;
-                line-height: 1;
-                display: flex;
-                align-items: end;
-
+            width: 100%;
+            justify-content: center;
+            align-content: flex-end;
+            font-size: var(--h2-font-size);
+            line-height: 1;
+            display: flex;
+            align-items: end;
         }
         h3 {
             font-size: 1rem;
-            padding-top: 0.75rem;
+            padding-top: calc(var(--h3-font-size) / 2 );
         }
     }
     &.inactive {
@@ -103,12 +103,24 @@
         top:4rem;
         padding:4rem 0;
     }
+    #visual-section {
+        --h2-font-size: 3rem;
+        --h3-font-size: 1rem;
+    }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
+      #visual-section {
+        --h2-font-size: min(0.3vw, 0.3vh);
+        --h3-font-size: min(0.1vw, 0.1vh);
+    }
 }
 
 @media (max-width: 768px) {
+    #visual-section {
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 0.875rem;
+    }
   /* 최대 768 */
 }
