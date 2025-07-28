@@ -37,6 +37,7 @@
  * HScomm Web dev Team
  * Date: 07/25/2025
  */
+            let aaa = 0;
 
 const app = {
     options: {
@@ -159,6 +160,8 @@ const app = {
     scrollHandler: {
         ticking: false,
         handleScroll() {
+        aaa++;
+        console.log(`${aaa}`);
             if (!this.ticking) {
                 requestAnimationFrame(() => {
                     const videoScrollFraction = app.scrollCalculator.getVideoScrollFraction();
