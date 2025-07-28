@@ -39,16 +39,9 @@
  */
 
 #visual-section {
-    .title::before {
-        content: " ";
-        line-height: 1;
-        font-size: 4rem;
-        height: 4rem;
-        display: flex;
-        align-items: end;
-        white-space: pre;
-    }
+
     .title {
+        padding-top:4rem;
         position: relative;
         h2, h3 {
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
