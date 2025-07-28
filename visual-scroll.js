@@ -154,7 +154,6 @@ const app = {
         section.classList.remove(inactiveClass);
         section.classList.add(activeClass);
         
-        console.log(`Visual section ${isActive ? 'activated' : 'deactivated'}`);
     },
 
     _emitStateChangeEvent(section, isActive) {
