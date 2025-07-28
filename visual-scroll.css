@@ -47,6 +47,8 @@
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
         h2 {
+                width: 100%;
+                justify-content: center;
                 align-content: flex-end;
                 position: absolute;
                 top:0;
