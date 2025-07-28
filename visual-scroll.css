@@ -90,6 +90,9 @@
     left:50%;
     transform: translateX(-50%);
     z-index: -1;
+    background: url(https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg);
+    background-position: top;
+    background-size: cover;
 }
 
 .sticky-element-content {
