@@ -52,6 +52,7 @@
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
         h2 {
+                align-content: flex-end;
                 position: absolute;
                 top:0;
                 inset-inline: 0;
