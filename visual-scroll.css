@@ -40,7 +40,7 @@
 
 #visual-section {
     .title {
-        h2, h3 {
+        h2 {
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
     }
@@ -49,17 +49,11 @@
             h2 {
                 font-size: calc(4rem / 1.5);
             }
-            h3 {
-                font-size: 1rem;
-            }
         }
     }
     &.active {
             h2 {
                 font-size: 4rem;
-            }
-            h3 {
-                font-size: 1.5rem;
             }
     }
 }
