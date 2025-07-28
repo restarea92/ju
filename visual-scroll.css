@@ -39,6 +39,9 @@
  */
 
 #visual-section {
+    .title {
+        transition: 0.3s transform cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
     &.inactive {
         .title {
             transform: scale(0.75);
@@ -55,8 +58,6 @@
     position: sticky;
     top:8rem;
     padding:8rem 0;
-    transition: 0.3s transform cubic-bezier(0.075, 0.82, 0.165, 1);
-
 }
 
 .sticky-element-background {
