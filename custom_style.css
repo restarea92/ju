@@ -204,17 +204,35 @@ footer#custom-footer {
 @media (max-width: 1280px) and (min-width: 1025px) {
   /* 1025 ~ 1280 */
    
+  :root {
+    --default-container-width: 1080px;
+    --default-content-width: 1000px;
+    --small-container-width: 980px;
+    --small-content-width: 960px;
+  }
 }
 
 
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
+    :root {
+      --default-container-width: 768px;
+      --default-content-width: 740px;
+      --small-container-width: 768px;
+      --small-content-width: 752px;
+    }
       body:not(.video_fullpage) {
         zoom: unset;
     }
 }
 
 @media (max-width: 768px) {
+    :root {
+        --default-container-width: 100lvw;
+        --default-content-width: calc(100lvw - 1rem);
+        --small-container-width: var(--default-container-width);
+        --small-content-width: var(--default-content-width);
+    }
   /* 최대 768 */
   footer#custom-footer {
     display: flex;
