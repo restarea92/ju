@@ -37,9 +37,7 @@
  * HScomm Web dev Team
  * Date: 07/25/2025
  */
-const version = '1.0.0';
 
-console.log(version);
 // GSAP 플러그인 등록
 if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -52,6 +50,10 @@ const app = {
     lastActiveState: null, // 마지막 활성 상태 저장
 
     init() {
+        
+        const version = '1.0.0';
+        console.log(version);
+
         this.initVisualSectionScroll();
         this.initStickyWrapper();
     },
