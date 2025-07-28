@@ -122,6 +122,7 @@ const app = {
 
     _updateProgress(progress, section) {
         this._state.progress = progress;
+        this._state.updateProgressCallCount++;
         console.log(`Visual section progress: ${progress.toFixed(1)}%, 호출 횟수: ${this._state.updateProgressCallCount}`);
         console.log(`Visual section progress: ${progress.toFixed(1)}%`);
         
