@@ -196,7 +196,7 @@ const app = {
 
         const { padding: paddingMultiplier } = this._config.clipPathConfig;
 
-        return `inset(calc(var(--h2-font-size) * ${paddingMultiplier}) ${50 - size / 2}% calc(var(--h2-font-size) * ${paddingMultiplier}) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+        return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
 
