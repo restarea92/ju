@@ -88,6 +88,8 @@ const app = {
                 this.handleScrollProgress(progress, visualSection);
             },
         });
+        this.handleScrollProgress(0, visualSection);
+
     },
 
     initStickyWrapper() {
@@ -147,7 +149,6 @@ const app = {
                 clipPath: `inset(${4 * backgroundPadding}rem ${50 - size / 2}% ${4 * backgroundPadding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw)`
             });
         }
-        this.handleScrollProgress(0, visualSection);
 
         document.dispatchEvent(new CustomEvent('visualSectionProgress', {
             detail: { progress, element }
