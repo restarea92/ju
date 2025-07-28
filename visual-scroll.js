@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.35',
+        version: '1.0.39',
         updateProgressCallCount: 0  // 호출 횟수 카운터
     },
 
@@ -93,11 +93,6 @@ const app = {
         
         this._initVisualSection();
         this._initStickyWrapper();
-        window.addEventListener('resize', () => {
-            const section = document.querySelector('#visual-section');
-            if (!section) return;
-            this._renderVisualEffects(this._state.progress, section);
-        });
     },
 
     _initVisualSection() {
@@ -190,12 +185,13 @@ const app = {
     _calculateClipPath(progress, section) {
         const dimensions = this._getDimensions(section);
         const startSize = this._getInitialSize(dimensions);
-        const { size, paddingProgress, radius } = this._getAnimationValues(progress, startSize);
+        const { size, padding, radius } = this._getAnimationValues(progress, startSize);
         
-        const { padding: basePadding } = this._config.clipPathConfig;
-        return `inset(${basePadding * paddingProgress}rem ${50 - size / 2}% ${basePadding * paddingProgress}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+        const { padding: paddingMultiplier } = this._config.clipPathConfig;
+        console.log({paddingMultiplier, padding})
+        return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+        // return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
-
 
 
     _getDimensions(section) {
