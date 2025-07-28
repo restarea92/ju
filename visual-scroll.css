@@ -40,17 +40,19 @@
 
 #visual-section {
     .title {
-        transition: 0.3s transform cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition: 0.3s transform cubic-bezier(0.3, 0.1, 0.1);
     }
     &.inactive {
         .title {
-            transform: scale(0.75);
+            h2 {
+                font-size: 6rem;
+            }
         }
     }
     &.active {
-        .title {
-            transform: scale(1);
-        }
+            h2 {
+                font-size: 3rem;
+            }
     }
 }
  
