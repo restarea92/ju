@@ -52,7 +52,7 @@
         }
         h2 {
                 position: absolute;
-                top:0;
+                inset-inline: 0;
                 font-size: 4rem;
                 line-height: 1.47;
             }
