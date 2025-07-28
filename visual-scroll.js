@@ -45,6 +45,9 @@ if (typeof gsap !== 'undefined') {
 
 const app = {
     isScrollWrapperActive: false, // ← 추가
+    scrollTimeout: null, // 스크롤 타임아웃 관리
+    currentProgress: 0, // 현재 진행률 저장
+    lastActiveState: null, // 마지막 활성 상태 저장
 
     init() {
         this.initVisualSectionScroll();
@@ -80,16 +83,56 @@ const app = {
             onUpdate: (self) => {
                 // 진행률을 0~100%로 계산
                 const progress = self.progress * 100;
+                this.currentProgress = progress;
                 
                 // 콘솔에 진행률 출력 (디버깅용)
                 console.log(`Visual section progress: ${progress.toFixed(1)}%`);
                 
-                // 여기서 진행률에 따른 애니메이션 또는 효과를 추가할 수 있습니다
+                // 기존 애니메이션 처리
                 this.handleScrollProgress(progress, visualSection);
+                
+                // 스크롤이 멈췄을 때 active/inactive 클래스 처리
+                this.handleScrollStop(visualSection);
             },
         });
         this.handleScrollProgress(0, visualSection);
+    },
 
+    // 스크롤이 멈췄을 때 처리하는 메서드
+    handleScrollStop(visualSection) {
+        // 기존 타임아웃 클리어
+        if (this.scrollTimeout) {
+            clearTimeout(this.scrollTimeout);
+        }
+
+        // 스크롤이 멈춘 후 150ms 후에 실행
+        this.scrollTimeout = setTimeout(() => {
+            const shouldBeActive = this.currentProgress >= 50;
+            
+            // 상태가 변경되었을 때만 클래스 업데이트
+            if (this.lastActiveState !== shouldBeActive) {
+                if (shouldBeActive) {
+                    visualSection.classList.remove('inactive');
+                    visualSection.classList.add('active');
+                    console.log('Visual section activated');
+                } else {
+                    visualSection.classList.remove('active');
+                    visualSection.classList.add('inactive');
+                    console.log('Visual section deactivated');
+                }
+                
+                this.lastActiveState = shouldBeActive;
+                
+                // 커스텀 이벤트 발생
+                document.dispatchEvent(new CustomEvent('visualSectionStateChange', {
+                    detail: { 
+                        isActive: shouldBeActive, 
+                        progress: this.currentProgress,
+                        element: visualSection
+                    }
+                }));
+            }
+        }, 150);
     },
 
     initStickyWrapper() {
@@ -127,14 +170,13 @@ const app = {
             let radius;
             let backgroundPadding;
 
-            if (progress < 30) {
+            if (progress < 25) {
                 // 초기 상태 유지
                 size = startSizePercent;
                 backgroundPadding = 1;
                 radius = 10;
-            } else if (progress < 60) {
-                // 30~60% 사이에서 size를 확장 (선형 보간)
-                const localProgress = (progress - 30) / 30; // 0~1
+            } else if (progress < 50) {
+                const localProgress = (progress - 25) / 25; // 0~1
                 size = startSizePercent + (100 - startSizePercent) * this.easeOutSine(localProgress);;
                 backgroundPadding = 1 - this.easeOutSine(localProgress);
                 radius = 10 - ( 10 * localProgress);
