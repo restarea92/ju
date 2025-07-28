@@ -47,11 +47,13 @@
         white-space: pre;
     }
     .title {
+        position: relative;
         h2, h3 {
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
         h2 {
                 position: absolute;
+                top:0;
                 inset-inline: 0;
                 font-size: 4rem;
                 line-height: 1.47;
