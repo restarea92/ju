@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.13'
+        version: '1.0.14'
     },
 
     // Configuration constants
@@ -61,12 +61,24 @@ const app = {
             initialRadius: 10,
             padding: 4,
             animationBreakpoints: [25, 50]
-        }
+        },
+        throttleDelay: 100  // 👈 여기 추가
     },
     
     // Utility functions
     _utils: {
         easeOutSine: t => Math.sin(t * Math.PI / 2),
+
+        throttle(func, limit) {
+            let inThrottle;
+            return function (...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);    
+                }
+            };
+        },
         
         validateGSAP() {
             if (typeof gsap === 'undefined') {
@@ -89,7 +101,12 @@ const app = {
         console.log(this._state.version);
         
         if (!this._utils.validateGSAP()) return;
-        
+
+        this._throttledUpdateProgress = this._utils.throttle(
+            this._updateProgress.bind(this),
+            this._config.throttleDelay  // 👈 여기 적용
+        );
+
         this._initVisualSection();
         this._initStickyWrapper();
     },
@@ -114,7 +131,7 @@ const app = {
             scrub: true,
             onUpdate: (self) => {
                 const progress = self.progress * 100;
-                this._updateProgress(progress, section);
+                this._throttledUpdateProgress(progress, section);
             },
         });
     },
