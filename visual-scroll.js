@@ -188,7 +188,7 @@ const app = {
         const { size, padding, radius } = this._getAnimationValues(progress, startSize);
         
         const { padding: paddingMultiplier } = this._config.clipPathConfig;
-        
+        console.log({paddingMultiplier, padding})
         return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
