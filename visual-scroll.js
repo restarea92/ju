@@ -93,6 +93,11 @@ const app = {
         
         this._initVisualSection();
         this._initStickyWrapper();
+        window.addEventListener('resize', () => {
+            const section = document.querySelector('#visual-section');
+            if (!section) return;
+            this._renderVisualEffects(this._state.progress, section);
+        });
     },
 
     _initVisualSection() {
