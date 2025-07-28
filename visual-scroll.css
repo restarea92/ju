@@ -53,6 +53,12 @@
         h2, h3 {
             transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
+        h2 {
+                font-size: 4rem;
+            }
+            h3 {
+                font-size: 1.25rem;
+        }
     }
     &.inactive {
         .title {
@@ -60,7 +66,7 @@
                 font-size: calc(4rem / 1.5);
             }
             h3 {
-                font-size: calc(1.25rem / 1.5);
+               /* font-size: calc(1.25rem / 1.5); */
             }
         }
     }
