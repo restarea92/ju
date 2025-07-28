@@ -41,7 +41,7 @@
 #visual-section {
     .title {
         h2, h3 {
-            transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0.1);
+            transition: 0.3s font-size cubic-bezier(0.3, 0.1, 0, 1);
         }
     }
     &.inactive {
