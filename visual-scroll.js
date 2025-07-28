@@ -37,7 +37,9 @@
  * HScomm Web dev Team
  * Date: 07/25/2025
  */
+const version = '1.0.0';
 
+console.log(version);
 // GSAP 플러그인 등록
 if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
