@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.23',
+        version: '1.0.24',
         updateProgressCallCount: 0  // 호출 횟수 카운터
     },
 
