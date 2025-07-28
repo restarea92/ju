@@ -38,7 +38,7 @@
  * Date: 07/25/2025
  */
 
-#sticky-wrapper {
+#visual-section {
     &.inactive {
         .title {
             transform: scale(0.75);
