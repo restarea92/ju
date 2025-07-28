@@ -61,7 +61,7 @@ const app = {
         clipPathConfig: {
             initialRadius: 10,
             padding: 4,
-            animationBreakpoints: [25, 50]
+            animationBreakpoints: [10, 90]
         }
     },
     
