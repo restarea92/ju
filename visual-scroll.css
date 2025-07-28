@@ -43,7 +43,9 @@
         content: " ";
         line-height: 1;
         font-size: 4rem;
-        line-height: 1.47;
+        height: 4rem;
+        display: flex;
+        align-items: baseline;
         white-space: pre;
     }
     .title {
