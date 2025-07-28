@@ -44,58 +44,47 @@ if (typeof gsap !== 'undefined') {
 }
 
 const app = {
-    // Private state management
-    _state: {
+    // 상태 관리
+    state: {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.39',
-        updateProgressCallCount: 0  // 호출 횟수 카운터
+        version: '1.0.39'
     },
 
-    // Configuration constants
-    _config: {
+    // 설정값
+    config: {
         activationThreshold: 15,
         scrollDebounceDelay: 150,
         stickyHeightMultiplier: 1.75,
-        clipPathConfig: {
-            initialRadius: 5,
-            padding: 4,
-            animationBreakpoints: [10, 90]
-        }
-    },
-    
-    // Utility functions
-    _utils: {
-        easeOutSine: t => Math.sin(t * Math.PI / 2),
-        
-        validateGSAP() {
-            if (typeof gsap === 'undefined') {
-                console.error('GSAP not loaded - include gsap.min.js');
-                return false;
-            }
-            if (typeof ScrollTrigger === 'undefined') {
-                console.error('ScrollTrigger not loaded or registered');
-                return false;
-            }
-            return true;
-        },
-
-        emitEvent(eventName, detail) {
-            document.dispatchEvent(new CustomEvent(eventName, { detail }));
-        }
+        initialRadius: 5,
+        padding: 4,
+        animationStart: 10,
+        animationEnd: 90
     },
 
     init() {
-        console.log(this._state.version);
+        console.log(this.state.version);
         
-        if (!this._utils.validateGSAP()) return;
+        if (!this.validateGSAP()) return;
         
-        this._initVisualSection();
-        this._initStickyWrapper();
+        this.initVisualSection();
+        this.initStickyWrapper();
     },
 
-    _initVisualSection() {
+    validateGSAP() {
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP not loaded - include gsap.min.js');
+            return false;
+        }
+        if (typeof ScrollTrigger === 'undefined') {
+            console.error('ScrollTrigger not loaded or registered');
+            return false;
+        }
+        return true;
+    },
+
+    initVisualSection() {
         const section = document.querySelector('#visual-section');
         
         if (!section) {
@@ -103,176 +92,147 @@ const app = {
             return;
         }
 
-        this._createScrollTrigger(section);
-        this._initializeSection(section);
-    },
-
-    _createScrollTrigger(section) {
+        // ScrollTrigger 생성
         ScrollTrigger.create({
             trigger: section,
             start: "top top",
             end: "bottom bottom",
             scrub: true,
             onUpdate: (self) => {
-                const progress = self.progress * 100;
-                this._updateProgress(progress, section);
+                this.updateProgress(self.progress * 100, section);
             },
         });
+
+        // 초기 상태 설정
+        this.renderVisualEffects(0, section);
+        this.updateActivationState(section);
     },
 
-    _updateProgress(progress, section) {
-        this._state.progress = progress;
-        this._state.updateProgressCallCount++;
+    updateProgress(progress, section) {
+        this.state.progress = progress;
+        this.renderVisualEffects(progress, section);
         
-        this._renderVisualEffects(progress, section);
-        this._scheduleActivationUpdate(section);
+        // 디바운스된 활성화 상태 업데이트
+        clearTimeout(this.state.scrollTimer);
+        this.state.scrollTimer = setTimeout(() => {
+            this.updateActivationState(section);
+        }, this.config.scrollDebounceDelay);
     },
 
-    _scheduleActivationUpdate(section) {
-        clearTimeout(this._state.scrollTimer);
+    updateActivationState(section) {
+        const shouldActivate = this.state.progress >= this.config.activationThreshold;
         
-        this._state.scrollTimer = setTimeout(() => {
-            this._updateActivationState(section);
-        }, this._config.scrollDebounceDelay);
-    },
-
-    _updateActivationState(section) {
-        const shouldActivate = this._state.progress >= this._config.activationThreshold;
+        if (this.state.isActive === shouldActivate) return;
         
-        if (this._state.isActive === shouldActivate) return;
+        this.state.isActive = shouldActivate;
         
-        this._state.isActive = shouldActivate;
-        this._applyActivationClasses(section, shouldActivate);
-        this._emitStateChangeEvent(section, shouldActivate);
-    },
-
-    _applyActivationClasses(section, isActive) {
-        const [activeClass, inactiveClass] = isActive 
-            ? ['active', 'inactive'] 
-            : ['inactive', 'active'];
+        // 클래스 적용
+        section.classList.remove(shouldActivate ? 'inactive' : 'active');
+        section.classList.add(shouldActivate ? 'active' : 'inactive');
         
-        section.classList.remove(inactiveClass);
-        section.classList.add(activeClass);
-        
-    },
-
-    _emitStateChangeEvent(section, isActive) {
-        this._utils.emitEvent('visualSectionStateChange', {
-            isActive,
-            progress: this._state.progress,
+        // 이벤트 발생
+        this.emitEvent('visualSectionStateChange', {
+            isActive: shouldActivate,
+            progress: this.state.progress,
             element: section
         });
     },
 
-    _initializeSection(section) {
-        this._renderVisualEffects(0, section);
-        this._updateActivationState(section);
-    },
-
-    _renderVisualEffects(progress, section) {
+    renderVisualEffects(progress, section) {
         const background = section.querySelector('.sticky-element-background');
         if (!background) return;
 
-        const clipPathValue = this._calculateClipPath(progress, section);
-        gsap.set(background, { clipPath: clipPathValue });
+        const clipPath = this.calculateClipPath(progress, section);
+        gsap.set(background, { clipPath });
 
-        this._utils.emitEvent('visualSectionProgress', {
+        this.emitEvent('visualSectionProgress', {
             progress,
             element: section
         });
     },
 
-    _calculateClipPath(progress, section) {
-        const dimensions = this._getDimensions(section);
-        const startSize = this._getInitialSize(dimensions);
-        const { size, padding, radius } = this._getAnimationValues(progress, startSize);
+    calculateClipPath(progress, section) {
+        const { size, padding, radius } = this.getAnimationValues(progress, section);
         
-        const { padding: paddingMultiplier } = this._config.clipPathConfig;
-        console.log({paddingMultiplier, padding})
         return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
-        // return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
+    getAnimationValues(progress, section) {
+        const startSize = this.getInitialSize(section);
+        const { initialRadius, padding, animationStart, animationEnd } = this.config;
 
-    _getDimensions(section) {
-        const content = section.querySelector('.sticky-element-content');
-        const background = section.querySelector('.sticky-element-background');
-        
-        return {
-            contentWidth: content?.getBoundingClientRect().width || 1,
-            containerWidth: background?.getBoundingClientRect().width || 1,
-            viewportWidth: window.innerWidth
-        };
-    },
-
-    _getInitialSize({ contentWidth, containerWidth, viewportWidth }) {
-        const effectiveWidth = Math.min(contentWidth, viewportWidth);
-        return (effectiveWidth / containerWidth) * 100;
-    },
-
-    _getAnimationValues(progress, startSize) {
-        const { animationBreakpoints, initialRadius } = this._config.clipPathConfig;
-        const [firstBreakpoint, secondBreakpoint] = animationBreakpoints;
-
-        if (progress < firstBreakpoint) {
+        // 애니메이션 시작 전
+        if (progress < animationStart) {
             return { size: startSize, padding: 1, radius: initialRadius };
         }
 
-        if (progress < secondBreakpoint) {
-            const localProgress = (progress - firstBreakpoint) / (secondBreakpoint - firstBreakpoint);
-            const easedProgress = this._utils.easeOutSine(localProgress);
-            
-            return {
-                size: startSize + (100 - startSize) * easedProgress,
-                padding: 1 - easedProgress,
-                radius: initialRadius * (1 - localProgress)
-            };
+        // 애니메이션 완료 후
+        if (progress >= animationEnd) {
+            return { size: 100, padding: 0, radius: 0 };
         }
 
-        return { size: 100, padding: 0, radius: 0 };
+        // 애니메이션 진행 중
+        const localProgress = (progress - animationStart) / (animationEnd - animationStart);
+        const easedProgress = this.easeOutSine(localProgress);
+        
+        return {
+            size: startSize + (100 - startSize) * easedProgress,
+            padding: 1 - easedProgress,
+            radius: initialRadius * (1 - localProgress)
+        };
     },
 
-    _initStickyWrapper() {
+    getInitialSize(section) {
+        const content = section.querySelector('.sticky-element-content');
+        const background = section.querySelector('.sticky-element-background');
+        
+        if (!content || !background) return 50; // 기본값
+        
+        const contentWidth = content.getBoundingClientRect().width;
+        const containerWidth = background.getBoundingClientRect().width;
+        const effectiveWidth = Math.min(contentWidth, window.innerWidth);
+        
+        return (effectiveWidth / containerWidth) * 100;
+    },
+
+    initStickyWrapper() {
         const wrapper = document.querySelector('.sticky-wrapper');
         const element = wrapper?.querySelector('.sticky-element');
         
         if (!wrapper || !element) return;
 
-        this._observeStickyResize(wrapper, element);
-    },
-
-    _observeStickyResize(wrapper, element) {
+        // ResizeObserver로 높이 자동 조정
         const observer = new ResizeObserver(() => {
             const height = element.getBoundingClientRect().height;
-            wrapper.style.height = `${height * this._config.stickyHeightMultiplier}px`;
+            wrapper.style.height = `${height * this.config.stickyHeightMultiplier}px`;
         });
 
         observer.observe(element);
     },
 
-    // Legacy method for backward compatibility
-    initVisualSectionScroll() {
-        return this._initVisualSection();
-    },
-
-    // Legacy method for backward compatibility  
-    initStickyWrapper() {
-        return this._initStickyWrapper();
-    },
-
-    // Legacy method for backward compatibility
-    handleScrollProgress(progress, element) {
-        return this._renderVisualEffects(progress, element);
-    },
-
-    // Legacy method for backward compatibility
-    handleScrollStop(element) {
-        return this._scheduleActivationUpdate(element);
-    },
-
-    // Legacy method for backward compatibility
+    // 유틸리티 함수들
     easeOutSine(t) {
-        return this._utils.easeOutSine(t);
+        return Math.sin(t * Math.PI / 2);
+    },
+
+    emitEvent(eventName, detail) {
+        document.dispatchEvent(new CustomEvent(eventName, { detail }));
+    },
+
+    // 하위 호환성을 위한 레거시 메서드들
+    initVisualSectionScroll() {
+        return this.initVisualSection();
+    },
+
+    handleScrollProgress(progress, element) {
+        return this.renderVisualEffects(progress, element);
+    },
+
+    handleScrollStop(element) {
+        clearTimeout(this.state.scrollTimer);
+        this.state.scrollTimer = setTimeout(() => {
+            this.updateActivationState(element);
+        }, this.config.scrollDebounceDelay);
     }
 };
 
