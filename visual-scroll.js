@@ -93,6 +93,13 @@ const app = {
         
         this._initVisualSection();
         this._initStickyWrapper();
+
+         // 창 크기 변경 시 clip-path 재계산 및 적용
+        window.addEventListener('resize', () => {
+            const section = document.querySelector('#visual-section');
+            if (!section) return;
+            this._renderVisualEffects(this._state.progress, section);
+        });
     },
 
     _initVisualSection() {
