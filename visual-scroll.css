@@ -60,7 +60,7 @@
                 align-items: end;
         }
         h3 {
-               font-size: calc(1.25rem / 1.5);
+            font-size: calc(1rem);
         }
     }
     &.inactive {
@@ -68,9 +68,7 @@
             h2 {
                 font-size: calc(4rem / 1.5);
             }
-            h3 {
-               font-size: calc(1.25rem / 1.5);
-            }
+
         }
     }
     &.active {
