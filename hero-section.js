@@ -184,9 +184,9 @@ const app = {
             const viewportHeight = window.innerHeight;
             const viewportBottom = window.pageYOffset + viewportHeight;
             let scrollProgress = (viewportBottom - targetBottom) / (viewportHeight * 2);
-            console.log(scrollProgress);
             scrollProgress = Math.min(Math.max(scrollProgress, 0), 1);
             const insetValue = scrollProgress * 20;
+            console.log(insetValue);
             app.elements.maskLayer.style.clipPath = `inset(${insetValue}% ${insetValue}% ${insetValue}% ${insetValue}% round ${insetValue}vw)`;
         },
         init() {
