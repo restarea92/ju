@@ -64,7 +64,7 @@
     &.inactive {
         .title {
             h2 {
-                transform: scale(0.333);
+                transform: scale(0.666);
             }
 
         }
