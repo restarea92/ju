@@ -46,6 +46,7 @@
         &::after {
             content: "JU가 제시하는 보컬 교육의 미래.";
             width: 100%;
+            font-size: var(--h2-font-size);
         }
         position: relative;
         h2, h3 {
