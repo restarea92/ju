@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.31',
+        version: '1.0.32',
         updateProgressCallCount: 0  // 호출 횟수 카운터
     },
 
@@ -189,7 +189,7 @@ const app = {
         
         const { padding: paddingMultiplier } = this._config.clipPathConfig;
         
-        return `inset(${paddingMultiplier * padding}rem ${50 - size / 2}% ${paddingMultiplier * padding}rem ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+        return `inset(0 ${50 - size / 2}% 0 ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
     _getDimensions(section) {
