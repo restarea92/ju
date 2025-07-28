@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.9'
+        version: '1.0.10'
     },
 
     // Configuration constants
