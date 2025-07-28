@@ -62,7 +62,7 @@ const app = {
             padding: 4,
             animationBreakpoints: [25, 50]
         },
-        throttleDelay: 100  // 👈 여기 추가
+        throttleDelay: 10  // 👈 여기 추가
     },
     
     // Utility functions
