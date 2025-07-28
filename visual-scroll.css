@@ -47,10 +47,10 @@
     &.inactive {
         .title {
             h2 {
-                font-size: 2rem;
+                font-size: calc(4rem / 1.5);
             }
             h3 {
-                font-size: 0.75rem;
+                font-size: 1rem;
             }
         }
     }
