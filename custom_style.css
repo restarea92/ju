@@ -211,7 +211,7 @@ footer#custom-footer {
   /* 769 ~ 1024 */
     :root {
       --default-container-width: 992px;
-      --default-content-width: 960px;
+      --default-content-width: 944px;
     }
       body:not(.video_fullpage) {
         zoom: unset;
