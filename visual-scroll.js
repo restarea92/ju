@@ -160,6 +160,7 @@ const app = {
         gsap.set(this.elements.background, { clipPath });
 
         const easeInOutSined = this.easeInOutSine(progress);
+        console.log(easeInOutSined);
         this.elements.visualSection.style.setProperty('--scroll-percentage', `${easeInOutSined}`);
 
         this.emitEvent('visualSectionProgress', {
@@ -210,7 +211,7 @@ const app = {
 
     // ========== 유틸리티 ==========
     easeOutSine: (t) => Math.sin(t * Math.PI / 2),
-    easeInOutSine: (t) => -(Math.cos(Math.PI * t) - 1) / 2,
+    easeInOutSine : (t) => 0.5 - 0.5 * Math.cos(t * Math.PI),
 
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
