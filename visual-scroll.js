@@ -67,7 +67,7 @@ const app = {
     elements: {
         visualSection: document.querySelector('#visual-section'),
         stickyWrapper: document.querySelector('.sticky-wrapper'),
-        title: visualSection.querySelector('.title');
+        title: visualSection.querySelector('.title'),
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); }
     },
