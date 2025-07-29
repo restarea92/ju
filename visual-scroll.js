@@ -51,7 +51,6 @@ const app = {
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
         INITIAL_RADIUS: 5,
-        PADDING: 4,
         ANIMATION_START: 10,
         ANIMATION_END: 90
     },
@@ -174,7 +173,7 @@ const app = {
 
     getAnimationValues(progress) {
         const startSize = this.getInitialSize();
-        const { INITIAL_RADIUS, PADDING, ANIMATION_START, ANIMATION_END } = this.CONFIG;
+        const { INITIAL_RADIUS, ANIMATION_START, ANIMATION_END } = this.CONFIG;
 
         if (progress < ANIMATION_START) {
             return { size: startSize, padding: 1, radius: INITIAL_RADIUS };
