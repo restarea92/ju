@@ -166,7 +166,6 @@ const app = {
                 pin: true,
                 scrub: 1,
                 snap: 1 / (numSections - 1),
-                end: () => "+=" + document.querySelector(".container").offsetWidth,
                 end: () => `+=${scrollLength * 0.5}`,
             }
         });
