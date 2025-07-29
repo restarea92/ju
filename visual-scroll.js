@@ -161,7 +161,7 @@ const app = {
 
         // progress는 이미 0~1이므로 바로 easing 적용
         const easedProgress = this.easeInOutSine(progress);
-        const peakProgress = this.easeInOutPeak(progress);
+        const peakProgress = this.easeInOutBell(progress);
 
         //set
         gsap.set(this.elements.title, { opacity: peakProgress });
