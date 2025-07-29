@@ -210,7 +210,7 @@ const app = {
 
     // ========== 유틸리티 ==========
     easeOutSine: (t) => Math.sin(t * Math.PI / 2),
-    easeInOutSine : (t) => 0.5 - 0.5 * Math.cos(t * Math.PI),
+    easeInOutSine: (t) => -(Math.cos(Math.PI * t) - 1) / 2,
 
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
