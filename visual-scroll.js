@@ -148,16 +148,7 @@ const app = {
             end: "bottom top",
             scrub: 1,
             onUpdate: (self) => {
-                this.updateProgress(self.progress); // 0~1 progress 사용
-                 if (self.progress >= 0.5 && !this.scrolledUp) {
-                this.scrolledUp = true; // 중복 실행 방지
-
-                gsap.to(window, {
-                    scrollTo: 0,
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-            }
+                
             },
         });
 
