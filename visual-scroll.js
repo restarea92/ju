@@ -160,7 +160,7 @@ const app = {
         gsap.set(this.elements.background, { clipPath });
 
         const easeInOutSined = this.easeInOutSine(progress);
-        this.elements.visualSection.style.setProperty('--scroll-percentage', `${easeInOutSined}%`);
+        this.elements.visualSection.style.setProperty('--scroll-percentage', `${easeInOutSined}`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
