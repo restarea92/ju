@@ -45,6 +45,7 @@
     background: #f5f5f7;
     .title {
         position: relative;
+        height:fit-content;
         h2 {
             transition: 0.3s transform cubic-bezier(0.3, 0.1, 0, 1);
         }
