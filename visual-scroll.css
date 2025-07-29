@@ -91,6 +91,7 @@
     z-index: -1;
     background-position: bottom;
     background-size: cover;
+    filter: brightness(0.9);
 }
 
 .sticky-element-content {
