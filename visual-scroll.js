@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.9',
+        VERSION: '1.1.10',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -137,6 +137,8 @@ const app = {
     initHorizontalScroll() {
         const wrapper = this.elements.horizontalWrapper;
         const scroller = this.elements.horizontalContent;
+        const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); // 혹은 적절한 클래스명
+        const numSections = sections.length;
 
         if (!wrapper || !scroller) return;
 
@@ -178,10 +180,10 @@ const app = {
                 pin: true,
                 anticipatePin: 1,
                 snap: {
-                snapTo: 1 / (numberOfSections - 1), // 섹션 수에 따라 분할
-                duration: {min: 0.2, max: 0.5},     // 스냅 애니메이션 시간
-                delay: 0.1,                         // 스냅 딜레이
-                ease: "power1.inOut"
+                    snapTo: 1 / (numSections - 1), // 섹션 수에 따라 분할
+                    duration: {min: 0.2, max: 0.5},     // 스냅 애니메이션 시간
+                    delay: 0.1,                         // 스냅 딜레이
+                    ease: "power1.inOut"
                 }
             }
         });
