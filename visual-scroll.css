@@ -59,7 +59,7 @@
             align-items: end;
         }
         h3 {
-            font-size: 1.5rem;
+            font-size: var(--h3-font-size);
             padding-top: calc(var(--h3-font-size) / 2 );
         }
     }
