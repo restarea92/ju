@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.76',
+        VERSION: '1.0.74',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -234,32 +234,29 @@ const app = {
     easeInOutBell: (t) => {
         t = Math.max(0, Math.min(1, t));
         if (t < 0.5) {
-            return 2 * t * t;
+            return 2 * t * t; // 0~0.5: 가속하며 올라감
         } else {
-            const result = 1 - 2 * (t - 1) * (t - 1);
-            // t=1일 때 정확히 0이 되도록
-            return t === 1 ? 0 : result;
+            return 1 - 2 * (t - 1) * (t - 1); // 0.5~1: 감속하며 내려감
         }
     },
-
     easeInOutPeak: (t) => {
         t = Math.max(0, Math.min(1, t));
-        return Math.sin(t * Math.PI);        // 0→1→0
+        const result = Math.sin(t * Math.PI);
+        // 부동소수점 정밀도 문제 해결
+        return Math.abs(result) < 1e-10 ? 0 : result;
     },
-
     easeInOutWide: (t) => {
         t = Math.max(0, Math.min(1, t));
+        // 정점을 0.25~0.75로 넓힘
         if (t < 0.25) {
             return 4 * t * t;
         } else if (t > 0.75) {
             const remaining = 1 - t;
-            const result = 1 - 4 * remaining * remaining;
-            // t=1일 때 정확히 0이 되도록
-            return t === 1 ? 0 : result;
+            return 1 - 4 * remaining * remaining;
         } else {
+            // 0.25~0.75 구간에서 0.8~1~0.8로 천천히 변화
             const localT = (t - 0.25) / 0.5;
-            const sinResult = Math.sin(localT * Math.PI);
-            return 0.8 + 0.2 * (Math.abs(sinResult) < 1e-10 ? 0 : sinResult);
+            return 0.8 + 0.2 * Math.sin(localT * Math.PI);
         }
     },
     emitEvent: (eventName, detail) => {
