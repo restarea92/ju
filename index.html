@@ -1,31 +1,52 @@
 <style>
- #visual-section {
-  .content {
-  	display:grid;
-	grid-template-columns:repeat(12, 1fr);
-    max-width: var(--default-content-width);
-    .content-text {
-        grid-column: 1 / 9;
-        grid-row: 1 / 5;
-    }
-    .content-image {   
-        grid-column: 5 / 13;
-        grid-row: 3 / 7;
-        img {
-            object-fit:cover;
-            width: 100%;
-            height: 100%;
-        }
-    }
+#visual-section {
     .content-wrapper-wide {
         width: 100lvw;
         position: relative;
-        display: flex;
-        justify-content: center;
     }
-  }
- }
+    .content {
+        margin:0 auto;
+        display:grid;
+        grid-template-columns:repeat(12, 1fr);
+        max-width: var(--default-content-width);
+        .content-text {
+            color:white;
+            grid-column: 1 / 9;
+            grid-row: 1 / 5;
+            strong {
+                font-weight: 750;
+            }
+        }
+        .content-image {   
+            grid-column: 5 / 13;
+            grid-row: 3 / 7;
+            img {
+                object-fit:cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+#horizontal-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.horizontal-content {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    height: 100lvh;
+}
+
+.content {
+    flex: 0 0 100lvw; /* 하나의 화면을 꽉 채우도록 */
+    box-sizing: border-box;
+    padding: 4rem;
+}
 </style>
+
 <div class="visual-section sticky-wrapper" id="visual-section">
     <div class="sticky-element">
         <div 
@@ -49,35 +70,34 @@
 		  </div>
         </div>
     </div>
-    <div id="scroll-trigger" style="position:relative; min-height: 100lvh; border:2px solid red; background: rgba(255,255,255,0.1);">
+    <div id="scroll-trigger" style="position:relative; min-height: 100lvh; background: transparent; user-select: none; z-index: -1;">
 	Trigger
     </div>
-    <div class="content-wrapper-wide" style="margin-top:50lvh; position:relative; min-height: 100lvh; border:4px solid red; background: rgba(255,255,255,0.7);">
-        <div class="content">
-            <div class="content-text">
-                <p>
-                    <strong>지피지기 백전불태.</strong> 발성적 문제와 원인은 너무나도 다양합니다. JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다.<br> 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br><br> 다양한 발성적 문제들을 과학적 관점으로 분석하고 개개인에 맞춘 체계적 커리큘럼을 제시합니다. 
-                </p>
+    <div id="horizontal-wrapper" class="content-wrapper-wide" style="margin-top:50lvh; position:relative; min-height: 100lvh; background:#f5f5f7; border-radius: 4rem;">
+        <div class="horizontal-content">
+            <div class="content">
+                <div class="content-text">
+                    <p>
+                        <strong>지피지기 백전불태.</strong> 발성적 문제와 원인은 너무나도 다양합니다. JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다.<br> 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br><br> 다양한 발성적 문제들을 과학적 관점으로 분석하고 개개인에 맞춘 체계적 커리큘럼을 제시합니다. 
+                    </p>
+                </div>
+                <div class="content-image">
+                    <img src="https://restarea92.github.io/ju/33.png">
+                </div>
             </div>
-            <div class="content-image">
-                <img src="https://restarea92.github.io/ju/33.png">
+            <div class="content">
+                <div class="content-text">
+                    <p>
+                        <strong>목표는 높게, 발성은 쉽게.</strong> 아무리 좋은 내용도 제대로 이해하지 못한다면 활용할 수 없습니다. 
+                        체계적 발성 이론을 누구나 쉽게 이해할 수 있도록 JU만의 방식으로 교육합니다. <br><br>
+                        더 이상 전공서적에나 나올 법한 어려운 이론들로 고민하지 마세요. 그저 여러분들은 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 JU가 할 테니까요.
+                    </p>
+                </div>
+                <div >
+                    <img src="https://restarea92.github.io/ju/td.jpg">
+                </div>
             </div>
         </div>
-        <div >
-            <div >
-                <p>
-                    <strong>목표는 높게, 발성은 쉽게.</strong> 아무리 좋은 내용도 제대로 이해하지 못한다면 활용할 수 없습니다. 
-                    체계적 발성 이론을 누구나 쉽게 이해할 수 있도록 JU만의 방식으로 교육합니다. <br><br>
-                    더 이상 전공서적에나 나올 법한 어려운 이론들로 고민하지 마세요. 그저 여러분들은 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 JU가 할 테니까요.
-                </p>
-            </div>
-            <div >
-                <img src="https://restarea92.github.io/ju/td.jpg">
-            </div>
-        </div>
-    </div>
-    <div style="position:relative; min-height: 100lvh; border:4px solid red; background: rgba(255,255,255,0.7);">
-        TEXT
     </div>
 </div>
 
