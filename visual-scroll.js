@@ -119,7 +119,7 @@ const app = {
 
         this.state.resizeObserver = new ResizeObserver(() => {
             const height = this.elements.stickyElement.getBoundingClientRect().height;
-            this.elements.stickyWrapper.style.height = `${height * this.CONFIG.STICKY_HEIGHT_MULTIPLIER}px`;
+            this.elements.stickyWrapper.style.minHeight = `${height * this.CONFIG.STICKY_HEIGHT_MULTIPLIER}px`;
         });
 
         this.state.resizeObserver.observe(this.elements.stickyElement);
