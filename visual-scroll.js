@@ -46,12 +46,11 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.45',
+        VERSION: '1.0.46',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
         INITIAL_RADIUS: 5,
-        PADDING: 4,
         ANIMATION_START: 10,
         ANIMATION_END: 90
     },
@@ -168,13 +167,13 @@ const app = {
 
     calculateClipPath(progress) {
         const { size, padding, radius } = this.getAnimationValues(progress);
-        console.log(padding);
+        console.log(size, padding, radius);
         return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
     getAnimationValues(progress) {
         const startSize = this.getInitialSize();
-        const { INITIAL_RADIUS, PADDING, ANIMATION_START, ANIMATION_END } = this.CONFIG;
+        const { INITIAL_RADIUS, ANIMATION_START, ANIMATION_END } = this.CONFIG;
 
         if (progress < ANIMATION_START) {
             return { size: startSize, padding: 1, radius: INITIAL_RADIUS };
