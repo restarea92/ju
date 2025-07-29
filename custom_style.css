@@ -207,8 +207,8 @@ footer#custom-footer {
   :root {
     --default-container-width: 1080px;
     --default-content-width: 1000px;
-    --small-container-width: 980px;
-    --small-content-width: 960px;
+    --small-container-width: var(--default-container-width);
+    --small-content-width: var(--default-content-width);
   }
 }
 
