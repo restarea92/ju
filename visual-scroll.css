@@ -41,6 +41,7 @@
 #visual-section {
     --h2-font-size: 4rem;
     --h3-font-size: 1.25rem;
+    --default-margin: 4rem;
     margin-top:0;
     background: #f5f5f7;
     .title {
