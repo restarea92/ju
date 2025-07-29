@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.43',
+        VERSION: '1.0.44',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
@@ -228,30 +228,6 @@ const app = {
             }
         });
     },
-
-    // ========== 레거시 호환성 ==========
-    initVisualSectionScroll() {
-        return this.initializeVisualSection();
-    },
-
-    initStickyWrapper() {
-        return this.initializeStickyWrapper();
-    },
-
-    handleScrollProgress(progress, element) {
-        return this.renderVisualEffects(progress);
-    },
-
-    handleScrollStop(element) {
-        clearTimeout(this.state.scrollTimer);
-        this.state.scrollTimer = setTimeout(() => {
-            this.updateActivationState();
-        }, this.CONFIG.SCROLL_DEBOUNCE_DELAY);
-    },
-
-    easeOutSine(t) {
-        return this.easeOutSine(t);
-    }
 };
 
 export default app;
