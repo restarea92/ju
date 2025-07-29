@@ -67,8 +67,8 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         visualSection: document.querySelector('#visual-section'),
-        get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         stickyWrapper: document.querySelector('.sticky-wrapper'),
+        get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); }
     },
 
