@@ -103,8 +103,8 @@ const app = {
 
         ScrollTrigger.create({
             trigger: this.elements.trigger,
-            start: "top top",
-            end: "bottom bottom",
+            start: "top bottom",
+            end: "bottom top",
             scrub: true,
             onUpdate: (self) => {
                 this.updateProgress(self.progress); // 0~1 그대로 사용
