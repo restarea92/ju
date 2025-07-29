@@ -46,11 +46,12 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.47',
+        VERSION: '1.0.49',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
         INITIAL_RADIUS: 5,
+        PADDING: 4,
         ANIMATION_START: 10,
         ANIMATION_END: 90
     },
@@ -81,7 +82,7 @@ const app = {
         this.initializeStickyWrapper();
     },
 
-    validateGSAP() {
+    validateGSAP: () => {
         if (typeof gsap === 'undefined') {
             console.error('GSAP not loaded - include gsap.min.js');
             return false;
@@ -167,12 +168,13 @@ const app = {
 
     calculateClipPath(progress) {
         const { size, padding, radius } = this.getAnimationValues(progress);
+        
         return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
     getAnimationValues(progress) {
         const startSize = this.getInitialSize();
-        const { INITIAL_RADIUS, ANIMATION_START, ANIMATION_END } = this.CONFIG;
+        const { INITIAL_RADIUS, PADDING, ANIMATION_START, ANIMATION_END } = this.CONFIG;
 
         if (progress < ANIMATION_START) {
             return { size: startSize, padding: 1, radius: INITIAL_RADIUS };
@@ -184,8 +186,7 @@ const app = {
 
         const localProgress = (progress - ANIMATION_START) / (ANIMATION_END - ANIMATION_START);
         const easedProgress = this.easeOutSine(localProgress);
-        console.log(localProgress, easedProgress);
-
+        
         return {
             size: startSize + (100 - startSize) * easedProgress,
             padding: 1 - easedProgress,
@@ -206,9 +207,9 @@ const app = {
     },
 
     // ========== 유틸리티 ==========
-    easeOutSine(t) { Math.sin(t * Math.PI / 2) },
+    easeOutSine: (t) => Math.sin(t * Math.PI / 2),
 
-    emitEvent(eventName, detail) {
+    emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
     },
 
