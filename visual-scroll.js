@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.68',
+        VERSION: '1.0.70',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -67,6 +67,7 @@ const app = {
     elements: {
         visualSection: document.querySelector('#visual-section'),
         stickyWrapper: document.querySelector('.sticky-wrapper'),
+        title: visualSection.querySelector('.title');
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); }
     },
@@ -157,10 +158,14 @@ const app = {
         if (!this.elements.background) return;
 
         const clipPath = this.calculateClipPath(progress);
-        gsap.set(this.elements.background, { clipPath });
 
         // progress는 이미 0~1이므로 바로 easing 적용
         const easedProgress = this.easeInOutSine(progress);
+        const peakProgress = this.easeInOutPeak(progress);
+
+        //set
+        gsap.set(this.elements.title, { opacity: peakProgress });
+        gsap.set(this.elements.background, { clipPath });
         this.elements.visualSection.style.setProperty('--scroll-percentage', `${easedProgress}`);
 
         this.emitEvent('visualSectionProgress', {
@@ -219,6 +224,14 @@ const app = {
         return -(Math.cos(Math.PI * t) - 1) / 2;
     },
 
+    easeInOutBell: (t) => {
+        t = Math.max(0, Math.min(1, t));
+        if (t < 0.5) {
+            return 2 * t * t; // 0~0.5: 가속하며 올라감
+        } else {
+            return 1 - 2 * (t - 1) * (t - 1); // 0.5~1: 감속하며 내려감
+        }
+    },
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
     },
