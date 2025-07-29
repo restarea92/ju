@@ -52,13 +52,14 @@ const app = {
         STICKY_HEIGHT_MULTIPLIER: 1.75,
         INITIAL_RADIUS: 5,
         ANIMATION_START: 10,
-        ANIMATION_END: 90
+        ANIMATION_END: 60
     },
 
     // ========== 변수 (STATE) ==========
     state: {
         scrollTimer: null,
         progress: 0,
+        animationProgress: 0, // 10~60 보간된 1~100 값
         isActive: null,
         resizeObserver: null
     },
@@ -151,7 +152,15 @@ const app = {
             element: this.elements.visualSection
         });
     },
+    getNormalizedProgress(progress) {
+        const { ANIMATION_START, ANIMATION_END } = this.CONFIG;
 
+        if (progress <= ANIMATION_START) return 1;
+        if (progress >= ANIMATION_END) return 100;
+
+        const local = (progress - ANIMATION_START) / (ANIMATION_END - ANIMATION_START);
+        return 1 + local * 99; // 1~100
+    },
     // ========== 렌더링 ==========
     renderVisualEffects(progress) {
         if (!this.elements.background) return;
@@ -159,7 +168,8 @@ const app = {
         const clipPath = this.calculateClipPath(progress);
         gsap.set(this.elements.background, { clipPath });
 
-        this.elements.visualSection.style.setProperty('--scroll-percentage', `${progress}%`);
+        const normalized = this.getNormalizedProgress(progress);
+        this.elements.visualSection.style.setProperty('--scroll-percentage', `${normalized}%`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
