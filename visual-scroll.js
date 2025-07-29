@@ -59,6 +59,8 @@ const app = {
     state: {
         scrollTimer: null,
         progress: 0,
+        verticalProgress: 0,     // 새 vertical 별도 progress
+        horizontalProgress: 0,    // 가로 스크롤 progress
         isActive: null,
         resizeObserver: null
     },
@@ -131,7 +133,6 @@ const app = {
 
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
-
     
     initHorizontalScroll() {
         const wrapper = this.elements.horizontalWrapper;
@@ -141,15 +142,28 @@ const app = {
 
         const scrollLength = scroller.scrollWidth - window.innerWidth;
 
-        // progress 업데이트용 ScrollTrigger
+        // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
         ScrollTrigger.create({
             trigger: scroller,
             start: "top bottom",
             end: "bottom top",
             scrub: 1,
             onUpdate: (self) => {
-                
+                this.state.verticalProgress = self.progress;
+                console.log(this.state.verticalProgress);
             },
+        });
+
+        // 가로 스크롤 프로그래스 업데이트용
+        ScrollTrigger.create({
+            trigger: wrapper,
+            start: "top top",
+            end: () => `+=${scrollLength * 0.5}`,
+            scrub: 1,
+            onUpdate: (self) => {
+                this.state.horizontalProgress = self.progress;
+                // 추가 처리 가능
+            }
         });
 
         // 가로 스크롤 애니메이션
@@ -157,12 +171,12 @@ const app = {
             x: () => -scrollLength,
             ease: "none",
             scrollTrigger: {
-            trigger: wrapper,
-            start: "top top",
-            end: () => `+=${scrollLength * 0.5}`,
-            scrub: 1,            // 숫자 줘서 부드럽게
-            pin: true,
-            anticipatePin: 1
+                trigger: wrapper,
+                start: "top top",
+                end: () => `+=${scrollLength * 0.5}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
             }
         });
     },
