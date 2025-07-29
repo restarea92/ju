@@ -41,7 +41,7 @@
 #visual-section {
     --h2-font-size: 4rem;
     --h3-font-size: 1.25rem;
-    --default-margin: 4rem;
+    --default-margin: 8rem;
     margin-top:0;
     background: #f5f5f7;
     .title {
@@ -70,7 +70,7 @@
     position: sticky;
     /* top:calc(var(--h2-font-size) * 2); */
     top:0;
-    padding:calc(var(--h2-font-size) * 2) 0;
+    padding: calc(var(--default-margin)) 0;
 }
 
 .sticky-element-background {
