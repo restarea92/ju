@@ -200,7 +200,6 @@ footer#custom-footer {
   
 @media (max-width: 1280px) and (min-width: 1025px) {
   /* 1025 ~ 1280 */
-   
   :root {
     --default-container-width: 1080px;
     --default-content-width: 1024px;
