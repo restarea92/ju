@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.6',
+        VERSION: '1.1.7',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -146,7 +146,7 @@ const app = {
             scrollTrigger: {
                 trigger: wrapper,
                 start: "top top",
-                end: () => `+=${scrollLength}`,
+                end: () => `+=${scrollLength * 0.5}`,
                 scrub: true,
                 pin: true,
                 anticipatePin: 1
