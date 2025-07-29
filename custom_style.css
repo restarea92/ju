@@ -218,8 +218,8 @@ footer#custom-footer {
     :root {
       --default-container-width: 768px;
       --default-content-width: 740px;
-      --small-container-width: 768px;
-      --small-content-width: 752px;
+      --small-container-width: var(--default-container-width);
+      --small-content-width: var(--default-content-width);
     }
       body:not(.video_fullpage) {
         zoom: unset;
