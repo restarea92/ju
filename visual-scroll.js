@@ -46,13 +46,13 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.66',
-        ACTIVATION_THRESHOLD: 15,
-        SCROLL_DEBOUNCE_DELAY: 150,
+        VERSION: '1.0.68',
+        ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
+        SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
         INITIAL_RADIUS: 5,
-        ANIMATION_START: 10,
-        ANIMATION_END: 60
+        ANIMATION_START: 0.1,        // 0~1 범위로 변경
+        ANIMATION_END: 0.6           // 0~1 범위로 변경
     },
 
     // ========== 변수 (STATE) ==========
@@ -105,7 +105,7 @@ const app = {
             end: "bottom bottom",
             scrub: true,
             onUpdate: (self) => {
-                this.updateProgress(self.progress * 100);
+                this.updateProgress(self.progress); // 0~1 그대로 사용
             },
         });
 
@@ -159,12 +159,13 @@ const app = {
         const clipPath = this.calculateClipPath(progress);
         gsap.set(this.elements.background, { clipPath });
 
-        const easeInOutSined = this.easeInOutSine(progress);
-        console.log(easeInOutSined);
-        this.elements.visualSection.style.setProperty('--scroll-percentage', `${easeInOutSined}`);
+        // progress는 이미 0~1이므로 바로 easing 적용
+        const easedProgress = this.easeInOutSine(progress);
+        this.elements.visualSection.style.setProperty('--scroll-percentage', `${easedProgress}`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
+            easedProgress,
             element: this.elements.visualSection
         });
     },
@@ -211,7 +212,12 @@ const app = {
 
     // ========== 유틸리티 ==========
     easeOutSine: (t) => Math.sin(t * Math.PI / 2),
-    easeInOutSine : (t) => 0.5 - 0.5 * Math.cos(t * Math.PI),
+    
+    easeInOutSine: (t) => {
+        // 입력값 안전성 보장
+        t = Math.max(0, Math.min(1, t));
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+    },
 
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
