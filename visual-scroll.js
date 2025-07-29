@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.10',
+        VERSION: '1.1.11',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -144,17 +144,17 @@ const app = {
 
         const scrollLength = scroller.scrollWidth - window.innerWidth;
 
-        // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
-        ScrollTrigger.create({
-            trigger: scroller,
-            start: "top bottom",
-            end: "top top",
-            scrub: 1,
-            onUpdate: (self) => {
-                this.state.verticalProgress = self.progress;
-                console.log(this.state.verticalProgress);
-            },
-        });
+        // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
+        // ScrollTrigger.create({
+        //     trigger: scroller,
+        //     start: "top bottom",
+        //     end: "top top",
+        //     scrub: 1,
+        //     onUpdate: (self) => {
+        //         this.state.verticalProgress = self.progress;
+        //         console.log(this.state.verticalProgress);
+        //     },
+        // });
 
         // 가로 스크롤 프로그래스 업데이트용
         ScrollTrigger.create({
