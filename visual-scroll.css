@@ -66,7 +66,8 @@
  
 .sticky-element {
     position: sticky;
-    top:calc(var(--h2-font-size) * 2);
+    /* top:calc(var(--h2-font-size) * 2); */
+    top:0;
     padding:calc(var(--h2-font-size) * 2) 0;
 }
 
