@@ -1,4 +1,20 @@
-
+<style>
+ #visual-section {
+  .content {
+  	display:grid;
+	grid-template-columns:repeat(12, 1fr);
+    max-width: var(--default-content-width);
+    .content-text {
+        grid-column: 1 / 9;
+        grid-row: 1 / 5;
+    }
+    .content-image {   
+        grid-column: 5 / 13;
+        grid-row: 3 / 7
+    }
+  }
+ }
+</style>
 <div class="visual-section sticky-wrapper" id="visual-section">
     <div class="sticky-element">
         <div 
