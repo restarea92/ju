@@ -163,8 +163,6 @@ const app = {
         // progress는 이미 0~1이므로 바로 easing 적용
         const easedProgress = this.easeInOutSine(progress);
         const peakProgress = this.easeInOutPeak(progress);
-        const bellProgress = this.easeInOutBell(progress);
-        const wideProgress = this.easeInOutWide(progress);
 
         //set
         // gsap.set(this.elements.title, { opacity: peakProgress });
@@ -173,8 +171,6 @@ const app = {
 
         this.elements.visualSection.style.setProperty('--scroll-percentage', `${easedProgress}`);
         this.elements.visualSection.style.setProperty('--scroll-peak-percentage', `${peakProgress}`);
-        this.elements.visualSection.style.setProperty('--scroll-bell-percentage', `${bellProgress}`);
-        this.elements.visualSection.style.setProperty('--scroll-wide-percentage', `${wideProgress}`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
@@ -232,47 +228,19 @@ const app = {
         return -(Math.cos(Math.PI * t) - 1) / 2;
     },
 
-    easeInOutBell: (t) => {
-        t = Math.max(0, Math.min(1, t));
-        if (t < 0.5) {
-            return 2 * t * t; // 0~0.5: 가속하며 올라감
-        } else {
-            return 1 - 2 * (t - 1) * (t - 1); // 0.5~1: 감속하며 내려감
-        }
-    },
     easeInOutPeak: (t) => {
-        t = Math.max(0, Math.min(1, t));
-        let result;
+    t = Math.max(0, Math.min(1, t));
+    const peak = 0.6;
+    const sharpness = 2.5; // 클수록 피크가 좁고 양끝이 완만함
 
-        if (t <= 0.5) {
-            result = Math.sin(t * Math.PI); // 원래 그대로 상승
-        } else if (t <= 0.9) {
-            // 천천히 내려오게: 피크값에서 0.9까지 곡선 완만하게 하강
-            const adjustedT = (t - 0.5) / 0.4; // 0~1 범위로 정규화
-            const slowFall = 1 - adjustedT ** 2; // 느리게 내려감 (포물선)
-            result = slowFall;
-        } else {
-            // 0.9~1: 빠르게 0으로 떨어짐
-            const adjustedT = (t - 0.9) / 0.1; // 0~1
-            result = (1 - adjustedT) * 0.1; // 급격히 감쇠 (0.1에서 0으로)
-        }
+    const a = Math.pow(t, sharpness);
+    const b = Math.pow(1 - t, sharpness);
+    const peakShape = a * b;
 
-        return Math.max(0, result);
+    return peakShape / Math.pow(peak * (1 - peak), sharpness); // 정규화
     },
-    easeInOutWide: (t) => {
-        t = Math.max(0, Math.min(1, t));
-        // 정점을 0.25~0.75로 넓힘
-        if (t < 0.25) {
-            return 4 * t * t;
-        } else if (t > 0.75) {
-            const remaining = 1 - t;
-            return 1 - 4 * remaining * remaining;
-        } else {
-            // 0.25~0.75 구간에서 0.8~1~0.8로 천천히 변화
-            const localT = (t - 0.25) / 0.5;
-            return 0.8 + 0.2 * Math.sin(localT * Math.PI);
-        }
-    },
+
+
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
     },
