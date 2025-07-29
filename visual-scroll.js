@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.12',
+        VERSION: '1.1.13',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -157,28 +157,17 @@ const app = {
         });
 
 
-
         // 가로 스크롤 애니메이션
         gsap.to(scroller, {
-            x: () => -scrollLength,
+            xPercent: -100 * (numSections - 1),
             ease: "none",
             scrollTrigger: {
                 trigger: wrapper,
-                start: "top top",
-                end: () => `+=${scrollLength * 0.5}`,
-                scrub: 1,
                 pin: true,
-                anticipatePin: 1,
-                snap: {
-                    snapTo: 1 / (numSections - 1),
-                    duration: { min: 0.2, max: 0.5 },
-                    delay: 0.1,
-                    ease: "power1.inOut"
-                },
-                onUpdate: (self) => {
-                this.state.horizontalProgress = self.progress;
-                // 추가 처리
-                }
+                scrub: 1,
+                snap: 1 / (numSections - 1),
+                // end: () => "+=" + document.querySelector(".container").offsetWidth,
+                end: () => `+=${scrollLength * 0.5}`,
             }
         });
     },
