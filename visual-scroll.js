@@ -68,6 +68,7 @@ const app = {
         visualSection: document.querySelector('#visual-section'),
         stickyWrapper: document.querySelector('.sticky-wrapper'),
         title: document.querySelector('.title'),
+        trigger: document.querySelector('#scroll-trigger'),
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); }
     },
@@ -101,7 +102,7 @@ const app = {
         }
 
         ScrollTrigger.create({
-            trigger: this.elements.visualSection,
+            trigger: this.elements.trigger,
             start: "top top",
             end: "bottom bottom",
             scrub: true,
