@@ -234,27 +234,27 @@ const app = {
     easeInOutBell: (t) => {
         t = Math.max(0, Math.min(1, t));
         if (t < 0.5) {
-            return 2 * t * t; // 0~0.5: 가속하며 올라감
+            return 2 * t * t;           // 0→1
         } else {
-            return 1 - 2 * (t - 1) * (t - 1); // 0.5~1: 감속하며 내려감
+            return 1 - 2 * (t - 1) * (t - 1); // 1→0
         }
     },
+
     easeInOutPeak: (t) => {
         t = Math.max(0, Math.min(1, t));
-        return Math.sin(t * Math.PI);
+        return Math.sin(t * Math.PI);        // 0→1→0
     },
+
     easeInOutWide: (t) => {
         t = Math.max(0, Math.min(1, t));
-        // 정점을 0.25~0.75로 넓힘
         if (t < 0.25) {
-            return 4 * t * t;
+            return 4 * t * t;               // 0→1
         } else if (t > 0.75) {
             const remaining = 1 - t;
-            return 1 - 4 * remaining * remaining;
+            return 1 - 4 * remaining * remaining; // 1→0  
         } else {
-            // 0.25~0.75 구간에서 0.8~1~0.8로 천천히 변화
             const localT = (t - 0.25) / 0.5;
-            return 0.8 + 0.2 * Math.sin(localT * Math.PI);
+            return 0.8 + 0.2 * Math.sin(localT * Math.PI); // 0.8~1~0.8 (거의 1 유지)
         }
     },
     emitEvent: (eventName, detail) => {
