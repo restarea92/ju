@@ -158,6 +158,8 @@ const app = {
 
         const clipPath = this.calculateClipPath(progress);
         gsap.set(this.elements.background, { clipPath });
+        
+        this.elements.visualSection.style.setProperty('--scroll-percentage', `${progress}%`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
