@@ -49,7 +49,7 @@
   --default-container-width: 1280px;
   --default-content-width: 1200px;
   --small-container-width: 1080px;
-  --small-content-width: 1000px;
+  --small-content-width: 1024px;
   --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
   --small-container-padding: calc(var(--small-container-width) - var(--small-content-width));
   --default-logo-margin: 20px;
@@ -206,7 +206,7 @@ footer#custom-footer {
    
   :root {
     --default-container-width: 1080px;
-    --default-content-width: 1000px;
+    --default-content-width: 1024px;
     --small-container-width: var(--default-container-width);
     --small-content-width: var(--default-content-width);
   }
