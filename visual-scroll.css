@@ -44,6 +44,9 @@
     --default-margin: 8rem;
     margin-top:0;
     background: #f5f5f7;
+    .content {
+        position: relative;
+    }
     .title {
         position: relative;
         height:fit-content;
