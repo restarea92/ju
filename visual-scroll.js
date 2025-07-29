@@ -161,6 +161,7 @@ const app = {
         x: () => -totalScrollWidth,
         ease: "none",
             scrollTrigger: {
+                normalizeScroll: true,
                 trigger: wrapper,
                 start: "top top",
                 end: () => `+=${totalScrollWidth}`,
