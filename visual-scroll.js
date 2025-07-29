@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.0',
+        VERSION: '1.1.1',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -241,10 +241,23 @@ const app = {
     },
     easeInOutPeak: (t) => {
         t = Math.max(0, Math.min(1, t));
-        const result = Math.sin(t * Math.PI);
-        // 부동소수점 정밀도 문제 해결
-        return Math.abs(result) < 1e-10 ? 0 : result;
-    },
+        let result;
+
+        if (t <= 0.5) {
+            result = Math.sin(t * Math.PI); // 원래 그대로 상승
+        } else if (t <= 0.9) {
+            // 천천히 내려오게: 피크값에서 0.9까지 곡선 완만하게 하강
+            const adjustedT = (t - 0.5) / 0.4; // 0~1 범위로 정규화
+            const slowFall = 1 - adjustedT ** 2; // 느리게 내려감 (포물선)
+            result = slowFall;
+        } else {
+            // 0.9~1: 빠르게 0으로 떨어짐
+            const adjustedT = (t - 0.9) / 0.1; // 0~1
+            result = (1 - adjustedT) * 0.1; // 급격히 감쇠 (0.1에서 0으로)
+        }
+
+        return Math.max(0, result);
+    }
     easeInOutWide: (t) => {
         t = Math.max(0, Math.min(1, t));
         // 정점을 0.25~0.75로 넓힘
