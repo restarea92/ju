@@ -49,7 +49,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.40'
+        version: '1.0.41'
     },
 
     config: {
@@ -129,18 +129,17 @@ const app = {
         }
     },
 
-    // ========== 메인 초기화 ==========
+    // ========== 초기화 ==========
     init() {
         console.log(this.state.version);
         
         if (!this.utils.validateGSAP()) return;
         
-        this.initVisualSection();
-        this.initStickyWrapper();
+        this.setupVisualSection();
+        this.setupStickyWrapper();
     },
 
-    // ========== 비주얼 섹션 관리 ==========
-    initVisualSection() {
+    setupVisualSection() {
         const section = document.querySelector('#visual-section');
         
         if (!section) {
@@ -148,11 +147,7 @@ const app = {
             return;
         }
 
-        this.createScrollTrigger(section);
-        this.initializeSectionState(section);
-    },
-
-    createScrollTrigger(section) {
+        // ScrollTrigger 생성
         ScrollTrigger.create({
             trigger: section,
             start: "top top",
@@ -162,20 +157,33 @@ const app = {
                 this.updateProgress(self.progress * 100, section);
             },
         });
-    },
 
-    initializeSectionState(section) {
+        // 초기 상태 설정
         this.renderVisualEffects(0, section);
         this.updateActivationState(section);
     },
 
+    setupStickyWrapper() {
+        const wrapper = document.querySelector('.sticky-wrapper');
+        const element = wrapper?.querySelector('.sticky-element');
+        
+        if (!wrapper || !element) return;
+
+        // ResizeObserver로 높이 자동 조정
+        const observer = new ResizeObserver(() => {
+            const height = element.getBoundingClientRect().height;
+            wrapper.style.height = `${height * this.config.stickyHeightMultiplier}px`;
+        });
+
+        observer.observe(element);
+    },
+
+    // ========== 스크롤 진행 처리 ==========
     updateProgress(progress, section) {
         this.state.progress = progress;
         this.renderVisualEffects(progress, section);
-        this.scheduleActivationUpdate(section);
-    },
-
-    scheduleActivationUpdate(section) {
+        
+        // 디바운스된 활성화 상태 업데이트
         clearTimeout(this.state.scrollTimer);
         this.state.scrollTimer = setTimeout(() => {
             this.updateActivationState(section);
@@ -188,16 +196,12 @@ const app = {
         if (this.state.isActive === shouldActivate) return;
         
         this.state.isActive = shouldActivate;
-        this.applyActivationClasses(section, shouldActivate);
-        this.emitStateChangeEvent(section, shouldActivate);
-    },
-
-    applyActivationClasses(section, shouldActivate) {
+        
+        // 클래스 적용
         section.classList.remove(shouldActivate ? 'inactive' : 'active');
         section.classList.add(shouldActivate ? 'active' : 'inactive');
-    },
-
-    emitStateChangeEvent(section, shouldActivate) {
+        
+        // 이벤트 발생
         this.utils.emitEvent('visualSectionStateChange', {
             isActive: shouldActivate,
             progress: this.state.progress,
@@ -218,28 +222,13 @@ const app = {
         });
     },
 
-    // ========== 스티키 래퍼 관리 ==========
-    initStickyWrapper() {
-        const wrapper = document.querySelector('.sticky-wrapper');
-        const element = wrapper?.querySelector('.sticky-element');
-        
-        if (!wrapper || !element) return;
-
-        this.observeStickyResize(wrapper, element);
-    },
-
-    observeStickyResize(wrapper, element) {
-        const observer = new ResizeObserver(() => {
-            const height = element.getBoundingClientRect().height;
-            wrapper.style.height = `${height * this.config.stickyHeightMultiplier}px`;
-        });
-
-        observer.observe(element);
-    },
-
     // ========== 레거시 호환성 ==========
     initVisualSectionScroll() {
-        return this.initVisualSection();
+        return this.setupVisualSection();
+    },
+
+    initStickyWrapper() {
+        return this.setupStickyWrapper();
     },
 
     handleScrollProgress(progress, element) {
@@ -247,7 +236,10 @@ const app = {
     },
 
     handleScrollStop(element) {
-        this.scheduleActivationUpdate(element);
+        clearTimeout(this.state.scrollTimer);
+        this.state.scrollTimer = setTimeout(() => {
+            this.updateActivationState(element);
+        }, this.config.scrollDebounceDelay);
     },
 
     easeOutSine(t) {
