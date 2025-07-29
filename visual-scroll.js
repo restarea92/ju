@@ -167,7 +167,6 @@ const app = {
 
     calculateClipPath(progress) {
         const { size, padding, radius } = this.getAnimationValues(progress);
-        console.log(size, padding, radius);
         return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
@@ -185,7 +184,8 @@ const app = {
 
         const localProgress = (progress - ANIMATION_START) / (ANIMATION_END - ANIMATION_START);
         const easedProgress = this.easeOutSine(localProgress);
-        
+        console.log(localProgress, easedProgress);
+
         return {
             size: startSize + (100 - startSize) * easedProgress,
             padding: 1 - easedProgress,
