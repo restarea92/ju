@@ -234,9 +234,11 @@ const app = {
     easeInOutBell: (t) => {
         t = Math.max(0, Math.min(1, t));
         if (t < 0.5) {
-            return 2 * t * t;           // 0→1
+            return 2 * t * t;
         } else {
-            return 1 - 2 * (t - 1) * (t - 1); // 1→0
+            const result = 1 - 2 * (t - 1) * (t - 1);
+            // t=1일 때 정확히 0이 되도록
+            return t === 1 ? 0 : result;
         }
     },
 
@@ -248,13 +250,16 @@ const app = {
     easeInOutWide: (t) => {
         t = Math.max(0, Math.min(1, t));
         if (t < 0.25) {
-            return 4 * t * t;               // 0→1
+            return 4 * t * t;
         } else if (t > 0.75) {
             const remaining = 1 - t;
-            return 1 - 4 * remaining * remaining; // 1→0  
+            const result = 1 - 4 * remaining * remaining;
+            // t=1일 때 정확히 0이 되도록
+            return t === 1 ? 0 : result;
         } else {
             const localT = (t - 0.25) / 0.5;
-            return 0.8 + 0.2 * Math.sin(localT * Math.PI); // 0.8~1~0.8 (거의 1 유지)
+            const sinResult = Math.sin(localT * Math.PI);
+            return 0.8 + 0.2 * (Math.abs(sinResult) < 1e-10 ? 0 : sinResult);
         }
     },
     emitEvent: (eventName, detail) => {
