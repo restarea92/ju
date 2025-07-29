@@ -61,19 +61,6 @@
             padding-top: calc(var(--h3-font-size) / 2 );
         }
     }
-    &.inactive {
-        .title {
-            h2 {
-                transform: scale(0.666);
-            }
-
-        }
-    }
-    &.active {
-            h2 {
-                transform: scale(1);
-            }
-    }
 }
  
 .sticky-element {
