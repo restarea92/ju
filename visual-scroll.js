@@ -157,16 +157,29 @@ const app = {
         // });
 
 
+
+
+
         // 가로 스크롤 애니메이션
         gsap.to(scroller, {
-            xPercent: -100 * (numSections - 1),
+            xPercent: -100 * (sections.length - 1),
             ease: "none",
             scrollTrigger: {
                 trigger: wrapper,
-                pin: true,
-                scrub: 1,
-                snap: 1 / (numSections - 1),
                 end: () => `+=${scrollLength * 0.5}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1,
+                snap: {
+                    snapTo: 1 / (numSections - 1),
+                    duration: { min: 0.2, max: 0.5 },
+                    delay: 0.1,
+                    ease: "power1.inOut"
+                },
+                onUpdate: (self) => {
+                this.state.horizontalProgress = self.progress;
+                // 추가 처리
+                }
             }
         });
     },
