@@ -216,8 +216,8 @@ footer#custom-footer {
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
     :root {
-      --default-container-width: 768px;
-      --default-content-width: 740px;
+      --default-container-width: 992px;
+      --default-content-width: 960px;
       --small-container-width: var(--default-container-width);
       --small-content-width: var(--default-content-width);
     }
@@ -229,7 +229,7 @@ footer#custom-footer {
 @media (max-width: 768px) {
     :root {
         --default-container-width: 100lvw;
-        --default-content-width: calc(100lvw - 1rem);
+        --default-content-width: calc(100lvw - 2rem);
         --small-container-width: var(--default-container-width);
         --small-content-width: var(--default-content-width);
     }
