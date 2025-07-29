@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.58',
+        VERSION: '1.0.60',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
