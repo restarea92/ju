@@ -83,9 +83,9 @@
 
   .content-wrapper {
       width: calc(100% - var(--default-container-padding) * 2);
-      max-width: var(--default-container-width);
+      max-width: var(--small-container-width);
       margin: 0 auto;
-      padding: 0 calc(var(--default-container-padding) / 2);
+      padding: 0 calc(var(--small-container-padding) / 2);
   }
   .content {
     margin-top: 4rem;
