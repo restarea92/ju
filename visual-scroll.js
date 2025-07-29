@@ -167,7 +167,6 @@ const app = {
                 end: () => `+=${scrollLength * 1}`,
                 scrub: 1,
                 pin: true,
-                anticipatePin: 1,
                 snap: {
                     snapTo: 1 / (numSections - 1),
                     duration: { min: 0.2, max: 0.5 },
