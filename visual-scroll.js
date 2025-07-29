@@ -146,7 +146,7 @@ const app = {
         ScrollTrigger.create({
             trigger: scroller,
             start: "top bottom",
-            end: "bottom top",
+            end: "top top",
             scrub: 1,
             onUpdate: (self) => {
                 this.state.verticalProgress = self.progress;
