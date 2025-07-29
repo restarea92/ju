@@ -232,6 +232,24 @@ const app = {
             return 1 - 2 * (t - 1) * (t - 1); // 0.5~1: 감속하며 내려감
         }
     },
+    easeInOutPeak: (t) => {
+        t = Math.max(0, Math.min(1, t));
+        return Math.sin(t * Math.PI);
+    },
+    easeInOutWide: (t) => {
+        t = Math.max(0, Math.min(1, t));
+        // 정점을 0.25~0.75로 넓힘
+        if (t < 0.25) {
+            return 4 * t * t;
+        } else if (t > 0.75) {
+            const remaining = 1 - t;
+            return 1 - 4 * remaining * remaining;
+        } else {
+            // 0.25~0.75 구간에서 0.8~1~0.8로 천천히 변화
+            const localT = (t - 0.25) / 0.5;
+            return 0.8 + 0.2 * Math.sin(localT * Math.PI);
+        }
+    },
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
     },
