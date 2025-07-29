@@ -144,40 +144,19 @@ const app = {
 
         const scrollLength = scroller.scrollWidth - window.innerWidth;
 
-        // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
-        ScrollTrigger.create({
-            trigger: scroller,
-            start: "top bottom",
-            end: "top top",
-            scrub: 1,
-            onUpdate: (self) => {
-                this.state.verticalProgress = self.progress;
-                console.log(this.state.verticalProgress);
-            },
-        });
+        // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
+        // ScrollTrigger.create({
+        //     trigger: scroller,
+        //     start: "top bottom",
+        //     end: "top top",
+        //     scrub: 1,
+        //     onUpdate: (self) => {
+        //         this.state.verticalProgress = self.progress;
+        //         console.log(this.state.verticalProgress);
+        //     },
+        // });normalizeScroll(true)
 
 
-
-        // 가로 스크롤 애니메이션
-        gsap.to(scroller, {
-            x: () => -scrollLength,
-            ease: "none",
-            scrollTrigger: {
-                trigger: wrapper,
-                end: () => `+=${scrollLength * 1}`,
-                scrub: 1,
-                pin: true,
-                snap: {
-                    snapTo: 1 / (numSections - 1),
-                    duration: { min: 0.2, max: 0.5 },
-                    delay: 0.1,
-                },
-                onUpdate: (self) => {
-                this.state.horizontalProgress = self.progress;
-                // 추가 처리
-                }
-            }
-        });
     },
 
     // ========== 상태 관리 ==========
