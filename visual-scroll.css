@@ -100,14 +100,14 @@
   /* 769 ~ 1024 */
     #visual-section {
         --h2-font-size: clamp(1.5rem, max(5vh, 5vw), 2rem);
-        --h2-font-size: clamp(0.875rem, max(5vh, 5vw), 1.25rem);
+        --h3-font-size: clamp(0.875rem, max(5vh, 5vw), 1.25rem);
     }
 }
 
 @media (max-width: 768px) {
     #visual-section {
         --h2-font-size: clamp(1.5rem, max(5vh, 5vw), 2rem);
-        --h2-font-size: clamp(0.875rem, max(5vh, 5vw), 1.25rem);
+        --h3-font-size: clamp(0.875rem, max(5vh, 5vw), 1.25rem);
     }
   /* 최대 768 */
 }
