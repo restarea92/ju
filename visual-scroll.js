@@ -137,7 +137,7 @@ const app = {
     initHorizontalScroll() {
         const wrapper = this.elements.horizontalWrapper;
         const scroller = this.elements.horizontalContent;
-        const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); // 혹은 적절한 클래스명
+        const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); 
         const numSections = sections.length;
 
         if (!wrapper || !scroller) return;
@@ -155,6 +155,20 @@ const app = {
         //         console.log(this.state.verticalProgress);
         //     },
         // });normalizeScroll(true)
+        // 가로 스크롤 초기화
+        const totalScrollWidth = scroller.scrollWidth - window.innerWidth;
+        gsap.to(scroller, {
+        x: () => -totalScrollWidth,
+        ease: "none",
+            scrollTrigger: {
+                trigger: wrapper,
+                start: "top top",
+                end: () => `+=${totalScrollWidth}`,
+                scrub: true,
+                pin: true,
+                anticipatePin: 1,
+            }
+        });
 
 
     },
