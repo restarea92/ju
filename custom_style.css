@@ -220,8 +220,8 @@ footer#custom-footer {
 
 @media (max-width: 768px) {
     :root {
-        --default-container-width: 100lvw;
-        --default-content-width: calc(100lvw - 2rem);
+        --default-container-width: calc(100lvw - 2rem);
+        --default-content-width: calc(var(--default-content-width) - 2rem);
     }
   /* 최대 768 */
   footer#custom-footer {
