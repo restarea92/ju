@@ -47,11 +47,8 @@
 :root {
   --logo-width: 100px;
   --default-container-width: 1280px;
-  --default-content-width: 1200px;
-  --small-container-width: 1080px;
-  --small-content-width: 1024px;
+  --default-content-width: 1152px;
   --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
-  --small-container-padding: calc(var(--small-container-width) - var(--small-content-width));
   --default-logo-margin: 20px;
   --default-navbar-padding: 12px;
 }
@@ -207,8 +204,6 @@ footer#custom-footer {
   :root {
     --default-container-width: 1080px;
     --default-content-width: 1024px;
-    --small-container-width: var(--default-container-width);
-    --small-content-width: var(--default-content-width);
   }
 }
 
@@ -218,8 +213,6 @@ footer#custom-footer {
     :root {
       --default-container-width: 992px;
       --default-content-width: 960px;
-      --small-container-width: var(--default-container-width);
-      --small-content-width: var(--default-content-width);
     }
       body:not(.video_fullpage) {
         zoom: unset;
@@ -230,8 +223,6 @@ footer#custom-footer {
     :root {
         --default-container-width: 100lvw;
         --default-content-width: calc(100lvw - 2rem);
-        --small-container-width: var(--default-container-width);
-        --small-content-width: var(--default-content-width);
     }
   /* 최대 768 */
   footer#custom-footer {
