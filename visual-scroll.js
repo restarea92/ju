@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.63',
+        VERSION: '1.0.64',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -60,6 +60,7 @@ const app = {
         scrollTimer: null,
         progress: 0,
         animationProgress: 0, // 10~60 보간된 1~100 값
+        oscillateProgress: 0,
         isActive: null,
         resizeObserver: null
     },
@@ -155,11 +156,11 @@ const app = {
     getNormalizedProgress(progress) {
         const { ANIMATION_START, ANIMATION_END } = this.CONFIG;
 
-        if (progress <= ANIMATION_START) return 1;
+        if (progress <= ANIMATION_START) return 0;
         if (progress >= ANIMATION_END) return 100;
 
         const local = (progress - ANIMATION_START) / (ANIMATION_END - ANIMATION_START);
-        return 1 + local * 99; // 1~100
+        return local * 100; // 0~100
     },
     // ========== 렌더링 ==========
     renderVisualEffects(progress) {
@@ -169,7 +170,8 @@ const app = {
         gsap.set(this.elements.background, { clipPath });
 
         const normalized = this.getNormalizedProgress(progress);
-        this.elements.visualSection.style.setProperty('--scroll-percentage', `${normalized}%`);
+        const oscillated = this.oscillate(normalized);
+        this.elements.visualSection.style.setProperty('--scroll-percentage', `${oscillated}%`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
@@ -219,6 +221,7 @@ const app = {
 
     // ========== 유틸리티 ==========
     easeOutSine: (t) => Math.sin(t * Math.PI / 2),
+    oscillate: (t) => 50 * (1 - Math.cos(t * 2 * Math.PI)),
 
     emitEvent: (eventName, detail) => {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));

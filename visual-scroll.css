@@ -51,6 +51,7 @@
         height:fit-content;
         position: absolute;
         inset:0;
+        top:50%;
         transform: translateY(calc(50% - var(--scroll-percentage) * 2));
         h2 {
             transition: 0.3s transform cubic-bezier(0.3, 0.1, 0, 1);
