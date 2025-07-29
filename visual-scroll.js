@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.72',
+        VERSION: '1.0.74',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -161,12 +161,19 @@ const app = {
 
         // progress는 이미 0~1이므로 바로 easing 적용
         const easedProgress = this.easeInOutSine(progress);
-        const peakProgress = this.easeInOutBell(progress);
+        const peakProgress = this.easeInOutPeak(progress);
+        const bellProgress = this.easeInOutBell(progress);
+        const wideProgress = this.easeInOutWide(progress);
 
         //set
         gsap.set(this.elements.title, { opacity: peakProgress });
         gsap.set(this.elements.background, { clipPath });
+
+
         this.elements.visualSection.style.setProperty('--scroll-percentage', `${easedProgress}`);
+        this.elements.visualSection.style.setProperty('--scroll-peak-percentage', `${peakProgress}`);
+        this.elements.visualSection.style.setProperty('--scroll-bell-percentage', `${bellProgress}`);
+        this.elements.visualSection.style.setProperty('--scroll-wide-percentage', `${wideProgress}`);
 
         this.emitEvent('visualSectionProgress', {
             progress,
