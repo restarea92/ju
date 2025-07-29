@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.0.42',
+        VERSION: '1.0.43',
         ACTIVATION_THRESHOLD: 15,
         SCROLL_DEBOUNCE_DELAY: 150,
         STICKY_HEIGHT_MULTIPLIER: 1.75,
@@ -82,7 +82,7 @@ const app = {
         this.initializeStickyWrapper();
     },
 
-    validateGSAP: () => {
+    validateGSAP() {
         if (typeof gsap === 'undefined') {
             console.error('GSAP not loaded - include gsap.min.js');
             return false;
@@ -207,9 +207,9 @@ const app = {
     },
 
     // ========== 유틸리티 ==========
-    easeOutSine: (t) => Math.sin(t * Math.PI / 2),
+    easeOutSine(t) { Math.sin(t * Math.PI / 2) },
 
-    emitEvent: (eventName, detail) => {
+    emitEvent(eventName, detail) {
         document.dispatchEvent(new CustomEvent(eventName, { detail }));
     },
 
