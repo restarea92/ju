@@ -257,7 +257,7 @@ const app = {
         }
 
         return Math.max(0, result);
-    }
+    },
     easeInOutWide: (t) => {
         t = Math.max(0, Math.min(1, t));
         // 정점을 0.25~0.75로 넓힘
