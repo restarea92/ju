@@ -166,7 +166,7 @@ const app = {
         const wideProgress = this.easeInOutWide(progress);
 
         //set
-        gsap.set(this.elements.title, { opacity: peakProgress });
+        // gsap.set(this.elements.title, { opacity: peakProgress });
         gsap.set(this.elements.background, { clipPath });
 
 
