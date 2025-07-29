@@ -168,7 +168,7 @@ const app = {
 
     calculateClipPath(progress) {
         const { size, padding, radius } = this.getAnimationValues(progress);
-        
+        console.log(padding);
         return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
     },
 
