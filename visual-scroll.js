@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.7',
+        VERSION: '1.1.8',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -131,6 +131,7 @@ const app = {
 
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
+
     
     initHorizontalScroll() {
         const wrapper = this.elements.horizontalWrapper;
@@ -140,19 +141,41 @@ const app = {
 
         const scrollLength = scroller.scrollWidth - window.innerWidth;
 
+        // progress 업데이트용 ScrollTrigger
+        ScrollTrigger.create({
+            trigger: scroller,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+            onUpdate: (self) => {
+                this.updateProgress(self.progress); // 0~1 progress 사용
+                 if (self.progress >= 0.5 && !this.scrolledUp) {
+                this.scrolledUp = true; // 중복 실행 방지
+
+                gsap.to(window, {
+                    scrollTo: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            }
+            },
+        });
+
+        // 가로 스크롤 애니메이션
         gsap.to(scroller, {
             x: () => -scrollLength,
             ease: "none",
             scrollTrigger: {
-                trigger: wrapper,
-                start: "top top",
-                end: () => `+=${scrollLength * 0.5}`,
-                scrub: true,
-                pin: true,
-                anticipatePin: 1
+            trigger: wrapper,
+            start: "top top",
+            end: () => `+=${scrollLength * 0.5}`,
+            scrub: 1,            // 숫자 줘서 부드럽게
+            pin: true,
+            anticipatePin: 1
             }
         });
     },
+
     // ========== 상태 관리 ==========
     updateProgress(progress) {
         this.state.progress = progress;
