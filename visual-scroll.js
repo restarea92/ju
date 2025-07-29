@@ -176,7 +176,13 @@ const app = {
                 end: () => `+=${scrollLength * 0.5}`,
                 scrub: 1,
                 pin: true,
-                anticipatePin: 1
+                anticipatePin: 1,
+                snap: {
+                snapTo: 1 / (numberOfSections - 1), // 섹션 수에 따라 분할
+                duration: {min: 0.2, max: 0.5},     // 스냅 애니메이션 시간
+                delay: 0.1,                         // 스냅 딜레이
+                ease: "power1.inOut"
+                }
             }
         });
     },
