@@ -144,50 +144,44 @@ const app = {
 
         const scrollLength = scroller.scrollWidth - window.innerWidth;
 
-        // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
-        // ScrollTrigger.create({
-        //     trigger: scroller,
-        //     start: "top bottom",
-        //     end: "top top",
-        //     scrub: 1,
-        //     onUpdate: (self) => {
-        //         this.state.verticalProgress = self.progress;
-        //         console.log(this.state.verticalProgress);
-        //     },
-        // });
-
-        // 가로 스크롤 프로그래스 업데이트용
+        // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
         ScrollTrigger.create({
+            trigger: scroller,
+            start: "top bottom",
+            end: "top top",
+            scrub: 1,
+            onUpdate: (self) => {
+                this.state.verticalProgress = self.progress;
+                console.log(this.state.verticalProgress);
+            },
+        });
+
+
+
+        // 가로 스크롤 애니메이션
+    gsap.to(scroller, {
+        x: () => -scrollLength,
+        ease: "none",
+        scrollTrigger: {
             trigger: wrapper,
             start: "top top",
             end: () => `+=${scrollLength * 0.5}`,
             scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            snap: {
+                snapTo: 1 / (numSections - 1),
+                duration: { min: 0.2, max: 0.5 },
+                delay: 0.1,
+                ease: "power1.inOut"
+            },
             onUpdate: (self) => {
-                this.state.horizontalProgress = self.progress;
-                // 추가 처리 가능
+            this.state.horizontalProgress = self.progress;
+            // 추가 처리
             }
-        });
+        }
+    });
 
-        // 가로 스크롤 애니메이션
-        gsap.to(scroller, {
-            x: () => -scrollLength,
-            ease: "none",
-            scrollTrigger: {
-                trigger: wrapper,
-                start: "top top",
-                end: () => `+=${scrollLength * 0.5}`,
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1,
-                snap: {
-                    snapTo: 1 / (numSections - 1), // 섹션 수에 따라 분할
-                    duration: {min: 0.2, max: 0.5},     // 스냅 애니메이션 시간
-                    delay: 0.1,                         // 스냅 딜레이
-                    ease: "power1.inOut"
-                }
-            }
-        });
-    },
 
     // ========== 상태 관리 ==========
     updateProgress(progress) {
