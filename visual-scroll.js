@@ -44,12 +44,42 @@ if (typeof gsap !== 'undefined') {
 }
 
 const app = {
-    // ========== 기본 설정 ==========
+    // ========== 상태 관리 ==========
     state: {
         scrollTimer: null,
         progress: 0,
         isActive: null,
-        version: '1.0.41'
+        version: '1.0.42',
+
+        updateProgress(progress, section) {
+            this.progress = progress;
+            app.renderVisualEffects(progress, section);
+            
+            // 디바운스된 활성화 상태 업데이트
+            clearTimeout(this.scrollTimer);
+            this.scrollTimer = setTimeout(() => {
+                this.updateActivationState(section);
+            }, app.config.scrollDebounceDelay);
+        },
+
+        updateActivationState(section) {
+            const shouldActivate = this.progress >= app.config.activationThreshold;
+            
+            if (this.isActive === shouldActivate) return;
+            
+            this.isActive = shouldActivate;
+            
+            // 클래스 적용
+            section.classList.remove(shouldActivate ? 'inactive' : 'active');
+            section.classList.add(shouldActivate ? 'active' : 'inactive');
+            
+            // 이벤트 발생
+            app.utils.emitEvent('visualSectionStateChange', {
+                isActive: shouldActivate,
+                progress: this.progress,
+                element: section
+            });
+        }
     },
 
     config: {
@@ -154,13 +184,13 @@ const app = {
             end: "bottom bottom",
             scrub: true,
             onUpdate: (self) => {
-                this.updateProgress(self.progress * 100, section);
+                this.state.updateProgress(self.progress * 100, section);
             },
         });
 
         // 초기 상태 설정
         this.renderVisualEffects(0, section);
-        this.updateActivationState(section);
+        this.state.updateActivationState(section);
     },
 
     setupStickyWrapper() {
@@ -178,37 +208,7 @@ const app = {
         observer.observe(element);
     },
 
-    // ========== 스크롤 진행 처리 ==========
-    updateProgress(progress, section) {
-        this.state.progress = progress;
-        this.renderVisualEffects(progress, section);
-        
-        // 디바운스된 활성화 상태 업데이트
-        clearTimeout(this.state.scrollTimer);
-        this.state.scrollTimer = setTimeout(() => {
-            this.updateActivationState(section);
-        }, this.config.scrollDebounceDelay);
-    },
-
-    updateActivationState(section) {
-        const shouldActivate = this.state.progress >= this.config.activationThreshold;
-        
-        if (this.state.isActive === shouldActivate) return;
-        
-        this.state.isActive = shouldActivate;
-        
-        // 클래스 적용
-        section.classList.remove(shouldActivate ? 'inactive' : 'active');
-        section.classList.add(shouldActivate ? 'active' : 'inactive');
-        
-        // 이벤트 발생
-        this.utils.emitEvent('visualSectionStateChange', {
-            isActive: shouldActivate,
-            progress: this.state.progress,
-            element: section
-        });
-    },
-
+    // ========== 렌더링 ==========
     renderVisualEffects(progress, section) {
         const background = section.querySelector('.sticky-element-background');
         if (!background) return;
@@ -238,7 +238,7 @@ const app = {
     handleScrollStop(element) {
         clearTimeout(this.state.scrollTimer);
         this.state.scrollTimer = setTimeout(() => {
-            this.updateActivationState(element);
+            this.state.updateActivationState(element);
         }, this.config.scrollDebounceDelay);
     },
 
