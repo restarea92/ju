@@ -187,6 +187,7 @@ const app = {
                     pin: true,
                     scrub: 1,
                     end: "+=3500",
+                    anticipatePin: 1,
                 }
             });
         });
