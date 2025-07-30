@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.15',
+        VERSION: '1.1.16',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -74,10 +74,6 @@ const app = {
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); },
 
-        horizontalWrapper: document.querySelector('#horizontal-wrapper'),
-        get horizontalContent() {
-            return this.horizontalWrapper?.querySelector('.horizontal-content');
-        }
     },
 
     // ========== 초기화 ==========
@@ -134,7 +130,7 @@ const app = {
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
     
-    initHorizontalScroll() {
+    initHorizontalScroll2() {
         const wrapper = this.elements.horizontalWrapper;
         const scroller = this.elements.horizontalContent;
         const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); 
@@ -172,8 +168,30 @@ const app = {
             }
             });
         });
-
-
+    },
+    initHorizontalScroll() {
+        // 가로 스크롤 컨테이너 찾기
+        let horizontalSections = gsap.utils.toArray(".horizontal-container");
+        
+        horizontalSections.forEach((container) => {
+            let sections = container.querySelectorAll(".multi-scroll-item");
+            
+            if (sections.length === 0) return;
+            
+            gsap.to(sections, {
+                xPercent: -100 * (sections.length - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    pin: true,
+                    scrub: 1,
+                    end: "+=3500",
+                    onUpdate: (self) => {
+                        this.state.horizontalProgress = self.progress;
+                    }
+                }
+            });
+        });
     },
 
     // ========== 상태 관리 ==========
