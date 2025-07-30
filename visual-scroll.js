@@ -173,7 +173,7 @@ const app = {
     initHorizontalScroll() {
         const lvhPx = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         // 가로 스크롤 컨테이너 찾기
-        let horizontalSections = gsap.utils.toArray(".horizontal-container");
+        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
         horizontalSections.forEach((container) => {
             let sections = container.querySelectorAll(".multi-scroll-item");
             
