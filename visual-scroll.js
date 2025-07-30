@@ -156,19 +156,21 @@ const app = {
         //     },
         // });normalizeScroll(true)
         // 가로 스크롤 초기화
-        const totalScrollWidth = scroller.scrollWidth - window.innerWidth;
-        gsap.to(scroller, {
-        x: () => -totalScrollWidth,
-        ease: "none",
+
+        let horizontalSections = gsap.utils.toArray("#horizontal-content");
+        horizontalSections.forEach((container) => {
+            let sections = container.querySelectorAll(".horizontal-content-item");
+            gsap.to(sections, {
+            xPercent: -100 * (sections.length - 1),
+            ease: "none",
             scrollTrigger: {
-                normalizeScroll: true,
-                trigger: wrapper,
-                start: "top top",
-                end: () => `+=${totalScrollWidth}`,
-                scrub: true,
+                trigger: container,
                 pin: true,
-                anticipatePin: 1,
+                scrub: 1,
+                // base vertical scrolling on how wide the container is so it feels more natural.
+                end: "+=3500",
             }
+            });
         });
 
 
