@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 첫 번째 섹션에서 잠시 멈춤
                         tl.to(sections, { 
                             xPercent: 0, 
-                            duration: 2, 
+                            duration: 0, 
                             ease: "none" 
                         });
                     } else {
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 해당 섹션에서 잠시 멈춤
                         .to(sections, { 
                             xPercent: -100 * index, 
-                            duration: 2, 
+                            duration: 1, 
                             ease: "none" 
                         });
                     }
