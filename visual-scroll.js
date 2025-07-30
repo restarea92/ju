@@ -162,9 +162,10 @@ const app = {
             scrollTrigger: {
                 trigger: container,
                 pin: true,
+                pinSpacing: true,
                 scrub: 1,
                 // base vertical scrolling on how wide the container is so it feels more natural.
-                end: "+=3500",
+                end: "+=13500",
             }
             });
         });
