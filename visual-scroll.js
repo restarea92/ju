@@ -131,54 +131,54 @@ const app = {
     },
     
     initHorizontalScroll() {
-        // 가로 스크롤 컨테이너 찾기
-        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        // // 가로 스크롤 컨테이너 찾기
+        // let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
         
-        horizontalSections.forEach((container) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
+        // horizontalSections.forEach((container) => {
+        //     let sections = container.querySelectorAll(".multi-scroll-item");
             
-            // 각 섹션별 멈춤 효과를 위한 타임라인 생성
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: container,
-                    pin: false,
-                    scrub: 1,
-                    start: "top top",  
-                    end: "bottom bottom",
-                    // markers: true, // 개발 시에만 사용
-                }
-            });
+        //     // 각 섹션별 멈춤 효과를 위한 타임라인 생성
+        //     let tl = gsap.timeline({
+        //         scrollTrigger: {
+        //             trigger: container,
+        //             pin: false,
+        //             scrub: 1,
+        //             start: "top top",  
+        //             end: "bottom bottom",
+        //             // markers: true, // 개발 시에만 사용
+        //         }
+        //     });
 
-            // 각 섹션마다 이동과 멈춤을 추가
-            sections.forEach((section, index) => {
-                if (index === 0) {
-                    // 첫 번째 섹션에서 잠시 멈춤
-                    tl.to(sections, { 
-                        xPercent: 0, 
-                        duration: 1, 
-                        ease: "none" 
-                    });
-                } else {
-                    // 다음 섹션으로 이동
-                    tl.to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 2, 
-                        ease: "power2.inOut" 
-                    })
-                    // 해당 섹션에서 잠시 멈춤
-                    .to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 1, 
-                        ease: "none" 
-                    });
-                }
-            });
-        });
+        //     // 각 섹션마다 이동과 멈춤을 추가
+        //     sections.forEach((section, index) => {
+        //         if (index === 0) {
+        //             // 첫 번째 섹션에서 잠시 멈춤
+        //             tl.to(sections, { 
+        //                 xPercent: 0, 
+        //                 duration: 1, 
+        //                 ease: "none" 
+        //             });
+        //         } else {
+        //             // 다음 섹션으로 이동
+        //             tl.to(sections, { 
+        //                 xPercent: -100 * index, 
+        //                 duration: 2, 
+        //                 ease: "power2.inOut" 
+        //             })
+        //             // 해당 섹션에서 잠시 멈춤
+        //             .to(sections, { 
+        //                 xPercent: -100 * index, 
+        //                 duration: 1, 
+        //                 ease: "none" 
+        //             });
+        //         }
+        //     });
+        // });
 
-        // 부드러운 스크롤 효과
-        gsap.to("body", {
-            scrollBehavior: "smooth"
-        });
+        // // 부드러운 스크롤 효과
+        // gsap.to("body", {
+        //     scrollBehavior: "smooth"
+        // });
     },
 
 
