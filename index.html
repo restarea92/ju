@@ -75,64 +75,50 @@
     </div>
     
 <style>
-    #multi-scroll {
-        border:20px solid red;
-    }
-  .multi-scroll-item {
-	border:4px solid blue;
-	background-color: skyblue;
-    width: 100vw;
-	height: 100lvh;
-  }
+#multi-scroll {
+}
+.multi-scroll-item {
+    border:2px solid blue;
+    width: 100lvw;
+    min-width: 100lvw;
+    height: 100lvh;
+}
   
-  .horizontal-container {
-	display: flex;
-	flex-wrap:nowrap;
-	border:10px solid green;
-    width: 600%;
-  }
+.horizontal-spacer {
+    height: 300lvh;
+}
+.horizontal-container {
+    position: sticky;
+    top:0;
+    display: flex;
+    flex-wrap:nowrap;
+}
 </style>
     <div id="multi-scroll">
-        <section class="multi-scroll-item red">
-            <h2>1</h2>
-        </section>
-            <section class="multi-scroll-item orange">
-        <h2>2</h2>
-        </section>
-            <section class="multi-scroll-item purple">
-        <h2>3</h2>
-            </section>
-        <section class="multi-scroll-item green">
-            <h2>4</h2>
-        </section>
-        <div class="horizontal-container">
-            <section class="multi-scroll-item red">
-                <h2>1</h2>
-            </section>
-            <section class="multi-scroll-item orange">
-                <h2>2</h2>
-            </section>
-            <section class="multi-scroll-item purple">
-                <h2>3</h2>
-            </section>
-            <section class="multi-scroll-item green">
-                <h2>4</h2>
-            </section>
-            <section class="multi-scroll-item red">
-                <h2>5</h2>
-            </section>
-        </div>
         <section class="multi-scroll-item red">
             <h2>1</h2>
         </section>
         <section class="multi-scroll-item orange">
             <h2>2</h2>
         </section>
-        <section class="multi-scroll-item purple">
-            <h2>3</h2>
+        <div class="horizontal-spacer">
+            <div class="horizontal-container">
+                <section class="multi-scroll-item red">
+                    <h2>1</h2>
+                </section>
+                <section class="multi-scroll-item orange">
+                    <h2>2</h2>
+                </section>
+                <section class="multi-scroll-item purple">
+                    <h2>3</h2>
+                </section>
+            </div>
+        </div>
+        <section class="multi-scroll-item red">
+            <h2>1</h2>
         </section>
-        <section class="multi-scroll-item green">
-            <h2>4</h2>
+        <section class="multi-scroll-item orange">
+            <h2>2</h2>
         </section>
     </div>
 </div>
@@ -181,30 +167,5 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
     <script>
-  document.addEventListener('DOMContentLoaded', () => {
 
-      function initHorizontalScroll() {
-        // 가로 스크롤 컨테이너 찾기
-        let horizontalSections = gsap.utils.toArray(".horizontal-container");
-        
-        horizontalSections.forEach((container) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
-            
-            if (sections.length === 0) return;
-            
-            gsap.to(sections, {
-                xPercent: -100 * (sections.length - 1),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: container,
-                    pin: true,
-                    scrub: 1,
-                    end: "0",
-                    pinType: "sticky",
-                }
-            });
-        });
-    }
-	  initHorizontalScroll();
-});
 </script>

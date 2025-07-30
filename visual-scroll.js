@@ -170,29 +170,29 @@ const app = {
     //         });
     //     });
     // },
-    // initHorizontalScroll() {
-    //     // 가로 스크롤 컨테이너 찾기
-    //     let horizontalSections = gsap.utils.toArray(".horizontal-container");
-        
-    //     horizontalSections.forEach((container) => {
-    //         let sections = container.querySelectorAll(".multi-scroll-item");
+    initHorizontalScroll() {
+        const lvhPx = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        // 가로 스크롤 컨테이너 찾기
+        let horizontalSections = gsap.utils.toArray(".horizontal-container");
+        horizontalSections.forEach((container) => {
+            let sections = container.querySelectorAll(".multi-scroll-item");
             
-    //         if (sections.length === 0) return;
             
-    //         gsap.to(sections, {
-    //             xPercent: -100 * (sections.length - 1),
-    //             ease: "none",
-    //             scrollTrigger: {
-    //                 trigger: container,
-    //                 pin: true,
-    //                 scrub: 1,
-    //                 end: "+=3500",
-    //                 anticipatePin: 1,
-    //                 pinType: "fixed",
-    //             }
-    //         });
-    //     });
-    // },
+            gsap.to(sections, {
+                xPercent: -100 * (sections.length - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    pin: false,
+                    scrub: 1,
+                    start: "top+=20% top",  
+                    end: "bottom-=20% bottom", 
+                    markers: true,
+                }
+            });
+        });
+    },
+
 
     // ========== 상태 관리 ==========
     updateProgress(progress) {
