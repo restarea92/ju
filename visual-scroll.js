@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.21',
+        VERSION: '1.1.22',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -130,73 +130,48 @@ const app = {
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
     
-    initHorizontalScroll() {
-        // 가로 스크롤 컨테이너 찾기
-        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-        
-        horizontalSections.forEach((container) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
-            
-            // 각 섹션별 멈춤 효과를 위한 타임라인 생성
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: container,
-                    pin: false,
-                    scrub: 1,
-                    start: "top+=20% top",  
-                    end: "bottom-=20% bottom",
-                    // markers: true, // 개발 시에만 사용
-                }
-            });
+initHorizontalScroll() {
+  // 가로 스크롤 컨테이너 찾기
+  let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
 
-            // 각 섹션마다 이동과 멈춤을 추가
-            sections.forEach((section, index) => {
-                if (index === 0) {
-                    // 첫 번째 섹션에서 잠시 멈춤
-                    tl.to(sections, { 
-                        xPercent: 0, 
-                        duration: 1, 
-                        ease: "none" 
-                    });
-                } else {
-                    // 다음 섹션으로 이동
-                    tl.to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 2, 
-                        ease: "power2.inOut" 
-                    })
-                    // 해당 섹션에서 잠시 멈춤
-                    .to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 1, 
-                        ease: "none" 
-                    });
-                }
-            });
-        });
+  horizontalSections.forEach((container) => {
+    let sections = container.querySelectorAll(".multi-scroll-item");
+    let totalSections = sections.length;
 
-        // 부드러운 스크롤 효과
-        gsap.to("body", {
-            scrollBehavior: "smooth"
-        });
-        // horizontalSections.forEach((container) => {
-        //     let sections = container.querySelectorAll(".multi-scroll-item");
-            
-            
-        //     gsap.to(sections, {
-        //         xPercent: -100 * (sections.length - 1),
-        //         ease: "none",
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             pin: false,
-        //             scrub: 1,
-        //             start: "top+=20% top",  
-        //             end: "bottom-=20% bottom", 
-        //             markers: true,
-        //         }
-        //     });
-        // });
-    },
+    // 스크롤 이동 최대 길이를 컨테이너 너비에 맞게 계산 (px 단위)
+    let scrollWidth = container.scrollWidth - container.clientWidth;
+
+    // 타임라인 생성
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        pin: false,  // sticky 처리 중이라면 false 유지
+        scrub: 1,
+        start: "top top",
+        end: () => "+=" + scrollWidth, // 스크롤 이동 길이만큼 애니메이션
+        // markers: true, // 개발 시 활성화
+      }
+    });
+
+    // 각 섹션마다 이동과 멈춤 애니메이션 추가
+    sections.forEach((section, index) => {
+      let xPercent = -100 * index;
+
+      tl.to(sections, {
+        xPercent: xPercent,
+        duration: 2,
+        ease: "power2.inOut"
+      }).to(sections, {
+        xPercent: xPercent,
+        duration: 1,
+        ease: "none"
+      });
+    });
+  });
+
+  // 부드러운 스크롤 효과는 CSS에서 하는 걸 권장합니다.
+  // gsap.to("body", { scrollBehavior: "smooth" }); 는 실제 효과 없음.
+},
 
 
     // ========== 상태 관리 ==========
