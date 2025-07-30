@@ -130,69 +130,69 @@ const app = {
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
     
-    initHorizontalScroll2() {
-        const wrapper = this.elements.horizontalWrapper;
-        const scroller = this.elements.horizontalContent;
-        const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); 
-        const numSections = sections.length;
+    // initHorizontalScroll2() {
+    //     const wrapper = this.elements.horizontalWrapper;
+    //     const scroller = this.elements.horizontalContent;
+    //     const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); 
+    //     const numSections = sections.length;
 
-        if (!wrapper || !scroller) return;
+    //     if (!wrapper || !scroller) return;
 
-        const scrollLength = scroller.scrollWidth - window.innerWidth;
+    //     const scrollLength = scroller.scrollWidth - window.innerWidth;
 
-        // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
-        // ScrollTrigger.create({
-        //     trigger: scroller,
-        //     start: "top bottom",
-        //     end: "top top",
-        //     scrub: 1,
-        //     onUpdate: (self) => {
-        //         this.state.verticalProgress = self.progress;
-        //         console.log(this.state.verticalProgress);
-        //     },
-        // });normalizeScroll(true)
-        // 가로 스크롤 초기화
+    //     // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
+    //     // ScrollTrigger.create({
+    //     //     trigger: scroller,
+    //     //     start: "top bottom",
+    //     //     end: "top top",
+    //     //     scrub: 1,
+    //     //     onUpdate: (self) => {
+    //     //         this.state.verticalProgress = self.progress;
+    //     //         console.log(this.state.verticalProgress);
+    //     //     },
+    //     // });normalizeScroll(true)
+    //     // 가로 스크롤 초기화
 
-        let horizontalSections = gsap.utils.toArray(".horizontal-container");
-        horizontalSections.forEach((container) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
-            gsap.to(sections, {
-            xPercent: -100 * (sections.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: container,
-                pin: true,
-                pinSpacing: true,
-                scrub: 1,
-                // base vertical scrolling on how wide the container is so it feels more natural.
-                end: "+=3500",
-            }
-            });
-        });
-    },
-    initHorizontalScroll() {
-        // 가로 스크롤 컨테이너 찾기
-        let horizontalSections = gsap.utils.toArray(".horizontal-container");
+    //     let horizontalSections = gsap.utils.toArray(".horizontal-container");
+    //     horizontalSections.forEach((container) => {
+    //         let sections = container.querySelectorAll(".multi-scroll-item");
+    //         gsap.to(sections, {
+    //         xPercent: -100 * (sections.length - 1),
+    //         ease: "none",
+    //         scrollTrigger: {
+    //             trigger: container,
+    //             pin: true,
+    //             pinSpacing: true,
+    //             scrub: 1,
+    //             // base vertical scrolling on how wide the container is so it feels more natural.
+    //             end: "+=3500",
+    //         }
+    //         });
+    //     });
+    // },
+    // initHorizontalScroll() {
+    //     // 가로 스크롤 컨테이너 찾기
+    //     let horizontalSections = gsap.utils.toArray(".horizontal-container");
         
-        horizontalSections.forEach((container) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
+    //     horizontalSections.forEach((container) => {
+    //         let sections = container.querySelectorAll(".multi-scroll-item");
             
-            if (sections.length === 0) return;
+    //         if (sections.length === 0) return;
             
-            gsap.to(sections, {
-                xPercent: -100 * (sections.length - 1),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: container,
-                    pin: true,
-                    scrub: 1,
-                    end: "+=3500",
-                    anticipatePin: 1,
-                    pinType: "fixed",
-                }
-            });
-        });
-    },
+    //         gsap.to(sections, {
+    //             xPercent: -100 * (sections.length - 1),
+    //             ease: "none",
+    //             scrollTrigger: {
+    //                 trigger: container,
+    //                 pin: true,
+    //                 scrub: 1,
+    //                 end: "+=3500",
+    //                 anticipatePin: 1,
+    //                 pinType: "fixed",
+    //             }
+    //         });
+    //     });
+    // },
 
     // ========== 상태 관리 ==========
     updateProgress(progress) {
