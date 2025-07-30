@@ -130,67 +130,72 @@ const app = {
         this.state.resizeObserver.observe(this.elements.stickyElement);
     },
     
-    // initHorizontalScroll2() {
-    //     const wrapper = this.elements.horizontalWrapper;
-    //     const scroller = this.elements.horizontalContent;
-    //     const sections = gsap.utils.toArray(".horizontal-content .horizontal-content-item"); 
-    //     const numSections = sections.length;
-
-    //     if (!wrapper || !scroller) return;
-
-    //     const scrollLength = scroller.scrollWidth - window.innerWidth;
-
-    //     // // 세로 스크롤 프로그래스 업데이트용 (필요하다면)
-    //     // ScrollTrigger.create({
-    //     //     trigger: scroller,
-    //     //     start: "top bottom",
-    //     //     end: "top top",
-    //     //     scrub: 1,
-    //     //     onUpdate: (self) => {
-    //     //         this.state.verticalProgress = self.progress;
-    //     //         console.log(this.state.verticalProgress);
-    //     //     },
-    //     // });normalizeScroll(true)
-    //     // 가로 스크롤 초기화
-
-    //     let horizontalSections = gsap.utils.toArray(".horizontal-container");
-    //     horizontalSections.forEach((container) => {
-    //         let sections = container.querySelectorAll(".multi-scroll-item");
-    //         gsap.to(sections, {
-    //         xPercent: -100 * (sections.length - 1),
-    //         ease: "none",
-    //         scrollTrigger: {
-    //             trigger: container,
-    //             pin: true,
-    //             pinSpacing: true,
-    //             scrub: 1,
-    //             // base vertical scrolling on how wide the container is so it feels more natural.
-    //             end: "+=3500",
-    //         }
-    //         });
-    //     });
-    // },
     initHorizontalScroll() {
-        const lvhPx = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         // 가로 스크롤 컨테이너 찾기
         let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        
         horizontalSections.forEach((container) => {
             let sections = container.querySelectorAll(".multi-scroll-item");
             
-            
-            gsap.to(sections, {
-                xPercent: -100 * (sections.length - 1),
-                ease: "none",
+            // 각 섹션별 멈춤 효과를 위한 타임라인 생성
+            let tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: container,
                     pin: false,
                     scrub: 1,
                     start: "top+=20% top",  
-                    end: "bottom-=20% bottom", 
-                    markers: true,
+                    end: "bottom-=20% bottom",
+                    // markers: true, // 개발 시에만 사용
+                }
+            });
+
+            // 각 섹션마다 이동과 멈춤을 추가
+            sections.forEach((section, index) => {
+                if (index === 0) {
+                    // 첫 번째 섹션에서 잠시 멈춤
+                    tl.to(sections, { 
+                        xPercent: 0, 
+                        duration: 1, 
+                        ease: "none" 
+                    });
+                } else {
+                    // 다음 섹션으로 이동
+                    tl.to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 1, 
+                        ease: "power2.inOut" 
+                    })
+                    // 해당 섹션에서 잠시 멈춤
+                    .to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 1, 
+                        ease: "none" 
+                    });
                 }
             });
         });
+
+        // 부드러운 스크롤 효과
+        gsap.to("body", {
+            scrollBehavior: "smooth"
+        });
+        // horizontalSections.forEach((container) => {
+        //     let sections = container.querySelectorAll(".multi-scroll-item");
+            
+            
+        //     gsap.to(sections, {
+        //         xPercent: -100 * (sections.length - 1),
+        //         ease: "none",
+        //         scrollTrigger: {
+        //             trigger: container,
+        //             pin: false,
+        //             scrub: 1,
+        //             start: "top+=20% top",  
+        //             end: "bottom-=20% bottom", 
+        //             markers: true,
+        //         }
+        //     });
+        // });
     },
 
 

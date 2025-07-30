@@ -167,5 +167,30 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
     <script>
+  document.addEventListener('DOMContentLoaded', () => {
 
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        // 가로 스크롤 컨테이너 찾기
+        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        
+        horizontalSections.forEach((container) => {
+        let sections = container.querySelectorAll(".multi-scroll-item");
+        
+        
+        gsap.to(sections, {
+            xPercent: -100 * (sections.length - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: container,
+                pin: false,
+                scrub: 1,
+                start: "top+=20% top",  
+                end: "bottom-=20% bottom", 
+                markers: true,
+            }
+        });
+    });
+
+});
 </script>
