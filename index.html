@@ -57,41 +57,8 @@
     height: 100lvh;
 }
 
-.content {
-    flex: 0 0 100lvw; /* 하나의 화면을 꽉 채우도록 */
-    box-sizing: border-box;
-    padding: 4rem;
-}
 </style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  function isLandscape() {
-    return window.innerWidth > window.innerHeight;
-  }
 
-  function updateVideo() {
-    const landscapeVideo = document.getElementById('landscapeVideo');
-    const portraitVideo = document.getElementById('portraitVideo');
-
-    if (isLandscape()) {
-      landscapeVideo.style.display = 'block';
-      portraitVideo.style.display = 'none';
-      landscapeVideo.play();
-      portraitVideo.pause();
-    } else {
-      landscapeVideo.style.display = 'none';
-      portraitVideo.style.display = 'block';
-      portraitVideo.play();
-      landscapeVideo.pause();
-    }
-  }
-
-  updateVideo();
-
-  window.addEventListener('resize', updateVideo);
-  window.addEventListener('orientationchange', updateVideo);
-});
-</script>
 <div class="visual-section sticky-wrapper" id="visual-section">
     <div class="sticky-element">
         <div 
@@ -146,6 +113,36 @@ document.addEventListener('DOMContentLoaded', () => {
     backdrop-filter: blur(16px);
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    function isLandscape() {
+        return window.innerWidth > window.innerHeight;
+    }
+
+    function updateVideo() {
+        const landscapeVideo = document.getElementById('landscapeVideo');
+        const portraitVideo = document.getElementById('portraitVideo');
+
+        if (isLandscape()) {
+        landscapeVideo.style.display = 'block';
+        portraitVideo.style.display = 'none';
+        landscapeVideo.play();
+        portraitVideo.pause();
+        } else {
+        landscapeVideo.style.display = 'none';
+        portraitVideo.style.display = 'block';
+        portraitVideo.play();
+        landscapeVideo.pause();
+        }
+    }
+
+    updateVideo();
+
+    window.addEventListener('resize', updateVideo);
+    window.addEventListener('orientationchange', updateVideo);
+});
+</script>
     <div id="multi-scroll">
         <div class="horizontal-spacer">
             <div class="horizontal-container">
@@ -199,23 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     <div style="display:none;">
-                <div class="content">
-                    <div class="content-text">
-                        <p>
-                            <strong>목표는 높게, 발성은 쉽게.</strong> 아무리 좋은 내용도 제대로 이해하지 못한다면 활용할 수 없습니다. 
-                            체계적 발성 이론을 누구나 쉽게 이해할 수 있도록 JU만의 방식으로 교육합니다. <br><br>
-                            더 이상 전공서적에나 나올 법한 어려운 이론들로 고민하지 마세요. 그저 여러분들은 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 JU가 할 테니까요.
-                        </p>
-                    </div>
-                    <div >
-                        <img src="https://restarea92.github.io/ju/33.jpg">
-                    </div>
-                </div>
+        <div class="content">
+            <div class="content-text">
+                <p>
+                    <strong>목표는 높게, 발성은 쉽게.</strong> 아무리 좋은 내용도 제대로 이해하지 못한다면 활용할 수 없습니다. 
+                    체계적 발성 이론을 누구나 쉽게 이해할 수 있도록 JU만의 방식으로 교육합니다. <br><br>
+                    더 이상 전공서적에나 나올 법한 어려운 이론들로 고민하지 마세요. 그저 여러분들은 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 JU가 할 테니까요.
+                </p>
+            </div>
+            <div >
+                <img src="https://restarea92.github.io/ju/33.jpg">
+            </div>
+        </div>
     </div>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-});
-    </script>
     

@@ -58,6 +58,9 @@
         padding: 0 calc(var(--default-container-padding) / 2);
     }
     .content {
+        flex: 0 0 100lvw; /* 하나의 화면을 꽉 채우도록 */
+        box-sizing: border-box;
+        padding: 4rem;
         position: relative;
     }
     .title {
@@ -117,6 +120,9 @@
     #visual-section {
         --h2-font-size: 3rem;
         --h3-font-size: 1.5rem;
+        .content {
+            padding: 3rem;
+        }
     }
 }
 
@@ -125,6 +131,9 @@
     #visual-section {
         --h2-font-size: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
         --h3-font-size: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
+        .content {
+            padding: 2rem;
+        }
     }
 }
 
@@ -132,6 +141,9 @@
     #visual-section {
         --h2-font-size: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
         --h3-font-size: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
+        .content {
+            padding: 2rem;
+        }
     }
   /* 최대 768 */
 }
