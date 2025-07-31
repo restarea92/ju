@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.28',
+        VERSION: '1.1.29',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -85,6 +85,14 @@ const app = {
         this.initializeVisualSection();
         this.initializeStickyWrapper();
         this.initHorizontalScroll(); 
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                app.renderVisualEffects(app.state.progress);
+            }, 100); // 100ms 후 실행
+        });
     },
 
     validateGSAP: () => {
