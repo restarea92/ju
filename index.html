@@ -10,9 +10,12 @@
         grid-template-columns:repeat(12, 1fr);
         max-width: var(--default-content-width);
         .content-text {
-            color:white;
+            z-index: 1;
             grid-column: 1 / 9;
             grid-row: 1 / 5;
+            p {
+                color:#91918c;
+            }
             strong {
                 font-weight: 750;
             }
@@ -82,6 +85,9 @@
     width: 100lvw;
     min-width: 100lvw;
     height: 100lvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
   
 .horizontal-spacer {
@@ -95,26 +101,29 @@
 }
 </style>
     <div id="multi-scroll">
-        <section class="multi-scroll-item red">
-            <h2>1</h2>
-        </section>
-        <section class="multi-scroll-item orange">
-            <h2>2</h2>
-        </section>
         <div class="horizontal-spacer">
             <div class="horizontal-container">
-                <section class="multi-scroll-item red">
-                    <h2>1</h2>
+                <section class="multi-scroll-item">
+                    <div class="content">
+                        <div class="content-text">
+                            <p>
+                                <strong>지피지기 백전불태.</strong> 발성적 문제와 원인은 너무나도 다양합니다. JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다.<br> 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br><br> 다양한 발성적 문제들을 과학적 관점으로 분석하고 개개인에 맞춘 체계적 커리큘럼을 제시합니다. 
+                            </p>
+                        </div>
+                        <div class="content-image">
+                            <img src="https://restarea92.github.io/ju/33.png">
+                        </div>
+                    </div>
                 </section>
-                <section class="multi-scroll-item orange">
+                <section class="multi-scroll-item">
                     <h2>2</h2>
                 </section>
             </div>
         </div>
-        <section class="multi-scroll-item red">
+        <section class="multi-scroll-item ">
             <h2>1</h2>
         </section>
-        <section class="multi-scroll-item orange">
+        <section class="multi-scroll-item">
             <h2>2</h2>
         </section>
     </div>
@@ -134,20 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     <div style="display:none;">
-        <div class="horizontal-content">
-            <div class="horizontal-content-item content-wrapper-wide">
-                <div class="content">
-                    <div class="content-text">
-                        <p>
-                            <strong>지피지기 백전불태.</strong> 발성적 문제와 원인은 너무나도 다양합니다. JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다.<br> 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br><br> 다양한 발성적 문제들을 과학적 관점으로 분석하고 개개인에 맞춘 체계적 커리큘럼을 제시합니다. 
-                        </p>
-                    </div>
-                    <div class="content-image">
-                        <img src="https://restarea92.github.io/ju/33.png">
-                    </div>
-                </div>
-            </div>
-            <div class="content-wrapper-wide">
+
+
                 <div class="content">
                     <div class="content-text">
                         <p>
@@ -160,8 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="https://restarea92.github.io/ju/td.jpg">
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
     <script>
 document.addEventListener('DOMContentLoaded', () => {
