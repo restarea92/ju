@@ -1,14 +1,4 @@
 <style>
-    :root {
-  --logo-width: 100px;
-  --default-container-width: 1280px;
-  --default-content-width: 1152px;
-  --small-container-width: 1024px;
-  --small-content-width: 960px;
-  --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
-  --default-logo-margin: 20px;
-  --default-navbar-padding: 12px;
-}
 
 #visual-section {
     .content-wrapper-wide {
@@ -196,11 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <script type="module">
-import app from 'https://restarea92.github.io/ju/visual-scroll.js';
+    import app from 'https://restarea92.github.io/ju/visual-scroll.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    app.init();
-});
+    document.addEventListener('DOMContentLoaded', () => {
+        app.init();
+    });
 </script>
 
 
@@ -209,8 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     <div style="display:none;">
-
-
                 <div class="content">
                     <div class="content-text">
                         <p>
@@ -224,130 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
     </div>
+    
     <script>
 document.addEventListener('DOMContentLoaded', () => {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-    
-    let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-    function minVwVh(value) {
-        const vw = window.innerWidth * (value / 100);
-        const vh = window.innerHeight * (value / 100);
-        return Math.min(vw, vh);
-    }
 
-    horizontalSections.forEach((container, containerIndex) => {
-        let sections = container.querySelectorAll(".multi-scroll-item");
-        const text = container.querySelector('.content-text');
-        const image = container.querySelector('.content-image');
-        const title = container.querySelector('.content-title');
-        const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
-        const progressEl = document.getElementById('progress-element');
-
-        let parallaxTimeline1 = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: "top center",
-                end: "center bottom",
-                scrub: 1,
-                onUpdate: self => {
-                    const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl) progressEl.textContent = progressPercent + '%';
-                }
-            }
-        });
-
-        let parallaxTimeline2 = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: "center bottom",
-                end: "center top",
-                scrub: 1,
-                onUpdate: self => {
-                    const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl) progressEl.textContent = progressPercent + '%';
-                }
-            }
-        });
-
-        let parallaxTimeline3 = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: "top center",
-                end: "center bottom",
-                scrub: 1,
-                onUpdate: self => {
-                    const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl) progressEl.textContent = progressPercent + '%';
-                }
-            }
-        });
-
-        // 초기 위치 세팅
-        if (text) gsap.set(text, { y: yOffset * 1.5, x: 0  });
-        if (image) gsap.set(image, { y: yOffset * 2, x: 0  });
-        if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
-        
-        // 타임라인 애니메이션 추가
-        parallaxTimeline1.to([text, image, title], {
-            y: "0%",
-            ease: "ease",
-            duration: 0.5
-        }, 0);
-        
-        parallaxTimeline2.to(text, {
-            x: "-200%",
-            ease: "ease",
-            opacity:0,
-            duration: 0.5
-        }, 0);
-        parallaxTimeline2.to(image, {
-            x: "-500%",
-            ease: "ease",
-            opacity:0,
-            duration: 0.5
-        }, 0);
-        parallaxTimeline2.to(title, {
-            x: "-100%",
-            ease: "ease",
-            filter: "blur(4px)",
-            duration: 0.5
-        }, 0);
-
-        let tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                pin: false,
-                scrub: 0.5,
-                start: "top+=10% top",  
-                end: "bottom-=10% bottom",
-            }
-        });
-
-        sections.forEach((section, index) => {
-            if (index === 0) {
-                tl.to(sections, { 
-                    xPercent: 0, 
-                    duration: 0.5, 
-                    ease: "none" 
-                });
-            } else {
-                tl.to(sections, { 
-                    xPercent: -100 * index, 
-                    duration: 3, 
-                    ease: "power2.inOut" 
-                })
-                .to(sections, { 
-                    xPercent: -100 * index, 
-                    duration: 0.5, 
-                    ease: "none" 
-                });
-            }
-        });
-    });
-
-    gsap.to("body", {
-        scrollBehavior: "smooth"
-    });
 });
     </script>
     

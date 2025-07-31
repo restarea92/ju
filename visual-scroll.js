@@ -131,54 +131,128 @@ const app = {
     },
     
     initHorizontalScroll() {
-        // // 가로 스크롤 컨테이너 찾기
-        // let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
         
-        // horizontalSections.forEach((container) => {
-        //     let sections = container.querySelectorAll(".multi-scroll-item");
+        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        function minVwVh(value) {
+            const vw = window.innerWidth * (value / 100);
+            const vh = window.innerHeight * (value / 100);
+            return Math.min(vw, vh);
+        }
+
+        horizontalSections.forEach((container, containerIndex) => {
+            let sections = container.querySelectorAll(".multi-scroll-item");
+            const text = container.querySelector('.content-text');
+            const image = container.querySelector('.content-image');
+            const title = container.querySelector('.content-title');
+            const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
+            const progressEl = document.getElementById('progress-element');
+
+            let parallaxTimeline1 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top center",
+                    end: "center bottom",
+                    scrub: 1,
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                    }
+                }
+            });
+
+            let parallaxTimeline2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    start: "center bottom",
+                    end: "center top",
+                    scrub: 1,
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                    }
+                }
+            });
+
+            let parallaxTimeline3 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top center",
+                    end: "center bottom",
+                    scrub: 1,
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                    }
+                }
+            });
+
+            // 초기 위치 세팅
+            if (text) gsap.set(text, { y: yOffset * 1.5, x: 0  });
+            if (image) gsap.set(image, { y: yOffset * 2, x: 0  });
+            if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
             
-        //     // 각 섹션별 멈춤 효과를 위한 타임라인 생성
-        //     let tl = gsap.timeline({
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             pin: false,
-        //             scrub: 1,
-        //             start: "top top",  
-        //             end: "bottom bottom",
-        //             // markers: true, // 개발 시에만 사용
-        //         }
-        //     });
+            // 타임라인 애니메이션 추가
+            parallaxTimeline1.to([text, image, title], {
+                y: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+            
+            parallaxTimeline2.to(text, {
+                x: "-200%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            parallaxTimeline2.to(image, {
+                x: "-500%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            parallaxTimeline2.to(title, {
+                x: "-100%",
+                ease: "ease",
+                filter: "blur(4px)",
+                duration: 0.5
+            }, 0);
 
-        //     // 각 섹션마다 이동과 멈춤을 추가
-        //     sections.forEach((section, index) => {
-        //         if (index === 0) {
-        //             // 첫 번째 섹션에서 잠시 멈춤
-        //             tl.to(sections, { 
-        //                 xPercent: 0, 
-        //                 duration: 1, 
-        //                 ease: "none" 
-        //             });
-        //         } else {
-        //             // 다음 섹션으로 이동
-        //             tl.to(sections, { 
-        //                 xPercent: -100 * index, 
-        //                 duration: 2, 
-        //                 ease: "power2.inOut" 
-        //             })
-        //             // 해당 섹션에서 잠시 멈춤
-        //             .to(sections, { 
-        //                 xPercent: -100 * index, 
-        //                 duration: 1, 
-        //                 ease: "none" 
-        //             });
-        //         }
-        //     });
-        // });
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    pin: false,
+                    scrub: 0.5,
+                    start: "top+=10% top",  
+                    end: "bottom-=10% bottom",
+                }
+            });
 
-        // // 부드러운 스크롤 효과
-        // gsap.to("body", {
-        //     scrollBehavior: "smooth"
-        // });
+            sections.forEach((section, index) => {
+                if (index === 0) {
+                    tl.to(sections, { 
+                        xPercent: 0, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                } else {
+                    tl.to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 3, 
+                        ease: "power2.inOut" 
+                    })
+                    .to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                }
+            });
+        });
+
+        gsap.to("body", {
+            scrollBehavior: "smooth"
+        });
     },
 
 
