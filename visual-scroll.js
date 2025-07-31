@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.34',
+        VERSION: '1.1.35',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -156,9 +156,12 @@ const app = {
 
         horizontalSections.forEach((container, containerIndex) => {
             let sections = container.querySelectorAll(".multi-scroll-item");
-            const text = container.querySelector('.content-text');
-            const image = container.querySelector('.content-image');
-            const title = container.querySelector('.content-title');
+            const multiScrollItem1 = container.querySelector("#multi-scroll-item1");
+            const multiScrollItem2 = container.querySelector("#multi-scroll-item2");
+
+            const text = multiScrollItem1.querySelector('.content-text');
+            const image = multiScrollItem1.querySelector('.content-image');
+            const title = multiScrollItem1.querySelector('.content-title');
             const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
             const progressEl = document.getElementById('progress-element');
 
@@ -226,6 +229,43 @@ const app = {
                 duration: 0.5
             }, 0);
             parallaxTimeline2.to(title, {
+                x: "-100%",
+                ease: "ease",
+                filter: "blur(4px)",
+                duration: 0.5
+            }, 0);
+
+            
+            const text2 = multiScrollItem1.querySelector('.content-text');
+            const image2 = multiScrollItem1.querySelector('.content-image');
+            const title2 = multiScrollItem1.querySelector('.content-title');
+
+
+            // 초기 위치 세팅
+            if (text2) gsap.set(text, { y: yOffset * 3, x: 0  });
+            if (image2) gsap.set(image, { y: yOffset * 1.5, x: 0  });
+            if (title2) gsap.set(title, { y: yOffset * 1, x: 0  });
+            
+            // 타임라인 애니메이션 추가
+            parallaxTimeline1.to([text2, image2, title2], {
+                y: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+            
+            parallaxTimeline2.to(text2, {
+                x: "-200%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            parallaxTimeline2.to(image2, {
+                x: "-500%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            parallaxTimeline2.to(title2, {
                 x: "-100%",
                 ease: "ease",
                 filter: "blur(4px)",
