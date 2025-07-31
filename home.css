@@ -70,21 +70,7 @@
   }
 }
 
-#visual-section {
-  h2 {
-    color:#FFF;
-  }
 
-  .content-wrapper {
-      width: 100%;
-      max-width: var(--default-container-width);
-      margin: 0 auto;
-      padding: 0 calc(var(--default-container-padding) / 2);
-  }
-  .content {
-
-  }
-}
 
 #visual-section2,
 #visual-section3 {
@@ -162,33 +148,6 @@
     }
   }
 
-  #visual-section {
-    .content {
-      grid-template-columns: 1fr;
-      margin-top: 2rem;
-      gap: 1rem;
-
-      .content-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        overflow: hidden;
-        grid-column: span 1;
-        aspect-ratio: 2 / 1;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      p {
-        margin-bottom: 2rem;
-      }
-
-      strong {
-        font-weight: 700;
-      }
-    }
   }
 
   #visual-section2 {
