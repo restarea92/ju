@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ScrollTrigger.create({
             trigger: ".horizontal-spacer",
             start: "top center",
-            end: "bottom center",
+            end: "top top",
             onUpdate: (self) => {
                 console.log("스크롤 진행률: ", self.progress); // 0 ~ 1
             }
