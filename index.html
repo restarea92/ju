@@ -75,7 +75,7 @@
 		    </video>
         </div>
         <div class="content-wrapper sticky-element-content">
-		  <div class="content" style="min-height:calc(100lvh - var(--default-margin) * 2); display:flex; background: rgba(0, 0, 0, 0.1);">
+		  <div class="content" style="min-height:calc(100lvh - var(--default-margin) * 2); display:flex;">
                 <div class="title" style="">
                 <h2>
                     JU가 제시하는 보컬 교육의 미래.
@@ -115,7 +115,7 @@
     <div id="multi-scroll">
         <div class="horizontal-spacer">
             <div class="horizontal-container">
-                <section class="multi-scroll-item">
+                <section class="multi-scroll-item" style="background: rgba(0, 0, 0, 0.1);">
                     <div class="content">
                         <div class="content-text">
                             <p>
@@ -183,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             end: "bottom center",
             onUpdate: (self) => {
                 console.log("스크롤 진행률: ", self.progress); // 0 ~ 1
-                // 원하는 별도 제어
             }
         });
         let tl = gsap.timeline({
