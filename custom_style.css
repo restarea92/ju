@@ -48,8 +48,8 @@
   --logo-width: 100px;
   --default-container-width: 1280px;
   --default-content-width: 1152px;
-  --small-container-width: 960px;
-  --small-content-width: var(--default-content-width);
+  --small-container-width: 1024px;
+  --small-content-width: 960px;
   --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
   --default-logo-margin: 20px;
   --default-navbar-padding: 12px;
