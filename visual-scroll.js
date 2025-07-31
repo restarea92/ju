@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.23',
+        VERSION: '1.1.24',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -233,9 +233,9 @@ const app = {
             const scale = 1 + local * 0.1;
             const brightness = 1 - 0.75 * local; // 1 → 0.25
             const blur = local * 10;
-            gsap.set(this.elements.background, { filter: `brightness(${brightness}) blur(${blur}px) scale(${scale})` });
+            gsap.set(this.elements.background, { filter: `brightness(${brightness}) blur(${blur}px)`, transform: `scale(${scale})`});
         } else {
-            gsap.set(this.elements.background, { filter: `brightness(1) blur(0) scale(1)`});
+            gsap.set(this.elements.background, { filter: `brightness(1) blur(0)`, transform: `scale(1)`});
         }
 
         this.emitEvent('visualSectionProgress', {
