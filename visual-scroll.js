@@ -170,7 +170,7 @@ const app = {
                     scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                     }
                 }
             });
@@ -183,7 +183,7 @@ const app = {
                     scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                     }
                 }
             });
@@ -196,7 +196,7 @@ const app = {
                     scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl) progressEl.textContent = progressPercent + '%';
+                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                     }
                 }
             });
