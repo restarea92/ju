@@ -109,9 +109,6 @@
                 <section class="multi-scroll-item orange">
                     <h2>2</h2>
                 </section>
-                <section class="multi-scroll-item purple">
-                    <h2>3</h2>
-                </section>
             </div>
         </div>
         <section class="multi-scroll-item red">
@@ -167,56 +164,91 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-            // 가로 스크롤 컨테이너 찾기
-            let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-            
-            horizontalSections.forEach((container) => {
-                let sections = container.querySelectorAll(".multi-scroll-item");
-                
-                // 각 섹션별 멈춤 효과를 위한 타임라인 생성
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: container,
-                        pin: false,
-                        scrub: 1,
-                        start: "top+=20% top",  
-                        end: "bottom-=20% bottom",
-                        // markers: true, // 개발 시에만 사용
-                    }
-                });
+    let isActive = false;
+    let currentSection;
 
-                // 각 섹션마다 이동과 멈춤을 추가
-                sections.forEach((section, index) => {
-                    if (index === 0) {
-                        // 첫 번째 섹션에서 잠시 멈춤
-                        tl.to(sections, { 
-                            xPercent: 0, 
-                            duration: 0, 
-                            ease: "none" 
-                        });
-                    } else {
-                        // 다음 섹션으로 이동
-                        tl.to(sections, { 
-                            xPercent: -100 * index, 
-                            duration: 1, 
-                            ease: "power2.inOut" 
-                        })
-                        // 해당 섹션에서 잠시 멈춤
-                        .to(sections, { 
-                            xPercent: -100 * index, 
-                            duration: 1, 
-                            ease: "none" 
-                        });
-                    }
-                });
-            });
+    function preventDefault(e) {
+        e.preventDefault();
+    }
 
-            // 부드러운 스크롤 효과
-            gsap.to("body", {
-                scrollBehavior: "smooth"
-            });
+    function stopScroll() {
+        // 스크롤 차단
+        document.addEventListener('touchmove', preventDefault, { passive: false });
+        document.addEventListener('wheel', preventDefault, { passive: false });
+        
+        const scrollY = window.scrollY;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${scrollY}px`;
+        
+        setTimeout(() => {
+            restoreScroll();
+        }, 10);
+    }
+
+    function restoreScroll() {
+        // 이벤트 리스너 제거
+        document.removeEventListener('touchmove', preventDefault);
+        document.removeEventListener('wheel', preventDefault);
+        
+        // 스크롤 위치 복원
+        const scrollY = document.body.style.top;
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        
+        if (scrollY) {
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+        
+        isActive = false;
+    }
+
+    
+    let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+    horizontalSections.forEach((container, containerIndex) => {
+        let sections = container.querySelectorAll(".multi-scroll-item");
+        
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                pin: false,
+                scrub: 1,
+                start: "top+=10% top",  
+                end: "bottom-=10% bottom",
+            }
         });
+
+        sections.forEach((section, index) => {
+            if (index === 0) {
+                tl.to(sections, { 
+                    xPercent: 0, 
+                    duration: 0.5, 
+                    ease: "none" 
+                });
+            } else {
+                tl.to(sections, { 
+                    xPercent: -100 * index, 
+                    duration: 3, 
+                    ease: "power2.inOut" 
+                })
+                .to(sections, { 
+                    xPercent: -100 * index, 
+                    duration: 0.5, 
+                    ease: "none" 
+                });
+            }
+        });
+    });
+
+    gsap.to("body", {
+        scrollBehavior: "smooth"
+    });
+});
     </script>
+    
