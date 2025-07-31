@@ -118,6 +118,7 @@
 @media (max-width: 1280px) and (min-width: 1025px) {
     /* 1025 ~ 1280 */
     #visual-section {
+        padding-top:8rem;
         --h2-font-size: 3rem;
         --h3-font-size: 1.5rem;
         .content {
@@ -129,6 +130,7 @@
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
     #visual-section {
+        padding-top:6rem;
         --h2-font-size: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
         --h3-font-size: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
         .content {
@@ -139,6 +141,7 @@
 
 @media (max-width: 768px) {
     #visual-section {
+        padding-top:4rem;
         --h2-font-size: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
         --h3-font-size: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
         .content {
