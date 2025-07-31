@@ -1,4 +1,15 @@
 <style>
+    :root {
+  --logo-width: 100px;
+  --default-container-width: 1280px;
+  --default-content-width: 1152px;
+  --small-container-width: 1024px;
+  --small-content-width: 960px;
+  --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
+  --default-logo-margin: 20px;
+  --default-navbar-padding: 12px;
+}
+
 #visual-section {
     .content-wrapper-wide {
         width: 100lvw;
@@ -8,7 +19,7 @@
         margin:0 auto;
         display:grid;
         grid-template-columns:repeat(12, 1fr);
-        max-width: var(--default-content-width);
+        max-width: var(--small-content-width);
         .content-text {
             z-index: 1;
             grid-column: 1 / 9;
