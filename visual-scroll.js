@@ -230,12 +230,11 @@ const app = {
 
         if (progress >= 0.5) {
             const local = (progress - 0.5) / 0.5; // 0.5~1 → 0~1
-            const scale = 1 + local * 0.1;
             const brightness = 1 - 0.75 * local; // 1 → 0.25
             const blur = local * 10;
-            gsap.set(this.elements.background, { filter: `brightness(${brightness}) blur(${blur}px)`, transform: `translateX(-50%) scale(${scale})`});
+            gsap.set(this.elements.background, { filter: `brightness(${brightness}) blur(${blur}px)`, transform: `translateX(-50%))`});
         } else {
-            gsap.set(this.elements.background, { filter: `brightness(1) blur(0)`, transform: `translateX(-50%) scale(1)`});
+            gsap.set(this.elements.background, { filter: `brightness(1) blur(0)`, transform: `translateX(-50%)`});
         }
 
         this.emitEvent('visualSectionProgress', {
