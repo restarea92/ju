@@ -123,15 +123,15 @@
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
     #visual-section {
-        --h2-font-size: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
-        --h3-font-size: clamp(1rem, max(3lvh, 3lvw), 1.25rem);
+        --h2-font-size: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
+        --h3-font-size: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
     }
 }
 
 @media (max-width: 768px) {
     #visual-section {
-        --h2-font-size: clamp(1.75rem, max(5lvh, 5lvw), 2rem);
-        --h3-font-size: clamp(0.875rem, max(3lvh, 3lvw), 1rem);
+        --h2-font-size: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
+        --h3-font-size: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
     }
   /* 최대 768 */
 }
