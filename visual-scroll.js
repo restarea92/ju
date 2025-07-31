@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.33',
+        VERSION: '1.1.34',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
