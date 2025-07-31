@@ -247,25 +247,25 @@ const app = {
             if (title2) gsap.set(title, { y: yOffset * 1, x: 0  });
             
             // 타임라인 애니메이션 추가
-            parallaxTimeline1.to([text2, image2, title2], {
+            parallaxTimeline2.to([text2, image2, title2], {
                 y: "0%",
                 ease: "ease",
                 duration: 0.5
             }, 0);
             
-            parallaxTimeline2.to(text2, {
+            parallaxTimeline3.to(text2, {
                 x: "-200%",
                 ease: "ease",
                 opacity:0,
                 duration: 0.5
             }, 0);
-            parallaxTimeline2.to(image2, {
+            parallaxTimeline3.to(image2, {
                 x: "-500%",
                 ease: "ease",
                 opacity:0,
                 duration: 0.5
             }, 0);
-            parallaxTimeline2.to(title2, {
+            parallaxTimeline3.to(title2, {
                 x: "-100%",
                 ease: "ease",
                 filter: "blur(4px)",
