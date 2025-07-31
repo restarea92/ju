@@ -79,21 +79,27 @@ const app = {
     // ========== 초기화 ==========
     init() {
         console.log(this.CONFIG.VERSION);
-        
+
         if (!this.validateGSAP()) return;
-        
+
+        this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
+
         this.initializeVisualSection();
         this.initializeStickyWrapper();
         this.initHorizontalScroll(); 
+
+        this.renderVisualEffects(this.state.progress); // 초기 클립패스 반영
 
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                app.renderVisualEffects(app.state.progress);
+                this.setHeaderHeightVariable(); // 리사이즈 시 헤더 높이 갱신
+                this.renderVisualEffects(this.state.progress);
             }, 100); // 100ms 후 실행
         });
     },
+
 
     validateGSAP: () => {
         if (typeof gsap === 'undefined') {
@@ -265,6 +271,11 @@ const app = {
 
 
     // ========== 상태 관리 ==========
+    setHeaderHeightVariable() {
+        const header = document.getElementById('s2025072923c95d7545c67');
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    },
     updateProgress(progress) {
         this.state.progress = progress;
         this.renderVisualEffects(progress);
@@ -328,8 +339,14 @@ const app = {
 
     calculateClipPath(progress) {
         const { size, padding, radius } = this.getAnimationValues(progress);
-        
-        return `inset(calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% calc(${padding} * var(--h2-font-size)) ${50 - size / 2}% round max(${radius}lvh, ${radius}lvw))`;
+
+        return `inset(
+            calc(${padding} * var(--h2-font-size) + var(--header-height)) 
+            ${50 - size / 2}% 
+            calc(${padding} * var(--h2-font-size)) 
+            ${50 - size / 2}% 
+            round max(${radius}lvh, ${radius}lvw)
+        )`;
     },
 
     getAnimationValues(progress) {
