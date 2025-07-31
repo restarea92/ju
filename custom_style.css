@@ -210,11 +210,6 @@ footer#custom-footer {
   }
 }
 
-@media (max-width: 1024px) and (min-width: 767px) {
-    body:not(.video_fullpage) {
-        zoom: unset!important;
-    }
-}
 
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
@@ -223,9 +218,6 @@ footer#custom-footer {
       --default-content-width: 944px;
       --small-container-width: var(--default-container-width);
       --small-content-width: var(--default-content-width);
-    }
-      body:not(.video_fullpage) {
-        zoom: unset;
     }
 }
 
