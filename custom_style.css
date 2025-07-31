@@ -210,6 +210,11 @@ footer#custom-footer {
   }
 }
 
+@media (max-width: 1024px) and (min-width: 767px) {
+    body:not(.video_fullpage) {
+        zoom: unset!important;
+    }
+}
 
 @media (max-width: 1024px) and (min-width: 769px) {
   /* 769 ~ 1024 */
