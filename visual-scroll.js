@@ -202,8 +202,8 @@ const app = {
             });
 
             // 초기 위치 세팅
-            if (text) gsap.set(text, { y: yOffset * 1.5, x: 0  });
-            if (image) gsap.set(image, { y: yOffset * 2, x: 0  });
+            if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
+            if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
             if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
             
             // 타임라인 애니메이션 추가
