@@ -11,7 +11,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== Configuration ==========
     CONFIG: {
-        VERSION: '1.1.44',
+        VERSION: '1.1.45',
         ACTIVATION_THRESHOLD: 0.15,
         SCROLL_DEBOUNCE_DELAY: 16,
         STICKY_HEIGHT_MULTIPLIER: 2,
