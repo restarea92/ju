@@ -15,20 +15,20 @@
             user-select: none;
             z-index: 1;
             grid-column: 1 / 9;
-            grid-row: 3 / auto;
+            grid-row: 6 / auto;
             p {
                 color:#86868b;
             }
             strong {
                 color: white;
-                font-weight: 750;
+                font-weight: 700;
             }
         }
         .content-image { 
             user-select: none;
             z-index: 0;
             grid-column: 5 / 13;
-            grid-row: 2 / 12;
+            grid-row: 4 / 12;
             img {
                 object-fit:contain;
                 object-position: right;
@@ -37,7 +37,8 @@
             }
         }
         .content-title {
-                grid-row: 1 / 2;
+            grid-column: 1 / 13;
+            grid-row: 1 / 4;
                 user-select: none;
                 z-index: 2;
                 h2 {
@@ -50,10 +51,9 @@
     }
     .content.second {
         .content-title {
-            grid-row: 1 / 4;
         }
         .content-text {
-            grid-column: 5 / 13;
+            grid-column: 6 / 13;
             grid-row: 5 / auto;
         }        
         .content-image {
@@ -214,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                     <div class="content">
                         <div class="content-title">
-                            <div id="progress-element">HELLO</div>
                             <h2>
                                 첫 단추부터 제대로.
                             </h2>
@@ -223,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p>
                                 <strong>지피지기 백전불태.</strong> 맞춤형 솔루션으로 설계하는 체계적 커리큘럼. 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br>
                                 JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것, 그리고 앞으로 나아갈 길을 정하는 것으로부터 시작합니다.
-                                다양한 발성적 문제들을 과학적 관점으로 분석하고 <strong>개개인에 맞춘 체계적 커리큘럼을 제시합니다. </strong>
+                                다양한 발성적 문제들을 과학적 관점으로 분석하고 <strong>개개인에 맞춘 체계적 커리큘럼</strong>을 제시합니다. 
                             </p>
                         </div>
                         <div class="content-image" style="filter: brightness(0.33);">
@@ -234,14 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <section id="multi-scroll-item2" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                     <div class="content second">
                         <div class="content-title">
-                            <div id="progress-element2">HELLO</div>
                             <h2>
                                 이렇게 쉽다니.
                             </h2>
                         </div>
                         <div class="content-text">
                         <p>
-                            <strong>목표는 높게, 성장은 쉽게.</strong>누구나 쉽게 이해할 수 있도록, 빠른 성장을 위해 설계된 JU만의 특별한 교육과정. 무엇이든 확실히 이해해야 비로소 내 것이 될 수 있죠.<br>
+                            <strong>목표는 높게, 성장은 쉽게.</strong> 누구나 쉽게 이해할 수 있도록, 빠른 성장을 위해 설계된 JU만의 특별한 교육과정. 무엇이든 확실히 이해해야 비로소 내 것이 될 수 있죠.<br>
                             더 이상 어려운 이론들로 고민하지 마세요. 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 이미 JU가 했으니까요.
                         </p>
                         </div>
@@ -261,189 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         app.init();
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-        function minVwVh(value) {
-            const vw = window.innerWidth * (value / 100);
-            const vh = window.innerHeight * (value / 100);
-            return Math.min(vw, vh);
-        }
-
-        horizontalSections.forEach((container, containerIndex) => {
-            let sections = container.querySelectorAll(".multi-scroll-item");
-
-            const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
-            const text = multiScrollItem1.querySelector('.content-text');
-            const image = multiScrollItem1.querySelector('.content-image');
-            const title = multiScrollItem1.querySelector('.content-title');
-
-            const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
-            const text2 = multiScrollItem2.querySelector('.content-text');
-            const image2 = multiScrollItem2.querySelector('.content-image');
-            const title2 = multiScrollItem2.querySelector('.content-title');
-
-            const yOffset = minVwVh(10); 
-            const xOffset = minVwVh(20); 
-            const progressEl = document.getElementById('progress-element');
-            const progressEl2 = document.getElementById('progress-element2');
-
-            const timelineOptions = {
-                firstIn: {
-                    start: "top center",
-                    end: "center bottom",
-                    onUpdate: self => {
-                        const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
-
-                    },
-                }, 
-                firstOut: {
-                    start: "center bottom",
-                    end: "center top",
-                },
-                secondIn: {
-                    start: "center center",
-                    end: "center top",
-                    onUpdate: self => {
-                        const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
-                    }
-                },
-                secondOut: {
-                    start: "bottom bottom",
-                    end: "bottom top",
-                }
-            }
-
-            const createTimeline = (options = {}) => {
-                return gsap.timeline({
-                    scrollTrigger: {
-                        trigger: container, 
-                        start: "top bottom",
-                        end: "center top",
-                        scrub: 1,
-                        onUpdate: self => {
-                            const progressPercent = (self.progress * 100).toFixed(0);
-                        },
-                        ...options,
-                    }
-                });
-            };
-
-            // 초기 위치 세팅
-            if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
-            if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
-            if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
-
-            if (text2) gsap.set(text2, { x: xOffset * 3, y: 0  });
-            if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0  });
-            if (title2) gsap.set(title2, { x: xOffset * 1, y: 0  });
-            
-
-            createTimeline(timelineOptions.firstIn).to([text, image, title], {
-                y: "0%",
-                ease: "ease",
-                duration: 0.5
-            }, 0);
-
-            
-            createTimeline(timelineOptions.firstOut).to(text, {
-                x: "-200%",
-                ease: "ease",
-                opacity:0,
-                filter: "blur(16px)",
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.firstOut).to(image, {
-                x: "-300%",
-                ease: "ease",
-                opacity:0,
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.firstOut).to(title, {
-                x: "-100%",
-                ease: "ease",
-                filter: "blur(16px)",
-                opacity:0,
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
-                x: "0%",
-                ease: "ease",
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.secondOut).to(text2, {
-                y: "-200%",
-                ease: "ease",
-                opacity:0,
-                filter: "blur(16px)",
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.secondOut).to(image2, {
-                y: "-300%",
-                ease: "ease",
-                opacity:0,
-                duration: 0.5
-            }, 0);
-            createTimeline(timelineOptions.secondOut).to(title2, {
-                y: "-100%",
-                ease: "ease",
-                filter: "blur(16px)",
-                opacity:0,
-                duration: 0.5
-            }, 0);
-
-
-            const stateEl = document.querySelector('#state-el');
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: container,
-                    pin: false,
-                    scrub: 0.5,
-                    start: "center bottom",  
-                    end: "center top",
-                    onUpdate: self => {
-                        if (stateEl) stateEl.textContent = 'For debug: SCROLLING';
-                        const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
-                    },
-                    onLeave: self => {
-                        if (stateEl) stateEl.textContent = 'For debug: END';
-                    },
-                    onLeaveBack: self => {
-                        if (stateEl) stateEl.textContent = 'For debug: END (back)';
-                    }
-                },
-            });
-
-            sections.forEach((section, index) => {
-                if (index === 0) {
-                    tl.to(sections, { 
-                        xPercent: 0, 
-                        duration: 0.5, 
-                        ease: "none" 
-                    });
-                } else {
-                    tl.to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 3, 
-                        ease: "power2.inOut" 
-                    })
-                    .to(sections, { 
-                        xPercent: -100 * index, 
-                        duration: 0.5, 
-                        ease: "none" 
-                    });
-                }
-            });
-        });
-
-        gsap.to("body", {
-            scrollBehavior: "smooth"
-        });
-    });
 </script>
 
 
