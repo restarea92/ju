@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.40',
+        VERSION: '1.1.41',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -266,9 +266,10 @@ const app = {
                     trigger: container,
                     pin: false,
                     scrub: 0.5,
-                    start: "top top",  
-                    end: "bottom bottom",
-                }
+                    start: "top+=10% top",  
+                    end: "bottom-=10% bottom",
+                },
+                marker: true,
             });
 
             sections.forEach((section, index) => {
