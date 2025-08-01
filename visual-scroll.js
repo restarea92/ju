@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.35',
+        VERSION: '1.1.36',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -156,9 +156,13 @@ const app = {
 
         horizontalSections.forEach((container, containerIndex) => {
             let sections = container.querySelectorAll(".multi-scroll-item");
-            const text = container.querySelector('.content-text');
-            const image = container.querySelector('.content-image');
-            const title = container.querySelector('.content-title');
+
+            const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
+            const text = multiScrollItem1.querySelector('.content-text');
+            const image = multiScrollItem1.querySelector('.content-image');
+            const title = multiScrollItem1.querySelector('.content-title');
+
+
             const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
             const progressEl = document.getElementById('progress-element');
 
