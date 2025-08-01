@@ -1,52 +1,11 @@
-/**
- * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
- * 
- * This Software is licensed by HScomm Web dev Team ("Licensor") to the end user ("Licensee").
- * 
- * 1. License Grants
- *    1.1 Licensee is granted a non-exclusive, non-transferable license to use one copy of the Software
- *        solely on a single website domain owned or controlled by Licensee.
- *    1.2 Third-party library components included are subject to their respective open source licenses
- *        (e.g., GPL, LGPL, MIT, Apache), which take precedence as applicable.
- *    1.3 However, GSAP library components are subject to the GSAP Standard "No Charge" License by Webflow.
- *        Licensee agrees to comply with the GSAP license terms (https://greensock.com/licensing/).
- *    1.4 For any matters not explicitly covered by third-party licenses, this EULA applies as the final
- *        governing license, except when conflicting with third-party licenses which take precedence.
- * 
- * 2. Usage Restrictions
- *    - No reproduction, distribution, sale, sublicensing, or transfer of Licensor's original Software parts
- *      to third parties.
- *    - No modification, adaptation, or derivative works of Licensor's original Software parts for redistribution.
- *    - Use limited to one domain; additional licenses required for multiple domains or projects.
- *    - No third-party use of Licensor's Software components allowed.
- *    - Proprietary notices or branding of third-party components must not be removed or altered.
- * 
- * 3. Ownership
- *    - Licensor retains all intellectual property rights in original code (excluding third-party components).
- *    - Third-party components remain property of their respective owners.
- * 
- * 4. Limitation of Liability
- *    - Licensor is not liable for damages from use or inability to use the Software, including third-party parts.
- * 
- * 5. Termination
- *    - License terminates immediately upon violation; Licensee must cease use and delete all copies.
- * 
- * 6. Governing Law
- *    - Governed by the laws of [Jurisdiction].
- * 
- * HScomm Web dev Team
- * Date: 07/25/2025
- */
-
-// GSAP 플러그인 등록
 if (typeof gsap !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.42',
+        VERSION: '1.1.43',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -145,7 +104,187 @@ const app = {
     },
     
     initHorizontalScroll() {
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        function minVwVh(value) {
+            const vw = window.innerWidth * (value / 100);
+            const vh = window.innerHeight * (value / 100);
+            return Math.min(vw, vh);
+        }
+
+        horizontalSections.forEach((container, containerIndex) => {
+            let sections = container.querySelectorAll(".multi-scroll-item");
+
+            const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
+            const text = multiScrollItem1.querySelector('.content-text');
+            const image = multiScrollItem1.querySelector('.content-image');
+            const title = multiScrollItem1.querySelector('.content-title');
+
+            const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
+            const text2 = multiScrollItem2.querySelector('.content-text');
+            const image2 = multiScrollItem2.querySelector('.content-image');
+            const title2 = multiScrollItem2.querySelector('.content-title');
+
+            const yOffset = minVwVh(10); 
+            const xOffset = minVwVh(20); 
+            const progressEl = document.getElementById('progress-element');
+            const progressEl2 = document.getElementById('progress-element2');
+
+            const timelineOptions = {
+                firstIn: {
+                    start: "top center",
+                    end: "center bottom",
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
+
+                    },
+                }, 
+                firstOut: {
+                    start: "center bottom",
+                    end: "center top",
+                },
+                secondIn: {
+                    start: "center center",
+                    end: "center top",
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+                    }
+                },
+                secondOut: {
+                    start: "bottom bottom",
+                    end: "bottom top",
+                }
+            }
+
+            const createTimeline = (options = {}) => {
+                return gsap.timeline({
+                    scrollTrigger: {
+                        trigger: container, 
+                        start: "top bottom",
+                        end: "center top",
+                        scrub: 1,
+                        onUpdate: self => {
+                            const progressPercent = (self.progress * 100).toFixed(0);
+                        },
+                        ...options,
+                    }
+                });
+            };
+
+            // 초기 위치 세팅
+            if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
+            if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
+            if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
+
+            if (text2) gsap.set(text2, { x: xOffset * 3, y: 0  });
+            if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0  });
+            if (title2) gsap.set(title2, { x: xOffset * 1, y: 0  });
+            
+
+            createTimeline(timelineOptions.firstIn).to([text, image, title], {
+                y: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+
+            
+            createTimeline(timelineOptions.firstOut).to(text, {
+                x: "-200%",
+                ease: "ease",
+                opacity:0,
+                filter: "blur(16px)",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.firstOut).to(image, {
+                x: "-300%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.firstOut).to(title, {
+                x: "-100%",
+                ease: "ease",
+                filter: "blur(16px)",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+                x: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to(text2, {
+                y: "-200%",
+                ease: "ease",
+                opacity:0,
+                filter: "blur(16px)",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to(image2, {
+                y: "-300%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to(title2, {
+                y: "-100%",
+                ease: "ease",
+                filter: "blur(16px)",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+
+
+            const stateEl = document.querySelector('#state-el');
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    pin: false,
+                    scrub: 0.5,
+                    start: "center bottom",  
+                    end: "center top",
+                    onUpdate: self => {
+                        if (stateEl) stateEl.textContent = 'For debug: SCROLLING';
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+                    },
+                    onLeave: self => {
+                        if (stateEl) stateEl.textContent = 'For debug: END';
+                    },
+                    onLeaveBack: self => {
+                        if (stateEl) stateEl.textContent = 'For debug: END (back)';
+                    }
+                },
+            });
+
+            sections.forEach((section, index) => {
+                if (index === 0) {
+                    tl.to(sections, { 
+                        xPercent: 0, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                } else {
+                    tl.to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 3, 
+                        ease: "power2.inOut" 
+                    })
+                    .to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                }
+            });
+        });
+
+        gsap.to("body", {
+            scrollBehavior: "smooth"
+        });
     },
 
 

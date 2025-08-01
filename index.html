@@ -12,9 +12,10 @@
         max-width: var(--small-content-width);
         max-height: 100%;
         .content-text {
+            user-select: none;
             z-index: 1;
-            grid-column: 1 / 11;
-            grid-row: 6 / 8;
+            grid-column: 1 / 9;
+            grid-row: 3 / auto;
             p {
                 color:#86868b;
             }
@@ -23,7 +24,9 @@
                 font-weight: 750;
             }
         }
-        .content-image {   
+        .content-image { 
+            user-select: none;
+            z-index: 0;
             grid-column: 5 / 13;
             grid-row: 2 / 12;
             img {
@@ -34,8 +37,9 @@
             }
         }
         .content-title {
-                grid-column: span 13;
-                grid-row: 1;
+                grid-row: 1 / 2;
+                user-select: none;
+                z-index: 2;
                 h2 {
                     text-align: left;
                     color:white;
@@ -43,6 +47,19 @@
                     padding-bottom: calc(var(--h2-font-size) / 2);
                 }
         }
+    }
+    .content.second {
+        .content-title {
+            grid-row: 1 / 4;
+        }
+        .content-text {
+            grid-column: 5 / 13;
+            grid-row: 5 / auto;
+        }        
+        .content-image {
+            grid-column: 1 / 9;
+            grid-row: 2 / 10;
+        }        
     }
 }
 #horizontal-wrapper {
@@ -199,53 +216,42 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="content-title">
                             <div id="progress-element">HELLO</div>
                             <h2>
-                                첫 단추부터 확실하게.
+                                첫 단추부터 제대로.
                             </h2>
                         </div>
                         <div class="content-text">
                             <p>
-                                <strong>지피지기 백전불태.</strong> 맞춤형 솔루션으로 설계하는 체계적 커리큘럼.<br>
-                                아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br>
-                                발성적 문제와 원인은 너무나도 다양합니다. <br>
-                                JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다. <br><br> 
-                                다양한 발성적 문제들을 과학적 관점으로 분석하고 <strong>개개인에 맞춘 체계적 커리큘럼</strong>을 제시합니다. 
+                                <strong>지피지기 백전불태.</strong> 맞춤형 솔루션으로 설계하는 체계적 커리큘럼. 아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br>
+                                JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것, 그리고 앞으로 나아갈 길을 정하는 것으로부터 시작합니다.
+                                다양한 발성적 문제들을 과학적 관점으로 분석하고 <strong>개개인에 맞춘 체계적 커리큘럼을 제시합니다. </strong>
                             </p>
                         </div>
-                        <div class="content-image" style="filter: brightness(0.25);">
+                        <div class="content-image" style="filter: brightness(0.33);">
                             <img src="https://images.pexels.com/photos/8412319/pexels-photo-8412319.jpeg">
                         </div>
                     </div>
                 </section>
                 <section id="multi-scroll-item2" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
-                    <div class="content">
+                    <div class="content second">
                         <div class="content-title">
                             <div id="progress-element2">HELLO</div>
                             <h2>
-                                첫 단추부터 확실하게.
+                                이렇게 쉽다니.
                             </h2>
                         </div>
                         <div class="content-text">
-                            <p>
-                                <strong>지피지기 백전불태.</strong> 맞춤형 솔루션으로 설계하는 체계적 커리큘럼.<br>
-                                아는 길로 나아가는 것보다 더 쉬운 것은 없죠. <br>
-                                발성적 문제와 원인은 너무나도 다양합니다. <br>
-                                JU의 커리큘럼은 현재 나의 상태를 정확하게 아는 것으로부터 시작합니다. <br><br> 
-                                다양한 발성적 문제들을 과학적 관점으로 분석하고 <strong>개개인에 맞춘 체계적 커리큘럼</strong>을 제시합니다. 
-                            </p>
+                        <p>
+                            <strong>목표는 높게, 성장은 쉽게.</strong>누구나 쉽게 이해할 수 있도록, 빠른 성장을 위해 설계된 JU만의 특별한 교육과정. 무엇이든 확실히 이해해야 비로소 내 것이 될 수 있죠.<br>
+                            더 이상 어려운 이론들로 고민하지 마세요. 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 이미 JU가 했으니까요.
+                        </p>
                         </div>
-                        <div class="content-image" style="filter: brightness(0.25);">
-                            <img src="https://images.pexels.com/photos/8412319/pexels-photo-8412319.jpeg">
+                        <div class="content-image" style="filter: brightness(0.33);">
+                            <img src="https://images.pexels.com/photos/5217841/pexels-photo-5217841.jpeg">
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-        <section class="multi-scroll-item ">
-            <h2>1</h2>
-        </section>
-        <section class="multi-scroll-item">
-            <h2>2</h2>
-        </section>
     </div>
 
 <script type="module">
@@ -347,10 +353,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 x: "-200%",
                 ease: "ease",
                 opacity:0,
+                filter: "blur(16px)",
                 duration: 0.5
             }, 0);
             createTimeline(timelineOptions.firstOut).to(image, {
-                x: "-500%",
+                x: "-300%",
                 ease: "ease",
                 opacity:0,
                 duration: 0.5
@@ -358,7 +365,8 @@ document.addEventListener('DOMContentLoaded', () => {
             createTimeline(timelineOptions.firstOut).to(title, {
                 x: "-100%",
                 ease: "ease",
-                filter: "blur(4px)",
+                filter: "blur(16px)",
+                opacity:0,
                 duration: 0.5
             }, 0);
             createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
@@ -366,9 +374,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: "ease",
                 duration: 0.5
             }, 0);
-            createTimeline(timelineOptions.secondOut).to([text2, image2, title2], {
-                x: "0%",
+            createTimeline(timelineOptions.secondOut).to(text2, {
+                y: "-200%",
                 ease: "ease",
+                opacity:0,
+                filter: "blur(16px)",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to(image2, {
+                y: "-300%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to(title2, {
+                y: "-100%",
+                ease: "ease",
+                filter: "blur(16px)",
+                opacity:0,
                 duration: 0.5
             }, 0);
 
@@ -424,22 +447,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
-
-
-
-    <div style="display:none;">
-        <div class="content">
-            <div class="content-text">
-                <p>
-                    <strong>목표는 높게, 발성은 쉽게.</strong> 아무리 좋은 내용도 제대로 이해하지 못한다면 활용할 수 없습니다. 
-                    체계적 발성 이론을 누구나 쉽게 이해할 수 있도록 JU만의 방식으로 교육합니다. <br><br>
-                    더 이상 전공서적에나 나올 법한 어려운 이론들로 고민하지 마세요. 그저 여러분들은 앞으로 일어날 놀라운 변화에만 집중하세요. 여러분들의 성장을 위한 고민은 JU가 할 테니까요.
-                </p>
-            </div>
-            <div >
-                <img src="https://restarea92.github.io/ju/33.jpg">
-            </div>
-        </div>
-    </div>
-    
