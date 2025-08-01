@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.36',
+        VERSION: '1.1.37',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -162,6 +162,10 @@ const app = {
             const image = multiScrollItem1.querySelector('.content-image');
             const title = multiScrollItem1.querySelector('.content-title');
 
+            const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
+            const text2 = multiScrollItem2.querySelector('.content-text');
+            const image2 = multiScrollItem2.querySelector('.content-image');
+            const title2 = multiScrollItem2.querySelector('.content-title');
 
             const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
             const progressEl = document.getElementById('progress-element');
@@ -209,6 +213,10 @@ const app = {
             if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
             if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
             if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
+
+            if (text2) gsap.set(text, { y: yOffset * 3, x: 0  });
+            if (image2) gsap.set(image, { y: yOffset * 1.5, x: 0  });
+            if (title2) gsap.set(title, { y: yOffset * 1, x: 0  });
             
             // 타임라인 애니메이션 추가
             parallaxTimeline1.to([text, image, title], {
