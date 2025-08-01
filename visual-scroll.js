@@ -139,8 +139,6 @@ const app = {
      * Initialize horizontal scroll animations
      */
     initializeHorizontalScroll() {
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
         const horizontalSections = gsap.utils.toArray(".horizontal-spacer");
         
         horizontalSections.forEach((container) => {
@@ -154,6 +152,7 @@ const app = {
      * Setup individual horizontal container
      * @param {Element} container - The horizontal container element
      */
+    
     setupHorizontalContainer(container) {
         const sections = container.querySelectorAll(".multi-scroll-item");
         const elements = this.getHorizontalElements();
@@ -258,6 +257,7 @@ const app = {
      * @param {Element} progressEl2 - Second progress element
      * @returns {Object} Timeline options
      */
+    
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
