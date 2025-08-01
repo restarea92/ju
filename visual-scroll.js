@@ -190,8 +190,7 @@ const app = {
                     end: "center top",
                     scrub: 1,
                     onUpdate: self => {
-                        const progressPercent = (self.progress * 100).toFixed(0);
-                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
+
                     }
                 }
             });
@@ -225,7 +224,7 @@ const app = {
                 duration: 0.5
             }, 0);
 
-            parallaxTimeline2.to([text2, image2, title2], {
+            parallaxTimeline3.to([text2, image2, title2], {
                 y: "0%",
                 ease: "ease",
                 duration: 0.5
