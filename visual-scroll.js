@@ -1,7 +1,7 @@
 /**
  * Visual Scroll Animation Module
  * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.1.44
+ * @version 1.1.45
  */
 
 if (typeof gsap !== 'undefined') {
@@ -152,7 +152,6 @@ const app = {
      * Setup individual horizontal container
      * @param {Element} container - The horizontal container element
      */
-    
     setupHorizontalContainer(container) {
         const sections = container.querySelectorAll(".multi-scroll-item");
         const elements = this.getHorizontalElements();
@@ -257,7 +256,6 @@ const app = {
      * @param {Element} progressEl2 - Second progress element
      * @returns {Object} Timeline options
      */
-    
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
