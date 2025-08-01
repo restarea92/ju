@@ -61,6 +61,7 @@
 <div class="scroll-marker top">VIEWPORT TOP</div>
 <div class="scroll-marker center">VIEWPORT CENTER</div>
 <div class="scroll-marker bottom">VIEWPORT BOTTOM</div>
+<div id="state-el"></div>
 <div class="visual-section sticky-wrapper" id="visual-section">
     <div class="sticky-element">
         <div 
@@ -145,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
     <style>
-        .scroll-marker {
+        .scroll-marker, #state-el {
             font-size: 0.75rem;
             font-weight: 900;
             width: fit-content;
@@ -158,6 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
             z-index: 9999;
             background: navy;
             text-align: left;
+        }
+        #state-el {
+            top:0;
+            left:0;
+            right: unset;
         }
         .scroll-marker.top {
             top:0;

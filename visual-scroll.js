@@ -261,6 +261,8 @@ const app = {
                 duration: 0.5
             }, 0);
 
+
+            const stateEl = document.querySelector('#state-el');
             let tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: container,
@@ -268,8 +270,18 @@ const app = {
                     scrub: 0.5,
                     start: "top+=10% top",  
                     end: "bottom-=10% bottom",
+                        onStart: self => {
+                            if (stateEl) stateEl.textContent = 'For debug: START';
+                        },
+                        onUpdate: self => {
+                            const progressPercent = (self.progress * 100).toFixed(0);
+                            if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+                        },
+                        onLeave: self => {
+                            if (stateEl) stateEl.textContent = 'For debug: END';
+                        }
                 },
-                marker: true,
+
             });
 
             sections.forEach((section, index) => {
