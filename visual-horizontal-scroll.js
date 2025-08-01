@@ -8,8 +8,13 @@ if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
+
 const app = {
 
+    // ========== Configuration ==========
+    CONFIG: {
+        VERSION: '1.0.1',
+    },
 
     // ========== Initialization ==========
     /**
