@@ -4,10 +4,7 @@
  * @version 1.1.44
  */
 
-if (typeof gsap !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-}
-
+import { initGSAP } from './gsapUtils.js';
 
 const app = {
 
@@ -23,7 +20,7 @@ const app = {
     init() {
         console.log(this.CONFIG.VERSION);
 
-        if (!this.validateGSAP()) return;
+        if (!initGSAP()) return;
 
         this.initializeHorizontalScroll();
     },
@@ -32,17 +29,17 @@ const app = {
      * Validate GSAP dependencies
      * @returns {boolean} Whether GSAP is properly loaded
      */
-    validateGSAP() {
-        if (typeof gsap === 'undefined') {
-            console.error('GSAP not loaded - include gsap.min.js');
-            return false;
-        }
-        if (typeof ScrollTrigger === 'undefined') {
-            console.error('ScrollTrigger not loaded or registered');
-            return false;
-        }
-        return true;
-    },
+    // validateGSAP() {
+    //     if (typeof gsap === 'undefined') {
+    //         console.error('GSAP not loaded - include gsap.min.js');
+    //         return false;
+    //     }
+    //     if (typeof ScrollTrigger === 'undefined') {
+    //         console.error('ScrollTrigger not loaded or registered');
+    //         return false;
+    //     }
+    //     return true;
+    // },
 
     // ========== Horizontal Scroll ==========
     /**
