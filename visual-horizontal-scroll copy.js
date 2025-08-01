@@ -1,78 +1,37 @@
 /**
- * Visual Scroll Animation Module
- * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.1.44
+ * Horizontal Scroll Animation Module
+ * Handles horizontal scroll animations with GSAP and ScrollTrigger
  */
 
 if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
-const app = {
-
-
-    // ========== Initialization ==========
-    /**
-     * Initialize the application
-     */
+const horizontalApp = {
     init() {
-        console.log(this.CONFIG.VERSION);
-
-        if (!this.validateGSAP()) return;
-
         this.initializeHorizontalScroll();
-    },
-
-    /**
-     * Validate GSAP dependencies
-     * @returns {boolean} Whether GSAP is properly loaded
-     */
-    validateGSAP() {
-        if (typeof gsap === 'undefined') {
-            console.error('GSAP not loaded - include gsap.min.js');
-            return false;
-        }
-        if (typeof ScrollTrigger === 'undefined') {
-            console.error('ScrollTrigger not loaded or registered');
-            return false;
-        }
-        return true;
-    },
-
-    // ========== Horizontal Scroll ==========
-    /**
-     * Initialize horizontal scroll animations
-     */
-    initializeHorizontalScroll() {
-        const horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-        
-        horizontalSections.forEach((container) => {
-            this.setupHorizontalContainer(container);
-        });
-
         gsap.to("body", { scrollBehavior: "smooth" });
     },
 
-    /**
-     * Setup individual horizontal container
-     * @param {Element} container - The horizontal container element
-     */
-    
+    initializeHorizontalScroll() {
+        const horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+
+        horizontalSections.forEach((container) => {
+            this.setupHorizontalContainer(container);
+        });
+    },
+
     setupHorizontalContainer(container) {
         const sections = container.querySelectorAll(".multi-scroll-item");
         const elements = this.getHorizontalElements();
         const { yOffset, xOffset } = this.calculateOffsets();
         const debugElements = this.getDebugElements();
-        
+
         this.setInitialPositions(elements, yOffset, xOffset);
         this.createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements);
         this.createMainHorizontalTimeline(container, sections, debugElements);
     },
 
-    /**
-     * Get horizontal scroll elements
-     * @returns {Object} Object containing element references
-     */
     getHorizontalElements() {
         const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
         const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
@@ -87,10 +46,6 @@ const app = {
         };
     },
 
-    /**
-     * Get debug elements
-     * @returns {Object} Object containing debug element references
-     */
     getDebugElements() {
         return {
             progressEl: document.getElementById('progress-element'),
@@ -99,10 +54,6 @@ const app = {
         };
     },
 
-    /**
-     * Calculate viewport-based offsets
-     * @returns {Object} Object containing calculated offsets
-     */
     calculateOffsets() {
         const minVwVh = (value) => {
             const vw = window.innerWidth * (value / 100);
@@ -116,12 +67,6 @@ const app = {
         };
     },
 
-    /**
-     * Set initial positions for horizontal elements
-     * @param {Object} elements - Element references
-     * @param {number} yOffset - Vertical offset
-     * @param {number} xOffset - Horizontal offset
-     */
     setInitialPositions(elements, yOffset, xOffset) {
         const { text, image, title, text2, image2, title2 } = elements;
 
@@ -134,14 +79,6 @@ const app = {
         if (title2) gsap.set(title2, { x: xOffset * 1, y: 0 });
     },
 
-    /**
-     * Create horizontal animation timelines
-     * @param {Element} container - Container element
-     * @param {Object} elements - Element references
-     * @param {number} yOffset - Vertical offset
-     * @param {number} xOffset - Horizontal offset
-     * @param {Object} debugElements - Debug element references
-     */
     createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements) {
         const { text, image, title, text2, image2, title2 } = elements;
         const { progressEl, progressEl2 } = debugElements;
@@ -149,20 +86,10 @@ const app = {
         const timelineOptions = this.getTimelineOptions(progressEl, progressEl2);
         const createTimeline = this.createTimelineFactory(container);
 
-        // First section animations
         this.createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title);
-        
-        // Second section animations
         this.createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2);
     },
 
-    /**
-     * Get timeline options configuration
-     * @param {Element} progressEl - First progress element
-     * @param {Element} progressEl2 - Second progress element
-     * @returns {Object} Timeline options
-     */
-    
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
@@ -192,11 +119,6 @@ const app = {
         };
     },
 
-    /**
-     * Create timeline factory function
-     * @param {Element} container - Container element
-     * @returns {Function} Timeline creation function
-     */
     createTimelineFactory(container) {
         return (options = {}) => {
             return gsap.timeline({
@@ -205,34 +127,21 @@ const app = {
                     start: "top bottom",
                     end: "center top",
                     scrub: 1,
-                    onUpdate: self => {
-                        const progressPercent = (self.progress * 100).toFixed(0);
-                    },
                     ...options,
                 }
             });
         };
     },
 
-    /**
-     * Create first section animations
-     * @param {Function} createTimeline - Timeline creation function
-     * @param {Object} timelineOptions - Timeline options
-     * @param {Element} text - Text element
-     * @param {Element} image - Image element
-     * @param {Element} title - Title element
-     */
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
-        // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             y: "0%",
             ease: "ease",
             duration: 0.5
         }, 0);
 
-        // First out animations
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
-        
+
         firstOutTimeline.to(text, {
             x: "-200%",
             ease: "ease",
@@ -240,14 +149,14 @@ const app = {
             filter: "blur(16px)",
             duration: 0.5
         }, 0);
-        
+
         firstOutTimeline.to(image, {
             x: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
         }, 0);
-        
+
         firstOutTimeline.to(title, {
             x: "-100%",
             ease: "ease",
@@ -257,25 +166,15 @@ const app = {
         }, 0);
     },
 
-    /**
-     * Create second section animations
-     * @param {Function} createTimeline - Timeline creation function
-     * @param {Object} timelineOptions - Timeline options
-     * @param {Element} text2 - Second text element
-     * @param {Element} image2 - Second image element
-     * @param {Element} title2 - Second title element
-     */
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
-        // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
             x: "0%",
             ease: "ease",
             duration: 0.5
         }, 0);
 
-        // Second out animations
         const secondOutTimeline = createTimeline(timelineOptions.secondOut);
-        
+
         secondOutTimeline.to(text2, {
             y: "-200%",
             ease: "ease",
@@ -283,14 +182,14 @@ const app = {
             filter: "blur(16px)",
             duration: 0.5
         }, 0);
-        
+
         secondOutTimeline.to(image2, {
             y: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
         }, 0);
-        
+
         secondOutTimeline.to(title2, {
             y: "-100%",
             ease: "ease",
@@ -300,12 +199,6 @@ const app = {
         }, 0);
     },
 
-    /**
-     * Create main horizontal timeline
-     * @param {Element} container - Container element
-     * @param {NodeList} sections - Section elements
-     * @param {Object} debugElements - Debug elements
-     */
     createMainHorizontalTimeline(container, sections, debugElements) {
         const { stateEl, progressEl2 } = debugElements;
 
@@ -321,10 +214,10 @@ const app = {
                     const progressPercent = (self.progress * 100).toFixed(0);
                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
                 },
-                onLeave: self => {
+                onLeave: () => {
                     if (stateEl) stateEl.textContent = 'For debug: END';
                 },
-                onLeaveBack: self => {
+                onLeaveBack: () => {
                     if (stateEl) stateEl.textContent = 'For debug: END (back)';
                 }
             },
@@ -333,11 +226,6 @@ const app = {
         this.createSectionTimeline(timeline, sections);
     },
 
-    /**
-     * Create section timeline animations
-     * @param {Object} timeline - GSAP timeline
-     * @param {NodeList} sections - Section elements
-     */
     createSectionTimeline(timeline, sections) {
         sections.forEach((section, index) => {
             if (index === 0) {
@@ -360,7 +248,6 @@ const app = {
             }
         });
     },
-
 };
 
-export default app;
+export default horizontalApp;
