@@ -7,7 +7,7 @@ if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
-const horizontalApp = {
+const app = {
     init() {
         this.initializeHorizontalScroll();
         gsap.to("body", { scrollBehavior: "smooth" });

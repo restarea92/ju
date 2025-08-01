@@ -677,3 +677,189 @@ const app = {
 };
 
 export default app;
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+//     let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+//     function minVwVh(value) {
+//         const vw = window.innerWidth * (value / 100);
+//         const vh = window.innerHeight * (value / 100);
+//         return Math.min(vw, vh);
+//     }
+
+//     horizontalSections.forEach((container, containerIndex) => {
+//         let sections = container.querySelectorAll(".multi-scroll-item");
+
+//         const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
+//         const text = multiScrollItem1.querySelector('.content-text');
+//         const image = multiScrollItem1.querySelector('.content-image');
+//         const title = multiScrollItem1.querySelector('.content-title');
+
+//         const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
+//         const text2 = multiScrollItem2.querySelector('.content-text');
+//         const image2 = multiScrollItem2.querySelector('.content-image');
+//         const title2 = multiScrollItem2.querySelector('.content-title');
+
+//         const yOffset = minVwVh(10); 
+//         const xOffset = minVwVh(20); 
+//         const progressEl = document.getElementById('progress-element');
+//         const progressEl2 = document.getElementById('progress-element2');
+
+//         const timelineOptions = {
+//             firstIn: {
+//                 start: "top center",
+//                 end: "center bottom",
+//                 onUpdate: self => {
+//                     const progressPercent = (self.progress * 100).toFixed(0);
+//                     if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
+
+//                 },
+//             }, 
+//             firstOut: {
+//                 start: "center bottom",
+//                 end: "center top",
+//             },
+//             secondIn: {
+//                 start: "center center",
+//                 end: "center top",
+//                 onUpdate: self => {
+//                     const progressPercent = (self.progress * 100).toFixed(0);
+//                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+//                 }
+//             },
+//             secondOut: {
+//                 start: "bottom bottom",
+//                 end: "bottom top",
+//             }
+//         }
+
+//         const createTimeline = (options = {}) => {
+//             return gsap.timeline({
+//                 scrollTrigger: {
+//                     trigger: container, 
+//                     start: "top bottom",
+//                     end: "center top",
+//                     scrub: 1,
+//                     onUpdate: self => {
+//                         const progressPercent = (self.progress * 100).toFixed(0);
+//                     },
+//                     ...options,
+//                 }
+//             });
+//         };
+
+//         // 초기 위치 세팅
+//         if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
+//         if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
+//         if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
+
+//         if (text2) gsap.set(text2, { x: xOffset * 3, y: 0  });
+//         if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0  });
+//         if (title2) gsap.set(title2, { x: xOffset * 1, y: 0  });
+        
+
+//         createTimeline(timelineOptions.firstIn).to([text, image, title], {
+//             y: "0%",
+//             ease: "ease",
+//             duration: 0.5
+//         }, 0);
+
+        
+//         createTimeline(timelineOptions.firstOut).to(text, {
+//             x: "-200%",
+//             ease: "ease",
+//             opacity:0,
+//             filter: "blur(16px)",
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.firstOut).to(image, {
+//             x: "-300%",
+//             ease: "ease",
+//             opacity:0,
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.firstOut).to(title, {
+//             x: "-100%",
+//             ease: "ease",
+//             filter: "blur(16px)",
+//             opacity:0,
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+//             x: "0%",
+//             ease: "ease",
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.secondOut).to(text2, {
+//             y: "-200%",
+//             ease: "ease",
+//             opacity:0,
+//             filter: "blur(16px)",
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.secondOut).to(image2, {
+//             y: "-300%",
+//             ease: "ease",
+//             opacity:0,
+//             duration: 0.5
+//         }, 0);
+//         createTimeline(timelineOptions.secondOut).to(title2, {
+//             y: "-100%",
+//             ease: "ease",
+//             filter: "blur(16px)",
+//             opacity:0,
+//             duration: 0.5
+//         }, 0);
+
+
+//         const stateEl = document.querySelector('#state-el');
+//         let tl = gsap.timeline({
+//             scrollTrigger: {
+//                 trigger: container,
+//                 pin: false,
+//                 scrub: 0.5,
+//                 start: "center bottom",  
+//                 end: "center top",
+//                 onUpdate: self => {
+//                     if (stateEl) stateEl.textContent = 'For debug: SCROLLING';
+//                     const progressPercent = (self.progress * 100).toFixed(0);
+//                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+//                 },
+//                 onLeave: self => {
+//                     if (stateEl) stateEl.textContent = 'For debug: END';
+//                 },
+//                 onLeaveBack: self => {
+//                     if (stateEl) stateEl.textContent = 'For debug: END (back)';
+//                 }
+//             },
+//         });
+
+//         sections.forEach((section, index) => {
+//             if (index === 0) {
+//                 tl.to(sections, { 
+//                     xPercent: 0, 
+//                     duration: 0.5, 
+//                     ease: "none" 
+//                 });
+//             } else {
+//                 tl.to(sections, { 
+//                     xPercent: -100 * index, 
+//                     duration: 3, 
+//                     ease: "power2.inOut" 
+//                 })
+//                 .to(sections, { 
+//                     xPercent: -100 * index, 
+//                     duration: 0.5, 
+//                     ease: "none" 
+//                 });
+//             }
+//         });
+//     });
+
+//     gsap.to("body", {
+//         scrollBehavior: "smooth"
+//     });
+// });

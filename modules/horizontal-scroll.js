@@ -19,9 +19,7 @@ const app = {
      */
     init() {
         console.log(this.CONFIG.VERSION);
-
         if (!initGSAP()) return;
-
         this.initializeHorizontalScroll();
     },
 
@@ -149,7 +147,7 @@ const app = {
         const { progressEl, progressEl2 } = debugElements;
 
         const timelineOptions = this.getTimelineOptions(progressEl, progressEl2);
-        const createTimeline = this.createTimelineFactory(container);
+        const createTimeline = this.timelineCreator(container);
 
         // First section animations
         this.createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title);
@@ -195,11 +193,13 @@ const app = {
     },
 
     /**
-     * Create timeline factory function
-     * @param {Element} container - Container element
-     * @returns {Function} Timeline creation function
+     * 주어진 컨테이너에 맞는 GSAP 타임라인 생성 함수를 반환.
+     * 반환된 함수는 옵션 객체를 받아 ScrollTrigger 설정을 커스터마이징.
+     * 
+     * @param {Element} container - 타임라인의 ScrollTrigger가 작동할 대상 요소
+     * @returns {Function} 타임라인 생성 함수 (options 객체를 받아서 gsap.timeline 생성)
      */
-    createTimelineFactory(container) {
+    timelineCreator(container) {
         return (options = {}) => {
             return gsap.timeline({
                 scrollTrigger: {
@@ -215,6 +215,7 @@ const app = {
             });
         };
     },
+
 
     /**
      * Create first section animations
