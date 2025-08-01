@@ -58,7 +58,9 @@
 }
 
 </style>
-
+<div class="scroll-marker top">VIEWPORT TOP</div>
+<div class="scroll-marker center">VIEWPORT CENTER</div>
+<div class="scroll-marker bottom">VIEWPORT BOTTOM</div>
 <div class="visual-section sticky-wrapper" id="visual-section">
     <div class="sticky-element">
         <div 
@@ -142,8 +144,49 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('orientationchange', updateVideo);
 });
 </script>
+    <style>
+        .scroll-marker {
+            font-size: 0.75rem;
+            font-weight: 900;
+            width: fit-content;
+            min-width: 200px;
+            height: fit-content;
+            border: 1px solid red;
+            position: fixed;
+            right: 0;
+            color: white;
+            z-index: 9999;
+            background: navy;
+            text-align: left;
+        }
+        .scroll-marker.top {
+            top:0;
+        }
+        .scroll-marker.center {
+            top:50%;
+            transform: translateY(-50%);
+        }
+        .scroll-marker.bottom {
+            bottom:0;
+        }
+        .horizontal-spacer {
+            position: relative;
+            
+
+            .scroll-marker {
+                text-align: right;
+                position: absolute;
+                margin-right: 200px;
+            }
+
+
+        }
+    </style>
     <div id="multi-scroll">
         <div class="horizontal-spacer">
+                <div class="scroll-marker top">TOP</div>
+                <div class="scroll-marker center">CENTER</div>
+                <div class="scroll-marker bottom">BOTTOM</div>
             <div class="horizontal-container">
                 <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                     <div class="content">
@@ -170,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <section id="multi-scroll-item2" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                     <div class="content">
                         <div class="content-title">
-                            <div id="progress-element">HELLO</div>
+                            <div id="progress-element2">HELLO</div>
                             <h2>
                                 첫 단추부터 확실하게.
                             </h2>

@@ -46,7 +46,7 @@ if (typeof gsap !== 'undefined') {
 const app = {
     // ========== 상수 (CONFIG) ==========
     CONFIG: {
-        VERSION: '1.1.38',
+        VERSION: '1.1.39',
         ACTIVATION_THRESHOLD: 0.15,  // 0~1 범위로 변경
         SCROLL_DEBOUNCE_DELAY: 16,   // 60fps에 맞춰 최적화
         STICKY_HEIGHT_MULTIPLIER: 2,
@@ -146,145 +146,162 @@ const app = {
     
     initHorizontalScroll() {
         // gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-        
-        // let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
-        // function minVwVh(value) {
-        //     const vw = window.innerWidth * (value / 100);
-        //     const vh = window.innerHeight * (value / 100);
-        //     return Math.min(vw, vh);
-        // }
 
-        // horizontalSections.forEach((container, containerIndex) => {
-        //     let sections = container.querySelectorAll(".multi-scroll-item");
+        let horizontalSections = gsap.utils.toArray(".horizontal-spacer");
+        function minVwVh(value) {
+            const vw = window.innerWidth * (value / 100);
+            const vh = window.innerHeight * (value / 100);
+            return Math.min(vw, vh);
+        }
 
-        //     const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
-        //     const text = multiScrollItem1.querySelector('.content-text');
-        //     const image = multiScrollItem1.querySelector('.content-image');
-        //     const title = multiScrollItem1.querySelector('.content-title');
+        function maxVwVh(value) {
+            const vw = window.innerWidth * (value / 100);
+            const vh = window.innerHeight * (value / 100);
+            return Math.max(vw, vh);
+        }
 
-        //     const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
-        //     const text2 = multiScrollItem2.querySelector('.content-text');
-        //     const image2 = multiScrollItem2.querySelector('.content-image');
-        //     const title2 = multiScrollItem2.querySelector('.content-title');
+        horizontalSections.forEach((container, containerIndex) => {
+            let sections = container.querySelectorAll(".multi-scroll-item");
 
-        //     const yOffset = minVwVh(10); // 10vw와 10vh 중 작은 값 (px 단위)
-        //     const progressEl = document.getElementById('progress-element');
+            const multiScrollItem1 = document.querySelector("#multi-scroll-item1");
+            const text = multiScrollItem1.querySelector('.content-text');
+            const image = multiScrollItem1.querySelector('.content-image');
+            const title = multiScrollItem1.querySelector('.content-title');
 
-        //     let parallaxTimeline1 = gsap.timeline({
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             start: "top center",
-        //             end: "center bottom",
-        //             scrub: 1,
-        //             onUpdate: self => {
-        //                 const progressPercent = (self.progress * 100).toFixed(0);
-        //                 if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
-        //             }
-        //         }
-        //     });
+            const multiScrollItem2 = document.querySelector("#multi-scroll-item2");
+            const text2 = multiScrollItem2.querySelector('.content-text');
+            const image2 = multiScrollItem2.querySelector('.content-image');
+            const title2 = multiScrollItem2.querySelector('.content-title');
 
-        //     let parallaxTimeline2 = gsap.timeline({
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             start: "center bottom",
-        //             end: "center top",
-        //             scrub: 1,
-        //             onUpdate: self => {
+            const yOffset = minVwVh(10); 
+            const xOffset = minVwVh(20); 
+            const progressEl = document.getElementById('progress-element');
+            const progressEl2 = document.getElementById('progress-element2');
 
-        //             }
-        //         }
-        //     });
+            const timelineOptions = {
+                firstIn: {
+                    start: "top center",
+                    end: "center bottom",
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
 
-        //     let parallaxTimeline3 = gsap.timeline({
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             start: "top center",
-        //             end: "center bottom",
-        //             scrub: 1,
-        //             onUpdate: self => {
-        //                 const progressPercent = (self.progress * 100).toFixed(0);
-        //                 if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
-        //             }
-        //         }
-        //     });
+                    },
+                }, 
+                firstOut: {
+                    start: "center bottom",
+                    end: "center top",
+                },
+                secondIn: {
+                    start: "center center",
+                    end: "bottom bottom",
+                    onUpdate: self => {
+                        const progressPercent = (self.progress * 100).toFixed(0);
+                        if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
+                    }
+                },
+                secondOut: {
+                    start: "bottom bottom",
+                    end: "bottom top",
+                }
+            }
 
-        //     // 초기 위치 세팅
-        //     if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
-        //     if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
-        //     if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
+            const createTimeline = (options = {}) => {
+                return gsap.timeline({
+                    scrollTrigger: {
+                        trigger: container, 
+                        start: "top bottom",
+                        end: "center top",
+                        scrub: 1,
+                        onUpdate: self => {
+                            const progressPercent = (self.progress * 100).toFixed(0);
+                        },
+                        ...options,
+                    }
+                });
+            };
 
-        //     if (text2) gsap.set(text, { y: yOffset * 3, x: 0  });
-        //     if (image2) gsap.set(image, { y: yOffset * 1.5, x: 0  });
-        //     if (title2) gsap.set(title, { y: yOffset * 1, x: 0  });
+            // 초기 위치 세팅
+            if (text) gsap.set(text, { y: yOffset * 3, x: 0  });
+            if (image) gsap.set(image, { y: yOffset * 1.5, x: 0  });
+            if (title) gsap.set(title, { y: yOffset * 1, x: 0  });
+
+            if (text2) gsap.set(text2, { x: xOffset * 3, y: 0  });
+            if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0  });
+            if (title2) gsap.set(title2, { x: xOffset * 1, y: 0  });
             
-        //     // 타임라인 애니메이션 추가
-        //     parallaxTimeline1.to([text, image, title], {
-        //         y: "0%",
-        //         ease: "ease",
-        //         duration: 0.5
-        //     }, 0);
 
-        //     parallaxTimeline3.to([text2, image2, title2], {
-        //         y: "0%",
-        //         ease: "ease",
-        //         duration: 0.5
-        //     }, 0);
+            createTimeline(timelineOptions.firstIn).to([text, image, title], {
+                y: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
 
             
-        //     parallaxTimeline2.to(text, {
-        //         x: "-200%",
-        //         ease: "ease",
-        //         opacity:0,
-        //         duration: 0.5
-        //     }, 0);
-        //     parallaxTimeline2.to(image, {
-        //         x: "-500%",
-        //         ease: "ease",
-        //         opacity:0,
-        //         duration: 0.5
-        //     }, 0);
-        //     parallaxTimeline2.to(title, {
-        //         x: "-100%",
-        //         ease: "ease",
-        //         filter: "blur(4px)",
-        //         duration: 0.5
-        //     }, 0);
+            createTimeline(timelineOptions.firstOut).to(text, {
+                x: "-200%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.firstOut).to(image, {
+                x: "-500%",
+                ease: "ease",
+                opacity:0,
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.firstOut).to(title, {
+                x: "-100%",
+                ease: "ease",
+                filter: "blur(4px)",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+                x: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+            createTimeline(timelineOptions.secondOut).to([text2, image2, title2], {
+                x: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
 
-        //     let tl = gsap.timeline({
-        //         scrollTrigger: {
-        //             trigger: container,
-        //             pin: false,
-        //             scrub: 0.5,
-        //             start: "top+=10% top",  
-        //             end: "bottom-=10% bottom",
-        //         }
-        //     });
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    pin: false,
+                    scrub: 0.5,
+                    start: "top+=10% top",  
+                    end: "bottom-=10% bottom",
+                }
+            });
 
-        //     sections.forEach((section, index) => {
-        //         if (index === 0) {
-        //             tl.to(sections, { 
-        //                 xPercent: 0, 
-        //                 duration: 0.5, 
-        //                 ease: "none" 
-        //             });
-        //         } else {
-        //             tl.to(sections, { 
-        //                 xPercent: -100 * index, 
-        //                 duration: 3, 
-        //                 ease: "power2.inOut" 
-        //             })
-        //             .to(sections, { 
-        //                 xPercent: -100 * index, 
-        //                 duration: 0.5, 
-        //                 ease: "none" 
-        //             });
-        //         }
-        //     });
-        // });
+            sections.forEach((section, index) => {
+                if (index === 0) {
+                    tl.to(sections, { 
+                        xPercent: 0, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                } else {
+                    tl.to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 3, 
+                        ease: "power2.inOut" 
+                    })
+                    .to(sections, { 
+                        xPercent: -100 * index, 
+                        duration: 0.5, 
+                        ease: "none" 
+                    });
+                }
+            });
+        });
 
-        // gsap.to("body", {
-        //     scrollBehavior: "smooth"
-        // });
+        gsap.to("body", {
+            scrollBehavior: "smooth"
+        });
     },
 
 
