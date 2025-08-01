@@ -224,6 +224,13 @@ const app = {
                 ease: "ease",
                 duration: 0.5
             }, 0);
+
+            parallaxTimeline2.to([text2, image2, title2], {
+                y: "0%",
+                ease: "ease",
+                duration: 0.5
+            }, 0);
+
             
             parallaxTimeline2.to(text, {
                 x: "-200%",
