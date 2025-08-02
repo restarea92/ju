@@ -249,6 +249,7 @@ window.MOBILE_SLIDE_MENU = function(){
 		});
 		$body.data('slide_menu','Y');
 		$body.css('overflow-y','clip');
+        $body.addClass('clip');
 		setTimeout(function() {
 			$menu_container.width('100%');
 		},10);
@@ -260,17 +261,25 @@ window.MOBILE_SLIDE_MENU = function(){
 	var hideSlide = function(){
 		$body.data('slide_menu','N');
 		var is_fullpage = $body.find('.visual_section').attr('doz_fullpage') ==='Y';
-		if(is_fullpage)
+		if(is_fullpage) {
 			$body.css('overflow-y','clip');
-		else
+            $body.addClass('clip');
+        }
+		else {
 			$body.css('overflow-y','');
+            $body.removeClass('clip');
+        }
 		$backdrop.remove();
 		setTimeout(function(){
 			$body.data('slide_menu','N');
-			if(is_fullpage)
-				$body.css('overflow-y','clip');
-			else
-				$body.css('overflow-y','');
+            if(is_fullpage) {
+                $body.css('overflow-y','clip');
+                $body.addClass('clip');
+            }
+            else {
+                $body.css('overflow-y','');
+                $body.removeClass('clip');
+            }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
 			$('#'+backdrop_class).remove();
@@ -552,6 +561,8 @@ window.PC_SLIDE_MENU = function(){
 		});
 		$body.data('pc_slide_menu','Y');
 		$body.css('overflow-y','clip');
+        $body.addClass('clip');
+
 		setTimeout(function() {
 			$menu_container.width('100%');
 		},10);
@@ -564,16 +575,24 @@ window.PC_SLIDE_MENU = function(){
 		$body.data('pc_slide_menu','N');
 		$backdrop.remove();
 		var is_fullpage = $body.find('.visual_section.pc_section').attr('doz_fullpage') ==='Y';
-		if(is_fullpage)
+		if(is_fullpage) {
 			$body.css('overflow-y','clip');
-		else
+            $body.addClass('clip');
+        }
+		else {
 			$body.css('overflow-y','');
+            $body.removeClass('clip');
+        }
 		setTimeout(function(){
 			$body.data('pc_slide_menu','N');
-			if(is_fullpage)
-				$body.css('overflow-y','clip');
-			else
-				$body.css('overflow-y','');
+            if(is_fullpage) {
+                $body.css('overflow-y','clip');
+                $body.addClass('clip');
+            }
+            else {
+                $body.css('overflow-y','');
+                $body.removeClass('clip');
+            }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
 			$('#'+backdrop_class).remove();
