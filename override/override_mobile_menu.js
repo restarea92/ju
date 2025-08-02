@@ -1,4 +1,5 @@
-window.MOBILE_SLIDE_MENU = function(){
+console.log('hi');
+const MOBILE_SLIDE_MENU = function(){
 	var $menu_slide;
 	var $menu_container;
 	var $body;
@@ -305,7 +306,7 @@ window.MOBILE_SLIDE_MENU = function(){
 	};
 
 }();
-var PC_SLIDE_MENU = function(){
+const PC_SLIDE_MENU = function(){
 	var $menu_slide;
 	var $menu_container;
 	var $body;
@@ -575,6 +576,9 @@ var PC_SLIDE_MENU = function(){
 	};
 
 }();
+console.log(MOBILE_SLIDE_MENU);
+
+console.log(PC_SLIDE_MENU);
 $(function(){
 	MOBILE_SLIDE_MENU.init();
 	PC_SLIDE_MENU.init();
