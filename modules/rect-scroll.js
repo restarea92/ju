@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: rectScrollTrigger, 
                 start: "top bottom",
-                end: "top top",
+                end: "bottom bottom",
                 scrub: 1,
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
@@ -77,12 +77,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const yOffset = minVwVh(10); 
 
     // 초기 위치 세팅
-    if (title) gsap.set(title, { y: yOffset * 2, x: 0  });
+    if (title) gsap.set(title, { y: yOffset * 3, x: 0  });
 
     createTimeline().to(title, {
         y: "0",
         ease: "ease",
         opacity:1,
+        filter: "",
+        duration: 0.5
+    }, 0);
+
+    createTimeline({
+        start: "bottom bottom",
+        end: "bottom top",
+    }).to(title, {
+        y: "0",
+        ease: "ease",
+        opacity:0,
         filter: "",
         duration: 0.5
     }, 0);
