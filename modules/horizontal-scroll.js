@@ -129,9 +129,9 @@ const app = {
         if (image) gsap.set(image, { y: yOffset * 1.5, x: 0 });
         if (title) gsap.set(title, { y: yOffset * 1, x: 0 });
 
-        if (text2) gsap.set(text2, { x: xOffset * 2, y: 0, opacity: 0, filter: "blur(16px)" });
+        if (text2) gsap.set(text2, { x: xOffset * 2, y: 0, opacity: 0 });
         if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0, opacity: 0 });
-        if (title2) gsap.set(title2, { x: xOffset * 3, y: 0, opacity:0, filter: "blur(16px)" });
+        if (title2) gsap.set(title2, { x: xOffset * 3, y: 0, opacity:0 });
     },
 
     /**
@@ -178,7 +178,7 @@ const app = {
                 end: "center center",
             },
             secondIn: {
-                start: "center center",
+                start: "center bottom",
                 end: "center top",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
