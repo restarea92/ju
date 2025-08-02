@@ -272,7 +272,7 @@ const app = {
         // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
             x: "0%",
-            ease: "ease",
+            ease: "power2inOut",
             opacity: 1,
             filter: "blur(0px)",
             duration: 0.5
