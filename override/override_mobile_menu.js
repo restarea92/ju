@@ -23,13 +23,14 @@ Object.defineProperty(window, 'PC_SLIDE_MENU', {
 });
 
 window.MOBILE_SLIDE_MENU = function(){
-    let scrollY = 0;
-    const documentRoot = document.documentElement;
-    const documentBody = document.body;
 
-    documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+    let scrollY = 0;
 
     const toggleModal = (active) => {
+        const documentRoot = document.documentElement;
+        const documentBody = document.body;
+        documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+
         if (active) {
             scrollY = window.scrollY;
             documentRoot.style.setProperty('--current-scroll-y', `${scrollY}px`);
@@ -356,12 +357,12 @@ window.MOBILE_SLIDE_MENU = function(){
 window.PC_SLIDE_MENU = function(){
 
     let scrollY = 0;
-    const documentRoot = document.documentElement;
-    const documentBody = document.body;
-
-    documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
 
     const toggleModal = (active) => {
+        const documentRoot = document.documentElement;
+        const documentBody = document.body;
+        documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+
         if (active) {
             scrollY = window.scrollY;
             documentRoot.style.setProperty('--current-scroll-y', `${scrollY}px`);
