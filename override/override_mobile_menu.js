@@ -23,6 +23,22 @@ Object.defineProperty(window, 'PC_SLIDE_MENU', {
 });
 
 window.MOBILE_SLIDE_MENU = function(){
+    let scrollY = 0;
+    const root = document.documentElement;
+    root.style.setProperty('--current-scroll-y', `${0}px`);
+    const modalOn = (body) => {
+        scrollY = window.scrollY;
+        root.style.setProperty('--current-scroll-y', `${scrollY}px`);
+        body.classList.add('clip');
+    };
+
+    const modalOff = (body) => {
+        body.classList.remove('clip');
+        root.style.setProperty('--current-scroll-y', `${0}px`);
+    };
+
+
+
 	var $menu_slide;
 	var $menu_container;
 	var $body;
@@ -248,8 +264,8 @@ window.MOBILE_SLIDE_MENU = function(){
 			slideNavToggle();
 		});
 		$body.data('slide_menu','Y');
-		$body.css('overflow-y','clip');
-        $body.addClass('clip');
+        modalOn($body);
+
 		setTimeout(function() {
 			$menu_container.width('100%');
 		},10);
@@ -261,24 +277,18 @@ window.MOBILE_SLIDE_MENU = function(){
 	var hideSlide = function(){
 		$body.data('slide_menu','N');
 		var is_fullpage = $body.find('.visual_section').attr('doz_fullpage') ==='Y';
-		if(is_fullpage) {
-			$body.css('overflow-y','clip');
-            $body.addClass('clip');
-        }
-		else {
-			$body.css('overflow-y','');
-            $body.removeClass('clip');
+        if (is_fullpage) {
+            modalOn($body);
+        } else {
+            modalOff($body);
         }
 		$backdrop.remove();
 		setTimeout(function(){
 			$body.data('slide_menu','N');
-            if(is_fullpage) {
-                $body.css('overflow-y','clip');
-                $body.addClass('clip');
-            }
-            else {
-                $body.css('overflow-y','');
-                $body.removeClass('clip');
+            if (is_fullpage) {
+                modalOn($body);
+            } else {
+                modalOff($body);
             }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
@@ -560,8 +570,7 @@ window.PC_SLIDE_MENU = function(){
 			slideNavToggle();
 		});
 		$body.data('pc_slide_menu','Y');
-		$body.css('overflow-y','clip');
-        $body.addClass('clip');
+        modalOn($body);
 
 		setTimeout(function() {
 			$menu_container.width('100%');
@@ -575,23 +584,17 @@ window.PC_SLIDE_MENU = function(){
 		$body.data('pc_slide_menu','N');
 		$backdrop.remove();
 		var is_fullpage = $body.find('.visual_section.pc_section').attr('doz_fullpage') ==='Y';
-		if(is_fullpage) {
-			$body.css('overflow-y','clip');
-            $body.addClass('clip');
-        }
-		else {
-			$body.css('overflow-y','');
-            $body.removeClass('clip');
+        if (is_fullpage) {
+            modalOn($body);
+        } else {
+            modalOff($body);
         }
 		setTimeout(function(){
 			$body.data('pc_slide_menu','N');
-            if(is_fullpage) {
-                $body.css('overflow-y','clip');
-                $body.addClass('clip');
-            }
-            else {
-                $body.css('overflow-y','');
-                $body.removeClass('clip');
+            if (is_fullpage) {
+                modalOn($body);
+            } else {
+                modalOff($body);
             }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
