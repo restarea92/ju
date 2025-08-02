@@ -24,18 +24,21 @@ Object.defineProperty(window, 'PC_SLIDE_MENU', {
 
 window.MOBILE_SLIDE_MENU = function(){
     let scrollY = 0;
-    const root = document.documentElement;
-    root.style.setProperty('--current-scroll-y', `${0}px`);
-    const modalOn = (body) => {
-        scrollY = window.scrollY;
-        root.style.setProperty('--current-scroll-y', `${scrollY}px`);
-        body.classList.add('clip');
-    };
+    const documentRoot = document.documentElement;
+    const documentBody = document.body;
 
-    const modalOff = (body) => {
-        body.classList.remove('clip');
-        root.style.setProperty('--current-scroll-y', `${0}px`);
-    };
+    documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+
+    const toggleModal = (active) => {
+        if (active) {
+            scrollY = window.scrollY;
+            documentRoot.style.setProperty('--current-scroll-y', `${scrollY}px`);
+            documentBody.classList.add('clip');
+        } else {
+            documentBody.classList.remove('clip');
+            documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+        }
+    }
 
 
 
@@ -264,7 +267,7 @@ window.MOBILE_SLIDE_MENU = function(){
 			slideNavToggle();
 		});
 		$body.data('slide_menu','Y');
-        modalOn($body);
+        toggleModal(true);
 
 		setTimeout(function() {
 			$menu_container.width('100%');
@@ -278,17 +281,17 @@ window.MOBILE_SLIDE_MENU = function(){
 		$body.data('slide_menu','N');
 		var is_fullpage = $body.find('.visual_section').attr('doz_fullpage') ==='Y';
         if (is_fullpage) {
-            modalOn($body);
+            toggleModal(true);
         } else {
-            modalOff($body);
+            toggleModal(false);
         }
 		$backdrop.remove();
 		setTimeout(function(){
 			$body.data('slide_menu','N');
             if (is_fullpage) {
-                modalOn($body);
+                toggleModal(true);
             } else {
-                modalOff($body);
+                toggleModal(false);
             }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
@@ -570,7 +573,7 @@ window.PC_SLIDE_MENU = function(){
 			slideNavToggle();
 		});
 		$body.data('pc_slide_menu','Y');
-        modalOn($body);
+        toggleModal(true);
 
 		setTimeout(function() {
 			$menu_container.width('100%');
@@ -585,16 +588,16 @@ window.PC_SLIDE_MENU = function(){
 		$backdrop.remove();
 		var is_fullpage = $body.find('.visual_section.pc_section').attr('doz_fullpage') ==='Y';
         if (is_fullpage) {
-            modalOn($body);
+            toggleModal(true);
         } else {
-            modalOff($body);
+            toggleModal(false);
         }
 		setTimeout(function(){
 			$body.data('pc_slide_menu','N');
             if (is_fullpage) {
-                modalOn($body);
+                toggleModal(true);
             } else {
-                modalOff($body);
+                toggleModal(false);
             }
 			$menu_container.width(0);
 			$menu_container.toggleClass(open_class,false);
