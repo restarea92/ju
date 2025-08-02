@@ -1,18 +1,42 @@
-console.log('hi');
-const MOBILE_SLIDE_MENU = function(){
-	var $menu_slide;
-	var $menu_container;
-	var $body;
-	var status;
-	var $backdrop;
-	var open_class = 'slide_open';
-	var backdrop_class = 'slide_menu_backdrop';
-	var init = function(){
+Object.defineProperty(window, 'MOBILE_SLIDE_MENU', {
+    get: function() {
+        return this._MOBILE_SLIDE_MENU;
+    },
+    set: function(value) {
+        if (this._MOBILE_SLIDE_MENU) {
+        console.log('MOBILE_SLIDE_MENU blocked');
+        return;
+        }
+        this._MOBILE_SLIDE_MENU = value;
+    },
+    configurable: true
+});
+
+Object.defineProperty(window, 'PC_SLIDE_MENU', {
+    get: function() { return this._PC_SLIDE_MENU; },
+    set: function(value) {
+        console.log('PC_SLIDE_MENU blocked');
+        if (this._PC_SLIDE_MENU) return;
+        this._PC_SLIDE_MENU = value;
+    },
+    configurable: true
+});
+
+window.MOBILE_SLIDE_MENU = function(){
+	let $menu_slide;
+	let $menu_container;
+	let $body;
+	let status;
+	let $backdrop;
+	const open_class = 'slide_open';
+	const backdrop_class = 'slide_menu_backdrop';
+	const init = function(){
+                console.log('Hi');
 		$body = $('body');
 		$menu_container = $('#mobile_slide_menu_wrap');
 		$menu_slide = $('#mobile_slide_menu');
 
-		var data = $body.data('slide_menu');
+		const data = $body.data('slide_menu');
 		if(typeof  data == 'undefined') {
 			$body.data('slide_menu','N');
 			status = false;
@@ -30,15 +54,15 @@ const MOBILE_SLIDE_MENU = function(){
 		// menuActivate();
 	};
 
-	var set_accordion = false;
-	var active_list = {};
-	var runAccordion = function(){
-		var transitioning = null;
+	let set_accordion = false;
+	let active_list = {};
+	const runAccordion = function(){
+		let transitioning = null;
 
-		var show = function ($el) {
+		const show = function ($el) {
 			if (transitioning || $el.hasClass('in')) return;
 
-			var dimension = 'height';
+			const dimension = 'height';
 
 			$el
 				.show()
@@ -51,7 +75,7 @@ const MOBILE_SLIDE_MENU = function(){
 
 			transitioning = 1;
 
-			var complete = function () {
+			const complete = function () {
 				$el
 					.removeClass('collapsing')
 					.addClass('collapse in')[dimension]('');
@@ -59,16 +83,16 @@ const MOBILE_SLIDE_MENU = function(){
 			};
 
 
-			var scrollSize = $.camelCase(['scroll', dimension].join('-'));
+			const scrollSize = $.camelCase(['scroll', dimension].join('-'));
 
 			$el
 				.one('bsTransitionEnd', $.proxy(complete, this))
 				.emulateTransitionEnd(350)[dimension]($el[0][scrollSize]);
 		};
-		var hide = function ($el) {
+		const hide = function ($el) {
 			if (transitioning || !$el.hasClass('in')) return;
 
-			var dimension = 'height';
+			const dimension = 'height';
 
 			$el[dimension]($el[dimension]())[0].offsetHeight;
 
@@ -78,8 +102,8 @@ const MOBILE_SLIDE_MENU = function(){
 				.attr('aria-expanded', false);
 
 			// 메뉴를 접을 때 하위 메뉴도 모두 접기 처리
-			var $el_li = $el.children('li');
-			var $el_li_a = $el_li.children('a');
+			const $el_li = $el.children('li');
+			const $el_li_a = $el_li.children('a');
 			if($el_li_a.hasClass('has_child')){
 				hide($el_li.children('ul'));
 				$el_li_a.toggleClass('open', false);
@@ -87,7 +111,7 @@ const MOBILE_SLIDE_MENU = function(){
 
 			transitioning = 1;
 
-			var complete = function () {
+			const complete = function () {
 				transitioning = 0;
 				$el
 					.removeClass('collapsing')
@@ -110,13 +134,13 @@ const MOBILE_SLIDE_MENU = function(){
 
 		if(!set_accordion){
 			$menu_slide.find('a').each(function(i){
-				var $that = $(this);
-				var $parent_li = $that.parent('li');
-				var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+				const $that = $(this);
+				const $parent_li = $that.parent('li');
+				const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 				if($that.hasClass('active')){
 					if(has_child){
-						var $child_ul = $parent_li.children('ul');
-						var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+						const $child_ul = $parent_li.children('ul');
+						const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 						$child_ul.attr('data-index',i);
 					}
 					if(has_child && $child_ul_li.length>0){
@@ -128,8 +152,8 @@ const MOBILE_SLIDE_MENU = function(){
 						active_list[i] = $child_ul;
 					}
 				}else{
-					var $child_ul = $parent_li.children('ul');
-					var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+					const $child_ul = $parent_li.children('ul');
+					const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 					$child_ul.height(0);
 					if(has_child && $child_ul_li.length>0){
 						$that.toggleClass('has_child', true);
@@ -137,18 +161,18 @@ const MOBILE_SLIDE_MENU = function(){
 					$child_ul.attr('data-index',i);
 				}
 				$that.off('click').on('click',function(e){
-					var $parent_li = $that.parent('li');
-					var is_folder_menu = $that.data('is_folder_menu')=='Y';
-					var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+					const $parent_li = $that.parent('li');
+					const is_folder_menu = $that.data('is_folder_menu')=='Y';
+					const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 					if(has_child){
-						var $child_ul = $parent_li.children('ul');
-						var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+						const $child_ul = $parent_li.children('ul');
+						const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 					}
 
 					if(has_child && $child_ul_li.length>0){
 						if(is_folder_menu || $(e.target).hasClass('_toggle_btn')){
-							var $child_ul = $parent_li.children('ul');
-							var child_height = 0;
+							const $child_ul = $parent_li.children('ul');
+							let child_height = 0;
 							$child_ul.children('li:not(.pms_check)').each(function(){
 								child_height += $that.outerHeight();
 							});
@@ -172,14 +196,14 @@ const MOBILE_SLIDE_MENU = function(){
 
 	};
 
-	var rebuildAccordion = function(){
+	const rebuildAccordion = function(){
 		$menu_slide.find('a').each(function(i){
-			var $that = $(this);
-			var $parent_li = $that.parent('li');
-			var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+			const $that = $(this);
+			const $parent_li = $that.parent('li');
+			const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 			if(has_child){
-				var $child_ul = $parent_li.children('ul');
-				var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+				const $child_ul = $parent_li.children('ul');
+				const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 			}
 			if(has_child && $child_ul_li.length>0){
 				$that.toggleClass('has_child', true);
@@ -187,10 +211,10 @@ const MOBILE_SLIDE_MENU = function(){
 		});
 	};
 
-	var slideNavToggle = function($obj){
+	const slideNavToggle = function($obj){
 		if(typeof $obj == 'object'){
-			var $colgroup = $obj.closest('div[data-type=col-group]');
-			var colgroup = $colgroup.attr('data-col-group');
+			const $colgroup = $obj.closest('div[data-type=col-group]');
+			const colgroup = $colgroup.attr('data-col-group');
 			if(colgroup == 'right'){
 				$menu_container.toggleClass('left-slide', false);
 				$menu_container.toggleClass('right-slide', true);
@@ -210,10 +234,10 @@ const MOBILE_SLIDE_MENU = function(){
 
 	};
 
-	var showSlide = function(){
+	const showSlide = function(){
 
 		//활성화되어있는 메뉴 보이도록 처리
-		for(var k in active_list){
+		for(const k in active_list){
 			if(active_list[k].length > 0){
 				if(active_list[k].css('display') === 'none') active_list[k].show();
 			}
@@ -233,9 +257,9 @@ const MOBILE_SLIDE_MENU = function(){
 		$menu_container.toggleClass(open_class, true);
 	};
 
-	var hideSlide = function(){
+	const hideSlide = function(){
 		$body.data('slide_menu','N');
-		var is_fullpage = $body.find('.visual_section').attr('doz_fullpage') ==='Y';
+		const is_fullpage = $body.find('.visual_section').attr('doz_fullpage') ==='Y';
 		if(is_fullpage)
 			$body.css('overflow-y','clip');
 		else
@@ -257,20 +281,20 @@ const MOBILE_SLIDE_MENU = function(){
 		$menu_container.toggleClass(open_class,false);
 	};
 
-	// var menuActivate = function(){
-	// 	var url = window.location.href;
-	// 	var url_id = url.split('/').splice(-1);
+	// const menuActivate = function(){
+	// 	const url = window.location.href;
+	// 	const url_id = url.split('/').splice(-1);
 	//
 	// 	$menu_slide.find('a').each(function(){
-	// 		var $that = $(this);
-	// 		var $parent_li = $that.parent('li');
-	// 		var has_child = $that.data('has_child')=='Y' && $parent_li.children('ul').children('li:not(.pms_check)').length > 0;
+	// 		const $that = $(this);
+	// 		const $parent_li = $that.parent('li');
+	// 		const has_child = $that.data('has_child')=='Y' && $parent_li.children('ul').children('li:not(.pms_check)').length > 0;
 	//
 	// 		if ( url_id[0] ==  $that.data('url') ) {
 	// 			$that.toggleClass('active-real', true);
 	// 		}
 	//
-	// 		var active_child = $parent_li.children('ul').children('li').children('a');
+	// 		const active_child = $parent_li.children('ul').children('li').children('a');
 	//
 	// 		setTimeout(function(){
 	// 			if( has_child && active_child.hasClass('active-real') ){
@@ -306,20 +330,21 @@ const MOBILE_SLIDE_MENU = function(){
 	};
 
 }();
-const PC_SLIDE_MENU = function(){
-	var $menu_slide;
-	var $menu_container;
-	var $body;
-	var status;
-	var $backdrop;
-	var open_class = 'slide_open';
-	var backdrop_class = 'slide_menu_backdrop';
-	var init = function(){
+
+window.PC_SLIDE_MENU = function(){
+	let $menu_slide;
+	let $menu_container;
+	let $body;
+	let status;
+	let $backdrop;
+	const open_class = 'slide_open';
+	const backdrop_class = 'slide_menu_backdrop';
+	const init = function(){
 		$body = $('body');
 		$menu_container = $('#pc_slide_menu_wrap');
 		$menu_slide = $('#pc_slide_menu');
 
-		var data = $body.data('pc_slide_menu');
+		const data = $body.data('pc_slide_menu');
 		if(typeof  data == 'undefined') {
 			$body.data('pc_slide_menu','N');
 			status = false;
@@ -336,15 +361,15 @@ const PC_SLIDE_MENU = function(){
 		$menu_slide.find('._tse_scrollable').TrackpadScrollEmulator();
 	};
 
-	var set_accordion = false;
-	var active_list = {};
-	var runAccordion = function(){
-		var transitioning = null;
+	let set_accordion = false;
+	let active_list = {};
+	const runAccordion = function(){
+		let transitioning = null;
 
-		var show = function ($el) {
+		const show = function ($el) {
 			if (transitioning || $el.hasClass('in')) return;
 
-			var dimension = 'height';
+			const dimension = 'height';
 
 			$el
 				.show()
@@ -357,7 +382,7 @@ const PC_SLIDE_MENU = function(){
 
 			transitioning = 1;
 
-			var complete = function () {
+			const complete = function () {
 				$el
 					.removeClass('collapsing')
 					.addClass('collapse in')[dimension]('');
@@ -365,16 +390,16 @@ const PC_SLIDE_MENU = function(){
 			};
 
 
-			var scrollSize = $.camelCase(['scroll', dimension].join('-'));
+			const scrollSize = $.camelCase(['scroll', dimension].join('-'));
 
 			$el
 				.one('bsTransitionEnd', $.proxy(complete, this))
 				.emulateTransitionEnd(350)[dimension]($el[0][scrollSize]);
 		};
-		var hide = function ($el) {
+		const hide = function ($el) {
 			if (transitioning || !$el.hasClass('in')) return;
 
-			var dimension = 'height';
+			const dimension = 'height';
 
 			$el[dimension]($el[dimension]())[0].offsetHeight;
 
@@ -384,8 +409,8 @@ const PC_SLIDE_MENU = function(){
 				.attr('aria-expanded', false);
 
 			// 메뉴를 접을 때 하위 메뉴도 모두 접기 처리
-			var $el_li = $el.children('li');
-			var $el_li_a = $el_li.children('a');
+			const $el_li = $el.children('li');
+			const $el_li_a = $el_li.children('a');
 			if($el_li_a.hasClass('has_child')){
 				hide($el_li.children('ul'));
 				$el_li_a.toggleClass('open', false);
@@ -393,7 +418,7 @@ const PC_SLIDE_MENU = function(){
 
 			transitioning = 1;
 
-			var complete = function () {
+			const complete = function () {
 				transitioning = 0;
 				$el
 					.removeClass('collapsing')
@@ -416,13 +441,13 @@ const PC_SLIDE_MENU = function(){
 
 		if(!set_accordion){
 			$menu_slide.find('a').each(function(i){
-				var $that = $(this);
-				var $parent_li = $that.parent('li');
-				var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+				const $that = $(this);
+				const $parent_li = $that.parent('li');
+				const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 				if($that.hasClass('active')){
 					if(has_child){
-						var $child_ul = $parent_li.children('ul');
-						var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+						const $child_ul = $parent_li.children('ul');
+						const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 						$child_ul.attr('data-index',i);
 					}
 					if(has_child && $child_ul_li.length>0){
@@ -434,8 +459,8 @@ const PC_SLIDE_MENU = function(){
 						active_list[i] = $child_ul;
 					}
 				}else{
-					var $child_ul = $parent_li.children('ul');
-					var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+					const $child_ul = $parent_li.children('ul');
+					const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 					$child_ul.height(0);
 					if(has_child && $child_ul_li.length>0){
 						$that.toggleClass('has_child', true);
@@ -443,18 +468,18 @@ const PC_SLIDE_MENU = function(){
 					$child_ul.attr('data-index',i);
 				}
 				$that.off('click').on('click',function(e){
-					var $parent_li = $that.parent('li');
-					var is_folder_menu = $that.data('is_folder_menu')=='Y';
-					var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+					const $parent_li = $that.parent('li');
+					const is_folder_menu = $that.data('is_folder_menu')=='Y';
+					const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 					if(has_child){
-						var $child_ul = $parent_li.children('ul');
-						var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+						const $child_ul = $parent_li.children('ul');
+						const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 					}
 
 					if(has_child && $child_ul_li.length>0){
 						if(is_folder_menu || $(e.target).hasClass('_toggle_btn')){
-							var $child_ul = $parent_li.children('ul');
-							var child_height = 0;
+							const $child_ul = $parent_li.children('ul');
+							let child_height = 0;
 							$child_ul.children('li:not(.pms_check)').each(function(){
 								child_height += $that.outerHeight();
 							});
@@ -478,14 +503,14 @@ const PC_SLIDE_MENU = function(){
 
 	};
 
-	var rebuildAccordion = function(){
+	const rebuildAccordion = function(){
 		$menu_slide.find('a').each(function(i){
-			var $that = $(this);
-			var $parent_li = $that.parent('li');
-			var has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
+			const $that = $(this);
+			const $parent_li = $that.parent('li');
+			const has_child = $that.data('has_child')=='Y' && $that.parent('li').children('ul').children('li:not(.pms_check)').length > 0;
 			if(has_child){
-				var $child_ul = $parent_li.children('ul');
-				var $child_ul_li = $child_ul.children('li:not(.pms_check)');
+				const $child_ul = $parent_li.children('ul');
+				const $child_ul_li = $child_ul.children('li:not(.pms_check)');
 			}
 			if(has_child && $child_ul_li.length>0){
 				$that.toggleClass('has_child', true);
@@ -493,10 +518,10 @@ const PC_SLIDE_MENU = function(){
 		});
 	};
 
-	var slideNavToggle = function($obj){
+	const slideNavToggle = function($obj){
 		if(typeof $obj == 'object'){
-			var $colgroup = $obj.closest('div[data-type=col-group]');
-			var colgroup = $colgroup.attr('data-col-group');
+			const $colgroup = $obj.closest('div[data-type=col-group]');
+			const colgroup = $colgroup.attr('data-col-group');
 			if(colgroup == 'right'){
 				$menu_container.toggleClass('left-slide', false);
 				$menu_container.toggleClass('right-slide', true);
@@ -514,9 +539,9 @@ const PC_SLIDE_MENU = function(){
 		}
 	};
 
-	var showSlide = function(){
+	const showSlide = function(){
 		//활성화되어있는 메뉴 보이도록 처리
-		for(var k in active_list){
+		for(const k in active_list){
 			if(active_list[k].length > 0){
 				if(active_list[k].css('display') === 'none') active_list[k].show();
 			}
@@ -535,10 +560,10 @@ const PC_SLIDE_MENU = function(){
 		$menu_container.toggleClass(open_class, true);
 	};
 
-	var hideSlide = function(){
+	const hideSlide = function(){
 		$body.data('pc_slide_menu','N');
 		$backdrop.remove();
-		var is_fullpage = $body.find('.visual_section.pc_section').attr('doz_fullpage') ==='Y';
+		const is_fullpage = $body.find('.visual_section.pc_section').attr('doz_fullpage') ==='Y';
 		if(is_fullpage)
 			$body.css('overflow-y','clip');
 		else
@@ -576,10 +601,8 @@ const PC_SLIDE_MENU = function(){
 	};
 
 }();
-console.log(MOBILE_SLIDE_MENU);
 
-console.log(PC_SLIDE_MENU);
-$(function(){
-	MOBILE_SLIDE_MENU.init();
-	PC_SLIDE_MENU.init();
+document.addEventListener('DOMContentLoaded', function() {
+    MOBILE_SLIDE_MENU.init();
+    PC_SLIDE_MENU.init();
 });

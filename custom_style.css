@@ -58,7 +58,11 @@
 body {
   padding-bottom:0!important;
 }
-
+body.doz_sys.modal-open {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
 
 /* ----------------------------------------------
  * common header default style
