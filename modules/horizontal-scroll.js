@@ -244,12 +244,12 @@ const app = {
             duration: 0.5
         }, 0);
         
-        /* firstOutTimeline.to(image, {
+        firstOutTimeline.to(image, {
             x: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
-        }, 0); */
+        }, 0);
         
         firstOutTimeline.to(title, {
             x: "-100%",
@@ -270,7 +270,7 @@ const app = {
      */
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
         // Second in animation
-        createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+        createTimeline(timelineOptions.secondIn).to([text2, title2], {
             x: "0%",
             ease: "power3.inOut",
             duration: 1
@@ -287,12 +287,12 @@ const app = {
             duration: 0.5
         }, 0);
         
-        /* secondOutTimeline.to(image2, {
+        secondOutTimeline.to(image2, {
             y: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
-        }, 0); */
+        }, 0); 
         
         secondOutTimeline.to(title2, {
             y: "-100%",
