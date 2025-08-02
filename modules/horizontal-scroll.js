@@ -274,7 +274,7 @@ const app = {
             x: "0%",
             ease: "ease",
             opacity: 1,
-            filter: "blur(0)",
+            filter: "blur(0px)",
             duration: 0.5
         }, 0);
 
