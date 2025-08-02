@@ -31,6 +31,7 @@ window.MOBILE_SLIDE_MENU = function(){
 	var open_class = 'slide_open';
 	var backdrop_class = 'slide_menu_backdrop';
 	var init = function(){
+        console.log('hi');
 		$body = $('body');
 		$menu_container = $('#mobile_slide_menu_wrap');
 		$menu_slide = $('#mobile_slide_menu');
