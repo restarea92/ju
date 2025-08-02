@@ -229,8 +229,8 @@ const app = {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             y: "0%",
-            ease: "power3.inOut",
-            duration: 0.5
+            ease: "power2.inOut",
+            duration: 1
         }, 0);
 
         // First out animations
@@ -272,7 +272,7 @@ const app = {
         // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
             x: "0%",
-            ease: "power3.inOut",
+            ease: "power2.inOut",
             duration: 1
         }, 0);
 
