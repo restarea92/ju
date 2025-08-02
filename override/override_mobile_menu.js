@@ -368,8 +368,10 @@ window.PC_SLIDE_MENU = function(){
         if (active) {
             scrollY = window.scrollY;
             documentRoot.style.setProperty('--current-scroll-y', `${scrollY}px`);
+            documentRoot.classList.add('clip');
             documentBody.classList.add('clip');
         } else {
+            documentRoot.classList.remove('clip');
             documentBody.classList.remove('clip');
             documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
         }
