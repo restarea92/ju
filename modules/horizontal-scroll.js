@@ -178,7 +178,7 @@ const app = {
                 end: "center center",
             },
             secondIn: {
-                start: "center center",
+                start: "center bottom",
                 end: "center top",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
