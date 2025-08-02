@@ -175,7 +175,7 @@ const app = {
             },
             firstOut: {
                 start: "center bottom",
-                end: "center top",
+                end: "center center",
             },
             secondIn: {
                 start: "center center",
