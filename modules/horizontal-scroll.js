@@ -125,13 +125,13 @@ const app = {
     setInitialPositions(elements, yOffset, xOffset) {
         const { text, image, title, text2, image2, title2 } = elements;
 
-        if (text) gsap.set(text, { y: yOffset * 3, x: 0 });
-        if (image) gsap.set(image, { y: yOffset * 1.5, x: 0 });
-        if (title) gsap.set(title, { y: yOffset * 1, x: 0 });
+        if (text) gsap.set(text, { y: yOffset * 3, x: 0, opacity: 0.5 });
+        if (image) gsap.set(image, { y: yOffset * 1.5, x: 0, opacity: 0.5 });
+        if (title) gsap.set(title, { y: yOffset * 1, x: 0, opacity: 0.5 });
 
-        if (text2) gsap.set(text2, { x: xOffset * 2, y: 0, opacity: 0 });
-        if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0, opacity: 0 });
-        if (title2) gsap.set(title2, { x: xOffset * 3, y: 0, opacity:0 });
+        if (text2) gsap.set(text2, { x: xOffset * 2, y: 0, opacity: 0.5 });
+        if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0, opacity: 0.5 });
+        if (title2) gsap.set(title2, { x: xOffset * 3, y: 0, opacity:0.5 });
     },
 
     /**
@@ -178,7 +178,7 @@ const app = {
                 end: "center center",
             },
             secondIn: {
-                start: "center bottom",
+                start: "center center",
                 end: "center top",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
@@ -229,8 +229,9 @@ const app = {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             y: "0%",
-            ease: "ease",
-            duration: 0.5
+            ease: "power3.inOut",
+            opacity: 1,
+            duration: 1
         }, 0);
 
         // First out animations
