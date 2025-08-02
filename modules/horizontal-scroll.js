@@ -126,11 +126,11 @@ const app = {
         const { text, image, title, text2, image2, title2 } = elements;
 
         if (text) gsap.set(text, { y: yOffset * 3, x: 0});
-        if (image) gsap.set(image, { y: yOffset * 1.5, x: 0});
+        //if (image) gsap.set(image, { y: yOffset * 1.5, x: 0});
         if (title) gsap.set(title, { y: yOffset * 1, x: 0});
 
         if (text2) gsap.set(text2, { x: xOffset * 2, y: 0});
-        if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0});
+        //if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0});
         if (title2) gsap.set(title2, { x: xOffset * 3, y: 0});
     },
 
@@ -166,7 +166,7 @@ const app = {
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
-                start: "top top",
+                start: "top center",
                 end: "center bottom",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
@@ -244,12 +244,12 @@ const app = {
             duration: 0.5
         }, 0);
         
-        firstOutTimeline.to(image, {
+        /* firstOutTimeline.to(image, {
             x: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
-        }, 0);
+        }, 0); */
         
         firstOutTimeline.to(title, {
             x: "-100%",
@@ -287,12 +287,12 @@ const app = {
             duration: 0.5
         }, 0);
         
-        secondOutTimeline.to(image2, {
+        /* secondOutTimeline.to(image2, {
             y: "-300%",
             ease: "ease",
             opacity: 0,
             duration: 0.5
-        }, 0);
+        }, 0); */
         
         secondOutTimeline.to(title2, {
             y: "-100%",
@@ -316,7 +316,7 @@ const app = {
             scrollTrigger: {
                 trigger: container,
                 pin: false,
-                scrub: 0.5,
+                scrub: 1,
                 start: "center bottom",
                 end: "center top",
                 onUpdate: self => {
@@ -352,7 +352,7 @@ const app = {
             } else {
                 timeline.to(sections, {
                     xPercent: -100 * index,
-                    duration: 3,
+                    duration: 2,
                     ease: "power2.inOut"
                 })
                 .to(sections, {
