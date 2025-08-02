@@ -1,4 +1,5 @@
 window.MOBILE_SLIDE_MENU = function(){
+    console.log('eddd');
 	var $menu_slide;
 	var $menu_container;
 	var $body;
