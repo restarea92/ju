@@ -126,11 +126,11 @@ const app = {
         const { text, image, title, text2, image2, title2 } = elements;
 
         if (text) gsap.set(text, { y: yOffset * 3, x: 0});
-        //if (image) gsap.set(image, { y: yOffset * 1.5, x: 0});
-        if (title) gsap.set(title, { y: yOffset * 1, x: 0});
+        if (image) gsap.set(image, { y: yOffset * 4, x: 0});
+        if (title) gsap.set(title, { y: yOffset * 2, x: 0});
 
         if (text2) gsap.set(text2, { x: xOffset * 2, y: 0});
-        //if (image2) gsap.set(image2, { x: xOffset * 1.5, y: 0});
+        if (image2) gsap.set(image2, { x: xOffset * 4, y: 0});
         if (title2) gsap.set(title2, { x: xOffset * 3, y: 0});
     },
 
