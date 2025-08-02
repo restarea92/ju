@@ -601,8 +601,3 @@ window.PC_SLIDE_MENU = function(){
 	};
 
 }();
-
-document.addEventListener('DOMContentLoaded', function() {
-    MOBILE_SLIDE_MENU.init();
-    PC_SLIDE_MENU.init();
-});
