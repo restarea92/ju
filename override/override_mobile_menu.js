@@ -31,7 +31,7 @@ window.MOBILE_SLIDE_MENU = function(){
 	var open_class = 'slide_open';
 	var backdrop_class = 'slide_menu_backdrop';
 	var init = function(){
-        console.log('Yep');
+        console.log('Yep~');
 		$body = $('body');
 		$menu_container = $('#mobile_slide_menu_wrap');
 		$menu_slide = $('#mobile_slide_menu');
@@ -601,3 +601,8 @@ window.PC_SLIDE_MENU = function(){
 	};
 
 }();
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     MOBILE_SLIDE_MENU.init();
+//     PC_SLIDE_MENU.init();
+// });
