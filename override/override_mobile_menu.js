@@ -354,6 +354,26 @@ window.MOBILE_SLIDE_MENU = function(){
 }();
 
 window.PC_SLIDE_MENU = function(){
+
+    let scrollY = 0;
+    const documentRoot = document.documentElement;
+    const documentBody = document.body;
+
+    documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+
+    const toggleModal = (active) => {
+        if (active) {
+            scrollY = window.scrollY;
+            documentRoot.style.setProperty('--current-scroll-y', `${scrollY}px`);
+            documentBody.classList.add('clip');
+        } else {
+            documentBody.classList.remove('clip');
+            documentRoot.style.setProperty('--current-scroll-y', `${0}px`);
+        }
+    }
+
+
+
 	var $menu_slide;
 	var $menu_container;
 	var $body;
