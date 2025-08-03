@@ -228,6 +228,7 @@ const app = {
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
+            immediateRender: false,
             y: "0%",
             ease: "power2.inOut",
             duration: 1
@@ -237,6 +238,7 @@ const app = {
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
         
         firstOutTimeline.to(text, {
+            immediateRender: false,
             x: "-200%",
             ease: "ease",
             opacity: 0,
@@ -245,6 +247,7 @@ const app = {
         }, 0);
         
         firstOutTimeline.to(image, {
+            immediateRender: false,
             x: "-300%",
             ease: "ease",
             opacity: 0,
@@ -252,6 +255,7 @@ const app = {
         }, 0);
         
         firstOutTimeline.to(title, {
+            immediateRender: false,
             x: "-100%",
             ease: "ease",
             filter: "blur(16px)",
@@ -271,6 +275,7 @@ const app = {
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
         // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+            immediateRender: false,
             x: "0%",
             ease: "power2.inOut",
             duration: 1
@@ -280,6 +285,7 @@ const app = {
         const secondOutTimeline = createTimeline(timelineOptions.secondOut);
         
         secondOutTimeline.to(text2, {
+            immediateRender: false,
             y: "-200%",
             ease: "ease",
             opacity: 0,
@@ -288,6 +294,7 @@ const app = {
         }, 0);
         
         secondOutTimeline.to(image2, {
+            immediateRender: false,
             y: "-300%",
             ease: "ease",
             opacity: 0,
@@ -295,6 +302,7 @@ const app = {
         }, 0); 
         
         secondOutTimeline.to(title2, {
+            immediateRender: false,
             y: "-100%",
             ease: "ease",
             filter: "blur(16px)",
