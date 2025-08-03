@@ -166,7 +166,7 @@ const app = {
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
-                start: "top center",
+                start: "top bottom",
                 end: "center bottom",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
@@ -179,7 +179,7 @@ const app = {
             },
             secondIn: {
                 start: "center bottom",
-                end: "center top",
+                end: "center center",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
