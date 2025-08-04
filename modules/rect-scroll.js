@@ -7,7 +7,6 @@
 import { initGSAP } from './gsapUtils.js';
 
 const app = {
-
     // ========== Configuration ==========
     CONFIG: {
         VERSION: '1.0.1',
@@ -16,6 +15,8 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         trigger: document.querySelector('#scroll-trigger'),
+        stickyElement: document.querySelector('.sticky-element'),
+        title: stickyElement.querySelector('.title'),
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); },
 
@@ -27,6 +28,8 @@ const app = {
     init() {
         console.log(this.CONFIG.VERSION);
         if (!initGSAP()) return;
+
+        this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
         this.initRectScroll();
     },
 
@@ -36,29 +39,53 @@ const app = {
      * Setup individual rect scroll container
      * @param {Element} trigger - The trigger container element
      */
-    
     initRectScroll() {
 
     },
 
-}
+    renderEffects() {
+        const title = this.elements.title;
+        const yOffset = this.minVwVh(10); 
+        // 초기 위치 세팅
 
-export default app;
+        if (title) gsap.set(title, { y: yOffset * 3, x: 0  });
+            this.createTimeline().to(title, {
+                y: "0",
+                ease: "ease",
+                opacity:1,
+                filter: "",
+                duration: 0.5
+            }, 0);
+
+            this.createTimeline({
+                start: "bottom bottom",
+                end: "bottom top",
+            }).to(title, {
+                y: "0",
+                ease: "ease",
+                opacity:0,
+                filter: "",
+                duration: 0.5
+            }, 0);
+    },
+
+    // ========== 상태 관리 ==========
+    setHeaderHeightVariable() {
+        const header = document.getElementById('s2025072923c95d7545c67');
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    },
 
 
-document.addEventListener('DOMContentLoaded', () => {
 
-    const rectScrollTrigger = document.querySelector('#scroll-trigger');
-    const stickyElement = document.querySelector('.sticky-element');
-    const title = stickyElement.querySelector('.title');
-    function minVwVh(value) {
+    // ========== 유틸리티 ==========
+    minVwVh(value) {
         const vw = window.innerWidth * (value / 100);
         const vh = window.innerHeight * (value / 100);
         return Math.min(vw, vh);
-    }
+    },
 
-
-    const createTimeline = (options = {}) => {
+    createTimeline: (options = {}) => {
         return gsap.timeline({
             scrollTrigger: {
                 trigger: rectScrollTrigger, 
@@ -71,34 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...options,
             }
         });
-    };
-    
+    },
 
-    const yOffset = minVwVh(10); 
+}
 
-    // 초기 위치 세팅
-    if (title) gsap.set(title, { y: yOffset * 3, x: 0  });
-
-    createTimeline().to(title, {
-        y: "0",
-        ease: "ease",
-        opacity:1,
-        filter: "",
-        duration: 0.5
-    }, 0);
-
-    createTimeline({
-        start: "bottom bottom",
-        end: "bottom top",
-    }).to(title, {
-        y: "0",
-        ease: "ease",
-        opacity:0,
-        filter: "",
-        duration: 0.5
-    }, 0);
-
-    gsap.to("body", {
-        scrollBehavior: "smooth"
-    });
-});
+export default app;
