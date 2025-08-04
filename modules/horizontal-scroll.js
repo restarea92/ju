@@ -342,7 +342,7 @@ const app = {
             },
         });
 
-        this.createSectionTimeline(timeline, sections);
+        // this.createSectionTimeline(timeline, sections);
     },
 
     /**
