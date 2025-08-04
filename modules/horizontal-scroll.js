@@ -122,13 +122,13 @@ const app = {
     setInitialPositions(elements) {
         const { text, image, title, text2, image2, title2 } = elements;
 
-        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75, x:0, y:0, immediateRender:false });
-        if (image) gsap.set(image, { xPercent: 0, yPercent: 50, x:0, y:0, immediateRender:false  });
-        if (title) gsap.set(title, { xPercent: 0, yPercent: 100, x:0, y:0, immediateRender:false  });
+        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75, x:0, y:0 });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 50, x:0, y:0, });
+        if (title) gsap.set(title, { xPercent: 0, yPercent: 100, x:0, y:0, });
 
-        if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, x:0, y:0, immediateRender:false  });
-        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, x:0, y:0, immediateRender:false  });
-        if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, x:0, y:0, immediateRender:false  });
+        if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, x:0, y:0, });
+        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, x:0, y:0, });
+        if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, x:0, y:0, });
     },
 
     /**
@@ -224,7 +224,6 @@ const app = {
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
-            immediateRender: false,
             yPercent: 0,
             duration: 1
         }, 0);
@@ -233,19 +232,16 @@ const app = {
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
         
         firstOutTimeline.to(text, {
-            immediateRender: false,
             xPercent: -200,
             duration: 0.5
         }, 0);
         
         firstOutTimeline.to(image, {
-            immediateRender: false,
             xPercent: -300,
             duration: 0.5
         }, 0);
         
         firstOutTimeline.to(title, {
-            immediateRender: false,
             xPercent: -100,
             duration: 0.5
         }, 0);
@@ -262,7 +258,6 @@ const app = {
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
         // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
-            immediateRender: false,
             xPercent: 0,
             duration: 1
         }, 0);
@@ -271,21 +266,17 @@ const app = {
         const secondOutTimeline = createTimeline(timelineOptions.secondOut);
         
         secondOutTimeline.to(text2, {
-            immediateRender: false,
             yPercent: -200,
             duration: 0.5
         }, 0);
         
         secondOutTimeline.to(image2, {
-            immediateRender: false,
             yPercent: -300,
             duration: 0.5
         }, 0); 
         
         secondOutTimeline.to(title2, {
-            immediateRender: false,
             yPercent: -100,
-            ease: "ease",
             duration: 0.5
         }, 0);
     },
@@ -303,7 +294,7 @@ const app = {
             scrollTrigger: {
                 trigger: container,
                 pin: false,
-                scrub: 0.3,
+                scrub: 1,
                 start: "center bottom",
                 end: "center top",
                 onUpdate: self => {
@@ -334,18 +325,15 @@ const app = {
                 timeline.to(sections, {
                     xPercent: 0,
                     duration: 0.5,
-                    ease: "none"
                 });
             } else {
                 timeline.to(sections, {
                     xPercent: -100 * index,
-                    duration: 2,
-                    ease: "power2.inOut"
+                    duration: 0.5,
                 })
                 .to(sections, {
                     xPercent: -100 * index,
                     duration: 0.5,
-                    ease: "none"
                 });
             }
         });
