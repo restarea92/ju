@@ -5,6 +5,13 @@
  */
 
 import { initGSAP } from './gsapUtils.js';
+/**
+ * Visual Scroll Animation Module
+ * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
+ * @version 1.0.8
+ */
+
+import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
 
 const app = {
 
@@ -123,11 +130,11 @@ const app = {
         const { text, image, title, text2, image2, title2 } = elements;
 
         if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75 });
-        if (image) gsap.set(image, { xPercent: 0, yPercent: 50 });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 100, filter: "blur(4px) brightness(0.25)"});
         if (title) gsap.set(title, { xPercent: 0, yPercent: 100 });
 
         if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, });
-        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, });
+        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, filter: "blur(4px) brightness(0.25)"});
         if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, });
     },
 
@@ -162,27 +169,25 @@ const app = {
         return {
             firstIn: {
                 start: "top center",
-                end: "center bottom",
+                end: "center 90%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                 },
             },
             firstOut: {
-                start: "center bottom",
-                end: "center top",
+                start: "center 90%",
+                end: "center center",
             },
             secondIn: {
                 start: "center center",
-                end: "center top",
+                end: "bottom 110%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
                 }
             },
             secondOut: {
-                start: "bottom bottom",
-                end: "bottom top",
+                start: "bottom 90%",
+                end: "bottom center",
             }
         };
     },
@@ -201,8 +206,8 @@ const app = {
                 scrollTrigger: {
                     trigger: container,
                     start: "top bottom",
-                    end: "center top",
-                    scrub: 0.3,
+                    end: "bottom 95%",
+                    scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
                     },
@@ -222,29 +227,44 @@ const app = {
      * @param {Element} title - Title element
      */
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
-        // First in animation
-        createTimeline(timelineOptions.firstIn).to([text, image, title], {
+
+        const firstInTimeline =  createTimeline(timelineOptions.firstIn);
+        firstInTimeline.to(text, {
             yPercent: 0,
-            duration: 1
+            duration: 0.5
+        }, 0);
+        
+        firstInTimeline.to(image, {
+            yPercent: 0,
+            duration: 1,
+            filter: "blur(0px) brightness(0.5)",
+        }, 0);
+        
+        firstInTimeline.to(title, {
+            yPercent: 0,
+            duration: 0.7
         }, 0);
 
         // First out animations
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
-        
         firstOutTimeline.to(text, {
-            xPercent: -200,
-            duration: 0.5
-        }, 0);
+            xPercent: -25,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 1,
+        }, 0.1);
         
         firstOutTimeline.to(image, {
-            xPercent: -300,
-            duration: 0.5
-        }, 0);
+            xPercent: -75,
+            duration: 0.75
+        }, 0.05);
         
         firstOutTimeline.to(title, {
-            xPercent: -100,
-            duration: 0.5
-        }, 0);
+            xPercent: -10,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
+        }, 0.15);
     },
 
     /**
@@ -256,29 +276,45 @@ const app = {
      * @param {Element} title2 - Second title element
      */
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
-        // Second in animation
-        createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+
+        const secondInTimeline =  createTimeline(timelineOptions.secondIn);
+        secondInTimeline.to(text2, {
             xPercent: 0,
-            duration: 1
+            duration: 0.5
+        }, 0);
+        
+        secondInTimeline.to(image2, {
+            xPercent: 0,
+            duration: 1,
+            filter: "blur(0px) brightness(0.5)",
+        }, 0);
+        
+        secondInTimeline.to(title2, {
+            xPercent: 0,
+            duration: 0.7
         }, 0);
 
         // Second out animations
         const secondOutTimeline = createTimeline(timelineOptions.secondOut);
         
         secondOutTimeline.to(text2, {
-            yPercent: -200,
-            duration: 0.5
+            yPercent: -100,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
         }, 0);
         
         secondOutTimeline.to(image2, {
-            yPercent: -300,
-            duration: 0.5
-        }, 0); 
+            yPercent: -50,
+            duration: 1
+        }, 0.05); 
         
         secondOutTimeline.to(title2, {
-            yPercent: -100,
-            duration: 0.5
-        }, 0);
+            yPercent: -75,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
+        }, 0.1);
     },
 
     /**
@@ -324,21 +360,20 @@ const app = {
             if (index === 0) {
                 timeline.to(sections, {
                     xPercent: 0,
-                    duration: 0.5,
+                    duration: 1,
                 });
             } else {
                 timeline.to(sections, {
                     xPercent: -100 * index,
-                    duration: 0.5,
+                    duration: 1,
                 })
                 .to(sections, {
                     xPercent: -100 * index,
-                    duration: 0.5,
+                    duration: 1,
                 });
             }
         });
     },
-
 };
 
 export default app;
