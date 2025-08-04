@@ -242,7 +242,7 @@
         --h3-font-size: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
 
         .content {
-            padding: 2rem;
+            padding: 1rem;
             .content-title {
             
             }

@@ -228,8 +228,8 @@ footer#custom-footer {
 
 @media (max-width: 768px) {
     :root {
-        --default-container-width: calc(100lvw - 1rem);
-        --default-content-width: calc(var(--default-container-width) - 1rem);
+        --default-container-width: calc(100lvw - 2rem);
+        --default-content-width: calc(var(--default-container-width) - 2rem);
         --small-container-width: var(--default-container-width);
         --small-content-width: var(--default-content-width);
     }
