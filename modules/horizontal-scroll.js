@@ -229,18 +229,18 @@ const app = {
         const firstInTimeline =  createTimeline(timelineOptions.firstIn);
         firstInTimeline.to(text, {
             yPercent: 0,
-            duration: 0.5
+            duration: 1
         }, 0);
         
         firstInTimeline.to(image, {
             yPercent: 0,
-            duration: 1,
+            duration: 0.6,
             filter: "blur(0px) brightness(0.5)",
         }, 0);
         
         firstInTimeline.to(title, {
             yPercent: 0,
-            duration: 0.7
+            duration: 0.5
         }, 0);
 
         // First out animations
@@ -278,18 +278,18 @@ const app = {
         const secondInTimeline =  createTimeline(timelineOptions.secondIn);
         secondInTimeline.to(text2, {
             xPercent: 0,
-            duration: 0.5
+            duration: 1
         }, 0);
         
         secondInTimeline.to(image2, {
             xPercent: 0,
-            duration: 1,
+            duration: 0.6,
             filter: "blur(0px) brightness(0.5)",
         }, 0);
         
         secondInTimeline.to(title2, {
             xPercent: 0,
-            duration: 0.7
+            duration: 0.5
         }, 0);
 
         // Second out animations
