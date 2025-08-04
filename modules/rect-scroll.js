@@ -72,11 +72,11 @@ const app = {
             gsap.set(background, { 
                 "--clip-path-start-size": `${50 - startSize / 2}%`,
                 clipPath: `inset(
-                    calc((var(--h2-font-size) + var(--header-height)) * var(--rect-scroll-inverted-progress) 
-                    calc(var(--clip-path-start-size) * var(--rect-scroll-inverted-progress)
-                    calc(var(--h2-font-size) * var(--rect-scroll-inverted-progress) 
-                    calc(var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) 
-                    round calc(max(5lvh, 5lvw) * var(--rect-scroll-inverted-progress)
+                    calc( (var(--h2-font-size) + var(--header-height)) * var(--rect-scroll-inverted-progress) )
+                    calc( var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) )
+                    calc( var(--h2-font-size) * var(--rect-scroll-inverted-progress) )
+                    calc( var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) )
+                    round calc( max(5lvh, 5lvw) * var(--rect-scroll-inverted-progress) )
                 )`
             });
         } 
