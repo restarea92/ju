@@ -122,13 +122,13 @@ const app = {
     setInitialPositions(elements) {
         const { text, image, title, text2, image2, title2 } = elements;
 
-        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 300, x:0, y:0 });
-        if (image) gsap.set(image, { xPercent: 0, yPercent: 400, x:0, y:0  });
-        if (title) gsap.set(title, { xPercent: 0, yPercent: 200, x:0, y:0  });
+        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 300, x:0, y:0, immediateRender:false });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 400, x:0, y:0, immediateRender:false  });
+        if (title) gsap.set(title, { xPercent: 0, yPercent: 200, x:0, y:0, immediateRender:false  });
 
-        if (text2)  gsap.set(text2,  { xPercent: 200, yPercent: 0, x:0, y:0  });
-        if (image2) gsap.set(image2, { xPercent: 400, yPercent: 0, x:0, y:0  });
-        if (title2) gsap.set(title2, { xPercent: 300, yPercent: 0, x:0, y:0  });
+        if (text2)  gsap.set(text2,  { xPercent: 200, yPercent: 0, x:0, y:0, immediateRender:false  });
+        if (image2) gsap.set(image2, { xPercent: 400, yPercent: 0, x:0, y:0, immediateRender:false  });
+        if (title2) gsap.set(title2, { xPercent: 300, yPercent: 0, x:0, y:0, immediateRender:false  });
     },
 
     /**
