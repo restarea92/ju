@@ -58,9 +58,10 @@ const app = {
                 "--rect-scroll-inverted-progress": 1,
                 "--rect-scroll-progress": 0,
             });  
+
             this.createTimeline({
-                start:"top bottom",
-                end:"top center",
+                start:"top center",
+                end:"top top",
                 scrub:1,
             }).to(stickyWrapper, {
                 "--rect-scroll-inverted-progress": 0,
@@ -88,23 +89,25 @@ const app = {
                 )`
             });
         } 
+        
         this.createTimeline({
             start:"top bottom",
-            end:"top center"
+            end:"top center",
+            scrub:1,
         }).to(title, {
             y: 0,
-            ease: "ease",
+            ease: "power3.out",
             opacity:1,
             filter: "blur(0px)",
             duration: 0.5
         }, 0);
 
         this.createTimeline({
-            start: "bottom bottom",
+            start: "top bottom",
             end: "bottom top",
+            scrub:1,
         }).to(title, {
             y: yOffset * -3,
-            ease: "ease",
             opacity:0,
             filter: "blur(16px)",
             duration: 0.5
