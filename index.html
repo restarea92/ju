@@ -33,12 +33,14 @@
         }
         .content-image { 
             padding: 1px;
+            background: red;
             transform: translateZ(0);
-            will-change:transform;
+            will-change: transform, contents;
             user-select: none;
             grid-column: 5 / 13;
             grid-row: 4 / 12;
             img {
+                will-change: transform, contents;
                 object-fit:contain;
                 object-position: right;
                 width: 100%;
@@ -213,6 +215,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         }
+
+        .pre-image {
+
+            height: auto;
+            display: flex;
+            position: absolute;
+            top:0;
+                z-index: 10;
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
     </style>
     <div id="multi-scroll">
         <div class="horizontal-spacer">
@@ -220,7 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="scroll-marker center">CENTER</div>
             <div class="scroll-marker bottom">BOTTOM</div>
             <div class="horizontal-container">
+
                 <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
+                <div class="pre-image">
+                    <img src="https://images.pexels.com/photos/8412319/pexels-photo-8412319.jpeg">
+                    <img src="https://images.pexels.com/photos/5217841/pexels-photo-5217841.jpeg">
+                </div>
                     <div class="content">
                         <div class="content-title">
                             <h2>
