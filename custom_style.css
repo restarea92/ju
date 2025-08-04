@@ -212,7 +212,7 @@ footer#custom-footer {
     --default-content-width: 1024px;
     --small-container-width: var(--default-container-width);
     --small-content-width: var(--default-content-width);
-      --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
+    --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
   }
 }
 
