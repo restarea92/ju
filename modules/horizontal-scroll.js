@@ -61,11 +61,10 @@ const app = {
     setupHorizontalContainer(container) {
         const sections = container.querySelectorAll(".multi-scroll-item");
         const elements = this.getHorizontalElements();
-        const { yOffset, xOffset } = this.calculateOffsets();
         const debugElements = this.getDebugElements();
         
         this.setInitialPositions(elements);
-        this.createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements);
+        this.createHorizontalTimelines(container, elements, debugElements);
         this.createMainHorizontalTimeline(container, sections, debugElements);
     },
 
@@ -119,8 +118,6 @@ const app = {
     /**
      * Set initial positions for horizontal elements
      * @param {Object} elements - Element references
-     * @param {number} yOffset - Vertical offset
-     * @param {number} xOffset - Horizontal offset
      */
     setInitialPositions(elements) {
         const { text, image, title, text2, image2, title2 } = elements;
@@ -138,11 +135,9 @@ const app = {
      * Create horizontal animation timelines
      * @param {Element} container - Container element
      * @param {Object} elements - Element references
-     * @param {number} yOffset - Vertical offset
-     * @param {number} xOffset - Horizontal offset
      * @param {Object} debugElements - Debug element references
      */
-    createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements) {
+    createHorizontalTimelines(container, elements, debugElements) {
         const { text, image, title, text2, image2, title2 } = elements;
         const { progressEl, progressEl2 } = debugElements;
 
