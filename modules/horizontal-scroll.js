@@ -64,7 +64,7 @@ const app = {
         const { yOffset, xOffset } = this.calculateOffsets();
         const debugElements = this.getDebugElements();
         
-        this.setInitialPositions(elements, yOffset, xOffset);
+        this.setInitialPositions(elements);
         this.createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements);
         this.createMainHorizontalTimeline(container, sections, debugElements);
     },
@@ -122,16 +122,16 @@ const app = {
      * @param {number} yOffset - Vertical offset
      * @param {number} xOffset - Horizontal offset
      */
-    setInitialPositions(elements, yOffset, xOffset) {
+    setInitialPositions(elements) {
         const { text, image, title, text2, image2, title2 } = elements;
 
-        if (text) gsap.set(text, { y: yOffset * 3, x: 0});
-        if (image) gsap.set(image, { y: yOffset * 4, x: 0});
-        if (title) gsap.set(title, { y: yOffset * 2, x: 0});
+        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 300 });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 400 });
+        if (title) gsap.set(title, { xPercent: 0, yPercent: 200 });
 
-        if (text2) gsap.set(text2, { x: xOffset * 2, y: 0});
-        if (image2) gsap.set(image2, { x: xOffset * 4, y: 0});
-        if (title2) gsap.set(title2, { x: xOffset * 3, y: 0});
+        if (text2)  gsap.set(text2,  { xPercent: 200, yPercent: 0 });
+        if (image2) gsap.set(image2, { xPercent: 400, yPercent: 0 });
+        if (title2) gsap.set(title2, { xPercent: 300, yPercent: 0 });
     },
 
     /**
@@ -230,8 +230,7 @@ const app = {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             immediateRender: false,
-            y: "0%",
-            ease: "power2.inOut",
+            y: 0,
             duration: 1
         }, 0);
 
@@ -240,27 +239,19 @@ const app = {
         
         firstOutTimeline.to(text, {
             immediateRender: false,
-            x: "-200%",
-            ease: "ease",
-            opacity: 0,
-            filter: "blur(16px)",
+            xPercent: -200,
             duration: 0.5
         }, 0);
         
         firstOutTimeline.to(image, {
             immediateRender: false,
-            x: "-300%",
-            ease: "ease",
-            opacity: 0,
+            xPercent: -300,
             duration: 0.5
         }, 0);
         
         firstOutTimeline.to(title, {
             immediateRender: false,
-            x: "-100%",
-            ease: "ease",
-            filter: "blur(16px)",
-            opacity: 0,
+            xPercent: -100,
             duration: 0.5
         }, 0);
     },
@@ -277,8 +268,7 @@ const app = {
         // Second in animation
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
             immediateRender: false,
-            x: "0%",
-            ease: "power2.inOut",
+            xPercent: 0,
             duration: 1
         }, 0);
 
@@ -287,27 +277,20 @@ const app = {
         
         secondOutTimeline.to(text2, {
             immediateRender: false,
-            y: "-200%",
-            ease: "ease",
-            opacity: 0,
-            filter: "blur(16px)",
+            yPercent: -200,
             duration: 0.5
         }, 0);
         
         secondOutTimeline.to(image2, {
             immediateRender: false,
-            y: "-300%",
-            ease: "ease",
-            opacity: 0,
+            yPercent: -300,
             duration: 0.5
         }, 0); 
         
         secondOutTimeline.to(title2, {
             immediateRender: false,
-            y: "-100%",
+            yPercent: -100,
             ease: "ease",
-            filter: "blur(16px)",
-            opacity: 0,
             duration: 0.5
         }, 0);
     },
