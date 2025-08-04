@@ -212,7 +212,6 @@ footer#custom-footer {
     --default-content-width: 1024px;
     --small-container-width: var(--default-container-width);
     --small-content-width: var(--default-content-width);
-    --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
   }
 }
 
@@ -224,18 +223,15 @@ footer#custom-footer {
       --default-content-width: 944px;
       --small-container-width: var(--default-container-width);
       --small-content-width: var(--default-content-width);
-      --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
     }
 }
 
 @media (max-width: 768px) {
     :root {
-        --default-container-width: calc(100lvw - 2rem);
-        --default-content-width: calc(var(--default-content-width) - 2rem);
+        --default-container-width: calc(100lvw - 4rem);
+        --default-content-width: calc(var(--default-container-width) - 4rem);
         --small-container-width: var(--default-container-width);
         --small-content-width: var(--default-content-width);
-          --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
-
     }
   /* 최대 768 */
   footer#custom-footer {
