@@ -85,10 +85,10 @@ const app = {
         return Math.min(vw, vh);
     },
 
-    createTimeline: (options = {}) => {
+    createTimeline(options = {}) {
         return gsap.timeline({
             scrollTrigger: {
-                trigger: rectScrollTrigger, 
+                trigger: this.elements.trigger, 
                 start: "top bottom",
                 end: "bottom bottom",
                 scrub: 1,
