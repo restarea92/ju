@@ -16,7 +16,7 @@ const app = {
     elements: {
         trigger: document.querySelector('#scroll-trigger'),
         stickyElement: document.querySelector('.sticky-element'),
-        title: stickyElement.querySelector('.title'),
+        title: document.querySelector('.title'),
         get background() { return this.visualSection?.querySelector('.sticky-element-background'); },
         get stickyElement() { return this.stickyWrapper?.querySelector('.sticky-element'); },
 
