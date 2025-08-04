@@ -151,15 +151,39 @@ body.doz_sys.modal-open {
 }
 
 /* ----------------------------------------------
- * common header default style
- * header id         - #doz_header_wrap
- * header wrapper id - #s20250721b75480cc5aa0f
- * header inner id   - #s20250721b75480cc5aa0f
- *
- * menu widget id    - #w2025072190d07aa84cf05
- * login widget id   - #w20250721c82ad2c991d45
- *
+ * common content default style
  * ---------------------------------------------- */
+
+.common-conteiner {
+    .content-wrapper {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: nowrap;
+    }
+    .content {
+        border-radius: 1rem;
+        background: #f5f5f7;
+        min-height: 50lvh;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        width: 100%;
+        h3 {
+        font-size: 1.25rem;
+        font-weight: 750;
+        color: black;
+        }
+        a {
+        color: #06c;
+        &:hover {
+            text-decoration: underline;
+            font-size: 1rem;
+        }
+        }
+    }
+}
 
 
 
@@ -167,41 +191,41 @@ body.doz_sys.modal-open {
  * common Footer default style
  * ---------------------------------------------- */
 footer#custom-footer {
-  display: flex;
-  justify-content:center;
-  padding:1rem;
-  > div.footer-content {
-      width:100%;
-      max-width: var(--default-content-width);
-      font-size:12px;
-      line-height:1;
-      color:#666;
-      display:flex;
-      flex-direction:column;
-      gap:0.5rem;
-      .copyright-wrapper {
-          display:flex;
-          align-items:center;
-          gap:1rem;
-          nav {
+    display: flex;
+    justify-content:center;
+    padding:1rem;
+    > div.footer-content {
+        width:100%;
+        max-width: var(--default-content-width);
+        font-size:12px;
+        line-height:1;
+        color:#666;
+        display:flex;
+        flex-direction:column;
+        gap:0.5rem;
+        .copyright-wrapper {
             display:flex;
-          }
-          nav a {
-              padding:0 0.5rem;
-              font-weight: 600;
-              line-height:1;
-          }
-          nav a:not(:first-of-type) {
-              border-left:1px solid #666;            
-          }
-      }
-      p {
-        line-height:1.47;
-      }
-      p span {
-         white-space: nowrap;
-      }
-  }
+            align-items:center;
+            gap:1rem;
+            nav {
+                display:flex;
+            }
+            nav a {
+                padding:0 0.5rem;
+                font-weight: 600;
+                line-height:1;
+            }
+            nav a:not(:first-of-type) {
+                border-left:1px solid #666;            
+            }
+        }
+        p {
+            line-height:1.47;
+        }
+        p span {
+            white-space: nowrap;
+        }
+    }
 }
 
   
