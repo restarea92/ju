@@ -15,6 +15,7 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         trigger: document.querySelector('#scroll-trigger'),
+        stickyWrapper: document.querySelector('.sticky-wrapper'),
         stickyElement: document.querySelector('.sticky-element'),
         get title() { return this.stickyElement?.querySelector('.title'); },
         get background() { return this.stickyElement?.querySelector('.sticky-element-background'); },
@@ -39,6 +40,8 @@ const app = {
     initRectScroll() {
         const title = this.elements.title;
         const background = this.elements.background;
+        const stickyWrapper = this.elements.stickyWrapper;
+
         const yOffset = this.minVwVh(10); 
         const startSize = this.getInitialSize();
 
@@ -50,10 +53,22 @@ const app = {
             filter: 'blur(16px)'
         });
 
-        if (background) {
-
-            gsap.set(background, { 
+        if (stickyWrapper) {
+            this.createTimeline({
+                start:"top bottom",
+                end:"top center"
+            }).to(stickyWrapper, {
+                "--clip-path-inverted-progress": 0,
+                "--clip-path-progress": 1,
+            }, 0);
+            gsap.set(stickyWrapper, { 
                 "--clip-path-inverted-progress": 1,
+                "--clip-path-progress": 0,
+            });  
+        }
+        
+        if (background) {
+            gsap.set(background, { 
                 "--clip-path-start-size": `${50 - startSize / 2}%`,
                 clipPath: `inset(
                     calc((var(--h2-font-size) + var(--header-height)) * var(--clip-path-inverted-progress)) 
@@ -63,14 +78,6 @@ const app = {
                     round calc(max(5lvh, 5lvw) * var(--clip-path-inverted-progress))
                 )`
             });
-
-            this.createTimeline({
-                start:"top bottom",
-                end:"top center"
-            }).to(background, {
-                "--clip-path-inverted-progress": 0,
-            }, 0);
-
         } 
         this.createTimeline({
             start:"top bottom",
@@ -143,7 +150,6 @@ const app = {
         });
     },
 }
-
 export default app;
 
 document.addEventListener('DOMContentLoaded', () => {
