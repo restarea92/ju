@@ -225,7 +225,7 @@ const app = {
         // First in animation
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             immediateRender: false,
-            y: 0,
+            yPercent: 0,
             duration: 1
         }, 0);
 
