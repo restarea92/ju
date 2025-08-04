@@ -291,17 +291,25 @@ const app = {
             filter: 'blur(16px)'
         });
 
-        if (background) gsap.set(background, { 
-            clipPath: `inset(
-                calc(1 * var(--h2-font-size) + var(--header-height)) 
-                ${50 - startSize / 2}% 
-                calc(1 * var(--h2-font-size)) 
-                ${50 - startSize / 2}% 
-                round max(5lvh, 5lvw)
-            )`,
-        });
+        if (background) {
 
+            gsap.set(background, { 
+                clipPath: `inset(
+                    calc(1 * var(--h2-font-size) + var(--header-height)) 
+                    ${50 - startSize / 2}% 
+                    calc(1 * var(--h2-font-size)) 
+                    ${50 - startSize / 2}% 
+                    round max(5lvh, 5lvw)
+                )`,
+            });
+            this.createTimeline({
+                start:"top bottom",
+                end:"top center"
+            }).to(background, {
+                clipPath: `inset(0)`,
+            }, 0);
 
+        } 
         this.createTimeline({
             start:"top bottom",
             end:"top center"
