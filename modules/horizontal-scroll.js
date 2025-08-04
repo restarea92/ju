@@ -11,8 +11,6 @@ import { initGSAP } from './gsapUtils.js';
  * @version 1.0.8
  */
 
-import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
-
 const app = {
 
     // ========== Configuration ==========
