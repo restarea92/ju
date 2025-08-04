@@ -1,7 +1,7 @@
 /**
  * Visual Scroll Animation Module
  * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.0.6
+ * @version 1.0.8
  */
 
 import { initGSAP } from './gsapUtils.js';
@@ -10,7 +10,7 @@ const app = {
 
     // ========== Configuration ==========
     CONFIG: {
-        VERSION: '1.0.6',
+        VERSION: '1.0.8',
     },
 
     // ========== Initialization ==========
@@ -122,13 +122,13 @@ const app = {
     setInitialPositions(elements) {
         const { text, image, title, text2, image2, title2 } = elements;
 
-        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75, x:0, y:0 });
-        if (image) gsap.set(image, { xPercent: 0, yPercent: 50, x:0, y:0, });
-        if (title) gsap.set(title, { xPercent: 0, yPercent: 100, x:0, y:0, });
+        if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75 });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 50 });
+        if (title) gsap.set(title, { xPercent: 0, yPercent: 100 });
 
-        if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, x:0, y:0, });
-        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, x:0, y:0, });
-        if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, x:0, y:0, });
+        if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, });
+        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, });
+        if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, });
     },
 
     /**
