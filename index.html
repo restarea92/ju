@@ -514,26 +514,24 @@ const app = {
         return {
             firstIn: {
                 start: "top center",
-                end: "center 95%",
+                end: "center 90%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                 },
             },
             firstOut: {
-                start: "center 95%",
+                start: "center 90%",
                 end: "center center",
             },
             secondIn: {
                 start: "center center",
-                end: "bottom 105%",
+                end: "bottom 110%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
                 }
             },
             secondOut: {
-                start: "bottom 95%",
+                start: "bottom 90%",
                 end: "bottom center",
             }
         };
@@ -595,23 +593,23 @@ const app = {
         // First out animations
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
         firstOutTimeline.to(text, {
-            xPercent: -100,
+            xPercent: -25,
             duration: 1,
             filter: "blur(8px)",
-            opacity: 0.5,
-        }, 0);
+            opacity: 1,
+        }, 0.1);
         
         firstOutTimeline.to(image, {
-            xPercent: -40,
-            duration: 1
+            xPercent: -75,
+            duration: 0.75
         }, 0.05);
         
         firstOutTimeline.to(title, {
-            xPercent: -80,
+            xPercent: -10,
             duration: 1,
             filter: "blur(8px)",
             opacity: 0.5,
-        }, 0.1);
+        }, 0.15);
     },
 
     /**
