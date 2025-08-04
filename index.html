@@ -12,18 +12,19 @@
         max-width: var(--small-content-width);
         max-height: 100%;
         .content-text {
+            z-index: 2;
             user-select: none;
             grid-column: 1 / 9;
             grid-row: 6 / auto;
-		    transform: translateZ(0);
-		    will-change:transform;
+		    will-change: transform;
+            transform: translateZ(0);
             p {
                 word-break: keep-all;
                 color:#86868b;
                 text-shadow: 
-                    0 0 13px rgba(0, 0, 0, 0.1), 
-                    0 0 21px rgba(0, 0, 0, 0.2), 
-                    0 0 34px rgba(0, 0, 0, 0.3), 
+                    0 0 13px rgba(0, 0, 0, 0.5), 
+                    0 0 21px rgba(0, 0, 0, 0.5), 
+                    0 0 34px rgba(0, 0, 0, 0.5), 
                     0 0 55px rgba(0, 0, 0, 0.5);
             }
             strong {
@@ -32,15 +33,22 @@
             }
         }
         .content-image { 
+            overflow: visible;
+            visibility: visible;
+            content-visibility: visible;
+            z-index: 1;
             padding: 1px;
-            background: red;
+		    will-change: transform;
             transform: translateZ(0);
-            will-change: transform, contents;
             user-select: none;
             grid-column: 5 / 13;
             grid-row: 4 / 12;
             img {
-                will-change: transform, contents;
+                overflow: visible;
+                visibility: visible;
+                content-visibility: visible;
+                will-change: transform;
+                transform: translateZ(0);
                 object-fit:contain;
                 object-position: right;
                 width: 100%;
@@ -48,8 +56,9 @@
             }
         }
         .content-title {
-		  	transform: translateZ(0);
+            z-index: 3;
 		    will-change: transform;
+            transform: translateZ(0);
             grid-column: 1 / 13;
             grid-row: 1 / 4;
             user-select: none;
@@ -71,7 +80,6 @@
             grid-row: 5 / auto;
         }        
         .content-image {
-		  
             grid-column: 1 / 9;
             grid-row: 2 / 10;
         }        
@@ -100,7 +108,7 @@
             class="sticky-element-background"
         >
         <video id="landscapeVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
-            <source src="https://restarea92.github.io/ju/vtts.mp4" type="video/mp4" />
+            <source src="https://restarea92.github.io/ju/vttsp.mp4" type="video/mp4" />
         </video>
 
         <video id="portraitVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
@@ -223,9 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="scroll-marker top">TOP</div>
             <div class="scroll-marker center">CENTER</div>
             <div class="scroll-marker bottom">BOTTOM</div>
-            <div class="horizontal-container">
-
-                <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
+            <div class="horizontal-container" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%); backdrop-filter: blur(16px);">
+                <section id="multi-scroll-item1" class="multi-scroll-item">
 
                     <div class="content">
                         <div class="content-title">
@@ -241,11 +248,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             </p>
                         </div>
                         <div class="content-image">
-                            <img src="https://restarea92.github.io/ju/media/es.jpg" width="300">
+                            <img src="https://restarea92.github.io/ju/image/ynin.jpg">
                         </div>
                     </div>
                 </section>
-                <section id="multi-scroll-item2" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
+                <section id="multi-scroll-item2" class="multi-scroll-item">
                     <div class="content second">
                         <div class="content-title">
                             <h2>
@@ -259,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </p>
                         </div>
                         <div class="content-image">
-                            <img src="https://images.pexels.com/photos/5217841/pexels-photo-5217841.jpeg" width="300">
+                            <img src="https://restarea92.github.io/ju/image/ynin.jpg">
                         </div>
                     </div>
                 </section>
@@ -469,11 +476,11 @@ const app = {
         const { text, image, title, text2, image2, title2 } = elements;
 
         if (text)  gsap.set(text,  { xPercent: 0, yPercent: 75 });
-        if (image) gsap.set(image, { xPercent: 0, yPercent: 50 });
+        if (image) gsap.set(image, { xPercent: 0, yPercent: 100, filter: "blur(4px) brightness(0.25)"});
         if (title) gsap.set(title, { xPercent: 0, yPercent: 100 });
 
         if (text2)  gsap.set(text2,  { xPercent: 75, yPercent: 0, });
-        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, });
+        if (image2) gsap.set(image2, { xPercent: 50, yPercent: 0, filter: "blur(4px) brightness(0.25)"});
         if (title2) gsap.set(title2, { xPercent: 25, yPercent: 0, });
     },
 
@@ -508,27 +515,27 @@ const app = {
         return {
             firstIn: {
                 start: "top center",
-                end: "center bottom",
+                end: "center 95%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
                     if (progressEl) progressEl.textContent = 'For debug: ' + progressPercent + '%';
                 },
             },
             firstOut: {
-                start: "center bottom",
-                end: "center top",
+                start: "center 95%",
+                end: "center center",
             },
             secondIn: {
                 start: "center center",
-                end: "center top",
+                end: "bottom 105%",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
                 }
             },
             secondOut: {
-                start: "bottom bottom",
-                end: "bottom top",
+                start: "bottom 95%",
+                end: "bottom center",
             }
         };
     },
@@ -547,8 +554,8 @@ const app = {
                 scrollTrigger: {
                     trigger: container,
                     start: "top bottom",
-                    end: "center top",
-                    scrub: 0.3,
+                    end: "bottom 95%",
+                    scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
                     },
@@ -568,29 +575,44 @@ const app = {
      * @param {Element} title - Title element
      */
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
-        // First in animation
-        createTimeline(timelineOptions.firstIn).to([text, image, title], {
+
+        const firstInTimeline =  createTimeline(timelineOptions.firstIn);
+        firstInTimeline.to(text, {
             yPercent: 0,
-            duration: 1
+            duration: 0.5
+        }, 0);
+        
+        firstInTimeline.to(image, {
+            yPercent: 0,
+            duration: 1,
+            filter: "blur(0px) brightness(0.5)",
+        }, 0);
+        
+        firstInTimeline.to(title, {
+            yPercent: 0,
+            duration: 0.7
         }, 0);
 
         // First out animations
         const firstOutTimeline = createTimeline(timelineOptions.firstOut);
-        
         firstOutTimeline.to(text, {
-            xPercent: -200,
-            duration: 0.5
+            xPercent: -100,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
         }, 0);
         
         firstOutTimeline.to(image, {
-            xPercent: -300,
-            duration: 0.5
-        }, 0);
+            xPercent: -40,
+            duration: 1
+        }, 0.05);
         
         firstOutTimeline.to(title, {
-            xPercent: -100,
-            duration: 0.5
-        }, 0);
+            xPercent: -80,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
+        }, 0.1);
     },
 
     /**
@@ -602,29 +624,45 @@ const app = {
      * @param {Element} title2 - Second title element
      */
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
-        // Second in animation
-        createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
+
+        const secondInTimeline =  createTimeline(timelineOptions.secondIn);
+        secondInTimeline.to(text2, {
             xPercent: 0,
-            duration: 1
+            duration: 0.5
+        }, 0);
+        
+        secondInTimeline.to(image2, {
+            xPercent: 0,
+            duration: 1,
+            filter: "blur(0px) brightness(0.5)",
+        }, 0);
+        
+        secondInTimeline.to(title2, {
+            xPercent: 0,
+            duration: 0.7
         }, 0);
 
         // Second out animations
         const secondOutTimeline = createTimeline(timelineOptions.secondOut);
         
         secondOutTimeline.to(text2, {
-            yPercent: -200,
-            duration: 0.5
+            yPercent: -100,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
         }, 0);
         
         secondOutTimeline.to(image2, {
-            yPercent: -300,
-            duration: 0.5
-        }, 0); 
+            yPercent: -50,
+            duration: 1
+        }, 0.05); 
         
         secondOutTimeline.to(title2, {
-            yPercent: -100,
-            duration: 0.5
-        }, 0);
+            yPercent: -75,
+            duration: 1,
+            filter: "blur(8px)",
+            opacity: 0.5,
+        }, 0.1);
     },
 
     /**
@@ -670,16 +708,16 @@ const app = {
             if (index === 0) {
                 timeline.to(sections, {
                     xPercent: 0,
-                    duration: 0.5,
+                    duration: 1,
                 });
             } else {
                 timeline.to(sections, {
                     xPercent: -100 * index,
-                    duration: 0.5,
+                    duration: 1,
                 })
                 .to(sections, {
                     xPercent: -100 * index,
-                    duration: 0.5,
+                    duration: 1,
                 });
             }
         });
