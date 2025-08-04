@@ -1,7 +1,7 @@
 /**
  * Visual Scroll Animation Module
  * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 import { initGSAP } from './gsapUtils.js';
@@ -9,7 +9,7 @@ import { initGSAP } from './gsapUtils.js';
 const app = {
     // ========== Configuration ==========
     CONFIG: {
-        VERSION: '1.0.5',
+        VERSION: '1.0.6',
     },
 
     // ========== DOM Elements Cache ==========
@@ -50,17 +50,28 @@ const app = {
             filter: 'blur(16px)'
         });
 
-        if (background) gsap.set(background, { 
-            clipPath: `inset(
-                calc(1 * var(--h2-font-size) + var(--header-height)) 
-                ${50 - size / 2}% 
-                calc(1 * var(--h2-font-size)) 
-                ${50 - size / 2}% 
-                round max(5lvh, 5lvw)
-            )`,
-        });
+        if (background) {
 
+            gsap.set(background, { 
+                "--clip-path-inverted-progress": 1,
+                "--clip-path-start-size": `${50 - startSize / 2}%`,
+                clipPath: `inset(
+                    calc((var(--h2-font-size) + var(--header-height)) * var(--clip-path-inverted-progress)) 
+                    calc(var(--clip-path-start-size) * var(--clip-path-inverted-progress))
+                    calc(var(--h2-font-size) * var(--clip-path-inverted-progress)) 
+                    calc(var(--clip-path-start-size) * var(--clip-path-inverted-progress)) 
+                    round calc(max(5lvh, 5lvw) * var(--clip-path-inverted-progress))
+                )`
+            });
 
+            this.createTimeline({
+                start:"top bottom",
+                end:"top center"
+            }).to(background, {
+                "--clip-path-inverted-progress": 0,
+            }, 0);
+
+        } 
         this.createTimeline({
             start:"top bottom",
             end:"top center"
@@ -86,15 +97,19 @@ const app = {
     },
     
     getInitialSize() {
-        const content = this.elements.visualSection?.querySelector('.sticky-element-content');
+        const content = this.elements.stickyElement?.querySelector('.sticky-element-content');
 
-        if (!content || !this.elements.background) return 50;
+        if (!content || !this.elements.background) {
+            return 50
+        };
 
         const contentWidth = content.getBoundingClientRect().width;
         const containerWidth = this.elements.background.getBoundingClientRect().width;
         const effectiveWidth = Math.min(contentWidth, window.innerWidth);
-
-        return (effectiveWidth / containerWidth) * 100;
+        
+        const result = (effectiveWidth / containerWidth) * 100;
+        console.log({contentWidth, containerWidth, effectiveWidth, result})
+        return result;
     },
 
     // ========== 상태 관리 ==========
@@ -129,7 +144,6 @@ const app = {
     },
 }
 
-export default app;
 document.addEventListener('DOMContentLoaded', () => {
     function isLandscape() {
         return window.innerWidth > window.innerHeight;
@@ -157,4 +171,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateVideo);
     window.addEventListener('orientationchange', updateVideo);
 });
-
