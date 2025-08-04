@@ -29,7 +29,6 @@ const app = {
 
         this.setInitialPositions(elements, yOffset, xOffset);
         this.createHorizontalTimelines(container, elements, yOffset, xOffset, debugElements);
-        this.createMainHorizontalTimeline(container, sections, debugElements);
     },
 
     getHorizontalElements() {
@@ -136,7 +135,7 @@ const app = {
     createFirstSectionAnimations(createTimeline, timelineOptions, text, image, title) {
         createTimeline(timelineOptions.firstIn).to([text, image, title], {
             y: "0%",
-            ease: "ease",
+            ease: "none",
             duration: 0.5
         }, 0);
 
@@ -145,7 +144,6 @@ const app = {
         firstOutTimeline.to(text, {
             x: "-200%",
             ease: "ease",
-            opacity: 0,
             filter: "blur(16px)",
             duration: 0.5
         }, 0);
@@ -153,7 +151,6 @@ const app = {
         firstOutTimeline.to(image, {
             x: "-300%",
             ease: "ease",
-            opacity: 0,
             duration: 0.5
         }, 0);
 
@@ -161,7 +158,6 @@ const app = {
             x: "-100%",
             ease: "ease",
             filter: "blur(16px)",
-            opacity: 0,
             duration: 0.5
         }, 0);
     },
@@ -169,7 +165,6 @@ const app = {
     createSecondSectionAnimations(createTimeline, timelineOptions, text2, image2, title2) {
         createTimeline(timelineOptions.secondIn).to([text2, image2, title2], {
             x: "0%",
-            ease: "ease",
             duration: 0.5
         }, 0);
 
@@ -177,54 +172,20 @@ const app = {
 
         secondOutTimeline.to(text2, {
             y: "-200%",
-            ease: "ease",
-            opacity: 0,
-            filter: "blur(16px)",
             duration: 0.5
         }, 0);
 
         secondOutTimeline.to(image2, {
             y: "-300%",
-            ease: "ease",
-            opacity: 0,
             duration: 0.5
         }, 0);
 
         secondOutTimeline.to(title2, {
             y: "-100%",
-            ease: "ease",
-            filter: "blur(16px)",
-            opacity: 0,
             duration: 0.5
         }, 0);
     },
 
-    createMainHorizontalTimeline(container, sections, debugElements) {
-        const { stateEl, progressEl2 } = debugElements;
-
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                pin: false,
-                scrub: 0.5,
-                start: "center bottom",
-                end: "center top",
-                onUpdate: self => {
-                    if (stateEl) stateEl.textContent = 'For debug: SCROLLING';
-                    const progressPercent = (self.progress * 100).toFixed(0);
-                    if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
-                },
-                onLeave: () => {
-                    if (stateEl) stateEl.textContent = 'For debug: END';
-                },
-                onLeaveBack: () => {
-                    if (stateEl) stateEl.textContent = 'For debug: END (back)';
-                }
-            },
-        });
-
-        this.createSectionTimeline(timeline, sections);
-    },
 
     createSectionTimeline(timeline, sections) {
         sections.forEach((section, index) => {
@@ -232,18 +193,15 @@ const app = {
                 timeline.to(sections, {
                     xPercent: 0,
                     duration: 0.5,
-                    ease: "none"
                 });
             } else {
                 timeline.to(sections, {
                     xPercent: -100 * index,
-                    duration: 3,
-                    ease: "power2.inOut"
+                    duration: 1,
                 })
                 .to(sections, {
                     xPercent: -100 * index,
                     duration: 0.5,
-                    ease: "none"
                 });
             }
         });

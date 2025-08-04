@@ -166,7 +166,7 @@ const app = {
     getTimelineOptions(progressEl, progressEl2) {
         return {
             firstIn: {
-                start: "top bottom",
+                start: "top center",
                 end: "center bottom",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
@@ -175,11 +175,11 @@ const app = {
             },
             firstOut: {
                 start: "center bottom",
-                end: "center center",
+                end: "center top",
             },
             secondIn: {
-                start: "center bottom",
-                end: "center center",
+                start: "center center",
+                end: "center top",
                 onUpdate: self => {
                     const progressPercent = (self.progress * 100).toFixed(0);
                     if (progressEl2) progressEl2.textContent = 'For debug: ' + progressPercent + '%';
@@ -191,6 +191,7 @@ const app = {
             }
         };
     },
+
 
     /**
      * 주어진 컨테이너에 맞는 GSAP 타임라인 생성 함수를 반환.
