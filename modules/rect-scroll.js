@@ -60,9 +60,17 @@ const app = {
             });  
             this.createTimeline({
                 start:"top bottom",
-                end:"top center"
+                end:"top center",
+                scrub:1,
             }).to(stickyWrapper, {
                 "--rect-scroll-inverted-progress": 0,
+            }, 0);
+
+            this.createTimeline({
+                start:"top bottom",
+                end:"top center",
+                scrub:0.1,
+            }).to(stickyWrapper, {
                 "--rect-scroll-progress": 1,
             }, 0);
 
