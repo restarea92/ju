@@ -1,7 +1,7 @@
 /**
  * Visual Scroll Animation Module
  * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.0.6
+ * @version 1.0.7
  */
 
 import { initGSAP } from './gsapUtils.js';
@@ -10,7 +10,7 @@ const app = {
 
     // ========== Configuration ==========
     CONFIG: {
-        VERSION: '1.0.6',
+        VERSION: '1.0.7',
     },
 
     // ========== Initialization ==========
@@ -202,7 +202,6 @@ const app = {
                     trigger: container,
                     start: "top bottom",
                     end: "center top",
-                    scrub: 1,
                     onUpdate: self => {
                         const progressPercent = (self.progress * 100).toFixed(0);
                     },
@@ -303,7 +302,6 @@ const app = {
             scrollTrigger: {
                 trigger: container,
                 pin: false,
-                scrub: 1,
                 start: "center bottom",
                 end: "center top",
                 onUpdate: self => {
