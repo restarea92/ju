@@ -1,7 +1,7 @@
 /**
  * Visual Scroll Animation Module
  * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
- * @version 1.1.44
+ * @version 1.0.2
  */
 
 import { initGSAP } from './gsapUtils.js';
@@ -9,7 +9,7 @@ import { initGSAP } from './gsapUtils.js';
 const app = {
     // ========== Configuration ==========
     CONFIG: {
-        VERSION: '1.0.1',
+        VERSION: '1.0.2',
     },
 
     // ========== DOM Elements Cache ==========
