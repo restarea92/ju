@@ -18,7 +18,6 @@ const app = {
         stickyElement: document.querySelector('.sticky-element'),
         get title() { return this.stickyElement?.querySelector('.title'); },
         get background() { return this.stickyElement?.querySelector('.sticky-element-background'); },
-
     },
     // ========== Initialization ==========
     /**
@@ -41,6 +40,7 @@ const app = {
         const title = this.elements.title;
         const background = this.elements.background;
         const yOffset = this.minVwVh(10); 
+        const startSize = this.getInitialSize();
 
         // 초기 위치 세팅
         if (title) gsap.set(title, { 
@@ -53,9 +53,9 @@ const app = {
         if (background) gsap.set(background, { 
             clipPath: `inset(
                 calc(1 * var(--h2-font-size) + var(--header-height)) 
-                0% 
+                ${50 - size / 2}% 
                 calc(1 * var(--h2-font-size)) 
-                0% 
+                ${50 - size / 2}% 
                 round max(5lvh, 5lvw)
             )`,
         });
@@ -84,7 +84,18 @@ const app = {
         }, 0);
 
     },
+    
+    getInitialSize() {
+        const content = this.elements.visualSection?.querySelector('.sticky-element-content');
 
+        if (!content || !this.elements.background) return 50;
+
+        const contentWidth = content.getBoundingClientRect().width;
+        const containerWidth = this.elements.background.getBoundingClientRect().width;
+        const effectiveWidth = Math.min(contentWidth, window.innerWidth);
+
+        return (effectiveWidth / containerWidth) * 100;
+    },
 
     // ========== 상태 관리 ==========
     setHeaderHeightVariable() {
