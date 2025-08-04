@@ -54,28 +54,29 @@ const app = {
         });
 
         if (stickyWrapper) {
+            gsap.set(stickyWrapper, { 
+                "--rect-scroll-inverted-progress": 1,
+                "--rect-scroll-progress": 0,
+            });  
             this.createTimeline({
                 start:"top bottom",
                 end:"top center"
             }).to(stickyWrapper, {
-                "--clip-path-inverted-progress": 0,
-                "--clip-path-progress": 1,
+                "--rect-scroll-inverted-progress": 0,
+                "--rect-scroll-progress": 1,
             }, 0);
-            gsap.set(stickyWrapper, { 
-                "--clip-path-inverted-progress": 1,
-                "--clip-path-progress": 0,
-            });  
+
         }
-        
+
         if (background) {
             gsap.set(background, { 
                 "--clip-path-start-size": `${50 - startSize / 2}%`,
                 clipPath: `inset(
-                    calc((var(--h2-font-size) + var(--header-height)) * var(--clip-path-inverted-progress)) 
-                    calc(var(--clip-path-start-size) * var(--clip-path-inverted-progress))
-                    calc(var(--h2-font-size) * var(--clip-path-inverted-progress)) 
-                    calc(var(--clip-path-start-size) * var(--clip-path-inverted-progress)) 
-                    round calc(max(5lvh, 5lvw) * var(--clip-path-inverted-progress))
+                    calc((var(--h2-font-size) + var(--header-height)) * var(--rect-scroll-inverted-progress) 
+                    calc(var(--clip-path-start-size) * var(--rect-scroll-inverted-progress)
+                    calc(var(--h2-font-size) * var(--rect-scroll-inverted-progress) 
+                    calc(var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) 
+                    round calc(max(5lvh, 5lvw) * var(--rect-scroll-inverted-progress)
                 )`
             });
         } 
