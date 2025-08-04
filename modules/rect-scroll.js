@@ -144,6 +144,8 @@ const app = {
     },
 }
 
+export default app;
+
 document.addEventListener('DOMContentLoaded', () => {
     function isLandscape() {
         return window.innerWidth > window.innerHeight;
@@ -171,3 +173,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateVideo);
     window.addEventListener('orientationchange', updateVideo);
 });
+
