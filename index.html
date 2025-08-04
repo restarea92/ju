@@ -294,9 +294,9 @@ const app = {
         if (background) gsap.set(background, { 
             clipPath: `inset(
                 calc(1 * var(--h2-font-size) + var(--header-height)) 
-                ${50 - size / 2}% 
+                ${50 - startSize / 2}% 
                 calc(1 * var(--h2-font-size)) 
-                ${50 - size / 2}% 
+                ${50 - startSize / 2}% 
                 round max(5lvh, 5lvw)
             )`,
         });
@@ -327,15 +327,19 @@ const app = {
     },
     
     getInitialSize() {
-        const content = this.elements.visualSection?.querySelector('.sticky-element-content');
+        const content = this.elements.stickyElement?.querySelector('.sticky-element-content');
 
-        if (!content || !this.elements.background) return 50;
+        if (!content || !this.elements.background) {
+            return 50
+        };
 
         const contentWidth = content.getBoundingClientRect().width;
         const containerWidth = this.elements.background.getBoundingClientRect().width;
         const effectiveWidth = Math.min(contentWidth, window.innerWidth);
-
-        return (effectiveWidth / containerWidth) * 100;
+        
+        const result = (effectiveWidth / containerWidth) * 100;
+        console.log({contentWidth, containerWidth, effectiveWidth, result})
+        return result;
     },
 
     // ========== 상태 관리 ==========
@@ -370,7 +374,6 @@ const app = {
     },
 }
 
-export default app;
 document.addEventListener('DOMContentLoaded', () => {
     function isLandscape() {
         return window.innerWidth > window.innerHeight;
@@ -402,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     app.init();
 });
+
 </script>
 
 <script type="module">
