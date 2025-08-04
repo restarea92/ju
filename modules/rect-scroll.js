@@ -31,7 +31,6 @@ const app = {
 
         this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
         this.initRectScroll();
-        this.renderEffects()
     },
 
     // ========== rect Scroll ==========
@@ -41,28 +40,50 @@ const app = {
      */
     initRectScroll() {
         const title = this.elements.title;
+        const background = this.elements.background;
         const yOffset = this.minVwVh(10); 
-        // 초기 위치 세팅
 
-        if (title) gsap.set(title, { y: yOffset * 3, x: 0  });
-        this.createTimeline().to(title, {
-            y: "0",
+        // 초기 위치 세팅
+        if (title) gsap.set(title, { 
+            y: yOffset * 3, 
+            x: 0,
+            opacity: 0,
+            filter: 'blur(16px)'
+        });
+
+        if (background) gsap.set(background, { 
+            clipPath: `inset(
+                calc(1 * var(--h2-font-size) + var(--header-height)) 
+                0% 
+                calc(1 * var(--h2-font-size)) 
+                0% 
+                round max(5lvh, 5lvw)
+            )`,
+        });
+
+
+        createTimeline({
+            start:"top bottom",
+            end:"top center"
+        }).to(title, {
+            y: 0,
             ease: "ease",
             opacity:1,
-            filter: "",
+            filter: "blur(0px)",
             duration: 0.5
         }, 0);
 
-        this.createTimeline({
+        createTimeline({
             start: "bottom bottom",
             end: "bottom top",
         }).to(title, {
-            y: "0",
+            y: yOffset * -3,
             ease: "ease",
             opacity:0,
-            filter: "",
+            filter: "blur(16px)",
             duration: 0.5
         }, 0);
+
     },
 
 
@@ -126,3 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateVideo);
     window.addEventListener('orientationchange', updateVideo);
 });
+
