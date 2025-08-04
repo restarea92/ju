@@ -31,43 +31,40 @@ const app = {
 
         this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
         this.initRectScroll();
+        this.renderEffects()
     },
 
     // ========== rect Scroll ==========
     /**
      * Initialize rect scroll animations
      * Setup individual rect scroll container
-     * @param {Element} trigger - The trigger container element
      */
     initRectScroll() {
-
-    },
-
-    renderEffects() {
         const title = this.elements.title;
         const yOffset = this.minVwVh(10); 
         // 초기 위치 세팅
 
         if (title) gsap.set(title, { y: yOffset * 3, x: 0  });
-            this.createTimeline().to(title, {
-                y: "0",
-                ease: "ease",
-                opacity:1,
-                filter: "",
-                duration: 0.5
-            }, 0);
+        this.createTimeline().to(title, {
+            y: "0",
+            ease: "ease",
+            opacity:1,
+            filter: "",
+            duration: 0.5
+        }, 0);
 
-            this.createTimeline({
-                start: "bottom bottom",
-                end: "bottom top",
-            }).to(title, {
-                y: "0",
-                ease: "ease",
-                opacity:0,
-                filter: "",
-                duration: 0.5
-            }, 0);
+        this.createTimeline({
+            start: "bottom bottom",
+            end: "bottom top",
+        }).to(title, {
+            y: "0",
+            ease: "ease",
+            opacity:0,
+            filter: "",
+            duration: 0.5
+        }, 0);
     },
+
 
     // ========== 상태 관리 ==========
     setHeaderHeightVariable() {
