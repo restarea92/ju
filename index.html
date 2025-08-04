@@ -217,10 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         .pre-image {
-
             height: auto;
-            display: flex;
+            display: grid;
             position: absolute;
+            grid-template-columns: 1fr 1fr 100fr;
             top:0;
                 z-index: 10;
 
@@ -236,12 +236,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="scroll-marker center">CENTER</div>
             <div class="scroll-marker bottom">BOTTOM</div>
             <div class="horizontal-container">
-
-                <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                 <div class="pre-image">
                     <img src="https://images.pexels.com/photos/8412319/pexels-photo-8412319.jpeg">
                     <img src="https://images.pexels.com/photos/5217841/pexels-photo-5217841.jpeg">
                 </div>
+                <section id="multi-scroll-item1" class="multi-scroll-item" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);">
                     <div class="content">
                         <div class="content-title">
                             <h2>
