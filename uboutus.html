@@ -514,28 +514,29 @@
             </div>
         <div class="vision-stats">
             <div class="stat fade-in">
-                <div class="stat-number" data-target="500" data-unit="+">0</div>
+                <div class="stat-number" data-target="500" data-unit="+"><span class="stat-value">0</span><span>명</span></div>
                 <div class="stat-label">지금까지 함께한 수강생</div>
                 <div class="reference">2024년 7월까지 집계 기준</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="8" data-unit="">0</div>
+                <div class="stat-number" data-target="8" data-unit=""><span class="stat-value">0</span><span>명</span></div>
                 <div class="stat-label">운영 연수</div>
                 <div class="reference">2025년 현재 기준</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="15" data-unit="+">0</div>
+                <div class="stat-number" data-target="15" data-unit="+"><span class="stat-value">0</span><span>명</span></div>
                 <div class="stat-label">지점 수</div>
                 <div class="reference">2025년 현재</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="98.7" data-unit="%">0</div>
+                <div class="stat-number" data-target="98" data-unit="%"><span class="stat-value">0</span><span>명</span></div>
                 <div class="stat-label">만족도</div>
                 <div class="reference">2024년 7월 온라인 후기 집계기준</div>
             </div>
         </div>
     </section>
 </div>
+
 
 <script>
 // 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
@@ -548,19 +549,16 @@ const observerOptions = {
 function animateCounter(element) {
     const target = parseFloat(element.dataset.target);
     const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
-    const duration = 2000; // 2초
+    const duration = 3000; // 2초
+    const statValue = element.querySelector('span.stat-value');
     let current = 0;
     
     // 퍼센트인지 확인 (단위가 %인 경우)
     const isPercentage = unit === '%';
     
-    let step, displayValue;
-    
     if (isPercentage) {
-        // 퍼센트는 0.1씩 증가
-        step = 0.1;
-        const totalSteps = target / step;
-        const stepInterval = duration / totalSteps;
+        // 퍼센트는 부드럽게 증가하되 0.1 단위로 표시
+        const step = target / (duration / 16); // 60fps
         
         const timer = setInterval(() => {
             current += step;
@@ -569,22 +567,23 @@ function animateCounter(element) {
                 clearInterval(timer);
             }
             
-            // 소수점 표시 (끝이 0이면 제거)
-            displayValue = current % 1 === 0 ? current.toString() : current.toFixed(1);
-            element.textContent = displayValue + unit;
-        }, stepInterval);
+            // 0.1 단위로 반올림해서 표시
+            const rounded = Math.round(current * 10) / 10;
+            const displayValue = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
+            statValue.textContent = displayValue + unit;
+        }, 16);
     } else {
         // 일반 숫자는 기존 방식
-        step = target / (duration / 16);
+        const step = target / (duration / 16);
         
         const timer = setInterval(() => {
             current += step;
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
-                element.textContent = target + unit; // 단위 유지
+                statValue.textContent = target + unit; // 단위 유지
             } else {
-                element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
+                statValue.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
             }
         }, 16);
     }
