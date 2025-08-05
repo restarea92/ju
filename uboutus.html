@@ -662,20 +662,20 @@ function animateCounter(element) {
 const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         const el = entry.target;
-		const yOffset = options.transformYOffset || 0;
-		const rectTop = el.getBoundingClientRect().top;
-		const viewportHeight = window.innerHeight;
-
         if (entry.isIntersecting) {
             el.classList.add('visible');
 
             if (el.classList.contains('stat-number')) {
                 animateCounter(el);
             }
-
         } else {
+            const yOffset = options.transformYOffset || 0;
+			const rootMargin = options.observerOptions.rootMargin;
+            const rectTop = el.getBoundingClientRect().top;
+            const viewportHeight = window.innerHeight;
 
             // 요소가 뷰포트 아래로 완전히 벗어났고, yOffset만큼 더 아래일 때
+			console.log({entry});
             if (rectTop > viewportHeight + yOffset) {
                 el.classList.remove('visible');
             }
