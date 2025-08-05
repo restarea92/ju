@@ -47,8 +47,10 @@ const app = {
 
         // 초기 위치 세팅
         if (title) gsap.set(title, { 
-            y: yOffset * 3, 
+            y: yOffset * 2, 
             x: 0,
+            filter: "blur(16px)",
+            opacity: 0,
         });
 
         if (stickyWrapper) {
@@ -132,6 +134,9 @@ const app = {
             end: "bottom 25%",
             scrub:0.5,
         }).to(title, {
+            opacity:0,
+            filter: "blur(16px)",
+            duration: 0.5,
             duration: 0.5
         }, 0);
 
