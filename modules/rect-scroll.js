@@ -109,7 +109,7 @@ const app = {
     
         this.createTimeline({
             start: "top top",
-            end: "bottom top",
+            end: "top center",
             scrub:1,
         }).to(title, {
             y: yOffset * -3,
@@ -117,21 +117,21 @@ const app = {
         }, 0);
 
                 
-        this.createTimeline({
-            start:"top top",
-            end:"center 60%",
-            scrub:0.5,
-        }).to(title, {
-            duration: 0.5
-        }, 0);
+        // this.createTimeline({
+        //     start:"top top",
+        //     end:"center 60%",
+        //     scrub:0.5,
+        // }).to(title, {
+        //     duration: 0.5
+        // }, 0);
 
-        this.createTimeline({
-            start: "center 40%",
-            end: "bottom top",
-            scrub:0.5,
-        }).to(title, {
-            duration: 0.5
-        }, 0);
+        // this.createTimeline({
+        //     start: "center 40%",
+        //     end: "bottom top",
+        //     scrub:0.5,
+        // }).to(title, {
+        //     duration: 0.5
+        // }, 0);
 
 
     },
