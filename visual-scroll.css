@@ -47,7 +47,9 @@
     background: #f5f5f7;
     --brightness-min: 0.33;
     --brightness-max: 0.66;
-    --brightness-interpolated: calc( var(--brightness-min) + var(--rect-scroll-inverted-progress) * (var(--brightness-max) - var(--brightness-min)) );
+    --brightness-interpolated: calc(
+        var(--brightness-min) + (1 - var(--rect-scroll-inverted-progress)) * (var(--brightness-max) - var(--brightness-min))
+    );
     background: rgba(
         max(0, calc(245 - var(--brightness-interpolated) * 255 * 1.5)),
         max(0, calc(245 - var(--brightness-interpolated) * 255 * 1.5)), 
