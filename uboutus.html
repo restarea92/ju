@@ -612,7 +612,7 @@
 const options = {
 	observerOptions: {
 		threshold: 0.1,
-		rootMargin: '0px 0px -50px 0px'
+		rootMargin: '-50px 0px -50px 0px'
 	},
 	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
 };
@@ -675,7 +675,7 @@ const observer = new IntersectionObserver(function(entries) {
             const viewportHeight = window.innerHeight;
 
             // 요소가 뷰포트 아래로 완전히 벗어났고, yOffset만큼 더 아래일 때
-			console.log({entry});
+			console.log({el, rectTop, viewportHeight, yOffset});
             if (rectTop > viewportHeight + yOffset) {
                 el.classList.remove('visible');
             }
