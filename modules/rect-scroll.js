@@ -115,32 +115,32 @@ const app = {
             scrub:1,
         }).to(title, {
             y: yOffset * -3,
-            ease: CustomEase.create("custom", "M0,0 C0,0 0,0.3 0.2,0.4 0.32,0.46 0.6,0.496 0.8,0.6 1,0.703 1,1 1,1 "),
+            // ease: CustomEase.create("custom", "M0,0 C0,0 0,0.3 0.2,0.4 0.32,0.46 0.6,0.496 0.8,0.6 1,0.703 1,1 1,1 "),
             duration: 1
         }, 0);
 
                 
-        this.createTimeline({
-            start:"top top",
-            end:"center 60%",
-            scrub:0.5,
-        }).to(title, {
-            y: 0,
-            opacity:1,
-            filter: "blur(0px)",
-            duration: 0.5
-        }, 0);
+        // this.createTimeline({
+        //     start:"top top",
+        //     end:"center 60%",
+        //     scrub:0.5,
+        // }).to(title, {
+        //     y: 0,
+        //     opacity:1,
+        //     filter: "blur(0px)",
+        //     duration: 0.5
+        // }, 0);
 
-        this.createTimeline({
-            start: "center 40%",
-            end: "bottom top",
-            scrub:0.5,
-        }).to(title, {
-            y: yOffset * -3,
-            opacity:0,
-            filter: "blur(16px)",
-            duration: 0.5
-        }, 0);
+        // this.createTimeline({
+        //     start: "center 40%",
+        //     end: "bottom top",
+        //     scrub:0.5,
+        // }).to(title, {
+        //     y: yOffset * -3,
+        //     opacity:0,
+        //     filter: "blur(16px)",
+        //     duration: 0.5
+        // }, 0);
 
 
     },
