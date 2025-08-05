@@ -76,21 +76,21 @@ const app = {
                 "--rect-scroll-progress": 1,
             }, 0);
 
-            this.createTimeline({
-                start:"top bottom",
-                end:"top top",
-                scrub:true,
-            }).to(background, {
-                "--rect-scroll-brightness": 0.7,
-            }, 0);
+            // this.createTimeline({
+            //     start:"top bottom",
+            //     end:"top top",
+            //     scrub:true,
+            // }).to(background, {
+            //     "--rect-scroll-brightness": 0.7,
+            // }, 0);
 
-            this.createTimeline({
-                start:"top top",
-                end:"bottom top",
-                scrub:1,
-            }).to(background, {
-                "--rect-scroll-brightness": 0.25,
-            }, 0);
+            // this.createTimeline({
+            //     start:"top top",
+            //     end:"bottom top",
+            //     scrub:1,
+            // }).to(background, {
+            //     "--rect-scroll-brightness": 0.25,
+            // }, 0);
 
         }
 
