@@ -614,6 +614,9 @@
 		rootMargin: '0px 0px -50px 0px'
 	};
 
+	// 이전 스크롤 위치 추적
+	let lastScrollY = window.scrollY;
+
 	// 카운터 애니메이션 함수
 	function animateCounter(element) {
 		const target = parseFloat(element.dataset.target);
@@ -654,17 +657,26 @@
 	}
 
 	const observer = new IntersectionObserver(function(entries) {
+		// 현재 스크롤 위치 확인
+		const currentScrollY = window.scrollY;
+		const isScrollingDown = currentScrollY > lastScrollY;
+		
 		entries.forEach(entry => {
-			if (entry.isIntersecting) {
+			if (entry.isIntersecting && isScrollingDown) {
+				// 아래로 스크롤할 때만 애니메이션 실행
 				entry.target.classList.add('visible');
 				
 				if (entry.target.classList.contains('stat-number')) {
 					animateCounter(entry.target);
 				}
-			} else { 
+			} else if (!entry.isIntersecting && !isScrollingDown) {
+				// 위로 스크롤할 때만 visible 제거
 				entry.target.classList.remove('visible');
 			}
 		});
+		
+		// 스크롤 위치 업데이트
+		lastScrollY = currentScrollY;
 	}, observerOptions);
 
 	// fade-in 요소들 관찰

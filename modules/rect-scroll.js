@@ -81,7 +81,7 @@ const app = {
                 end:"top 25%",
                 scrub:0.1,
             }).to(background, {
-                "--rect-scroll-brightness": 0.7,
+                "--rect-scroll-brightness": 0.5,
             }, 0);
 
             this.createTimeline({
