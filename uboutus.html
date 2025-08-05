@@ -100,21 +100,21 @@
         color: white;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        animation: slideUp 1s ease-out;
+        animation: slideUp 0.3s ease-out;
     }
 
     .hero p {
         font-size: 1.3rem;
         color: rgba(255,255,255,0.9);
         margin-bottom: 2rem;
-        animation: slideUp 1s ease-out 0.3s both;
+        animation: slideUp 0.3s ease-out 0.1s both;
     }
 
     .hero-subtitle {
         font-size: 1.1rem;
         color: rgba(255,255,255,0.8);
         font-weight: 300;
-        animation: slideUp 1s ease-out 0.6s both;
+        animation: slideUp 0.3s ease-out 0.2s both;
     }
 
     /* Story Section */
@@ -176,13 +176,6 @@
         overflow: hidden;
     }
 
-    .story-visual::before {
-        content: '🎤';
-        font-size: 8rem;
-        opacity: 0.8;
-        animation: pulse 2s ease-in-out infinite;
-    }
-
     /* Services Section */
     .services {
         padding: 120px 0;
@@ -216,7 +209,7 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s ease;
+        transition: left 0.3s ease;
     }
 
     .service-card:hover::before {
@@ -245,6 +238,118 @@
     .service-card p {
         color: #b0b0b0;
         line-height: 1.6;
+    }
+
+    /* CEO Message Section */
+    .ceo-message {
+        padding: 120px 0;
+        background-color: white;
+        position: relative;
+        min-height: 120lvh;
+    }
+
+    .ceo-content {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        gap: 80px;
+        align-items: start;
+        margin-top: 60px;
+        h2.section-title {
+            color: black;
+        }
+    }
+
+    .ceo-profile {
+        text-align: center;
+        position: sticky;
+        top: 120px;
+    }
+
+    .profile-image {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-placeholder {
+        width: 280px;
+        height: 420px; /* 2:3 비율 (세로가 더 긴 비율) */
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6rem;
+        color: white;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .profile-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .ceo-info h3 {
+        font-size: 2rem;
+        color: white;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    .ceo-title {
+        color: #667eea;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+    }
+
+    .signature {
+        display: flex;
+        justify-content: center;
+        opacity: 0.8;
+    }
+
+    .ceo-message-text {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 50px 40px;
+        border-radius: 25px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .message-content h3 {
+        font-size: 2.2rem;
+        color: white;
+        margin-bottom: 2rem;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .message-content p {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .message-closing {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        color: #667eea !important;
+        text-align: center;
+        margin-top: 2.5rem !important;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Team Section */
@@ -389,6 +494,11 @@
         50% { transform: scale(1.1); opacity: 1; }
     }
 
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
         .hero h1 {
@@ -422,6 +532,33 @@
             gap: 30px;
         }
 
+        .ceo-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .ceo-profile {
+            position: static;
+        }
+
+        .profile-placeholder {
+            width: 200px;
+            height: 300px;
+            font-size: 4rem;
+        }
+
+        .ceo-info h3 {
+            font-size: 1.6rem;
+        }
+
+        .message-content h3 {
+            font-size: 1.8rem;
+        }
+
+        .ceo-message-text {
+            padding: 30px 25px;
+        }
+
         .vision h2 {
             font-size: 2.2rem;
         }
@@ -440,7 +577,7 @@
     .fade-in {
         opacity: 0;
         transform: translateY(30px);
-        transition: all 0.6s ease;
+        transition: all 0.3s ease;
     }
 
     .fade-in.visible {
@@ -502,6 +639,66 @@
         </div>
     </section>
 
+    <!-- CEO Message Section -->
+    <section class="ceo-message">
+        <div class="container">
+            <h2 class="section-title fade-in">대표자 인사</h2>
+            <div class="ceo-content">
+                <div class="ceo-profile fade-in">
+                    <div class="profile-image">
+                        <div class="profile-placeholder">
+                            <span>👤</span>
+                        </div>
+                    </div>
+                    <div class="ceo-info">
+                        <h3>대표자 성명</h3>
+                        <p class="ceo-title">Vocal Studio JU 대표</p>
+                        <div class="signature">
+                            <svg width="120" height="40" viewBox="0 0 120 40">
+                                <path d="M10 25 Q20 15, 30 25 Q40 35, 50 25 Q60 15, 70 25 Q80 35, 90 25 Q100 15, 110 25" 
+                                      stroke="#667eea" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="ceo-message-text fade-in">
+                    <div class="message-content">
+                        <h3>저는 Vocal Studio의 대표자입니다.</h3>
+                        <p>
+                            안녕하세요, 이것은 Vocal Studio JU 대표 예제 인사말입니다.
+                        </p>
+                        <p>
+                            이 인삿말은 예시로 작성되었습니다.
+                            지난 n년간 음악교육 현장에서 수많은 수강생들과 함께했습니다.
+                            저를 포함하여 JU의 강사진들은 정해진 틀에서 이루어지는 형식적인 레슨방식보다는 수강생들이 직면하는 문제점들과 실질적인 고민들을 해결해 주는것을 목표로 하고 있습니다.
+
+                            이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+
+                            단순히 기술을 가르치는 것을 넘어, 
+                            수강생들이 진짜 본인의 음악을 찾고 그 속에서 자유롭게 노래할 수 있도록, 
+                            음악을 사랑하는 모든 수강생분들이 음악을 통해 자신만의 색깔을 찾고, 
+                            꿈을 실현할 수 있도록하는 JU만의 차별화된 교육 철학을 이어나가고자 합니다.
+
+                            이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+                        </p>
+ 
+                        <p>
+                            이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+                        </p>
+                        <p class="message-closing">
+                            이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+                            이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 
+                            이것은 테스트 문장입니다. 
+
+                            JU와 함께 특별한 음악 여정을 시작해보세요. 
+                            이것은 테스트 문장입니다.  이것은 의미가 없는 테스트 문장이기 때문입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Vision Section -->
     <section class="vision">
         <div class="container">
@@ -514,7 +711,7 @@
             </div>
         <div class="vision-stats">
             <div class="stat fade-in">
-                <div class="stat-number" data-target="500" data-unit="+"></div>
+                <div class="stat-number" data-target="999" data-unit="+"></div>
                 <div class="stat-label">지금까지 함께한 수강생</div>
                 <div class="reference">2024년 7월까지 집계 기준</div>
             </div>
