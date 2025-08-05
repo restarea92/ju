@@ -385,12 +385,12 @@
 .fade-in {
 	opacity: 0;
 	transform: translateY(30px);
-	transition: 0;
+	transition: var(--transition-smooth);
 
 	&.visible {
 		opacity: 1;
 		transform: translateY(0);
-		transition: var(--transition-smooth);
+		
 	}
 }
 
@@ -609,11 +609,13 @@
 
 <script>
 // 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+const options = {
+	observerOptions: {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	},
+	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
 };
-
 // 카운터 애니메이션 함수
 function animateCounter(element) {
     const target = parseFloat(element.dataset.target);
@@ -659,18 +661,27 @@ function animateCounter(element) {
 
 const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
+        const el = entry.target;
+		const yOffset = options.transformYOffset || 0;
+		const rectTop = el.getBoundingClientRect().top;
+		const viewportHeight = window.innerHeight;
+
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            
-            // stat-number인 경우 카운터 애니메이션 실행
-            if (entry.target.classList.contains('stat-number')) {
-                animateCounter(entry.target);
+            el.classList.add('visible');
+
+            if (el.classList.contains('stat-number')) {
+                animateCounter(el);
             }
+
         } else {
-            entry.target.classList.remove('visible');
-		}
+
+            // 요소가 뷰포트 아래로 완전히 벗어났고, yOffset만큼 더 아래일 때
+            if (rectTop > viewportHeight + yOffset) {
+                el.classList.remove('visible');
+            }
+        }
     });
-}, observerOptions);
+}, options.observerOptions);
 
 // 기존 fade-in 관찰
 document.querySelectorAll('.fade-in').forEach(el => {
