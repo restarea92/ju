@@ -49,8 +49,6 @@ const app = {
         if (title) gsap.set(title, { 
             y: yOffset * 3, 
             x: 0,
-            opacity: 0,
-            filter: 'blur(16px)'
         });
 
         if (stickyWrapper) {
@@ -126,7 +124,6 @@ const app = {
             scrub:0.5,
         }).to(title, {
             opacity:1,
-            filter: "blur(0px)",
             duration: 0.5
         }, 0);
 
@@ -136,7 +133,6 @@ const app = {
             scrub:0.5,
         }).to(title, {
             opacity:0,
-            filter: "blur(16px)",
             duration: 0.5
         }, 0);
 
