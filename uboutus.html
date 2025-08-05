@@ -612,7 +612,7 @@
 const options = {
 	observerOptions: {
 		threshold: 0.1,
-		rootMargin: '-50px 0px -50px 0px'
+		rootMargin: '0px 0px -50px 0px'
 	},
 	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
 };
@@ -662,29 +662,36 @@ function animateCounter(element) {
 const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         const el = entry.target;
+
         if (entry.isIntersecting) {
-            el.classList.add('visible');
+            if (!el.classList.contains('visible')) {
+                el.classList.add('visible');
 
-            if (el.classList.contains('stat-number')) {
-                animateCounter(el);
+                if (el.classList.contains('stat-number')) {
+                    animateCounter(el); // 중복 실행 방지
+                }
             }
-        } else {
-            const yOffset = options.transformYOffset || 0;
-			const rootMargin = options.observerOptions.rootMargin;
-            const rectTop = el.getBoundingClientRect().top;
-            const viewportHeight = window.innerHeight;
 
-            // 요소가 뷰포트 아래로 완전히 벗어났고, yOffset만큼 더 아래일 때
-			console.log({el, rectTop, viewportHeight, yOffset});
-            if (rectTop > viewportHeight + yOffset) {
+        } else {
+            const elementTop = entry.boundingClientRect.top;
+            const viewportTop = entry.rootBounds.top;
+
+            // 아래로 스크롤해 나간 경우에만 클래스 제거
+            if (elementTop > viewportTop) {
                 el.classList.remove('visible');
             }
         }
     });
 }, options.observerOptions);
 
-// 기존 fade-in 관찰
 document.querySelectorAll('.fade-in').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    
+    if (rect.bottom < 0) {
+        el.classList.add('visible');
+    }
+
+    // 관찰 시작
     observer.observe(el);
 });
 
