@@ -68,8 +68,8 @@ const app = {
             }, 0);
 
             this.createTimeline({
-                start:"top bottom",
-                end:"top center",
+                start:"top center",
+                end:"top top",
                 scrub:0.1,
             }).to(stickyWrapper, {
                 "--rect-scroll-progress": 1,
@@ -96,7 +96,7 @@ const app = {
             scrub:1,
         }).to(title, {
             y: 0,
-            ease: "power3.out",
+            ease: "power2.inOut",
             opacity:1,
             filter: "blur(0px)",
             duration: 0.5
@@ -108,6 +108,7 @@ const app = {
             scrub:1,
         }).to(title, {
             y: yOffset * -3,
+            ease: "power2.inOut",
             opacity:0,
             filter: "blur(16px)",
             duration: 0.5
