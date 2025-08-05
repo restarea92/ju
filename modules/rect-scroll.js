@@ -59,36 +59,36 @@ const app = {
             });  
 
             this.createTimeline({
-                start:"top center",
-                end:"top top",
+                start:"top 75%",
+                end:"top 25%",
                 scrub:1,
             }).to(stickyWrapper, {
                 "--rect-scroll-inverted-progress": 0,
             }, 0);
 
-            this.createTimeline({
-                start:"top 40%",
-                end:"top top",
-                scrub:0.1,
-            }).to(stickyWrapper, {
-                "--rect-scroll-progress": 1,
-            }, 0);
+            // this.createTimeline({
+            //     start:"top 40%",
+            //     end:"top top",
+            //     scrub:0.1,
+            // }).to(stickyWrapper, {
+            //     "--rect-scroll-progress": 1,
+            // }, 0);
 
-            this.createTimeline({
-                start:"top bottom",
-                end:"top top",
-                scrub:true,
-            }).to(background, {
-                "--rect-scroll-brightness": 0.7,
-            }, 0);
+            // this.createTimeline({
+            //     start:"top bottom",
+            //     end:"top top",
+            //     scrub:true,
+            // }).to(background, {
+            //     "--rect-scroll-brightness": 0.7,
+            // }, 0);
 
-            this.createTimeline({
-                start:"top top",
-                end:"bottom top",
-                scrub:1,
-            }).to(background, {
-                "--rect-scroll-brightness": 0.25,
-            }, 0);
+            // this.createTimeline({
+            //     start:"top top",
+            //     end:"bottom top",
+            //     scrub:1,
+            // }).to(background, {
+            //     "--rect-scroll-brightness": 0.25,
+            // }, 0);
 
         }
 
@@ -102,14 +102,14 @@ const app = {
                     calc( var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) )
                     round calc( max(5lvh, 5lvw) * var(--rect-scroll-inverted-progress) )
                 )`,
-                filter: "brightness(--rect-scroll-brightness)",
+                filter: "brightness(var(--rect-scroll-brightness))",
             });
         } 
         
     
         this.createTimeline({
-            start: "top top",
-            end: "top center",
+            start: "top 20%",
+            end: "top 80%",
             scrub:1,
         }).to(title, {
             y: yOffset * -3,
