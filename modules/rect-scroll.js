@@ -120,6 +120,30 @@ const app = {
             duration: 1
         }, 0);
 
+                
+        this.createTimeline({
+            start:"top bottom",
+            end:"top 25%",
+            scrub:0.5,
+        }).to(title, {
+            y: 0,
+            opacity:1,
+            filter: "blur(0px)",
+            duration: 0.5
+        }, 0);
+
+        this.createTimeline({
+            start: "top top",
+            end: "bottom top",
+            scrub:0.5,
+        }).to(title, {
+            y: yOffset * -3,
+            opacity:0,
+            filter: "blur(16px)",
+            duration: 0.5
+        }, 0);
+
+
     },
     
     getInitialSize() {
