@@ -110,8 +110,8 @@ const app = {
         
         this.createTimeline({
             start:"top bottom",
-            end:"top center",
-            scrub:1,
+            end:"top 45%",
+            scrub:0.5,
         }).to(title, {
             y: 0,
             ease: "power2.inOut",
@@ -121,9 +121,9 @@ const app = {
         }, 0);
 
         this.createTimeline({
-            start: "top center",
+            start: "top 55%",
             end: "bottom top",
-            scrub:1,
+            scrub:0.5,
         }).to(title, {
             y: yOffset * -3,
             ease: "power2.inOut",

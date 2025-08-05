@@ -63,93 +63,96 @@
 
 <style>
     /* About Us 전용 스타일 */
-    .about-hero {
+
+    /* Hero Section */
+    .hero {
+        height: 100vh;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
-        padding: 80px 0;
-        margin: -2rem -1rem 0 -1rem;
-        border-radius: 0 0 1rem 1rem;
         position: relative;
         overflow: hidden;
     }
 
-    .about-hero::before {
+    .hero::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23a)"><animate attributeName="r" values="100;200;100" dur="8s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="100" fill="url(%23a)"><animate attributeName="r" values="80;160;80" dur="6s" repeatCount="indefinite"/></circle></svg>') center/cover;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23a)"><animate attributeName="r" values="100;200;100" dur="8s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="100" fill="url(%23a)"><animate attributeName="r" values="80;160;80" dur="6s" repeatCount="indefinite"/></circle><circle cx="500" cy="700" r="120" fill="url(%23a)"><animate attributeName="r" values="90;180;90" dur="10s" repeatCount="indefinite"/></circle></svg>') center/cover;
         animation: float 20s ease-in-out infinite;
     }
 
-    .about-hero-content {
-        position: relative;
+    .hero-content {
         z-index: 2;
-        max-width: var(--default-content-width);
-        margin: 0 auto;
-        padding: 0 2rem;
+        position: relative;
+        max-width: 800px;
+        padding: 0 20px;
     }
 
-    .about-hero h1 {
-        font-size: 3.5rem;
+    .hero h1 {
+        font-size: 4rem;
         font-weight: 700;
+        color: white;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        animation: slideUp 1s ease-out;
     }
 
-    .about-hero p {
-        font-size: 1.2rem;
-        opacity: 0.9;
-        margin-bottom: 0.5rem;
+    .hero p {
+        font-size: 1.3rem;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 2rem;
+        animation: slideUp 1s ease-out 0.3s both;
     }
 
-    .about-hero .subtitle {
-        font-size: 1rem;
-        opacity: 0.8;
+    .hero-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.8);
         font-weight: 300;
+        animation: slideUp 1s ease-out 0.6s both;
     }
 
-    .about-section {
-        padding: 60px 0;
-        max-width: var(--default-content-width);
+    /* Story Section */
+    .story {
+        padding: 120px 0;
+        background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+        position: relative;
+    }
+
+    .container {
+        max-width: 1200px;
         margin: 0 auto;
+        padding: 0 20px;
     }
 
     .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 3rem;
         text-align: center;
-        margin-bottom: 3rem;
-        color: #333;
+        margin-bottom: 4rem;
+        color: white;
         position: relative;
     }
 
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        border-radius: 2px;
-    }
 
-    .story-grid {
+    .story-content {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        gap: 60px;
         align-items: center;
-        margin-bottom: 40px;
+    }
+
+    .story-text {
+        color: #e0e0e0;
     }
 
     .story-text h3 {
-        font-size: 1.8rem;
-        color: #333;
+        font-size: 2rem;
+        color: white;
         margin-bottom: 1.5rem;
         background: linear-gradient(45deg, #667eea, #764ba2);
         -webkit-background-clip: text;
@@ -158,47 +161,75 @@
 
     .story-text p {
         font-size: 1.1rem;
-        line-height: 1.7;
-        color: #666;
         margin-bottom: 1.5rem;
+        line-height: 1.8;
     }
 
     .story-visual {
-        height: 300px;
+        position: relative;
+        height: 400px;
         background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 15px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 5rem;
-        color: white;
-        opacity: 0.9;
+        overflow: hidden;
+    }
+
+    .story-visual::before {
+        content: '🎤';
+        font-size: 8rem;
+        opacity: 0.8;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Services Section */
+    .services {
+        padding: 120px 0;
+        background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
     }
 
     .services-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        margin-top: 60px;
     }
 
     .service-card {
-        background: white;
+        background: rgba(255, 255, 255, 0.05);
         padding: 40px 30px;
-        border-radius: 15px;
+        border-radius: 20px;
         text-align: center;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
-        border: 1px solid #e0e0e0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .service-card:hover::before {
+        left: 100%;
     }
 
     .service-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
     }
 
     .service-icon {
-        font-size: 2.5rem;
+        font-size: 3rem;
         margin-bottom: 1.5rem;
         background: linear-gradient(45deg, #667eea, #764ba2);
         -webkit-background-clip: text;
@@ -206,109 +237,116 @@
     }
 
     .service-card h4 {
-        font-size: 1.3rem;
-        color: #333;
+        font-size: 1.5rem;
+        color: white;
         margin-bottom: 1rem;
-        font-weight: 600;
     }
 
     .service-card p {
-        color: #666;
+        color: #b0b0b0;
         line-height: 1.6;
-        font-size: 0.95rem;
+    }
+
+    /* Team Section */
+    .team {
+        padding: 120px 0;
+        background: linear-gradient(45deg, #1a1a1a, #333);
     }
 
     .team-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        margin-top: 60px;
     }
 
     .team-member {
-        background: white;
-        border-radius: 15px;
-        padding: 30px 25px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 40px 30px;
         text-align: center;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
-        border: 1px solid #e0e0e0;
     }
 
     .team-member:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
     }
 
     .member-avatar {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         background: linear-gradient(45deg, #667eea, #764ba2);
         margin: 0 auto 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
+        font-size: 3rem;
         color: white;
-        font-weight: bold;
     }
 
     .member-name {
-        font-size: 1.3rem;
-        color: #333;
+        font-size: 1.5rem;
+        color: white;
         margin-bottom: 0.5rem;
-        font-weight: 600;
     }
 
     .member-role {
         color: #667eea;
         font-weight: 500;
         margin-bottom: 1rem;
-        font-size: 0.95rem;
     }
 
     .member-bio {
-        color: #666;
-        line-height: 1.5;
-        font-size: 0.9rem;
+        color: #b0b0b0;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    /* Vision Section */
+    .vision {
+        padding: 120px 0;
+        background: linear-gradient(135deg, #333, #2d2d2d);
+        text-align: center;
     }
 
     .vision-content {
-        text-align: center;
         max-width: 800px;
-        margin: 0 auto 50px;
+        margin: 0 auto;
     }
 
-    .vision-content h3 {
-        font-size: 2rem;
-        color: #333;
+    .vision h2 {
+        font-size: 3rem;
+        color: white;
         margin-bottom: 2rem;
         background: linear-gradient(45deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
-    .vision-content p {
-        font-size: 1.1rem;
-        color: #666;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
+    .vision p {
+        font-size: 1.3rem;
+        color: #e0e0e0;
+        line-height: 1.8;
+        margin-bottom: 2rem;
     }
 
-    .stats-grid {
+    .vision-stats {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
+        gap: 40px;
+        margin-top: 60px;
     }
 
-    .stat-card {
-        background: white;
+    .stat {
+        background: rgba(255, 255, 255, 0.05);
         padding: 30px 20px;
         border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        border: 1px solid #e0e0e0;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .stat-number {
@@ -319,19 +357,83 @@
     }
 
     .stat-label {
-        color: #666;
+        color: #b0b0b0;
         font-size: 0.95rem;
     }
 
-    /* 애니메이션 */
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-10px) rotate(180deg); }
+    /* Animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+        }
+
+        .story-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .story-visual {
+            height: 300px;
+        }
+
+        .story-visual::before {
+            font-size: 5rem;
+        }
+
+        .services-grid,
+        .team-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .vision h2 {
+            font-size: 2.2rem;
+        }
+
+        .vision p {
+            font-size: 1.1rem;
+        }
+
+        .vision-stats {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    /* Scroll animations */
     .fade-in {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
         transition: all 0.6s ease;
     }
 
@@ -339,175 +441,130 @@
         opacity: 1;
         transform: translateY(0);
     }
-
-    /* 반응형 */
-    @media (max-width: 768px) {
-        .about-hero {
-            padding: 60px 0;
-            margin: -2rem -0.5rem 0 -0.5rem;
-        }
-
-        .about-hero h1 {
-            font-size: 2.5rem;
-        }
-
-        .about-hero p {
-            font-size: 1.1rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-        }
-
-        .story-grid {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .story-visual {
-            height: 200px;
-            font-size: 3rem;
-        }
-
-        .services-grid,
-        .team-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .about-section {
-            padding: 40px 0;
-        }
-    }
 </style>
 
+
 <div id="about-ju" class="common-container">
-    <!-- Hero Section -->
-    <div class="about-hero">
-        <div class="about-hero-content">
-            <h1>Vocal Studio JU</h1>
-            <p>25자 내외 길이의 간단한 소개문장을 작성합니다.</p>
-            <p class="subtitle">Professional Voice & Vocal Training • Some word • Some word</p>
-        </div>
-    </div>
 
     <!-- Story Section -->
-    <section class="about-section">
-        <h2 class="section-title">Our Story</h2>
-        <div class="story-grid">
-            <div class="story-text">
-                <h3>음성 예술의 새로운 지평을 열다</h3>
-                <p>
-                    Vocalstudio JU는 2015년, 음성에 대한 깊은 열정과 전문성을 바탕으로 설립되었습니다. 
-                    우리는 단순한 보컬 트레이닝을 넘어서, 각 개인의 고유한 음색과 표현력을 발견하고 
-                    발전시키는 것을 목표로 합니다.
-                </p>
-                <p>
-                    지난 8년간 수많은 아티스트들과 함께하며, 그들의 꿈을 현실로 만드는 여정에 동행해왔습니다. 
-                    프로페셔널한 녹음 시설과 최신 오디오 장비, 그리고 풍부한 경험을 가진 전문가들이 
-                    여러분의 음악적 비전을 실현할 수 있도록 최선을 다하고 있습니다.
-                </p>
+    <section class="story">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Story</h2>
+            <div class="story-content">
+                <div class="story-text fade-in">
+                    <h3>음성 예술의 새로운 지평을 열다</h3>
+                    <p>
+                        Vocalstudio JU는 2015년, 음성에 대한 깊은 열정과 전문성을 바탕으로 설립되었습니다. 
+                        우리는 단순한 보컬 트레이닝을 넘어서, 각 개인의 고유한 음색과 표현력을 발견하고 
+                        발전시키는 것을 목표로 합니다.
+                    </p>
+                    <p>
+                        지난 8년간 수많은 아티스트들과 함께하며, 그들의 꿈을 현실로 만드는 여정에 동행해왔습니다. 
+                        프로페셔널한 녹음 시설과 최신 오디오 장비, 그리고 풍부한 경험을 가진 전문가들이 
+                        여러분의 음악적 비전을 실현할 수 있도록 최선을 다하고 있습니다.
+                    </p>
+                </div>
+                <div class="story-visual fade-in"></div>
             </div>
-            <div class="story-visual">🎤</div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="about-section">
-        <h2 class="section-title">Our Services</h2>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">🎵</div>
-                <h4>보컬 트레이닝</h4>
-                <p>개인별 맞춤 커리큘럼으로 발성, 호흡법, 표현력을 체계적으로 향상시킵니다. 초보자부터 프로까지 모든 레벨을 지원합니다.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🎙️</div>
-                <h4>레코딩 & 믹싱</h4>
-                <p>최첨단 장비와 음향 시설을 갖춘 스튜디오에서 최고 품질의 레코딩과 전문적인 믹싱 마스터링 서비스를 제공합니다.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🎧</div>
-                <h4>오디오 프로덕션</h4>
-                <p>작곡, 편곡부터 최종 마스터링까지 전 과정을 아우르는 종합적인 음악 제작 서비스를 제공합니다.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">🎭</div>
-                <h4>퍼포먼스 코칭</h4>
-                <p>무대 매너, 관중과의 소통, 감정 표현 등 완성도 높은 퍼포먼스를 위한 종합적인 코칭을 제공합니다.</p>
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎵</div>
+                    <h4>보컬 트레이닝</h4>
+                    <p>개인별 맞춤 커리큘럼으로 발성, 호흡법, 표현력을 체계적으로 향상시킵니다. 초보자부터 프로까지 모든 레벨을 지원합니다.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎙️</div>
+                    <h4>레코딩 & 믹싱</h4>
+                    <p>최첨단 장비와 음향 시설을 갖춘 스튜디오에서 최고 품질의 레코딩과 전문적인 믹싱 마스터링 서비스를 제공합니다.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎧</div>
+                    <h4>오디오 프로덕션</h4>
+                    <p>작곡, 편곡부터 최종 마스터링까지 전 과정을 아우르는 종합적인 음악 제작 서비스를 제공합니다.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎭</div>
+                    <h4>퍼포먼스 코칭</h4>
+                    <p>무대 매너, 관중과의 소통, 감정 표현 등 완성도 높은 퍼포먼스를 위한 종합적인 코칭을 제공합니다.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section class="about-section">
-        <h2 class="section-title">Our Team</h2>
-        <div class="team-grid">
-            <div class="team-member fade-in">
-                <div class="member-avatar">JU</div>
-                <div class="member-name">박정우</div>
-                <div class="member-role">Creative Director & Vocal Coach</div>
-                <div class="member-bio">
-                    15년간의 음악 업계 경험을 바탕으로 스튜디오를 이끌고 있습니다. 
-                    버클리 음대 출신으로 수많은 아티스트들의 성장을 도왔습니다.
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-avatar">JU</div>
+                    <div class="member-name">박정우</div>
+                    <div class="member-role">Creative Director & Vocal Coach</div>
+                    <div class="member-bio">
+                        15년간의 음악 업계 경험을 바탕으로 스튜디오를 이끌고 있습니다. 
+                        버클리 음대 출신으로 수많은 아티스트들의 성장을 도왔습니다.
+                    </div>
                 </div>
-            </div>
-            <div class="team-member fade-in">
-                <div class="member-avatar">🎵</div>
-                <div class="member-name">김서연</div>
-                <div class="member-role">Senior Vocal Instructor</div>
-                <div class="member-bio">
-                    클래식부터 팝까지 다양한 장르의 전문성을 갖춘 보컬 트레이너입니다. 
-                    개인별 특성에 맞는 맞춤형 레슨으로 정평이 나있습니다.
+                <div class="team-member fade-in">
+                    <div class="member-avatar">🎵</div>
+                    <div class="member-name">김서연</div>
+                    <div class="member-role">Senior Vocal Instructor</div>
+                    <div class="member-bio">
+                        클래식부터 팝까지 다양한 장르의 전문성을 갖춘 보컬 트레이너입니다. 
+                        개인별 특성에 맞는 맞춤형 레슨으로 정평이 나있습니다.
+                    </div>
                 </div>
-            </div>
-            <div class="team-member fade-in">
-                <div class="member-avatar">🎛️</div>
-                <div class="member-name">이민호</div>
-                <div class="member-role">Audio Engineer</div>
-                <div class="member-bio">
-                    10년 이상의 레코딩 엔지니어 경력을 가지고 있으며, 
-                    수많은 히트곡의 제작에 참여한 오디오 전문가입니다.
+                <div class="team-member fade-in">
+                    <div class="member-avatar">🎛️</div>
+                    <div class="member-name">이민호</div>
+                    <div class="member-role">Audio Engineer</div>
+                    <div class="member-bio">
+                        10년 이상의 레코딩 엔지니어 경력을 가지고 있으며, 
+                        수많은 히트곡의 제작에 참여한 오디오 전문가입니다.
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vision Section -->
-    <section class="about-section">
-        <h2 class="section-title">Our Vision</h2>
-        <div class="vision-content fade-in">
-            <h3>음성이 가진 무한한 가능성을 믿습니다</h3>
-            <p>
-                모든 사람은 고유한 음색과 표현력을 가지고 있으며, 이를 발견하고 발전시키는 것이 우리의 사명입니다.
-                Vocalstudio JU는 단순히 기술을 가르치는 것을 넘어서, 각자의 음악적 정체성을 찾아가는 여정에 
-                동반자가 되고자 합니다.
-            </p>
-            <p>
-                전문적인 교육과 창조적인 환경을 통해 여러분의 꿈을 현실로 만들어보세요.
-            </p>
-        </div>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">수강생</div>
+    <section class="vision">
+        <div class="container">
+            <div class="vision-content fade-in">
+                <h2>Our Vision</h2>
+                <p>
+                    우리는 음성이 가진 무한한 가능성을 믿습니다. 모든 사람은 고유한 음색과 표현력을 가지고 있으며, 
+                    이를 발견하고 발전시키는 것이 우리의 사명입니다.
+                </p>
+                <p>
+                    Vocalstudio JU는 단순히 기술을 가르치는 것을 넘어서, 각자의 음악적 정체성을 찾아가는 여정에 
+                    동반자가 되고자 합니다. 전문적인 교육과 창조적인 환경을 통해 여러분의 꿈을 현실로 만들어보세요.
+                </p>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">8</div>
-                <div class="stat-label">운영 연수</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">200+</div>
-                <div class="stat-label">제작 곡수</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">만족도</div>
+            <div class="vision-stats">
+                <div class="stat fade-in">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">수강생</div>
+                </div>
+                <div class="stat fade-in">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">운영 연수</div>
+                </div>
+                <div class="stat fade-in">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">제작 곡수</div>
+                </div>
+                <div class="stat fade-in">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">만족도</div>
+                </div>
             </div>
         </div>
     </section>
