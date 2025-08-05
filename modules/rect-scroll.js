@@ -103,7 +103,8 @@ const app = {
                     calc( var(--h2-font-size) * var(--rect-scroll-inverted-progress) )
                     calc( var(--clip-path-start-size) * var(--rect-scroll-inverted-progress) )
                     round calc( max(5lvh, 5lvw) * var(--rect-scroll-inverted-progress) )
-                )`
+                )`,
+                filter: "brightness(--rect-scroll-brightness)",
             });
         } 
         
