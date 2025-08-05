@@ -117,7 +117,6 @@ const app = {
             ease: "power2.inOut",
             opacity:1,
             filter: "blur(0px)",
-            duration: 0.5
         }, 0);
 
         this.createTimeline({
@@ -129,7 +128,6 @@ const app = {
             ease: "power2.inOut",
             opacity:0,
             filter: "blur(16px)",
-            duration: 0.5
         }, 0);
 
     },
