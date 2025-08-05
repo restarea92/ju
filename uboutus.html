@@ -91,9 +91,6 @@
 	--common-text-color: white;
 	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
 	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	.overlay {
 		position: absolute;
 		width: 100%;
@@ -110,14 +107,34 @@
 		margin: 0;
 		padding: 0;
 		position: relative;
-
-		span.overlay-text {
+		line-height: 1;
+		margin: 0 auto;
+		width: fit-content;
+		span {
+			display: flex;
+			line-height: 1;
+		}
+		span.content-title-text {
+			line-height: 1;
 			width: 100%;
 			height: fit-content;
-			.back {
+			&.back {
 				position: absolute;
 				top:0;
 				left:0;
+			}
+			.overlay-text-wrapper {
+				position: relative;
+			}
+			.overlay-text {
+				position: absolute;
+				top:0;
+				&.left {
+					right: 100%;
+				}
+				&.right {
+					left: 100%;
+				}
 			}
 		}
 	}
@@ -125,6 +142,7 @@
 		z-index: 1;
 	}
 	.story-content {
+		margin-top: 4rem;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 60px;
@@ -496,54 +514,161 @@
 
 <!-- Story Section -->
 <div id="about-ju" class="story common-container">
-	<div class="overlay">
-	</div>
-	<div class="content-wrapper">
-		<h2 class="content-title">
-			<span class="overlay-text">ABOUT JU.</span>
-			<span class="overlay-text back">ALL ABOUT VOICE.<span style="display: none;">.</span></span>
-		</h2>
-		<div class="story-content">
-			<div class="story-text">
-				<h3>15~25자 내외의 제목 영억.</h3>
-				<p>
-					이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-					이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.
-				</p>
-				<p>
-					이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-					이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
-				</p>
+	<div class="hero-spacer">
+		<div class="overlay">
+		</div>
+		<div class="content-wrapper">
+			<h2 class="content-title">
+				<span class="content-title-text">ABOUT JU.</span>
+				<span class="content-title-text back">
+					<span class="overlay-text-wrapper">
+						<span class="overlay-text left">ALL&nbsp;</span>
+						<span>ABOUT&nbsp;</span>
+						<span class="overlay-text right">VOICE.</span>
+					</span>
+					<span style="color:transparent; opacity: 0;" >JU.</span>
+				</span>
+			</h2>
+			<div class="story-content">
+				<div class="story-text">
+					<h3>15~25자 내외의 제목 영억.</h3>
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.
+					</p>
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+					</p>
+				</div>
+				<div class="story-visual fade-in"></div>
 			</div>
-			<div class="story-visual fade-in"></div>
 		</div>
 	</div>
 </div>
 
+
+<script type="module">
+/**
+ * Visual Scroll Animation Module
+ * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
+ * @version 1.0.7
+ */
+
+// import { initGSAP } from './gsapUtils.js';
+import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
+
+const app = {
+    // ========== Configuration ==========
+    CONFIG: {
+        VERSION: '1.0.0',
+    },
+
+    // ========== DOM Elements Cache ==========
+    elements: {
+        spacer: document.querySelector('.hero-spacer'),
+		get trigger() { return this.spacer },
+		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper'); },
+        get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text.back'); },
+    },
+	
+    // ========== Initialization ==========
+    /**
+     * Initialize the application
+     */
+    init() {
+        console.log(this.CONFIG.VERSION);
+        if (!initGSAP()) return;
+
+        this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
+        this.initHeroScroll();
+    },
+
+    // ========== rect Scroll ==========
+    /**
+     * Initialize rect scroll animations
+     * Setup individual rect scroll container
+     */
+    initHeroScroll() {
+		const trigger = this.elements.trigger;
+		const contentTitleOverlay = this.elements.contentTitleOverlay;
+		const contentWrapper = this.elements.contentWrapper;
+		
+        // 초기 위치 세팅
+        if (trigger && contentTitleOverlay) {
+			gsap.set(trigger, { 
+				"--hero-scroll-inverted-progress": 1,
+                "--hero-scroll-progress": 0,
+				height: "200lvh",
+			});
+		
+			gsap.set(contentWrapper, { 
+				position: "sticky",
+				top:0,
+				opacity: 0.5,
+			});
+
+
+		} 
+    },
+
+    // ========== 상태 관리 ==========
+    setHeaderHeightVariable() {
+        const header = document.getElementById('s2025072923c95d7545c67');
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    },
+
+
+    createTimeline(options = {}) {
+        return gsap.timeline({
+            scrollTrigger: {
+                trigger: this.elements.trigger, 
+                start: "top bottom",
+                end: "bottom bottom",
+                scrub: 1,
+                onUpdate: self => {
+                    const progressPercent = (self.progress * 100).toFixed(0);
+                },
+                ...options,
+            }
+        });
+    },
+}
+
+// export default app;
+
+document.addEventListener('DOMContentLoaded', () => {
+	app.init();
+});
+</script>
+
 <!-- Services Section -->
 <div id="about-ju-services" class="services common-container">
 	<div class="content-wrapper">
-		<h2 class="content-title fade-in">Why JU?</h2>
-		<div class="services-grid">
-			<div class="service-card fade-in">
-				<div class="service-icon">🎵</div>
-				<h4>Music</h4>
-				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎙️</div>
-				<h4>Recording</h4>
-				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎧</div>
-				<h4>Headphone</h4>
-				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎭</div>
-				<h4>Acting</h4>
-				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+		<div class="content">
+			<h2 class="content-title fade-in">Why JU?</h2>
+			<div class="services-grid">
+				<div class="service-card fade-in">
+					<div class="service-icon">🎵</div>
+					<h4>Music</h4>
+					<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+				</div>
+				<div class="service-card fade-in">
+					<div class="service-icon">🎙️</div>
+					<h4>Recording</h4>
+					<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
+				</div>
+				<div class="service-card fade-in">
+					<div class="service-icon">🎧</div>
+					<h4>Headphone</h4>
+					<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+				</div>
+				<div class="service-card fade-in">
+					<div class="service-icon">🎭</div>
+					<h4>Acting</h4>
+					<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+				</div>
 			</div>
 		</div>
 	</div>
