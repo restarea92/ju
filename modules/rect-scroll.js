@@ -79,7 +79,7 @@ const app = {
             this.createTimeline({
                 start:"top bottom",
                 end:"top top",
-                scrub:1,
+                scrub:true,
             }).to(background, {
                 "--rect-scroll-brightness": 0.7,
             }, 0);
@@ -87,7 +87,7 @@ const app = {
             this.createTimeline({
                 start:"top top",
                 end:"bottom top",
-                scrub:0.1,
+                scrub:1,
             }).to(background, {
                 "--rect-scroll-brightness": 0.25,
             }, 0);
@@ -110,7 +110,7 @@ const app = {
         
     
         this.createTimeline({
-            start: "top bottom",
+            start: "top top",
             end: "bottom top",
             scrub:1,
         }).to(title, {
@@ -122,8 +122,8 @@ const app = {
 
                 
         this.createTimeline({
-            start:"top bottom",
-            end:"top 25%",
+            start:"top top",
+            end:"center center",
             scrub:0.5,
         }).to(title, {
             y: 0,
@@ -133,7 +133,7 @@ const app = {
         }, 0);
 
         this.createTimeline({
-            start: "top top",
+            start: "center center",
             end: "bottom top",
             scrub:0.5,
         }).to(title, {
