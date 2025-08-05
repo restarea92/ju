@@ -514,22 +514,22 @@
             </div>
         <div class="vision-stats">
             <div class="stat fade-in">
-                <div class="stat-number" data-target="500" data-unit="+"><span class="stat-value">0</span><span>명</span></div>
+                <div class="stat-number" data-target="500" data-unit="+"></div>
                 <div class="stat-label">지금까지 함께한 수강생</div>
                 <div class="reference">2024년 7월까지 집계 기준</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="8" data-unit=""><span class="stat-value">0</span><span>명</span></div>
+                <div class="stat-number" data-target="8" data-unit=" 년">0</div>
                 <div class="stat-label">운영 연수</div>
                 <div class="reference">2025년 현재 기준</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="15" data-unit="+"><span class="stat-value">0</span><span>명</span></div>
+                <div class="stat-number" data-target="15" data-unit="+">0</div>
                 <div class="stat-label">지점 수</div>
                 <div class="reference">2025년 현재</div>
             </div>
             <div class="stat fade-in">
-                <div class="stat-number" data-target="98" data-unit="%"><span class="stat-value">0</span><span>명</span></div>
+                <div class="stat-number" data-target="98" data-unit="%">0</div>
                 <div class="stat-label">만족도</div>
                 <div class="reference">2024년 7월 온라인 후기 집계기준</div>
             </div>
@@ -550,7 +550,6 @@ function animateCounter(element) {
     const target = parseFloat(element.dataset.target);
     const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
     const duration = 3000; // 2초
-    const statValue = element.querySelector('span.stat-value');
     let current = 0;
     
     // 퍼센트인지 확인 (단위가 %인 경우)
@@ -570,7 +569,7 @@ function animateCounter(element) {
             // 0.1 단위로 반올림해서 표시
             const rounded = Math.round(current * 10) / 10;
             const displayValue = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
-            statValue.textContent = displayValue + unit;
+            element.textContent = displayValue + unit;
         }, 16);
     } else {
         // 일반 숫자는 기존 방식
@@ -581,9 +580,9 @@ function animateCounter(element) {
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
-                statValue.textContent = target + unit; // 단위 유지
+                element.textContent = target + unit; // 단위 유지
             } else {
-                statValue.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
+                element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
             }
         }, 16);
     }
@@ -598,6 +597,8 @@ const observer = new IntersectionObserver(function(entries) {
             if (entry.target.classList.contains('stat-number')) {
                 animateCounter(entry.target);
             }
+        } else { 
+            entry.target.classList.remove('visible');
         }
     });
 }, observerOptions);
