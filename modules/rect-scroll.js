@@ -77,7 +77,7 @@ const app = {
             }, 0);
 
             this.createTimeline({
-                start:"top center",
+                start:"top bottom",
                 end:"top top",
                 scrub:1,
             }).to(background, {
