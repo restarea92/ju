@@ -109,7 +109,7 @@ const app = {
     
         this.createTimeline({
             start: "top 80%",
-            end: "top 20%",
+            end: "bottom center",
             scrub:1,
         }).to(title, {
             y: yOffset * -3,
