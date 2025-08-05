@@ -122,7 +122,7 @@ const app = {
                 
         this.createTimeline({
             start:"top top",
-            end:"center center",
+            end:"center 60%",
             scrub:0.5,
         }).to(title, {
             y: 0,
@@ -132,7 +132,7 @@ const app = {
         }, 0);
 
         this.createTimeline({
-            start: "center center",
+            start: "center 40%",
             end: "bottom top",
             scrub:0.5,
         }).to(title, {
