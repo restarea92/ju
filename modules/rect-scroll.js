@@ -88,7 +88,7 @@ const app = {
                 start:"top top",
                 end:"bottom top",
                 scrub:0.1,
-            }).to(stickyWrapper, {
+            }).to(background, {
                 "--rect-scroll-brightness": 0.25,
             }, 0);
 

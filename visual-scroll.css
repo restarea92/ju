@@ -207,7 +207,7 @@
     z-index: -1;
     background-position: bottom;
     background-size: cover;
-    filter: brightness(--rect-scroll-brightness);
+    filter: brightness(var(--rect-scroll-brightness));
 }
 
 .sticky-element-content {
