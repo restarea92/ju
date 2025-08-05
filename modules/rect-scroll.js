@@ -46,12 +46,12 @@ const app = {
         const startSize = this.getInitialSize();
 
         // 초기 위치 세팅
-        if (title) gsap.set(title, { 
-            y: yOffset * 3, 
-            x: 0,
-            opacity: 0,
-            filter: 'blur(16px)'
-        });
+        // if (title) gsap.set(title, { 
+        //     y: yOffset * 3, 
+        //     x: 0,
+        //     opacity: 0,
+        //     filter: 'blur(16px)'
+        // });
 
         if (stickyWrapper) {
             gsap.set(stickyWrapper, { 
