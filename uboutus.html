@@ -359,7 +359,12 @@
 
     .stat-label {
         color: #b0b0b0;
-        font-size: 0.95rem;
+        font-size: 1rem;
+    }
+    
+    .reference {
+        color: #666669;
+        font-size: 0.75rem;
     }
 
     /* Animations */
@@ -507,50 +512,104 @@
                         이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
                 </p>
             </div>
-            <div class="vision-stats">
-                <div class="stat fade-in">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">지금까지 함께한 수강생</div>
-                    <div class="reference">2024년 7월까지 집계 기준</div>
-                </div>
-                <div class="stat fade-in">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">운영 연수</div>
-                    <div class="reference">2025년 현재 기준</div>
-                </div>
-                <div class="stat fade-in">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">지점 수</div>
-                    <div class="reference">2025년 현재</div>
-                </div>
-                <div class="stat fade-in">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">만족도</div>
-                    <div class="reference">2024년 7월 온라인 후기 집계기준</div>
-                </div>
+        <div class="vision-stats">
+            <div class="stat fade-in">
+                <div class="stat-number" data-target="500" data-unit="+">0</div>
+                <div class="stat-label">지금까지 함께한 수강생</div>
+                <div class="reference">2024년 7월까지 집계 기준</div>
+            </div>
+            <div class="stat fade-in">
+                <div class="stat-number" data-target="8" data-unit="">0</div>
+                <div class="stat-label">운영 연수</div>
+                <div class="reference">2025년 현재 기준</div>
+            </div>
+            <div class="stat fade-in">
+                <div class="stat-number" data-target="15" data-unit="+">0</div>
+                <div class="stat-label">지점 수</div>
+                <div class="reference">2025년 현재</div>
+            </div>
+            <div class="stat fade-in">
+                <div class="stat-number" data-target="98.7" data-unit="%">0</div>
+                <div class="stat-label">만족도</div>
+                <div class="reference">2024년 7월 온라인 후기 집계기준</div>
             </div>
         </div>
     </section>
 </div>
 
 <script>
-    // Scroll animation
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+// 카운터 애니메이션 함수
+function animateCounter(element) {
+    const target = parseFloat(element.dataset.target);
+    const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
+    const duration = 2000; // 2초
+    let current = 0;
+    
+    // 퍼센트인지 확인 (단위가 %인 경우)
+    const isPercentage = unit === '%';
+    
+    let step, displayValue;
+    
+    if (isPercentage) {
+        // 퍼센트는 0.1씩 증가
+        step = 0.1;
+        const totalSteps = target / step;
+        const stepInterval = duration / totalSteps;
+        
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
             }
-        });
-    }, observerOptions);
+            
+            // 소수점 표시 (끝이 0이면 제거)
+            displayValue = current % 1 === 0 ? current.toString() : current.toFixed(1);
+            element.textContent = displayValue + unit;
+        }, stepInterval);
+    } else {
+        // 일반 숫자는 기존 방식
+        step = target / (duration / 16);
+        
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+                element.textContent = target + unit; // 단위 유지
+            } else {
+                element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
+            }
+        }, 16);
+    }
+}
 
-    // Observe all elements with fade-in class
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // stat-number인 경우 카운터 애니메이션 실행
+            if (entry.target.classList.contains('stat-number')) {
+                animateCounter(entry.target);
+            }
+        }
     });
-</script>
+}, observerOptions);
 
+// 기존 fade-in 관찰
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+});
+
+// stat-number 개별 관찰 추가
+document.querySelectorAll('.stat-number').forEach(el => {
+    observer.observe(el);
+});
+</script>
