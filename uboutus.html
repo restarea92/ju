@@ -686,7 +686,7 @@ const observer = new IntersectionObserver(function(entries) {
 
 document.querySelectorAll('.fade-in').forEach(el => {
     const rect = el.getBoundingClientRect();
-    
+	console.log(rect.bottom);
     if (rect.bottom < 0) {
         el.classList.add('visible');
     }
