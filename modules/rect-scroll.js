@@ -123,7 +123,6 @@ const app = {
             end:"center 60%",
             scrub:0.5,
         }).to(title, {
-            opacity:1,
             duration: 0.5
         }, 0);
 
@@ -132,7 +131,6 @@ const app = {
             end: "bottom top",
             scrub:0.5,
         }).to(title, {
-            opacity:0,
             duration: 0.5
         }, 0);
 
