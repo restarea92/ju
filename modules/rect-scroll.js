@@ -57,6 +57,7 @@ const app = {
             gsap.set(stickyWrapper, { 
                 "--rect-scroll-inverted-progress": 1,
                 "--rect-scroll-progress": 0,
+                "--rect-scroll-brightness": 0.8,
             });  
 
             this.createTimeline({
@@ -68,11 +69,27 @@ const app = {
             }, 0);
 
             this.createTimeline({
-                start:"top center",
+                start:"top 40%",
                 end:"top top",
                 scrub:0.1,
             }).to(stickyWrapper, {
                 "--rect-scroll-progress": 1,
+            }, 0);
+
+            this.createTimeline({
+                start:"top center",
+                end:"top top",
+                scrub:1,
+            }).to(background, {
+                "--rect-scroll-brightness": 0.7,
+            }, 0);
+
+            this.createTimeline({
+                start:"top top",
+                end:"bottom top",
+                scrub:0.1,
+            }).to(stickyWrapper, {
+                "--rect-scroll-brightness": 0.25,
             }, 0);
 
         }
@@ -103,7 +120,7 @@ const app = {
         }, 0);
 
         this.createTimeline({
-            start: "top bottom",
+            start: "top center",
             end: "bottom top",
             scrub:1,
         }).to(title, {
