@@ -87,11 +87,42 @@
 <style>
 /* Story Section */
 .story.common-container {
+	min-height: 100lvh;
 	--common-text-color: white;
 	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.overlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top:0;
+		left: 0;
+		background: rgba(255, 255, 255, 0.5);
+		z-index: 0;
+	}
 	h2 {
-		text-align: left;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		margin: 0;
+		padding: 0;
+		position: relative;
+
+		span.overlay-text {
+			width: 100%;
+			height: fit-content;
+			.back {
+				position: absolute;
+				top:0;
+				left:0;
+			}
+		}
+	}
+	.content-wrapper {
+		z-index: 1;
 	}
 	.story-content {
 		display: grid;
@@ -465,10 +496,15 @@
 
 <!-- Story Section -->
 <div id="about-ju" class="story common-container">
+	<div class="overlay">
+	</div>
 	<div class="content-wrapper">
-		<h2 class="content-title fade-in">ABOUT JU.</h2>
+		<h2 class="content-title">
+			<span class="overlay-text">ABOUT JU.</span>
+			<span class="overlay-text back">ALL ABOUT VOICE.<span style="display: none;">.</span></span>
+		</h2>
 		<div class="story-content">
-			<div class="story-text fade-in">
+			<div class="story-text">
 				<h3>15~25자 내외의 제목 영억.</h3>
 				<p>
 					이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
@@ -608,95 +644,99 @@
 </div>
 
 <script>
-// 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
-const options = {
-	observerOptions: {
-		threshold: 0.1,
-		rootMargin: '0px 0px -50px 0px'
-	},
-	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
-};
-// 카운터 애니메이션 함수
-function animateCounter(element) {
-    const target = parseFloat(element.dataset.target);
-    const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
-    const duration = 2000; // 2초
-    let current = 0;
-    
-    // 퍼센트인지 확인 (단위가 %인 경우)
-    const isPercentage = unit === '%';
-    
-    if (isPercentage) {
-        // 퍼센트는 부드럽게 증가하되 0.1 단위로 표시
-        const step = target / (duration / 16); // 60fps
-        
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            
-            // 0.1 단위로 반올림해서 표시
-            const rounded = Math.round(current * 10) / 10;
-            const displayValue = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
-            element.textContent = displayValue + unit;
-        }, 16);
-    } else {
-        // 일반 숫자는 기존 방식
-        const step = target / (duration / 16);
-        
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-                element.textContent = target + unit; // 단위 유지
-            } else {
-                element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
-            }
-        }, 16);
-    }
-}
 
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        const el = entry.target;
+document.addEventListener('DOMContentLoaded', () => {
 
-        if (entry.isIntersecting) {
-            if (!el.classList.contains('visible')) {
-                el.classList.add('visible');
+	// 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
+	const options = {
+		observerOptions: {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		},
+		transformYOffset: 30 // 예: transform: translateY(100px) 고려용
+	};
+	// 카운터 애니메이션 함수
+	function animateCounter(element) {
+		const target = parseFloat(element.dataset.target);
+		const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
+		const duration = 2000; // 2초
+		let current = 0;
+		
+		// 퍼센트인지 확인 (단위가 %인 경우)
+		const isPercentage = unit === '%';
+		
+		if (isPercentage) {
+			// 퍼센트는 부드럽게 증가하되 0.1 단위로 표시
+			const step = target / (duration / 16); // 60fps
+			
+			const timer = setInterval(() => {
+				current += step;
+				if (current >= target) {
+					current = target;
+					clearInterval(timer);
+				}
+				
+				// 0.1 단위로 반올림해서 표시
+				const rounded = Math.round(current * 10) / 10;
+				const displayValue = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
+				element.textContent = displayValue + unit;
+			}, 16);
+		} else {
+			// 일반 숫자는 기존 방식
+			const step = target / (duration / 16);
+			
+			const timer = setInterval(() => {
+				current += step;
+				if (current >= target) {
+					current = target;
+					clearInterval(timer);
+					element.textContent = target + unit; // 단위 유지
+				} else {
+					element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
+				}
+			}, 16);
+		}
+	}
 
-                if (el.classList.contains('stat-number')) {
-                    animateCounter(el); // 중복 실행 방지
-                }
-            }
+	const observer = new IntersectionObserver(function(entries) {
+		entries.forEach(entry => {
+			const el = entry.target;
 
-        } else {
-            const elementTop = entry.boundingClientRect.top;
-            const viewportTop = entry.rootBounds.top;
+			if (entry.isIntersecting) {
+				if (!el.classList.contains('visible')) {
+					el.classList.add('visible');
 
-            // 아래로 스크롤해 나간 경우에만 클래스 제거
-            if (elementTop > viewportTop) {
-                el.classList.remove('visible');
-            }
-        }
-    });
-}, options.observerOptions);
+					if (el.classList.contains('stat-number')) {
+						animateCounter(el); // 중복 실행 방지
+					}
+				}
 
-document.querySelectorAll('.fade-in').forEach(el => {
-    const rect = el.getBoundingClientRect();
-	console.log(rect.bottom);
-    if (rect.bottom < 0) {
-        el.classList.add('visible');
-    }
+			} else {
+				const elementTop = entry.boundingClientRect.top;
+				const viewportTop = entry.rootBounds.top;
 
-    // 관찰 시작
-    observer.observe(el);
-});
+				// 아래로 스크롤해 나간 경우에만 클래스 제거
+				if (elementTop > viewportTop) {
+					el.classList.remove('visible');
+				}
+			}
+		});
+	}, options.observerOptions);
 
-// stat-number 개별 관찰 추가
-document.querySelectorAll('.stat-number').forEach(el => {
-    observer.observe(el);
+	document.querySelectorAll('.fade-in').forEach(el => {
+		const rect = el.getBoundingClientRect();
+		console.log(rect.bottom);
+		if (rect.bottom < 0) {
+			el.classList.add('visible');
+		}
+
+		// 관찰 시작
+		observer.observe(el);
+	});
+
+	// stat-number 개별 관찰 추가
+	document.querySelectorAll('.stat-number').forEach(el => {
+		observer.observe(el);
+	});
 });
 </script>
