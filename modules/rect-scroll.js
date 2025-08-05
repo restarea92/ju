@@ -110,10 +110,11 @@ const app = {
         
         this.createTimeline({
             start:"top bottom",
-            end:"top 45%",
+            end:"top center",
+            scrub:0.5,
         }).to(title, {
             y: 0,
-            ease: "power2.inOut",
+            ease: "power3.inOut",
             opacity:1,
             filter: "blur(0px)",
             duration: 0.5
@@ -122,6 +123,7 @@ const app = {
         this.createTimeline({
             start: "top 55%",
             end: "bottom top",
+            scrub:0.5,
         }).to(title, {
             y: yOffset * -3,
             ease: "power2.inOut",
