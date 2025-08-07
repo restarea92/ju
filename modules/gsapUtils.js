@@ -16,7 +16,7 @@ export function initGSAP() {
 
     // 중복 등록 방지
     if (!gsap.plugins || !gsap.plugins.ScrollTrigger) {
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase);
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase, DrawSVGPlugin);
     }
 
     return true;
