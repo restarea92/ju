@@ -14,9 +14,8 @@
 /* 공통 컨테이너 스타일 */
 .common-container {
 	--common-text-color: #333;
-	padding: 120px 0;
 	color: var(--common-text-color);
-
+	padding: 4rem 0;
 	h2, h3, h4, h5 {
 		margin: 0;
 	}
@@ -44,43 +43,7 @@
 		color: var(--common-text-color);
 	}
 
-	.content {
-		border-radius: 1rem;
-		background: #f5f5f7;
-		min-height: 50lvh;
-		margin-top: 2rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-		width: 100%;
-		
-		h3 {
-			font-size: 1.25rem;
-			font-weight: 750;
-			color: black;
-		}
-		
-		p {
-			color: #6e6e73;
-			font-weight: 700;
-			font-size: 1.25rem;
-			line-height: 1.54;
-		}
-		
-		strong {
-			font-weight: 700;
-		}
-		
-		a {
-			color: #06c;
-			
-			&:hover {
-				text-decoration: underline;
-				font-size: 1rem;
-			}
-		}
-	}
+
 }
 </style>
 
@@ -97,10 +60,20 @@
 		height: 100%;
 		top:0;
 		left: 0;
-		background: rgba(255, 255, 255, 0.5);
 		z-index: 0;
 	}
-	h2 {
+	.content-wrapper {
+		padding: 4rem 0;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100lvh;
+	}
+	
+	h2.content-title {
+		display: grid;
+		grid-template-columns: 1fr;
 		width: 100%;
 		text-align: center;
 		display: flex;
@@ -109,44 +82,80 @@
 		position: relative;
 		line-height: 1;
 		margin: 0 auto;
-		width: fit-content;
 		span {
 			display: flex;
 			line-height: 1;
 		}
-		span.content-title-text {
+		.content-title-text {
 			line-height: 1;
 			width: 100%;
 			height: fit-content;
-			&.back {
-				position: absolute;
-				top:0;
-				left:0;
+			width: fit-content;
+			display: flex;
+			z-index: 1;
+			font-size: min(4lvw, 5rem);
+			.will-change-overflow {
+				overflow: hidden;
+				filter: blur(0) brightness(1);
+				opacity: 1;
+				transform: scale(1);
+				transition: 0.3s filter 0.2s ease-in-out,
+							0.3s opacity 0.2s ease-in-out,
+							0.3s transform 0.2s ease-in-out
+							;
 			}
-			.overlay-text-wrapper {
-				position: relative;
+			
+			.will-change-transform {
+				transform: translateX(0);
+				transition: 0.3s transform 0.2s;;
 			}
-			.overlay-text {
-				position: absolute;
-				top:0;
-				&.left {
-					right: 100%;
-				}
-				&.right {
-					left: 100%;
-				}
+			.will-change-opacity.before {
+				opacity: 0;
+				transition: 0s opacity 0s,
+							0.3s transform 0.2s;
+			}
+			.will-change-opacity.after {
+				opacity: 1;
+				transition: 0s opacity 0s,
+							0.3s transform 0.2s;
+			}
+		}
+		.overlay-text-wrapper {
+			display: grid;
+			justify-content: center;
+			grid-template-columns: min-content min-content 1fr;
+			width: 100%;
+			.hidden-text {
+				visibility: hidden;
+				opacity: 0;
+			}
+			> span {
+				grid-row: 1;
+			}
+			> span:nth-child(1) {
+				grid-column: 1 / 2;
+			}
+			> span:nth-child(2) {
+				grid-column: 2 / 3;
+			}
+			> span:nth-child(3) {
+				grid-column: 3 / 4;
+			}
+			> span:nth-child(4) {
+				grid-column: 3 / 4;
 			}
 		}
 	}
-	.content-wrapper {
-		z-index: 1;
-	}
+
+
 	.story-content {
-		margin-top: 4rem;
+		opacity: 0;
+		margin-top: 2rem;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 60px;
 		align-items: center;
+		transform: translateY(10%);
 	}
 
 	.story-text {
@@ -172,6 +181,42 @@
 		}
 	}
 
+	&.scroll-end {
+		.story-content {
+			opacity: 1;
+			transform: translateY(0);
+			transition: 0.3s all ;
+		}
+		h2 {
+			.content-title-text {
+				.will-change-overflow {
+					filter: blur(16px) brightness(0.5);
+					opacity: 0;
+					transform: scale(0.5);
+					transition: 0.3s filter 0.2s ease-in-out,
+								0.3s opacity 0.2s ease-in-out,
+								0.3s transform 0.2s ease-in-out
+								;
+				}
+				.will-change-transform {
+					transform: translateX( calc(-1 * var(--will-change-overflow-width)) );
+					transition: 0.3s transform 0.2s;
+				}
+				.will-change-opacity.before {
+					opacity: 1;
+					transition: 0.3s opacity 0.5s,
+								0.3s transform 0.2s
+					;
+				}
+				.will-change-opacity.after {
+					opacity: 0;
+					transition: 0.3s opacity 0.3s,
+								0.3s transform 0.2s;
+				}
+			}
+		}
+	}
+
 	.story-visual {
 		position: relative;
 		height: 400px;
@@ -182,6 +227,8 @@
 		justify-content: center;
 		overflow: hidden;
 	}
+
+	
 }
 
 /* Services Section */
@@ -277,32 +324,18 @@
 		margin-bottom: 2rem;
 		display: flex;
 		justify-content: center;
-	}
-
-	.profile-placeholder {
-		width: 280px;
-		height: 420px;
-		background: var(--gradient-primary);
-		border-radius: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 6rem;
-		color: white;
+		aspect-ratio: 3 / 4;
 		box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 		position: relative;
 		overflow: hidden;
+		border-radius: 1.5rem;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 
-		&::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-			animation: shimmer 3s ease-in-out infinite;
 		}
+
 	}
 
 	.ceo-info h3 {
@@ -444,6 +477,11 @@
 }
 
 /* Responsive */
+@media (max-width: 990px) {
+	.story.common-container .content {
+		margin-top: var(--header-height);
+	}
+}
 @media (max-width: 768px) {
 	.common-container {
 		padding: 80px 0;
@@ -515,33 +553,39 @@
 <!-- Story Section -->
 <div id="about-ju" class="story common-container">
 	<div class="hero-spacer">
+		<div class="sticky-wrapper">
 		<div class="overlay">
+			<img src="https://images.pexels.com/photos/3990842/pexels-photo-3990842.jpeg" width="1920" style="width: 100%; height: 100%; object-fit: cover;">
 		</div>
-		<div class="content-wrapper">
-			<h2 class="content-title">
-				<span class="content-title-text">ABOUT JU.</span>
-				<span class="content-title-text back">
-					<span class="overlay-text-wrapper">
-						<span class="overlay-text left">ALL&nbsp;</span>
-						<span>ABOUT&nbsp;</span>
-						<span class="overlay-text right">VOICE.</span>
-					</span>
-					<span style="color:transparent; opacity: 0;" >JU.</span>
-				</span>
-			</h2>
-			<div class="story-content">
-				<div class="story-text">
-					<h3>15~25자 내외의 제목 영억.</h3>
-					<p>
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.
-					</p>
-					<p>
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
-					</p>
+			<div class="content-wrapper">
+				<div class="content">
+					<h2 class="content-title">
+						<div class="content-title-text">
+							<span class="overlay-text-wrapper">
+								<span class="will-change-overflow">ALL&nbsp;</span>
+								<span class="will-change-transform">
+									ABOUT&nbsp;
+								</span>
+								<span class="will-change-opacity will-change-transform before">JU.</span>
+								<span class="will-change-opacity will-change-transform after">VOICE.</span>
+							</span>
+						</div>
+					</h2>
+					<div class="story-content">
+						<div class="story-text">
+							<h3>15~25자 내외의 제목 영역.</h3>
+							<p>
+								이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+								이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.
+							</p>
+							<p>
+								이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+								이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+							</p>
+						</div>
+						<div class="story-visual fade-in"></div>
+					</div>
 				</div>
-				<div class="story-visual fade-in"></div>
 			</div>
 		</div>
 	</div>
@@ -567,9 +611,16 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         spacer: document.querySelector('.hero-spacer'),
+		container: document.querySelector('#about-ju.common-container'),
 		get trigger() { return this.spacer },
-		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper'); },
-        get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text.back'); },
+		get stickyWrapper() { return this.trigger?.querySelector('.sticky-wrapper'); },
+		get content() { return this.trigger?.querySelector('.content')},
+		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper')},
+		get contentTitleText() { return this.trigger?.querySelector('.content-title-text')},
+		get overlay() { return this.trigger?.querySelector('.overlay'); },
+        get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text .overlay-text-wrapper'); },
+		get hiddenText() { return this.contentTitleOverlay?.querySelector('.hidden-text'); },
+		get offsetText() { return this.contentTitleOverlay?.querySelector('.offset-text'); },
     },
 	
     // ========== Initialization ==========
@@ -591,9 +642,18 @@ const app = {
      */
     initHeroScroll() {
 		const trigger = this.elements.trigger;
-		const contentTitleOverlay = this.elements.contentTitleOverlay;
+		const container = this.elements.container;
+		const stickyWrapper = this.elements.stickyWrapper;
+		const overlay = this.elements.overlay;
+		const overlayImage = overlay.querySelector('img');
+		const content = this.elements.content;
 		const contentWrapper = this.elements.contentWrapper;
-		
+		const contentTitleText = this.elements.contentTitleText;
+
+		const hiddenText = this.elements.hiddenText;
+		const offsetText = this.elements.offsetText;
+		const contentTitleOverlay = this.elements.contentTitleOverlay;
+
         // 초기 위치 세팅
         if (trigger && contentTitleOverlay) {
 			gsap.set(trigger, { 
@@ -601,20 +661,88 @@ const app = {
                 "--hero-scroll-progress": 0,
 				height: "200lvh",
 			});
+
+			gsap.set(container, { 
+				marginTop: "calc(-1 * var(--header-height))",
+			});
 		
-			gsap.set(contentWrapper, { 
+			gsap.set(stickyWrapper, { 
+				width:"100%",
+				minHeight:"100lvh",
 				position: "sticky",
 				top:0,
-				opacity: 0.5,
 			});
 
+			
+			const rect = contentTitleText.getBoundingClientRect();
+			const centerX = window.innerWidth / 2;
+			const centerY = window.innerHeight / 2;
+
+			const offsetX = rect.left + rect.width / 2 - centerX;
+			const offsetY = content.offsetTop - centerY;
+
+			const willChangeOverflow = document.querySelector('.will-change-overflow');
+			const willChangeOverflowWidth = willChangeOverflow.getBoundingClientRect().width;
+					
+			gsap.set(stickyWrapper, { 
+				"--will-change-overflow-width": `${willChangeOverflowWidth}px`,
+			});
+
+			gsap.set(contentTitleOverlay, {
+				transformOrigin: "center",
+				zIndex: 1,
+				x: -offsetX,
+				y: -offsetY,
+				scale: 2,
+			});
+
+			gsap.set(overlay, {
+					filter: "blur(0px)"
+			});
+			
+			gsap.set(overlayImage, {
+					filter: "brightness(0.9) saturate(1)",
+			});
+
+			// 하나의 타임라인으로 통합 (성능상 더 좋음)
+			const tl = this.createTimeline({
+				start: "top top",
+				end: "center center",
+				onUpdate: self => {
+					if (self.progress >= 1) {  // === 1 대신 >= 1 사용 (더 안정적)
+						this.elements.container.classList.add('scroll-end');
+					} else {
+						this.elements.container.classList.remove('scroll-end');
+					}
+				}
+			});
+
+			// 동시에 실행되는 애니메이션들을 하나의 타임라인에 추가
+			tl.to(contentTitleOverlay, {
+				ease: "power3.inOut",
+				y: 0,
+			}, 0)
+			.to(contentTitleOverlay, {
+				ease: "power3.out", 
+				x: 0,
+				scale: 1,
+			}, 0)
+			.to(overlay, {
+				ease: "power3.out", 
+				filter: "blur(32px)"
+			}, 0) 
+			.to(overlayImage, {
+				ease: "power3.inOut", 
+				filter: "brightness(0.25) saturate(0.1)",
+				opacity:0.2,
+			}, 0); // 같은 시간(0)에 시작하여 동시 실행
 
 		} 
-    },
+	},
 
     // ========== 상태 관리 ==========
     setHeaderHeightVariable() {
-        const header = document.getElementById('s2025072923c95d7545c67');
+        const header = document.getElementById('doz_header_wrap');
         const headerHeight = header ? header.getBoundingClientRect().height : 0;
         document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
     },
@@ -646,29 +774,27 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Services Section -->
 <div id="about-ju-services" class="services common-container">
 	<div class="content-wrapper">
-		<div class="content">
-			<h2 class="content-title fade-in">Why JU?</h2>
-			<div class="services-grid">
-				<div class="service-card fade-in">
-					<div class="service-icon">🎵</div>
-					<h4>Music</h4>
-					<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-				</div>
-				<div class="service-card fade-in">
-					<div class="service-icon">🎙️</div>
-					<h4>Recording</h4>
-					<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
-				</div>
-				<div class="service-card fade-in">
-					<div class="service-icon">🎧</div>
-					<h4>Headphone</h4>
-					<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-				</div>
-				<div class="service-card fade-in">
-					<div class="service-icon">🎭</div>
-					<h4>Acting</h4>
-					<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-				</div>
+		<h2 class="content-title fade-in">Why JU?</h2>
+		<div class="services-grid">
+			<div class="service-card fade-in">
+				<div class="service-icon">🎵</div>
+				<h4>Music</h4>
+				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎙️</div>
+				<h4>Recording</h4>
+				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎧</div>
+				<h4>Headphone</h4>
+				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎭</div>
+				<h4>Acting</h4>
+				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
 			</div>
 		</div>
 	</div>
@@ -680,12 +806,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		<div class="ceo-content">
 			<div class="ceo-profile fade-in">
 				<div class="profile-image">
-					<div class="profile-placeholder">
-						<span>👤</span>
-					</div>
+					<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" width=500 />
 				</div>
 				<div class="ceo-info">
-					<h3>대표자 성명</h3>
+					<h3>Sleepy Wonder</h3>
 					<p class="ceo-title">Vocal Studio JU 대표</p>
 					<div class="signature">
 						<svg width="120" height="40" viewBox="0 0 120 40">
@@ -745,7 +869,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		</div>
 		<div class="vision-stats">
 			<div class="stat fade-in">
-				<div class="stat-number" data-target="999" data-unit="+">0</div>
+				<div class="stat-number" data-target="15200" data-unit="+">0</div>
 				<div class="stat-label">지금까지 함께한 수강생</div>
 				<div class="reference">2024년 7월까지 집계 기준</div>
 			</div>
@@ -781,47 +905,53 @@ document.addEventListener('DOMContentLoaded', () => {
 		transformYOffset: 30 // 예: transform: translateY(100px) 고려용
 	};
 	// 카운터 애니메이션 함수
-	function animateCounter(element) {
-		const target = parseFloat(element.dataset.target);
-		const unit = element.dataset.unit || ''; // 단위 가져오기 (없으면 빈 문자열)
-		const duration = 2000; // 2초
-		let current = 0;
-		
-		// 퍼센트인지 확인 (단위가 %인 경우)
-		const isPercentage = unit === '%';
-		
-		if (isPercentage) {
-			// 퍼센트는 부드럽게 증가하되 0.1 단위로 표시
-			const step = target / (duration / 16); // 60fps
-			
-			const timer = setInterval(() => {
-				current += step;
-				if (current >= target) {
-					current = target;
-					clearInterval(timer);
-				}
-				
-				// 0.1 단위로 반올림해서 표시
-				const rounded = Math.round(current * 10) / 10;
-				const displayValue = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
-				element.textContent = displayValue + unit;
-			}, 16);
-		} else {
-			// 일반 숫자는 기존 방식
-			const step = target / (duration / 16);
-			
-			const timer = setInterval(() => {
-				current += step;
-				if (current >= target) {
-					current = target;
-					clearInterval(timer);
-					element.textContent = target + unit; // 단위 유지
-				} else {
-					element.textContent = Math.floor(current) + (unit === '+' ? '' : unit); // 애니메이션 중에는 + 제외
-				}
-			}, 16);
+function animateCounter(element) {
+	const target = parseFloat(element.dataset.target);
+	const unit = element.dataset.unit || '';
+	const duration = 2000;
+	let current = 0;
+
+	const step = target / (duration / 16);
+
+	const timer = setInterval(() => {
+		current += step;
+		if (current >= target) {
+			current = target;
+			clearInterval(timer);
 		}
-	}
+
+		const isFinal = current === target;
+		let displayValue;
+
+		if (target < 1000 && current < 1000) {
+			displayValue = Math.floor(current).toString();
+
+		} else if (current < 1000) {
+			displayValue = Math.floor(current).toString();
+
+		} else {
+			const kValue = current / 1000;
+			const rounded = Math.round(kValue * 10) / 10;
+
+			if (isFinal && rounded % 1 === 0) {
+				displayValue = `${Math.floor(rounded)}k`;
+			} else {
+				displayValue = `${rounded.toFixed(1)}k`;
+			}
+		}
+
+		// unit이 '+'일 때는 마지막에만 붙임
+		if (unit === '+') {
+			element.textContent = isFinal ? displayValue + '+' : displayValue;
+		} else {
+			element.textContent = displayValue + unit;
+		}
+
+	}, 16);
+}
+
+
+
 
 	const observer = new IntersectionObserver(function(entries) {
 		entries.forEach(entry => {
