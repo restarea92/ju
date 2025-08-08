@@ -1,18 +1,23 @@
 
+<!-- Document Root Style -->
 <style>
-:root {
-	--gradient-primary: linear-gradient(45deg, #667eea, #764ba2);
-	--shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.3);
-	--border-glass: 1px solid rgba(255, 255, 255, 0.1);
-	--bg-glass: rgba(255, 255, 255, 0.05);
-	--backdrop-blur: blur(20px);
-	--transition-smooth: all 0.3s ease;
-}
+	:root {
+		--gradient-primary: linear-gradient(45deg, #667eea, #764ba2);
+		--shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.3);
+		--border-glass: 1px solid rgba(255, 255, 255, 0.1);
+		--bg-glass: rgba(255, 255, 255, 0.05);
+		--backdrop-blur: blur(20px);
+		--transition-smooth: all 0.3s ease;
+		 --title-overlay-scale: 2
+	}
 </style>
 
+<!-- Common Container Style-->
 <style>
 /* 공통 컨테이너 스타일 */
 .common-container {
+	position: relative;
+	z-index: 1;
 	--common-text-color: #333;
 	color: var(--common-text-color);
 	padding: 4rem 0;
@@ -21,9 +26,9 @@
 	}
 	
 	.content-wrapper {
-		max-width: 1200px;
+        max-width: var(--default-container-width);
+        padding: 0 calc(var(--default-container-padding) / 2);
 		margin: 0 auto;
-		padding: 0 20px;
 	}
 	
 	.content-title {
@@ -47,14 +52,21 @@
 }
 </style>
 
+<!-- Common Content Style-->
 <style>
 /* Story Section */
 .story.common-container {
-	min-height: 100lvh;
 	--common-text-color: white;
+	--content-title-padding-top: 0;
+	--fixed-wrapper-top: 0;
+	min-height: 100lvh;
 	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
 	position: relative;
-	.overlay {
+	padding-top:0;
+	.fixed-wrapper {
+		top: var(--fixed-wrapper-top);
+	}
+	.overlay-background {
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -63,7 +75,6 @@
 		z-index: 0;
 	}
 	.content-wrapper {
-		padding: 4rem 0;
 		z-index: 1;
 		display: flex;
 		justify-content: center;
@@ -152,16 +163,18 @@
 
 
 	.story-content {
+		transition: 0.3s all ;
 		opacity: 0;
 		margin-top: 2rem;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 60px;
+		gap: 4rem;
 		align-items: center;
 		transform: translateY(10%);
+		grid-auto-columns: 1fr;
 	}
 
 	.story-text {
+		grid-column: 1 / 2;
 		color: #e0e0e0;
 		
 		h3 {
@@ -176,15 +189,27 @@
 		}
 		
 		p {
-			font-size: 1.1rem;
+			font-size: 1.125rem;
 			margin-bottom: 1.5rem;
 			line-height: 1.8;
-			color: #e0e0e0;
-			font-weight: 400;
+			color: #a6a6a9;
+			font-weight: 600;
 		}
 	}
 
-	&.scroll-end {
+	.story-visual {
+		grid-column: 2 / 3;
+		position: relative;
+		background: var(--gradient-primary);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+	}
+
+		&.scroll-end {
 		.story-content {
 			opacity: 1;
 			transform: translateY(0);
@@ -219,19 +244,6 @@
 			}
 		}
 	}
-
-	.story-visual {
-		position: relative;
-		height: 400px;
-		background: var(--gradient-primary);
-		border-radius: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow: hidden;
-	}
-
-	
 }
 
 /* Services Section */
@@ -299,27 +311,30 @@
 }
 /* CEO Message Section */
 .ceo-message.common-container {
+	margin-top: -1px;
 	--common-text-color: white;
 	background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 	position: relative;
 	min-height: 120lvh;
-	
+	h2 {
+		text-align: left;
+	}
 	h3 {
 		width: 100%;
 	}
 
 	.ceo-content {
 		display: grid;
-		grid-template-columns: 400px 1fr;
-		gap: 80px;
+		grid-template-columns: 1fr 2fr;
+		gap: 4rem;
 		align-items: start;
-		margin-top: 60px;
+		margin-top: 4rem;
 	}
 
 	.ceo-profile {
 		text-align: center;
 		position: sticky;
-		top: 120px;
+		top: 4rem;
 
 		.profile-image {
 			margin-bottom: 2rem;
@@ -353,7 +368,7 @@
 
 		.ceo-title {
 			color: #667eea;
-			font-size: 1.1rem;
+			font-size: 1.125rem;
 			font-weight: 500;
 			margin-bottom: 1rem;
 		}
@@ -371,7 +386,7 @@
 
 	.ceo-message-text {
 		background: var(--bg-glass);
-		padding: 50px 40px;
+		padding: calc(var(--default-container-padding) / 2);
 		border-radius: 25px;
 		backdrop-filter: var(--backdrop-blur);
 		border: var(--border-glass);
@@ -382,7 +397,7 @@
 		}
 		.message-content {
 			h3 {
-				font-size: 2.2rem;
+				font-size: 2rem;
 				color: white;
 				margin-bottom: 2rem;
 				background: var(--gradient-primary);
@@ -394,11 +409,15 @@
 			}
 
 			p {
-				color: #e0e0e0;
+				color: #a6a6ab;
 				font-size: 1.125rem;
 				line-height: 1.475;
 				margin-bottom: 1.5rem;
-
+				font-weight: 600;
+				strong {
+					font-weight: 600;
+					color:white
+				}
 				&.message-closing {
 					font-size: 1.2rem !important;
 					font-weight: 600 !important;
@@ -412,6 +431,7 @@
 		}
 	}
 }
+
 /* Coach Section */
 #about-ju-coach.common-container {
 	--common-text-color: black;
@@ -422,7 +442,7 @@
 		width: 100%;
 	}
 	.content-wrapper {
-			max-width: var(--small-container-width);
+		max-width: var(--small-container-width);
 	}
 
 
@@ -464,7 +484,7 @@
 
 		.coach-title {
 			color: #667eea;
-			font-size: 1.1rem;
+			font-size: 1.125rem;
 			font-weight: 500;
 			margin-bottom: 2rem;
 		}
@@ -479,7 +499,7 @@
 
 		.message-content {
 			h3 {
-				font-size: 2.2rem;
+				font-size: 2rem;
 				color: white;
 				margin-bottom: 2rem;
 				background: var(--gradient-primary);
@@ -495,7 +515,7 @@
 				font-size: 1.125rem;
 				line-height: 1.475;
 				margin-bottom: 1.5rem;
-
+				font-weight: 600;
 				&.message-closing {
 					font-size: 1.2rem !important;
 					font-weight: 600 !important;
@@ -521,103 +541,11 @@
 
 	/* 코치들 사이 간격 추가 */
 	.coach-content + .coach-content {
-		margin-top: 120px;
-		padding-top: 60px;
+		margin-top: 8rem;
+		padding-top: 8rem;
 		border-top: 1px solid rgba(0,0,0,0.1);
 	}
 
-}
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-	.coach-content {
-		grid-template-columns: 1fr;
-		gap: 40px;
-	}
-
-	.coach-profile {
-		position: static;
-
-		.profile-image {
-			width: 250px;
-			margin: 0 auto 2rem auto;
-		}
-
-		.coach-info h3 {
-			font-size: 1.6rem;
-		}
-	}
-
-	.coach-message-text {
-		.message-content h3 {
-			font-size: 1.8rem;
-		}
-	}
-
-	.coach-content + .coach-content {
-		margin-top: 80px;
-		padding-top: 40px;
-	}
-}
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-	/* CEO Section 모바일 */
-	.ceo-message.common-container {
-		.ceo-content {
-			grid-template-columns: 1fr;
-			gap: 40px;
-		}
-
-		.ceo-profile {
-			position: static;
-
-			.profile-image {
-				width: 250px;
-				margin: 0 auto 2rem auto;
-			}
-
-			.ceo-info h3 {
-				font-size: 1.6rem;
-			}
-		}
-
-		.ceo-message-text {
-			padding: 30px 25px;
-			
-			.message-content h3 {
-				font-size: 1.8rem;
-			}
-		}
-	}
-
-	/* Coach Section 모바일 */
-	.coach-content {
-		grid-template-columns: 1fr;
-		gap: 40px;
-	}
-
-	.coach-profile {
-		position: static;
-
-		.profile-image {
-			width: 250px;
-			margin: 0 auto 2rem auto;
-		}
-
-		.coach-info h3 {
-			font-size: 1.6rem;
-		}
-	}
-
-	.coach-message-text {
-		.message-content h3 {
-			font-size: 1.8rem;
-		}
-	}
-
-	.coach-content + .coach-content {
-		margin-top: 80px;
-		padding-top: 40px;
-	}
 }
 
 
@@ -681,7 +609,10 @@
 		}
 	}
 }
+</style>
 
+
+<style>
 /* Animations */
 @keyframes shimmer {
 	0% { transform: translateX(-100%); }
@@ -699,36 +630,530 @@
 		
 	}
 }
+</style>
 
-/* Responsive */
-@media (max-width: 990px) {
-	.story.common-container .content {
-		margin-top: var(--header-height);
+
+<style>
+
+
+  
+@media (max-width: 1280px) and (min-width: 1025px) {
+  	/* 1025 ~ 1280 */
+	:root {
+		--default-container-width: 1080px;
+		--default-content-width: 1024px;
+		--small-container-width: var(--default-container-width);
+		--small-content-width: var(--default-content-width);
 	}
-}
-@media (max-width: 768px) {
 	.common-container {
-		padding: 80px 0;
-		
-		.content-title {
-			font-size: 2.2rem;
+		.content-wrapper {
+			padding: 0 calc(var(--default-container-padding));
+		}
+	}
+	.story.common-container {
+		.overlay-background {
+
+		}
+		.content-wrapper {
+		}
+		h2.content-title {
+			span {
+
+			}
+			.content-title-text {
+				.will-change-overflow, .will-change-opacity, .will-change-transform {
+
+				}
+				.will-change-overflow {
+
+				}
+				
+				.will-change-transform {
+
+				}
+				.will-change-opacity.before {
+
+				}
+				.will-change-opacity.after {
+
+				}
+			}
+			.overlay-text-wrapper {
+
+				.hidden-text {
+
+				}
+				> span {
+				}
+				> span:nth-child(1) {
+				}
+				> span:nth-child(2) {
+				}
+				> span:nth-child(3) {
+				}
+				> span:nth-child(4) {
+				}
+			}
+		}
+
+
+		.story-content {
+		}
+
+		.story-text {
+
+			h3 {
+
+			}
+			
+			p {
+
+			}
+		}
+
+		.story-visual {
+		}
+
+		&.scroll-end {
+			.story-content {}
+			h2 {
+				.content-title-text {
+					.will-change-overflow {}
+					.will-change-transform {}
+					.will-change-opacity.before {}
+					.will-change-opacity.after {}
+				}
+			}
 		}
 	}
 
-	.story-content {
-		grid-template-columns: 1fr;
-		gap: 40px;
+}
+
+
+
+
+@media (max-width: 1024px) and (min-width: 991px) {
+  /* 991 ~ 1024 */
+    :root {
+      --default-container-width: 992px;
+      --default-content-width: 944px;
+      --small-container-width: var(--default-container-width);
+      --small-content-width: var(--default-content-width);
+    }
+	.common-container {
+		.content-wrapper {
+			padding: 0 calc(var(--default-container-padding));
+		}
+	}
+	.story.common-container {
+		.overlay-background {
+
+		}
+		.content-wrapper {
+		}
+		h2.content-title {
+			span {
+
+			}
+			.content-title-text {
+				padding: 0 calc(var(--default-container-padding));
+				.will-change-overflow, .will-change-opacity, .will-change-transform {
+					
+				}
+				.will-change-overflow {
+
+				}
+				
+				.will-change-transform {
+
+				}
+				.will-change-opacity.before {
+
+				}
+				.will-change-opacity.after {
+
+				}
+			}
+			.overlay-text-wrapper {
+
+				.hidden-text {
+
+				}
+				> span {
+				}
+				> span:nth-child(1) {
+				}
+				> span:nth-child(2) {
+				}
+				> span:nth-child(3) {
+				}
+				> span:nth-child(4) {
+				}
+			}
+		}
+
+
+		.story-content {
+		}
+
+		.story-text {
+			grid-column: 1 / 2;
+			grid-row: 2 / 3;
+			h3 {
+
+			}
+			
+			p {
+
+			}
+		}
+
+		.story-visual {
+			aspect-ratio: 16 / 9;
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+		}
+
+		&.scroll-end {
+			.story-content {}
+			h2 {
+				.content-title-text {
+					.will-change-overflow {}
+					.will-change-transform {}
+					.will-change-opacity.before {}
+					.will-change-opacity.after {}
+				}
+			}
+		}
+	}
+}
+
+/* Responsive */
+@media (max-width: 990px) and (min-width: 769px)  {
+	:root {
+        --default-container-width: calc(100lvw - 2rem);
+        --default-content-width: calc(var(--default-container-width) - 2rem);
+        --small-container-width: var(--default-container-width);
+        --small-content-width: var(--default-content-width);
+		--title-overlay-scale: 1.25;
+    }
+	
+	.common-container {
+		.content-wrapper {
+			padding: 0 calc(var(--default-container-padding));
+		}
 	}
 
-	.story-visual {
-		height: 300px;
+	.story.common-container {
+		.overlay-background {
+
+		}
+		.content-wrapper {
+		}
+		h2.content-title {
+			span {
+
+			}
+			.content-title-text {
+				font-size: clamp(3rem, 8vw, 4rem);
+				.will-change-overflow, .will-change-opacity, .will-change-transform {
+					
+				}
+				.will-change-overflow {
+
+				}
+				
+				.will-change-transform {
+
+				}
+				.will-change-opacity.before {
+
+				}
+				.will-change-opacity.after {
+
+				}
+			}
+			.overlay-text-wrapper {
+
+				.hidden-text {
+
+				}
+				> span {
+				}
+				> span:nth-child(1) {
+				}
+				> span:nth-child(2) {
+				}
+				> span:nth-child(3) {
+				}
+				> span:nth-child(4) {
+				}
+			}
+		}
+
+
+		.story-content {
+		}
+
+		.story-text {
+			grid-column: 1 / 2;
+			grid-row: 2 / 3;
+			h3 {
+
+			}
+			
+			p {
+
+			}
+		}
+
+		.story-visual {
+			aspect-ratio: 16 / 9;
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+		}
+
+		&.scroll-end {
+			.story-content {}
+			h2 {
+				.content-title-text {
+					.will-change-overflow {}
+					.will-change-transform {}
+					.will-change-opacity.before {}
+					.will-change-opacity.after {}
+				}
+			}
+		}
 	}
+
+	.story.common-container {
+		--fixed-wrapper-top: var(--header-height);
+		--content-title-padding-top: var(--header-height);
+	}
+	/* CEO Section 모바일 */
+	.ceo-message.common-container {
+		.ceo-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.ceo-profile {
+			position: static;
+
+			.profile-image {
+				margin: 0 auto 2rem auto;
+				width: 50%;
+			}
+
+			.ceo-info h3 {
+			}
+		}
+
+		.ceo-message-text {
+			.message-content  {
+				h3 {
+					font-size: 1.5rem;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+    :root {
+        --default-container-width: calc(100lvw - 1rem)!important;
+        --default-content-width: calc(var(--default-container-width) - 1rem);
+        --small-container-width: var(--default-container-width);
+        --small-content-width: var(--default-content-width);
+		--title-overlay-scale: 1.25;
+    }
+	
+	/* common-container */
+	.common-container {
+		.content-wrapper {
+			padding: 0 calc(var(--default-container-padding) / 2);
+		}
+	}
+
+	.story.common-container {
+		--fixed-wrapper-top: var(--header-height);
+		--content-title-padding-top: var(--header-height);
+		.overlay-background {
+
+		}
+		.content-wrapper {
+		}
+		h2.content-title {
+			span {
+
+			}
+			.content-title-text {
+				font-size: clamp(1.5rem, 8vw, 3rem);
+				.will-change-overflow, .will-change-opacity, .will-change-transform {
+					
+				}
+				.will-change-overflow {
+
+				}
+				
+				.will-change-transform {
+
+				}
+				.will-change-opacity.before {
+
+				}
+				.will-change-opacity.after {
+
+				}
+			}
+			.overlay-text-wrapper {
+
+				.hidden-text {
+
+				}
+				> span {
+				}
+				> span:nth-child(1) {
+				}
+				> span:nth-child(2) {
+				}
+				> span:nth-child(3) {
+				}
+				> span:nth-child(4) {
+				}
+			}
+		}
+
+
+		.story-content {
+		}
+
+		.story-text {
+			grid-column: 1 / 2;
+			grid-row: 2 / 3;
+			h3 {
+				font-size: 1.5rem;
+			}
+			p {
+				font-size: 1rem;
+			}
+		}
+
+		.story-visual {
+			aspect-ratio: 16 / 9;
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+		}
+
+		&.scroll-end {
+			.story-content {}
+			h2.content-title {
+				.content-title-text {
+					.will-change-overflow {}
+					.will-change-transform {}
+					.will-change-opacity.before {}
+					.will-change-opacity.after {}
+				}
+			}
+		}
+	}
+
+	/* CEO Section 모바일 */
+	.ceo-message.common-container {
+		.ceo-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.ceo-profile {
+			position: static;
+
+			.profile-image {
+				width: 62.5%;
+				margin: 0 auto 2rem auto;
+			}
+
+			.ceo-info h3 {
+				font-size: 1.6rem;
+			}
+		}
+
+		.ceo-message-text {
+			padding: calc(var(--default-container-padding) / 2);
+
+			.message-content  {
+				h3 {
+					font-size: 1.5rem;
+				}
+				p {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+	/* Coach Section 모바일 */
+
+	#about-ju-coach.common-container {
+		.coach-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.coach-profile {
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+
+			position: static;
+
+			.profile-image {
+				width: 62.5%;
+				margin: 0 auto 2rem auto;
+			}
+
+			.coach-info h3 {
+				font-size: 1.6rem;
+			}
+		}
+
+		.coach-message-text {
+				grid-column: 1 / 2;
+				grid-row: 2 / 3;
+			.message-content  {
+
+				h3 {
+					font-size: 1.5rem;
+				}
+				p {
+					font-size: 1rem;
+				}
+			}
+		}
+
+		.coach-content:nth-of-type(even) {
+			.coach-profile {
+				grid-column: 1 / 2;
+				grid-row: 1 / 2;			
+			}
+			.coach-message-text {
+				grid-column: 1 / 2;
+				grid-row: 2 / 3;			
+			}
+		}
+		.coach-content + .coach-content {
+			margin-top: 4rem;
+			padding-top: 4rem;
+		}
+	}
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+
 
 	.services-grid {
 		grid-template-columns: 1fr;
 		gap: 30px;
 	}
-
 
 	.vision.common-container {
 		.vision-content {
@@ -737,7 +1162,7 @@
 			}
 
 			p {
-				font-size: 1.1rem;
+				font-size: 1.125rem;
 			}
 		}
 
@@ -747,13 +1172,15 @@
 		}
 	}
 }
+
+
 </style>
 
 <!-- Story Section -->
 <div id="about-ju" class="story common-container">
 	<div class="hero-spacer">
-		<div class="sticky-wrapper">
-		<div class="overlay">
+		<div class="fixed-wrapper">
+		<div class="overlay-background">
 			<img src="https://images.pexels.com/photos/3990842/pexels-photo-3990842.jpeg" width="1920" style="width: 100%; height: 100%; object-fit: cover;">
 		</div>
 			<div class="content-wrapper">
@@ -782,14 +1209,13 @@
 								이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
 							</p>
 						</div>
-						<div class="story-visual fade-in"></div>
+						<div class="story-visual fade-in"><img src="https://restarea92.github.io/ju/ailogop.jpg" width="800" style="width: 100%; height: 100%; object-fit: cover;" /></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 
 <script type="module">
 /**
@@ -798,7 +1224,6 @@
  * @version 1.0.7
  */
 
-// import { initGSAP } from './gsapUtils.js';
 import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
 
 const app = {
@@ -812,78 +1237,107 @@ const app = {
         spacer: document.querySelector('.hero-spacer'),
 		container: document.querySelector('#about-ju.common-container'),
 		get trigger() { return this.spacer },
-		get stickyWrapper() { return this.trigger?.querySelector('.sticky-wrapper'); },
+		get fixedWrapper() { return this.trigger?.querySelector('.fixed-wrapper'); },
 		get content() { return this.trigger?.querySelector('.content')},
 		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper')},
+		get contentTitle() {return this.trigger?.querySelector('.content-title')},
 		get contentTitleText() { return this.trigger?.querySelector('.content-title-text')},
-		get overlay() { return this.trigger?.querySelector('.overlay'); },
+		get overlay() { return this.trigger?.querySelector('.overlay-background'); },
         get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text .overlay-text-wrapper'); },
 		get hiddenText() { return this.contentTitleOverlay?.querySelector('.hidden-text'); },
 		get offsetText() { return this.contentTitleOverlay?.querySelector('.offset-text'); },
     },
 	
     // ========== Initialization ==========
-    /**
-     * Initialize the application
-     */
-    init() {
-        console.log(this.CONFIG.VERSION);
-        if (!initGSAP()) return;
+	init() {
+		console.log(this.CONFIG.VERSION);
+		if (!initGSAP()) return;
 
-        this.setHeaderHeightVariable(); // 헤더 높이 → CSS 변수로 반영
-        this.initHeroScroll();
-    },
+		this.setHeaderHeightVariable();
+		this.initHeroScroll();
 
-    // ========== rect Scroll ==========
-    /**
-     * Initialize rect scroll animations
-     * Setup individual rect scroll container
-     */
+		let resizeTimer;
+		let isTouching = false;
+
+		// 모바일 터치 감지 (pinch zoom 포함)
+		window.addEventListener("touchstart", () => {
+			isTouching = true;
+		});
+
+		window.addEventListener("touchend", () => {
+			setTimeout(() => { // 약간의 딜레이 후 터치 종료 처리
+				isTouching = false;
+			}, 500);
+		});
+
+		// 리사이즈 종료 감지 (디바운스)
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				if (!isTouching) {
+					this.setHeaderHeightVariable();
+					this.initHeroScroll();
+				}
+			}, 300); // 300ms 동안 추가 resize 이벤트 없을 때 실행
+		});
+	},
+
+
+    // ========== Hero Scroll Animation Setup ==========
     initHeroScroll() {
+        // 기존 타임라인 kill
+        if (this.tl) {
+            this.tl.kill();
+            this.tl = null;
+        }
+
 		const trigger = this.elements.trigger;
 		const container = this.elements.container;
-		const stickyWrapper = this.elements.stickyWrapper;
+		const fixedWrapper = this.elements.fixedWrapper;
 		const overlay = this.elements.overlay;
-		const overlayImage = overlay.querySelector('img');
+		const overlayImage = overlay?.querySelector('img');
 		const content = this.elements.content;
 		const contentWrapper = this.elements.contentWrapper;
+		const contentTitle = this.elements.contentTitle;
 		const contentTitleText = this.elements.contentTitleText;
 
 		const hiddenText = this.elements.hiddenText;
 		const offsetText = this.elements.offsetText;
 		const contentTitleOverlay = this.elements.contentTitleOverlay;
 
-        // 초기 위치 세팅
         if (trigger && contentTitleOverlay) {
 			gsap.set(trigger, { 
 				"--hero-scroll-inverted-progress": 1,
                 "--hero-scroll-progress": 0,
-				height: "200lvh",
+				height: "clamp(3000px, 200lvh, 5000px)",
 			});
 
 			gsap.set(container, { 
 				marginTop: "calc(-1 * var(--header-height))",
 			});
 		
-			gsap.set(stickyWrapper, { 
+			gsap.set(fixedWrapper, { 
 				width:"100%",
 				minHeight:"100lvh",
 				position: "sticky",
-				top:0,
 			});
 
-			
+			gsap.set(contentTitle, {
+				paddingTop:0,
+			});
+
 			const rect = contentTitleText.getBoundingClientRect();
 			const centerX = window.innerWidth / 2;
 			const centerY = window.innerHeight / 2;
 
 			const offsetX = rect.left + rect.width / 2 - centerX;
 			const offsetY = content.offsetTop - centerY;
-
+			const fixedTop = parseFloat(getComputedStyle(container)
+				.getPropertyValue('--fixed-wrapper-top')) || 0;
+			
 			const willChangeOverflow = document.querySelector('.will-change-overflow');
-			const willChangeOverflowWidth = willChangeOverflow.getBoundingClientRect().width;
-					
-			gsap.set(stickyWrapper, { 
+			const willChangeOverflowWidth = willChangeOverflow?.clientWidth || 0;
+			gsap.set(fixedWrapper, { 
 				"--will-change-overflow-width": `${willChangeOverflowWidth}px`,
 			});
 
@@ -891,8 +1345,8 @@ const app = {
 				transformOrigin: "center",
 				zIndex: 1,
 				x: -offsetX,
-				y: -offsetY,
-				scale: 2,
+				y: -offsetY - fixedTop,
+				scale: "var(--title-overlay-scale)",
 			});
 			
 			gsap.set(overlay, {
@@ -904,12 +1358,11 @@ const app = {
 				filter: "brightness(0.9)",
 			});
 
-			// 하나의 타임라인으로 통합 (성능상 더 좋음)
-			const tl = this.createTimeline({
+			this.tl = this.createTimeline({
 				start: "top top",
 				end: "center center",
 				onUpdate: self => {
-					if (self.progress >= 1) {  // === 1 대신 >= 1 사용 (더 안정적)
+					if (self.progress >= 1) {
 						this.elements.container.classList.add('scroll-end');
 					} else {
 						this.elements.container.classList.remove('scroll-end');
@@ -917,8 +1370,7 @@ const app = {
 				}
 			});
 
-			// 동시에 실행되는 애니메이션들을 하나의 타임라인에 추가
-			tl.to(contentTitleOverlay, {
+			this.tl.to(contentTitleOverlay, {
 				ease: "power3.inOut",
 				y: 0,
 			}, 0)
@@ -927,6 +1379,10 @@ const app = {
 				x: 0,
 				scale: 1,
 			}, 0)
+			.to(contentTitle, {
+				ease: "power3.out", 
+				paddingTop: "var(--content-title-padding-top)",
+			}, 0)
 			.to(overlay, {
 				ease: "power3.out", 
 				filter: "blur(32px)"
@@ -934,8 +1390,7 @@ const app = {
 			.to(overlayImage, {
 				ease: "power3.inOut", 
 				filter: "brightness(0.33)",
-			}, 0); // 같은 시간(0)에 시작하여 동시 실행
-
+			}, 0);
 		} 
 	},
 
@@ -946,7 +1401,6 @@ const app = {
         document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
     },
 
-
     createTimeline(options = {}) {
         return gsap.timeline({
             scrollTrigger: {
@@ -955,7 +1409,7 @@ const app = {
                 end: "bottom bottom",
                 scrub: 1,
                 onUpdate: self => {
-                    const progressPercent = (self.progress * 100).toFixed(0);
+                    // 필요한 경우 progress 활용 가능
                 },
                 ...options,
             }
@@ -963,24 +1417,24 @@ const app = {
     },
 }
 
-// export default app;
-
 document.addEventListener('DOMContentLoaded', () => {
 	app.init();
 });
 </script>
 
 
+
 <!-- CEO Message Section -->
 <div id="about-ju-ceo" class="ceo-message common-container">
 	<div class="content-wrapper">
+		<h2 class="content-title fade-in">목소리 하나로 달라진 삶.</h2>
 		<div class="ceo-content">
 			<div class="ceo-profile fade-in">
 				<div class="profile-image">
-					<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" width=500 />
+					<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" width=800 />
 				</div>
 				<div class="ceo-info">
-					<h3>Sleepy Wonder</h3>
+					<h3>김정호</h3>
 					<p class="ceo-title">Vocal Studio JU 대표</p>
 					<div class="signature" id="signature-container">
 
@@ -989,36 +1443,39 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 			<div class="ceo-message-text fade-in">
 				<div class="message-content">
-					<h3>목소리는 당신의 인생을 바꿔줍니다.</h3>
+					<h3>목소리로 인생을 바꾸다.</h3>
 					<p>
 					안녕하세요.<br>
-					목소리 전문 교육기관 JU보컬&발성 전문스튜디오 대표 김정호입니다.<br>
+					목소리 전문 교육기관 <strong>JU보컬&발성 전문스튜디오</strong> 대표 김정호입니다.<br>
+					<br>
 					전문가로서, 10년이 넘는 시간 동안 수많은 수강생분들과 함께했습니다.<br>
 					그 시간속에서 느낀 것 중 하나는 정말 많은 분들이 간단한 것을 어렵게 생각하고 고민하는 분들이 정말 많았다는 것입니다.<br>
 					<br>
-					전문가로서의 꿈을 키우게 된 가장 큰 계기는, 아무리 수업을 들어도 늘지 않는 나의 실력이었습니다.<br>
+					전문가로서의 길을 걷게 된 가장 큰 계기는, 아무리 수업을 들어도 늘지 않는 나의 실력이었습니다.<br>
 					내가 무엇을 잘못하고 있는지 정확한 설명도 듣지 못한 채 그저 시간에 맞춰 나가야만 했던 수업들.<br>
 					너무나도 복잡한 용어들과 그럴싸한 설명, 선생님들의 설명과 다른 소리들.<br>
-					결국, 목소리를 내는 것 그 이상도 이하도 아닌 것에 수많은 전문용어들이 남발되며, 본질을 흐리는 교육에 전문가가 되기 이전인 저조차도 많은 시행착오를 겪었습니다.<br>
+					<br>
+					결국, <strong>목소리를 내는 것 그 이상도 이하도 아닌 것</strong>에 수많은 전문용어들이 남발되며, 본질을 흐리는 교육에 전문가가 되기 이전인 저조차도 많은 시행착오를 겪었습니다.<br>
 					<br>
 					JU는 그 고민의 시간들과 기억을 양분삼아 세상에 나왔습니다.<br>
 					<br>
 					우리는 자동차의 기계적인 구조나 원리를 알고 운전하지 않습니다.<br>
 					목소리 또한 마찬가지입니다.<br>
 					<br>
-					보컬과 발성, 말하는 목소리, 성대질환 이후 회복이 필요한 발성적 문제들.<br>
-					이들은 각각 다른 이름을 갖지만 해결방법은 결국 하나로 통하게 됩니다.<br>
+					보컬과 발성, 말하는 목소리, 성대질환 이후 회복이 필요한 발성적 문제들. 이들은 각각 다른 이름을 갖지만 <strong>해결방법은 결국 하나로 통하게 됩니다.</strong><br>
 					<br>
-					정확하게 문제점과 그 원인을 파악하여 가장 효율적이고 효과적인 해결방법을 제시하고,
-					이것을 어려운 이론이나 설명이 아닌, 누구나 쉽고 빠르게 이해할 수 있도록 지식을 전달할 수 있는 능력.<br>
-					이는 JU가 추구하는 보컬코치가 가져야 할 필수 덕목이라 생각합니다.<br>
+					정확하게 문제점과 그 원인을 파악하여 가장 효율적이고 <strong>효과적인 해결방법을 제시</strong>하고,
+					이것을 어려운 이론이나 설명이 아닌, <strong>누구나 쉽고 빠르게 이해할 수 있도록 지식을 전달할 수 있는 능력.</strong><br>
+					이는 <strong>JU가 추구하는 보컬코치가 가져야 할 필수 덕목</strong>이라 생각합니다.<br>
 					<br>
 					JU는 위와 같은 코치가 되기 위해 매일, 매주, 매달, 서로에게 질문을 하고 조언을 듣고, 공부를 하며 수강생분들 앞에 서고 있습니다.<br>
-					<br>
 					</p>
 					<p class="message-closing">
-						우리는 보컬뿐만이 아닌, 목소리 그 자체를 다룹니다.<br>
-						우리는 목소리가 인생을 바꿔줄 수 있다고 믿습니다.<br>
+						우리는 보컬뿐만이 아닌,<br>
+						목소리 그 자체를 다룹니다.<br>
+						<br>
+						우리는 목소리가 <br>
+						인생을 바꿔줄 수 있다고 믿습니다.<br>
 						<br>
 						JU는 본질에 더 집중합니다.<br>
 						<br>

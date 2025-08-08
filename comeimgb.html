@@ -1,0 +1,295 @@
+
+<style>
+:root {
+    --gradient-primary: linear-gradient(45deg, #667eea, #764ba2);
+    --shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.3);
+    --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --backdrop-blur: blur(20px);
+    --transition-smooth: all 0.3s ease;
+}
+
+
+
+/* 공통 컨테이너 스타일 */
+.common-container {
+    --common-text-color: #333;
+    padding: 120px 0;
+    position: relative;
+    color: var(--common-text-color);
+
+    h2, h3, h4, h5 {
+        margin: 0;
+    }
+    
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .content-title {
+        font-size: 3rem;
+        font-weight: 800;
+        text-align: left;
+        margin-bottom: 2rem;
+        color: var(--common-text-color);
+        position: relative;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        width: 75%;
+        color: var(--common-text-color);
+    }
+
+
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem 4rem;
+        align-items: start;
+
+        &.image-box {
+            grid-template-columns: 1fr;
+            transform: translateZ(0);
+            will-change: transform;
+            img {
+                transform: translateZ(0);
+                will-change: transform;
+                max-width: 100%;
+                height: auto;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            /* Main CSS */
+            .grid-wrapper > div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .grid-wrapper > div > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+
+            }
+
+            .grid-wrapper {
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-auto-rows: 200px;
+                grid-auto-flow: dense;
+            }
+            .grid-wrapper .wide {
+                grid-column: span 2;
+            }
+            .grid-wrapper .tall {
+                grid-row: span 2;
+            }
+            .grid-wrapper .big {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+        }
+    }
+
+    h3.grid-title {
+        grid-column: 1 / 2;
+        font-size: 2rem;
+        color: var(--common-text-color);
+        margin-bottom: 0;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        width: 100%;
+        text-align: left;
+    }
+
+    .content-text {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        color: #e0e0e0;
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--common-text-color);
+            font-weight: 400;
+        }
+    }
+
+    .content-image {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        aspect-ratio: 4 / 3;
+        img {
+            will-change: transform;
+            transform: translateZ(0);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+}
+
+
+
+/* Animations */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 990px) {
+    .common-container {
+
+        .content { 
+            grid-template-columns: 1fr;
+        }
+    }
+}
+</style>
+
+    <!-- Story Section -->
+    <div class="common-container">
+        <div class="content-wrapper">
+            <h2 class="content-title">JU의 시작. 그리고 모든 것.</h2>
+            <div class="content">
+                <h3 class="grid-title">Vocal Studio JU 송도본점.</h3>
+                <div class="content-text">
+                    <p>
+                        이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+                        이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.
+                    </p>
+                    <p>
+                        이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
+                        이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+                    </p>
+                </div>
+                <div class="content-image fade-in">
+                    <img src="https://restarea92.github.io/ju/ailogop.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="common-container">
+    <div class="content-wrapper">
+        <h2 class="content-title">끝없는 성장, 이곳에서 시작되죠.</h2>
+        <div class="content image-box">
+            <div class="grid-wrapper">
+                <div class="big fade-in">
+                    <img src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg" width="500" loading="eager" />
+                </div>
+
+                <div class="fade-in">
+                    <img src="https://images.pexels.com/photos/11044742/pexels-photo-11044742.jpeg"  width="500" loading="eager"  alt="" />
+                </div>
+
+                <div class="tall fade-in">
+                    <img src="https://images.pexels.com/photos/2049411/pexels-photo-2049411.jpeg" width="500" loading="eager"  alt="">
+                </div>
+
+                <div class="fade-in">
+                    <img src="https://images.pexels.com/photos/8105748/pexels-photo-8105748.jpeg" width="500" loading="eager"  alt="" />
+                </div>
+
+                <div class="tall fade-in">
+                    <img src="https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg"  width="500" loading="eager"  alt="" />
+                </div>
+
+                <div class="tall fade-in">
+                    <img src="https://images.pexels.com/photos/2097428/pexels-photo-2097428.jpeg" width="500" loading="eager"  alt="" />
+                </div>
+
+                <div class="big fade-in">
+                    <img src="https://images.pexels.com/photos/8132437/pexels-photo-8132437.jpeg"  width="500" loading="eager"  alt="" />
+                </div>
+
+                <div  class="fade-in">
+                    <img src="https://images.pexels.com/photos/911738/pexels-photo-911738.jpeg"  width="500" loading="eager"  alt="" />
+                </div>
+
+                <div  class="fade-in">
+                    <img src="https://images.pexels.com/photos/417273/pexels-photo-417273.jpeg"  width="500" loading="eager"  alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+const options = {
+	observerOptions: {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	},
+	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
+};
+
+
+	const observer = new IntersectionObserver(function(entries) {
+		entries.forEach(entry => {
+			const el = entry.target;
+
+			if (entry.isIntersecting) {
+				if (!el.classList.contains('visible')) {
+					el.classList.add('visible');
+				}
+
+			} else {
+				const elementTop = entry.boundingClientRect.top;
+				const viewportTop = entry.rootBounds.top;
+
+				// 아래로 스크롤해 나간 경우에만 클래스 제거
+				if (elementTop > viewportTop) {
+					el.classList.remove('visible');
+				}
+			}
+		});
+	}, options.observerOptions);
+
+	document.querySelectorAll('.fade-in').forEach(el => {
+		const rect = el.getBoundingClientRect();
+		console.log(rect.bottom);
+		if (rect.bottom < 0) {
+			el.classList.add('visible');
+		}
+
+		// 관찰 시작
+		observer.observe(el);
+	});
+
+    document.querySelectorAll('.entrance-up').forEach(el => {
+		const rect = el.getBoundingClientRect();
+		console.log(rect.bottom);
+		if (rect.bottom < 0) {
+			el.classList.add('visible');
+		}
+
+		// 관찰 시작
+		observer.observe(el);
+	});
+
+});
+</script>
