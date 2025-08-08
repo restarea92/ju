@@ -238,171 +238,388 @@
 .services.common-container {
 	--common-text-color: white;
 	background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
-}
 
-.services-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 40px;
-	margin-top: 60px;
-}
-
-.service-card {
-	background: var(--bg-glass);
-	padding: 40px 30px;
-	border-radius: 20px;
-	text-align: center;
-	backdrop-filter: var(--backdrop-blur);
-	border: var(--border-glass);
-	transition: var(--transition-smooth);
-	position: relative;
-	overflow: hidden;
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-		transition: left 0.3s ease;
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 40px;
+		margin-top: 60px;
 	}
 
-	&:hover {
-		transform: translateY(-10px);
-		box-shadow: var(--shadow-hover);
+	.service-card {
+		background: var(--bg-glass);
+		padding: 40px 30px;
+		border-radius: 20px;
+		text-align: center;
+		backdrop-filter: var(--backdrop-blur);
+		border: var(--border-glass);
+		transition: var(--transition-smooth);
+		position: relative;
+		overflow: hidden;
 
 		&::before {
-			left: 100%;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+			transition: left 0.3s ease;
+		}
+
+		&:hover {
+			transform: translateY(-10px);
+			box-shadow: var(--shadow-hover);
+
+			&::before {
+				left: 100%;
+			}
+		}
+
+		.service-icon {
+			font-size: 3rem;
+			margin-bottom: 1.5rem;
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		h4 {
+			font-size: 1.5rem;
+			color: white;
+			margin-bottom: 1rem;
+		}
+
+		p {
+			color: #b0b0b0;
+			line-height: 1.6;
 		}
 	}
-
-	.service-icon {
-		font-size: 3rem;
-		margin-bottom: 1.5rem;
-		background: var(--gradient-primary);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-
-	h4 {
-		font-size: 1.5rem;
-		color: white;
-		margin-bottom: 1rem;
-	}
-
-	p {
-		color: #b0b0b0;
-		line-height: 1.6;
-	}
 }
-
 /* CEO Message Section */
 .ceo-message.common-container {
-	--common-text-color: black;
-	background-color: white;
+	--common-text-color: white;
+	background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 	position: relative;
 	min-height: 120lvh;
 	
 	h3 {
 		width: 100%;
 	}
-}
 
-.ceo-content {
-	display: grid;
-	grid-template-columns: 400px 1fr;
-	gap: 80px;
-	align-items: start;
-	margin-top: 60px;
-}
-
-.ceo-profile {
-	text-align: center;
-	position: sticky;
-	top: 120px;
-
-	.profile-image {
-		margin-bottom: 2rem;
-		display: flex;
-		justify-content: center;
-		aspect-ratio: 3 / 4;
-		box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-		position: relative;
-		overflow: hidden;
-		border-radius: 1.5rem;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-
-		}
-
+	.ceo-content {
+		display: grid;
+		grid-template-columns: 400px 1fr;
+		gap: 80px;
+		align-items: start;
+		margin-top: 60px;
 	}
 
-	.ceo-info h3 {
-		font-size: 2rem;
-		color: black;
-		margin-bottom: 0.5rem;
-		font-weight: 700;
-		text-align: center !important;
-	}
+	.ceo-profile {
+		text-align: center;
+		position: sticky;
+		top: 120px;
 
-	.ceo-title {
-		color: #667eea;
-		font-size: 1.1rem;
-		font-weight: 500;
-		margin-bottom: 2rem;
-	}
-
-	.signature {
-		display: flex;
-		justify-content: center;
-		opacity: 0.8;
-		svg {
-			width: 50%;
-			transform: rotate(-5deg);
-		}
-	}
-}
-
-.ceo-message-text {
-	border-radius: 25px;
-	backdrop-filter: var(--backdrop-blur);
-	border: var(--border-glass);
-
-	.message-content {
-		h3 {
-			font-size: 2.2rem;
-			color: white;
+		.profile-image {
 			margin-bottom: 2rem;
-			background: var(--gradient-primary);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			font-weight: 700;
-			width: 100%;
-			text-align: left;
+			display: flex;
+			justify-content: center;
+			aspect-ratio: 3 / 4;
+			box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+			position: relative;
+			overflow: hidden;
+			border-radius: 1.5rem;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+
+			}
+
 		}
 
-		p {
-			color: #86868b;
-			font-size: 1.125rem;
-			line-height: 1.475;
-			margin-bottom: 1.5rem;
+		.ceo-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-align: center !important;
+            color: white;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+		}
 
-			&.message-closing {
-				font-size: 1.2rem !important;
-				font-weight: 600 !important;
-				color: #667eea !important;
-				text-align: center;
-				margin-top: 2.5rem !important;
-				padding-top: 2rem;
-				border-top: var(--border-glass);
+		.ceo-title {
+			color: #667eea;
+			font-size: 1.1rem;
+			font-weight: 500;
+			margin-bottom: 1rem;
+		}
+
+		.signature {
+			display: flex;
+			justify-content: center;
+			opacity: 0.8;
+			svg {
+				width: 50%;
+				transform: rotate(-5deg);
+			}
+		}
+	}
+
+	.ceo-message-text {
+		background: var(--bg-glass);
+		padding: 50px 40px;
+		border-radius: 25px;
+		backdrop-filter: var(--backdrop-blur);
+		border: var(--border-glass);
+		transition: var(--transition-smooth);
+		&:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15);
+		}
+		.message-content {
+			h3 {
+				font-size: 2.2rem;
+				color: white;
+				margin-bottom: 2rem;
+				background: var(--gradient-primary);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-weight: 700;
+				width: 100%;
+				text-align: left;
+			}
+
+			p {
+				color: #e0e0e0;
+				font-size: 1.125rem;
+				line-height: 1.475;
+				margin-bottom: 1.5rem;
+
+				&.message-closing {
+					font-size: 1.2rem !important;
+					font-weight: 600 !important;
+					color: #667eea !important;
+					text-align: center;
+					margin-top: 2.5rem !important;
+					padding-top: 2rem;
+					border-top: var(--border-glass);
+				}
 			}
 		}
 	}
 }
+/* Coach Section */
+#about-ju-coach.common-container {
+	--common-text-color: black;
+	background-color: white;
+	position: relative;
+	min-height: 120lvh;
+	h3 {
+		width: 100%;
+	}
+	.content-wrapper {
+			max-width: var(--small-container-width);
+	}
+
+
+	.coach-content {
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0,1fr));
+		align-items: start;
+		margin-top: 60px;
+	}
+
+	.coach-profile {
+		text-align: center;
+		grid-column: 1 / 5;
+		grid-row: 5 / 9;
+		.profile-image {
+			margin-bottom: 2rem;
+			display: flex;
+			justify-content: center;
+			aspect-ratio: 3 / 4;
+			box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+			position: relative;
+			overflow: hidden;
+			border-radius: 1.5rem;
+			
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.coach-info h3 {
+			font-size: 2rem;
+			color: black;
+			margin-bottom: 0.5rem;
+			font-weight: 700;
+			text-align: center !important;
+		}
+
+		.coach-title {
+			color: #667eea;
+			font-size: 1.1rem;
+			font-weight: 500;
+			margin-bottom: 2rem;
+		}
+	}
+
+	.coach-message-text {
+		grid-column: 6 / 13;
+		grid-row: 1 / 13;
+		border-radius: 25px;
+		backdrop-filter: var(--backdrop-blur);
+		border: var(--border-glass);
+
+		.message-content {
+			h3 {
+				font-size: 2.2rem;
+				color: white;
+				margin-bottom: 2rem;
+				background: var(--gradient-primary);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-weight: 700;
+				width: 100%;
+				text-align: left;
+			}
+
+			p {
+				color: #86868b;
+				font-size: 1.125rem;
+				line-height: 1.475;
+				margin-bottom: 1.5rem;
+
+				&.message-closing {
+					font-size: 1.2rem !important;
+					font-weight: 600 !important;
+					color: #667eea !important;
+					text-align: center;
+					margin-top: 2.5rem !important;
+					padding-top: 2rem;
+					border-top: var(--border-glass);
+				}
+			}
+		}
+	}
+
+	.coach-content:nth-of-type(even) {
+		.coach-profile {
+			grid-column: 9 / 13;
+		}
+		.coach-message-text {
+			grid-column: 1 / 8;
+		}
+	}
+
+
+	/* 코치들 사이 간격 추가 */
+	.coach-content + .coach-content {
+		margin-top: 120px;
+		padding-top: 60px;
+		border-top: 1px solid rgba(0,0,0,0.1);
+	}
+
+}
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+	.coach-content {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+
+	.coach-profile {
+		position: static;
+
+		.profile-image {
+			width: 250px;
+			margin: 0 auto 2rem auto;
+		}
+
+		.coach-info h3 {
+			font-size: 1.6rem;
+		}
+	}
+
+	.coach-message-text {
+		.message-content h3 {
+			font-size: 1.8rem;
+		}
+	}
+
+	.coach-content + .coach-content {
+		margin-top: 80px;
+		padding-top: 40px;
+	}
+}
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+	/* CEO Section 모바일 */
+	.ceo-message.common-container {
+		.ceo-content {
+			grid-template-columns: 1fr;
+			gap: 40px;
+		}
+
+		.ceo-profile {
+			position: static;
+
+			.profile-image {
+				width: 250px;
+				margin: 0 auto 2rem auto;
+			}
+
+			.ceo-info h3 {
+				font-size: 1.6rem;
+			}
+		}
+
+		.ceo-message-text {
+			padding: 30px 25px;
+			
+			.message-content h3 {
+				font-size: 1.8rem;
+			}
+		}
+	}
+
+	/* Coach Section 모바일 */
+	.coach-content {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+
+	.coach-profile {
+		position: static;
+
+		.profile-image {
+			width: 250px;
+			margin: 0 auto 2rem auto;
+		}
+
+		.coach-info h3 {
+			font-size: 1.6rem;
+		}
+	}
+
+	.coach-message-text {
+		.message-content h3 {
+			font-size: 1.8rem;
+		}
+	}
+
+	.coach-content + .coach-content {
+		margin-top: 80px;
+		padding-top: 40px;
+	}
+}
+
 
 /* Vision Section */
 .vision.common-container {
@@ -512,31 +729,6 @@
 		gap: 30px;
 	}
 
-	.ceo-content {
-		grid-template-columns: 1fr;
-		gap: 40px;
-	}
-
-	.ceo-profile {
-		position: static;
-
-		.profile-placeholder {
-			width: 200px;
-			height: 300px;
-			font-size: 4rem;
-		}
-
-		.ceo-info h3 {
-			font-size: 1.6rem;
-		}
-	}
-
-	.ceo-message-text {
-
-		.message-content h3 {
-			font-size: 1.8rem;
-		}
-	}
 
 	.vision.common-container {
 		.vision-content {
@@ -741,8 +933,7 @@ const app = {
 			}, 0) 
 			.to(overlayImage, {
 				ease: "power3.inOut", 
-				filter: "brightness(0.25)",
-				opacity:0.2,
+				filter: "brightness(0.33)",
 			}, 0); // 같은 시간(0)에 시작하여 동시 실행
 
 		} 
@@ -779,6 +970,201 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<!-- CEO Message Section -->
+<div id="about-ju-ceo" class="ceo-message common-container">
+	<div class="content-wrapper">
+		<div class="ceo-content">
+			<div class="ceo-profile fade-in">
+				<div class="profile-image">
+					<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" width=500 />
+				</div>
+				<div class="ceo-info">
+					<h3>Sleepy Wonder</h3>
+					<p class="ceo-title">Vocal Studio JU 대표</p>
+					<div class="signature" id="signature-container">
+
+					</div>
+				</div>
+			</div>
+			<div class="ceo-message-text fade-in">
+				<div class="message-content">
+					<h3>목소리는 당신의 인생을 바꿔줍니다.</h3>
+					<p>
+					안녕하세요.<br>
+					목소리 전문 교육기관 JU보컬&발성 전문스튜디오 대표 김정호입니다.<br>
+					전문가로서, 10년이 넘는 시간 동안 수많은 수강생분들과 함께했습니다.<br>
+					그 시간속에서 느낀 것 중 하나는 정말 많은 분들이 간단한 것을 어렵게 생각하고 고민하는 분들이 정말 많았다는 것입니다.<br>
+					<br>
+					전문가로서의 꿈을 키우게 된 가장 큰 계기는, 아무리 수업을 들어도 늘지 않는 나의 실력이었습니다.<br>
+					내가 무엇을 잘못하고 있는지 정확한 설명도 듣지 못한 채 그저 시간에 맞춰 나가야만 했던 수업들.<br>
+					너무나도 복잡한 용어들과 그럴싸한 설명, 선생님들의 설명과 다른 소리들.<br>
+					결국, 목소리를 내는 것 그 이상도 이하도 아닌 것에 수많은 전문용어들이 남발되며, 본질을 흐리는 교육에 전문가가 되기 이전인 저조차도 많은 시행착오를 겪었습니다.<br>
+					<br>
+					JU는 그 고민의 시간들과 기억을 양분삼아 세상에 나왔습니다.<br>
+					<br>
+					우리는 자동차의 기계적인 구조나 원리를 알고 운전하지 않습니다.<br>
+					목소리 또한 마찬가지입니다.<br>
+					<br>
+					보컬과 발성, 말하는 목소리, 성대질환 이후 회복이 필요한 발성적 문제들.<br>
+					이들은 각각 다른 이름을 갖지만 해결방법은 결국 하나로 통하게 됩니다.<br>
+					<br>
+					정확하게 문제점과 그 원인을 파악하여 가장 효율적이고 효과적인 해결방법을 제시하고,
+					이것을 어려운 이론이나 설명이 아닌, 누구나 쉽고 빠르게 이해할 수 있도록 지식을 전달할 수 있는 능력.<br>
+					이는 JU가 추구하는 보컬코치가 가져야 할 필수 덕목이라 생각합니다.<br>
+					<br>
+					JU는 위와 같은 코치가 되기 위해 매일, 매주, 매달, 서로에게 질문을 하고 조언을 듣고, 공부를 하며 수강생분들 앞에 서고 있습니다.<br>
+					<br>
+					</p>
+					<p class="message-closing">
+						우리는 보컬뿐만이 아닌, 목소리 그 자체를 다룹니다.<br>
+						우리는 목소리가 인생을 바꿔줄 수 있다고 믿습니다.<br>
+						<br>
+						JU는 본질에 더 집중합니다.<br>
+						<br>
+						JU는 이러한 철학으로 교육합니다.<br>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="about-ju-coach" class="common-container">
+	<div class="content-wrapper">
+		<h2 class="content-title fade-in">JU의 코치진들을 소개할게요.</h2>
+		<div class="coach-content">
+			<div class="coach-profile fade-in">
+				<div class="profile-image">
+					<img src="https://images.pexels.com/photos/20715519/pexels-photo-20715519.jpeg" width=500 />
+				</div>
+				<div class="coach-info">
+					<h3>Colton Ruiz</h3>
+					<p class="coach-title">Vocal Studio JU 수석코치</p>
+				</div>
+			</div>
+			<div class="coach-message-text fade-in">
+				<div class="message-content">
+					<h3>노래하는 즐거움을 모두에게.</h3>
+					<p>
+						안녕하세요, 이것은 Vocal Studio JU Colton Ruiz의 예제 인사말입니다.
+					</p>
+					<p>
+						이 인삿말은 예시로 작성되었습니다.<br>
+						지난 n년간 음악교육 현장에서 수많은 수강생들과 함께했습니다.<br>
+						<br>
+						<br>
+						저를 포함하여 JU의 강사진들은 정해진 틀에서 이루어지는 형식적인 레슨방식보다는 수강생들이 직면하는 문제점들과 실질적인 고민들을 해결해 주는것을 목표로 하고 있습니다.<br><br>
+						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 
+					</p>
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.<br>
+						이것은 의미가 없는 테스트 문장이기 때문입니다.  <br>
+					</p>
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						이것은 의미가 없는 테스트 문장이기 때문입니다.  <br>
+					</p>
+					<p class="message-closing">
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						<br>
+						 이것은 의미가 없는 테스트 문장이기 때문입니다. <br>
+						<br>
+						이것은 테스트 문장입니다. <br>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="coach-content">
+			<div class="coach-profile fade-in">
+				<div class="profile-image">
+					<img src="https://images.pexels.com/photos/29768920/pexels-photo-29768920.jpeg" width=500 />
+				</div>
+				<div class="coach-info">
+					<h3>Harry Walker</h3>
+					<p class="coach-title">Vocal Studio JU 코치</p>
+				</div>
+			</div>
+			<div class="coach-message-text fade-in">
+				<div class="message-content">
+					<h3>더 나은 목소리를 만듭니다.</h3>
+					<p>
+						안녕하세요, 이것은 Vocal Studio JU Harry Walker의 예제 인사말입니다.
+					</p>
+					<p>
+						이 인삿말은 예시로 작성되었습니다.<br>
+						지난 n년간 음악교육 현장에서 수많은 수강생들과 함께했습니다.<br>
+						<br>
+						<br>
+						저를 포함하여 JU의 강사진들은 정해진 틀에서 이루어지는 형식적인 레슨방식보다는 수강생들이 직면하는 문제점들과 실질적인 고민들을 해결해 주는것을 목표로 하고 있습니다.<br><br>
+						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 
+					</p>
+
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						이것은 의미가 없는 테스트 문장이기 때문입니다.  <br>
+					</p>
+					<p class="message-closing">
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						<br>
+						 이것은 의미가 없는 테스트 문장이기 때문입니다. <br>
+						<br>
+						이것은 테스트 문장입니다. <br>
+					</p>
+				</div>
+			</div>
+		</div>
+				<div class="coach-content">
+			<div class="coach-profile fade-in">
+				<div class="profile-image">
+					<img src="https://images.pexels.com/photos/16564734/pexels-photo-16564734.jpeg" width=500 />
+				</div>
+				<div class="coach-info">
+					<h3>Rafael Ramos</h3>
+					<p class="coach-title">Vocal Studio JU 코치</p>
+				</div>
+			</div>
+			<div class="coach-message-text fade-in">
+				<div class="message-content">
+					<h3>혹시, 락 좋아하세요?</h3>
+					<p>
+						안녕하세요, 이것은 Vocal Studio JU Rafael Ramos의 예제 인사말입니다.
+					</p>
+					<p>
+						이 인삿말은 예시로 작성되었습니다.<br>
+						지난 n년간 음악교육 현장에서 수많은 수강생들과 함께했습니다.<br>
+						<br>
+						<br>
+						저를 포함하여 JU의 강사진들은 정해진 틀에서 이루어지는 형식적인 레슨방식보다는 수강생들이 직면하는 문제점들과 실질적인 고민들을 해결해 주는것을 목표로 하고 있습니다.<br><br>
+						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 
+					</p>
+
+					<p>
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						이것은 의미가 없는 테스트 문장이기 때문입니다.  <br>
+					</p>
+					<p class="message-closing">
+						이것은 의미가 없는 테스트 문장입니다. <br>
+						이것은 테스트 문장입니다. <br>
+						<br>
+						 이것은 의미가 없는 테스트 문장이기 때문입니다. <br>
+						<br>
+						이것은 테스트 문장입니다. <br>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
 <!-- Services Section -->
 <div id="about-ju-services" class="services common-container">
 	<div class="content-wrapper">
@@ -803,60 +1189,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				<div class="service-icon">🎭</div>
 				<h4>Acting</h4>
 				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- CEO Message Section -->
-<div id="about-ju-ceo" class="ceo-message common-container">
-	<div class="content-wrapper">
-		<div class="ceo-content">
-			<div class="ceo-profile fade-in">
-				<div class="profile-image">
-					<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" width=500 />
-				</div>
-				<div class="ceo-info">
-					<h3>Sleepy Wonder</h3>
-					<p class="ceo-title">Vocal Studio JU 대표</p>
-					<div class="signature" id="signature-container">
-
-					</div>
-				</div>
-			</div>
-			<div class="ceo-message-text fade-in">
-				<div class="message-content">
-					<h3>저는 Vocal Studio의 대표자입니다.</h3>
-					<p>
-						안녕하세요, 이것은 Vocal Studio JU 대표 예제 인사말입니다.
-					</p>
-					<p>
-						이 인삿말은 예시로 작성되었습니다.<br>
-						지난 n년간 음악교육 현장에서 수많은 수강생들과 함께했습니다.<br>
-						저를 포함하여 JU의 강사진들은 정해진 틀에서 이루어지는 형식적인 레슨방식보다는 수강생들이 직면하는 문제점들과 실질적인 고민들을 해결해 주는것을 목표로 하고 있습니다.<br><br>
-
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. <br><br>
-
-						단순히 기술을 가르치는 것을 넘어, <br>
-						수강생들이 진짜 본인의 음악을 찾고 그 속에서 자유롭게 노래할 수 있도록, <br>
-						음악을 사랑하는 모든 수강생분들이 음악을 통해 자신만의 색깔을 찾고, <br>
-						꿈을 실현할 수 있도록하는 JU만의 차별화된 교육 철학을 이어나가고자 합니다.<br>
-
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-					</p>
-
-					<p>
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다. 
-					</p>
-					<p class="message-closing">
-						이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. <br>
-						이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. <br>
-						이것은 테스트 문장입니다. <br><br>
-
-						JU와 함께 특별한 음악 여정을 시작해보세요. <br>
-						이것은 테스트 문장입니다.  이것은 의미가 없는 테스트 문장이기 때문입니다.<br>
-					</p>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -912,7 +1244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			gsap.set(paths, {
 				fill: "none",
-				stroke: "black",
+				stroke: "white",
 				strokeWidth: 12,
 				drawSVG: "0%",
 			});
