@@ -174,20 +174,21 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
+                ease:"exop.in",
                 "--center-svg-scale": 1,
             }, 0);
             
             this.createTimeline(
                 {
-                    start: "top top",
-                    end: "center center",
+                    start: "bottom bottom",
+                    end: "bottom top",
                 }
             ).to(centerText, {
                 fontSize: "150lvh"
             }, 0);
             
             this.createTimeline().to(centerSvg, {
-                ease:"power3.out",
+                ease:"power3.in",
                 opacity:1,
             }, 0);
         }
