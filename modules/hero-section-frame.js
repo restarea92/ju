@@ -174,7 +174,7 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease:"power3.",
+                ease:"power3.in",
                 "--center-svg-scale": 1,
             }, 0).to(centerText, {
                 ease:"power3.Out",
