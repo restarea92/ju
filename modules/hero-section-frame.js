@@ -205,7 +205,7 @@ const app = {
             scrollTrigger: {
                 trigger: this.elements.trigger,
                 start: "top top",
-                end: "bottom bottom",
+                end: "bottom top",
                 scrub: 1, 
                 ...options,
             }
