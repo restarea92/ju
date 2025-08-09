@@ -150,8 +150,8 @@ const app = {
             });
 
             this.createTimeline({
-                start: "center top",
-                end: "bottom top",
+                start: "top -10%",
+                end: "bottom 110%",
             }).to(maskLayer, {
                 "--hero-scroll-inverted-progress": 0,
                  "--hero-scroll-progress": 1,
@@ -174,7 +174,7 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease: "power4.in",
+                ease: "expo.in",
                 "--center-svg-scale": 1,
             }, 0);
             
