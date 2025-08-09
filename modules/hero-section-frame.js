@@ -1,5 +1,6 @@
 // app.js
 import { initGSAP } from './gsapUtils.js';
+// import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
 
 const app = {
     options: {
@@ -82,6 +83,7 @@ const app = {
                 scrub: true,
                 onUpdate: (self) => {
                     const frame = Math.round(self.progress * (this.images.length - 1));
+                    console.log(frame);
                     if (frame !== this.targetFrame) {
                         this.targetFrame = frame;
                         if (!this.rafId) this.animateFrames();
