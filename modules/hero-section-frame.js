@@ -159,6 +159,7 @@ const app = {
 
 
             this.createTimeline().to(maskLayer, {
+                ease: "expo.in",
                 "--hero-scroll-brightness": 0.25,
             }, 0);
         } 
