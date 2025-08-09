@@ -215,7 +215,7 @@ const app = {
                     endColor: "yellow",
                     fontSize: "2rem",
                      fontWeight: "900"
-                }
+                },
                 ...options,
             }
         });
