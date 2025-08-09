@@ -152,7 +152,13 @@ const app = {
             this.createTimeline({
                 start: "top top",
                 end: "bottom top",
-                }).to(maskLayer, {
+                markers: {
+                    startColor: "red",
+                    endColor: "yellow",
+                    fontSize: "2rem",
+                     fontWeight: "900"
+                },
+            }).to(maskLayer, {
                 "--hero-scroll-inverted-progress": 0,
                  "--hero-scroll-progress": 1,
             }, 0);
@@ -210,12 +216,6 @@ const app = {
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 1, 
-                markers: {
-                    startColor: "red",
-                    endColor: "yellow",
-                    fontSize: "2rem",
-                     fontWeight: "900"
-                },
                 ...options,
             }
         });
