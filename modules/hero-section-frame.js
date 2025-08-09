@@ -174,7 +174,6 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease:"expo.in",
                 "--center-svg-scale": 1,
                 fontSize: "150lvh"
             }, 0);
