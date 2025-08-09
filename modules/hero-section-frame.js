@@ -171,7 +171,7 @@ const app = {
             this.createTimeline(
                 {
                     start: "top top",
-                    end: "bottom center",
+                    end: "bottom top",
                 }
             ).to(centerSvg, {
                 ease:"power3.in",
@@ -179,7 +179,7 @@ const app = {
             }, 0)
             .to(centerText, {
                 ease:"power3.in",
-                fontSize:"120lvh",
+                fontSize:"150lvh",
             }, 0);
             
             this.createTimeline().to(centerSvg, {
