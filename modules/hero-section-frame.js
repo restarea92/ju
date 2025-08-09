@@ -149,7 +149,10 @@ const app = {
                 filter: "brightness(var(--hero-scroll-brightness))",
             });
 
-            this.createTimeline().to(maskLayer, {
+            this.createTimeline({
+                start: "top top",
+                end: "bottom top",
+                }).to(maskLayer, {
                 "--hero-scroll-inverted-progress": 0,
                  "--hero-scroll-progress": 1,
             }, 0);
@@ -168,14 +171,14 @@ const app = {
             this.createTimeline(
                 {
                     start: "top top",
-                    end: "bottom top",
+                    end: "bottom center",
                 }
             ).to(centerSvg, {
                 ease:"power3.in",
                 "--center-svg-scale": 1,
             }, 0)
             .to(centerText, {
-                ease:"power4.in",
+                ease:"power2.in",
                 fontSize:"100lvh",
             }, 0);
             
@@ -205,7 +208,7 @@ const app = {
             scrollTrigger: {
                 trigger: this.elements.trigger,
                 start: "top top",
-                end: "bottom top",
+                end: "bottom bottom",
                 scrub: 1, 
                 ...options,
             }
