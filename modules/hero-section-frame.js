@@ -82,7 +82,7 @@ const app = {
                 scrollTrigger: {
                     trigger: app.elements.canvasWrapper,
                     start: "top top",
-                    end: "bottom bottom",
+                    end: "bottom top",
                     scrub: 1,  // 0.5초 정도 스크럽 딜레이 줌 (부드럽게 따라감)
                 }
             });
