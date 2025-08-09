@@ -177,7 +177,7 @@ const app = {
                 ease: "power4.in",
                 "--center-svg-scale": 1,
             }, 0);
-            0);
+            
             
             this.createTimeline().to(centerSvg, {
                 ease:"power3.in",
