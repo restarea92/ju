@@ -156,7 +156,7 @@ const app = {
 
 
             this.createTimeline().to(maskLayer, {
-                "--hero-scroll-brightness": 0.5,
+                "--hero-scroll-brightness": 0.25,
             }, 0);
         } 
 
@@ -168,10 +168,10 @@ const app = {
             this.createTimeline(
                 {
                     start: "top top",
-                    end: "bottom center",
+                    end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease:"power4.in",
+                ease:"power3.in",
                 "--center-svg-scale": 1,
             }, 0)
             .to(centerText, {
@@ -180,7 +180,7 @@ const app = {
             }, 0);
             
             this.createTimeline().to(centerSvg, {
-                ease:"power2.out",
+                ease:"power3.out",
                 opacity:1,
             }, 0);
         }
