@@ -175,6 +175,14 @@ const app = {
                 }
             ).to(centerSvg, {
                 "--center-svg-scale": 1,
+            }, 0);
+            
+            this.createTimeline(
+                {
+                    start: "top top",
+                    end: "center center",
+                }
+            ).to(centerText, {
                 fontSize: "150lvh"
             }, 0);
             
