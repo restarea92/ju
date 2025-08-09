@@ -159,7 +159,7 @@ const app = {
 
 
             this.createTimeline().to(maskLayer, {
-                ease: "expo.in",
+                ease: "power2.in",
                 "--hero-scroll-brightness": 0.25,
             }, 0);
         } 
@@ -175,13 +175,13 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease: "expo.in",
+                ease: "power3.in",
                 "--center-svg-scale": 1,
             }, 0);
             
             
             this.createTimeline().to(centerSvg, {
-                ease:"power3.in",
+                ease:"power3.out",
                 opacity:1,
             }, 0);
         }
