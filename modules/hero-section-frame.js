@@ -48,20 +48,20 @@ const app = {
         },
 
         animateFrames() {
-            if (this.currentFrame !== this.targetFrame) {
-                const step = this.currentFrame < this.targetFrame ? 1 : -1;
-                this.currentFrame += step;
-                this.drawImage(this.currentFrame);
-                this.rafId = requestAnimationFrame(() => this.animateFrames());
-            } else {
+            if (this.currentFrame === this.targetFrame) {
                 cancelAnimationFrame(this.rafId);
                 this.rafId = null;
+                return;
             }
+            const step = this.currentFrame < this.targetFrame ? 1 : -1;
+            this.currentFrame += step;
+            this.drawImage(this.currentFrame);
+            this.rafId = requestAnimationFrame(() => this.animateFrames());
         },
 
         init() {
             if (!initGSAP()) return;
-            
+
             const firstFrame = new Image();
             firstFrame.src = this.getFrameUrl(1);
             firstFrame.onload = () => {
