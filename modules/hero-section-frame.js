@@ -176,8 +176,6 @@ const app = {
             ).to(centerSvg, {
                 ease:"expo.in",
                 "--center-svg-scale": 1,
-            }, 0).to(centerText, {
-                fontSize:"100lvh",
             }, 0);
             
             this.createTimeline().to(centerSvg, {
