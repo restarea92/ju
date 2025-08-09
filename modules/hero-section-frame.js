@@ -174,8 +174,8 @@ const app = {
                     end: "bottom top",
                 }
             ).to(centerSvg, {
-                ease:"exop.in",
-                "--center-svg-scale": 1,
+                //ease: "power4.in",
+                //"--center-svg-scale": 1,
             }, 0);
             
             this.createTimeline(
