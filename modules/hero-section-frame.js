@@ -83,14 +83,14 @@ const app = {
                     trigger: app.elements.canvasWrapper,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1,  // 0.5초 정도 스크럽 딜레이 줌 (부드럽게 따라감)
+                    scrub: 0.5,  // 0.5초 정도 스크럽 딜레이 줌 (부드럽게 따라감)
                 }
             });
             const debugFrame = document.querySelector('#debug-frame');
             this.timeline.to(this, {
                 onUpdate: (self) => {
                     const progress = this.timeline.progress();
-                    const frame = Math.min(app.options.FRAME_COUNT, Math.max(1, Math.ceil(progress * this.images.length)));
+                   const frame = Math.min(app.options.FRAME_COUNT, Math.max(1, Math.ceil(progress * this.images.length)));
                     if (frame !== this.targetFrame) {
                         this.targetFrame = frame;
                         debugFrame.innerHTML = `${this.targetFrame}`;
@@ -184,8 +184,8 @@ const app = {
                 "--center-svg-scale": 1,
             }, 0)
             .to(centerText, {
-                ease:"power2.in",
-                fontSize:"100lvh",
+                ease:"power3.in",
+                fontSize:"120lvh",
             }, 0);
             
             this.createTimeline().to(centerSvg, {
