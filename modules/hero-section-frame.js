@@ -210,6 +210,12 @@ const app = {
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 1, 
+                markers: {
+                    startColor: "red",
+                    endColor: "yellow",
+                    fontSize: "2rem",
+                     fontWeight: "900"
+                }
                 ...options,
             }
         });
