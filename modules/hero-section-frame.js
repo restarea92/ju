@@ -150,7 +150,7 @@ const app = {
             });
 
             this.createTimeline({
-                start: "top top",
+                start: "center top",
                 end: "bottom top",
             }).to(maskLayer, {
                 "--hero-scroll-inverted-progress": 0,
