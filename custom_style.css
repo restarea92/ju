@@ -169,18 +169,18 @@ body.doz_sys.modal-open {
         justify-content: center;
         align-items: center;
         flex: 1;
-        width: 100%;
+         width: 100%;
         h3 {
-        font-size: 1.25rem;
-        font-weight: 750;
-        color: black;
+            font-size: 1.25rem;
+            font-weight: 750;
+            color: black;
         }
         a {
-        color: #06c;
-        &:hover {
-            text-decoration: underline;
-            font-size: 1rem;
-        }
+            color: #06c;
+            &:hover {
+                text-decoration: underline;
+                font-size: 1rem;
+            }
         }
     }
 }

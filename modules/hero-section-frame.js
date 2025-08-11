@@ -3,7 +3,6 @@ import { initGSAP } from './gsapUtils.js';
 // import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
 
 const app = {
-    
     options: {
         FRAME_COUNT: 125,
         FRAME_BASE_URL: 'https://raw.githubusercontent.com/restarea92/ju/main/media/webp_frames',
