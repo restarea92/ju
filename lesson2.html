@@ -1,95 +1,290 @@
 <!-- courses Section -->
 <style>
 .courses.common-container {
-    .courses-grid {
+    padding-top: 8rem;
+    background: linear-gradient(135deg, 
+        rgba(99, 102, 241, 0.1) 0%, 
+        rgba(236, 72, 153, 0.1) 50%, 
+        rgba(245, 158, 11, 0.1) 100%);
+
+    .content-wrapper {
+        display: grid;
         grid-template-columns: 1fr;
     }
 
     h2.content-title {
         text-align: center;
         width: 100%;
-        font-weight: 750;
-        font-size: var(--h2-font-size);
+        font-weight: 800;
+        font-size: var(--font-size-common-title);
+        margin-bottom: 4rem;
+    }
+
+    .courses-grid {
+        will-change: transform;
+        transform: translateZ(0);
+        --row-span: 5;
+        --grid-card-count: 5;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: 1fr;
+        height: 75lvh;
     }
     .course-card {
-        border: 4px solid red;
+        transform: translateZ(0) scale(1.1);
+        opacity: 0;
+        will-change: transform opacity;
         border-radius: 1rem;
-        background-color: lightblue;
+        background-color: white;
+        grid-column: 1;
+        grid-row: 1 / span var(--grid-card-count);
+        z-index: 1;
+        transform-style: preserve-3d; /* 자식 요소에 3D 변형 효과 전달 */
+        transform-origin: center top;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.125);
+        padding: 2rem;
     }
+
 
 }
 </style>
 
 <div id="courses" class="courses common-container">
-    <div class="content-wrapper">
-        <h2 class="content-title">JU의 보컬&발성과정은 어떻게 이루어질까요?</h2>
-        <div class="courses-grid">
-            <div class="course-card">
-                <div class="course-icon">🎯</div>
-                <h3>코스 1</h3>
-                <p>이것은 예시 커리큘럼입니다.</p>
-                <ul class="course-features">
-                    <li>호흡의 기초</li>
-                    <li>지속 가능한 발성을 위한 목 관리법</li>
-                    <li>기타 항목 1</li>
-                    <li>기타 항목 2</li>
-                </ul>
-                <p><strong>기대효과:</strong> 안정적인 발성과 기본기 완성</p>
-            </div>
+    <div class="scroll-spacer">
+        <div class="content-wrapper sticky-element">
+            <h2 class="content-title">JU의 보컬&발성과정은 어떻게 이루어질까요?</h2>
+            <div class="courses-grid">
+                <div class="course-card" style="--course-card-i:1;">
+                    <h3>코스 설명 카드 1</h3>
+                    <p>이것은 예시 커리큘럼입니다.</p>
+                    <ul class="course-features">
+    
+                    </ul>
+                </div>
 
-            <div class="course-card">
-                <div class="course-icon">🎯</div>
-                <h3>코스 2의 제목</h3>
-                <p>이것은 예시 커리큘럼입니다.</p>
-                <ul class="course-features">
-                    <li>예시 이론 교육 1</li>
-                    <li>예시 이론 교육 2</li>
-                    <li>기타 항목 1</li>
-                    <li>기타 항목 2</li>
-                </ul>
-                <p><strong>기대효과:</strong> 안정적인 발성과 기본기 완성</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🎯</div>
-                <h3>코스 3의 제목</h3>
-                <p>이것은 예시 커리큘럼입니다.</p>
-                <ul class="course-features">
-                    <li>예시 이론 교육 1</li>
-                    <li>예시 이론 교육 2</li>
-                    <li>기타 항목 1</li>
-                    <li>기타 항목 2</li>
-                </ul>
-                <p><strong>기대효과:</strong> 안정적인 발성과 기본기 완성</p>
-            </div>
-            
-            <div class="course-card">
-                <div class="course-icon">🎯</div>
-                <h3>코스 4의 제목</h3>
-                <p>이것은 예시 커리큘럼입니다.</p>
-                <ul class="course-features">
-                    <li>예시 이론 교육 1</li>
-                    <li>예시 이론 교육 2</li>
-                    <li>기타 항목 1</li>
-                    <li>기타 항목 2</li>
-                </ul>
-                <p><strong>기대효과:</strong> 안정적인 발성과 기본기 완성</p>
-            </div>
+                <div class="course-card" style="--course-card-i:2;">
+                    <h3>코스 설명 카드 2</h3>
+                    <p>이것은 예시 커리큘럼입니다.</p>
+                    <ul class="course-features">
 
-            
-            <div class="course-card">
-                <div class="course-icon">🎯</div>
-                <h3>코스 5의 제목</h3>
-                <p>이것은 예시 커리큘럼입니다.</p>
-                <ul class="course-features">
-                    <li>예시 이론 교육 1</li>
-                    <li>예시 이론 교육 2</li>
-                    <li>기타 항목 1</li>
-                    <li>기타 항목 2</li>
-                </ul>
-                <p><strong>기대효과:</strong> 안정적인 발성과 기본기 완성</p>
-            </div>
+                    </ul>
+                </div>
+                <div class="course-card" style="--course-card-i:3;">
+                    <h3>코스 설명 카드 3</h3>
+                    <p>이것은 예시 커리큘럼입니다.</p>
+                    <ul class="course-features">
 
+                    </ul>
+                </div>
+                
+                <div class="course-card" style="--course-card-i:4;">
+                    <h3>코스 설명 카드 4</h3>
+                    <p>이것은 예시 커리큘럼입니다.</p>
+                    <ul class="course-features">
+
+                    </ul>
+                </div>
+
+                
+                <div class="course-card" style="--course-card-i:5;">
+                    <h3>코스 설명 카드 5</h3>
+                    <p>이것은 예시 커리큘럼입니다.</p>
+                    <ul class="course-features">
+
+                    </ul>
+                </div>
+
+            </div>  
         </div>
     </div>
 </div>
 
+<script type="module">
+// app.js
+
+//import { initGSAP } from './gsapUtils.js';
+import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
+
+const app = {
+
+    // ========== Configuration ==========
+    CONFIG: {
+        VERSION: '1.0.0',
+    },
+
+    // ========== DOM Elements Cache ==========
+    elements: {
+        // Base element for the courses section
+        baseElement: document.querySelector('#courses'),
+
+        // Elements within the courses section
+        get contentWrapper() { return this.baseElement?.querySelector('.content-wrapper')},
+        get stickyElement() { return this.baseElement?.querySelector('.sticky-element')},
+		get spacer() { return this.baseElement?.querySelector('.scroll-spacer')},
+        get trigger() { return this.baseElement?.querySelector('.scroll-spacer')},
+
+        // Grid elements
+        get gridBox() { return this.baseElement?.querySelector('.courses-grid')},
+        get gridCards() { 
+            return gsap.utils.toArray(this.gridBox?.querySelectorAll('.course-card'));
+        },
+    },
+
+
+	init() {
+        // Initialize GSAP
+        if (!initGSAP()) {
+            console.error('GSAP initialization failed.');
+            return;
+        }
+        this.initScroll();
+    },
+
+    // ========== Init Scroll ==========
+    /**
+     * Initialize scroll
+     */
+    initScroll() {
+        const contentWrapper = this.elements.contentWrapper;
+        const stickyElement = this.elements.stickyElement;
+
+        const trigger = this.elements.trigger;
+        const spacer = this.elements.spacer;
+
+        const gridBox = this.elements.gridBox;
+        const gridCards = this.elements.gridCards;
+        const gridCardCount = gridCards.length;
+        // 100 / gridCardCount;
+        const gridCardRatio = 100 / (gridCardCount + 1);
+        const gridCardHeight = parseFloat(getComputedStyle(gridCards[0]).height);
+
+        gsap.set(gridCards, {
+            force3D: true,
+            z: 0,
+            yPercent: 10,
+            opacity: 0,
+            scale: 1.1,
+            filter: "brightness(1)",
+        });
+        
+        gsap.set(contentWrapper, {
+            paddingTop: "4rem",
+        });
+
+        gsap.set(stickyElement, {
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+        });
+
+        gsap.set(spacer, {
+            height: `calc(clamp(3000px, 300vh, 5000px)`,
+        });
+
+        gridCards.forEach((card, i) => {
+            const timeline1 = this.createTimeline({
+                start:  `top+=${i * gridCardRatio}% top+=20%`,
+                end: `top+=${(i) * gridCardRatio }% 10%`,
+                markers: {
+                    startColor: "green",
+                    endColor: "red",
+                    fontSize: "12px",
+                    indent: 20,
+                }
+            });
+            timeline1.to(card, {
+                ease: "expo.inOut",
+                yPercent: 0,
+                opacity: 1,
+                scale: 1,
+                filter: "brightness(1)",
+            }, 0);
+
+            if (i < gridCardCount - 1) {
+                const timeline2 = this.createTimeline({
+                    start:  `top+=${(i + 1) * gridCardRatio}% top+=25%`,
+                    end: `top+=${(i + 1) * gridCardRatio }% 10%`,
+                    markers: {
+                        startColor: "green",
+                        endColor: "red",
+                        fontSize: "12px",
+                        indent: 100,
+                    }
+                });
+                timeline2.to(card, {
+                ease: "expo.inOut",
+                    yPercent: -3,
+                    opacity: 1,
+                    scale: 0.95,
+                    filter: "brightness(0.95)",
+                }, 0);
+            }
+
+            if (i < gridCardCount - 2) {
+                const timeline3 = this.createTimeline({
+                    start:  `top+=${(i + 2) * gridCardRatio}% top+=30%`,
+                    end: `top+=${(i + 2) * gridCardRatio }% 10%`,
+                    markers: {
+                        startColor: "green",
+                        endColor: "red",
+                        fontSize: "12px",
+                        indent: 200,
+                    }
+                });
+                timeline3.to(card, {
+                ease: "expo.inOut",
+                    opacity: 0.5,
+                    scale: 0.9,
+                    yPercent: -4,
+                    filter: "brightness(0.6)",
+                }, 0);
+            }
+
+            if (i < gridCardCount - 3) {
+                const timeline4 = this.createTimeline({
+                    start:  `top+=${(i + 3) * gridCardRatio}% top+=35%`,
+                    end: `top+=${(i + 3) * gridCardRatio }% 10%`,
+                    markers: {
+                        startColor: "green",
+                        endColor: "red",
+                        fontSize: "12px",
+                        indent: 300,
+                    }
+                });
+                
+                timeline4.to(card, {
+                ease: "expo.inOut",
+                    opacity: 0,
+                    scale: 0.8,
+                    yPercent: -5,
+                    filter: "brightness(0.9)",
+                }, 0);
+            } 
+
+
+        });
+        
+    },
+    
+
+
+    createTimeline(options = {}) {
+        return gsap.timeline({
+            scrollTrigger: {
+                trigger: this.elements.trigger,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1, 
+                ...options,
+            }
+        });
+    },
+
+};
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+});
+
+</script>

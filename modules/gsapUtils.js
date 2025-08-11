@@ -18,6 +18,6 @@ export function initGSAP() {
     if (!gsap.plugins || !gsap.plugins.ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase, DrawSVGPlugin);
     }
-
+ 
     return true;
 }
