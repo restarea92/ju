@@ -12,13 +12,43 @@
     --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     
-    /* Typography Scale */
+    /* Typography Scale in this page only*/
     --font-h1: 3.5rem;
     --font-h2: 2.5rem;
     --font-h3: 1.75rem;
     --font-body: 1.125rem;
     --font-small: 1rem;
+
+    /* Typography Scale in common pages */
+    --font-size-primary-title: 4rem;
+    --font-size-common-title: 2.5rem;
+    --font-size-sub-title: 1.25rem;
 }
+
+@media (max-width: 1280px) and (min-width: 1025px) {
+    /* 1025 ~ 1280 */
+    :root {        
+        --font-size-primary-title: 3rem;
+        --font-size-sub-title: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+/* 769 ~ 1024 */
+    :root {    
+        --font-size-primary-titlee: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
+        --font-size-sub-title: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {   
+        --font-size-primary-title: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
+        --font-size-sub-title: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
+    }
+}
+
+
 .inside:has(.comment) {
     display: none;
 }
@@ -35,11 +65,33 @@
         padding: 0 calc(var(--default-container-padding) / 2);
 		margin: 0 auto;
 	}
-	
-	.content-title {
 
-	}
+    .content {
+        border-radius: 1rem;
+        min-height: 50lvh;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        width: 100%;
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 750;
+            color: black;
+        }
+        a {
+            color: #06c;
+            &:hover {
+                text-decoration: underline;
+                font-size: 1rem;
+            }
+        }
+    }
 }
+
+
+
 
 .lesson.common-container {
     min-height: 100vh;
