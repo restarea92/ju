@@ -12,7 +12,7 @@
 	}
 </style>
 
-<!-- Common Container Style-->
+<!-- Override Common Container Style-->
 <style>
 /* 공통 컨테이너 스타일 */
 .common-container {
@@ -26,11 +26,15 @@
 	}
 	
 	.content-wrapper {
+		display: block;
         max-width: var(--default-container-width);
         padding: 0 calc(var(--default-container-padding) / 2);
 		margin: 0 auto;
 	}
-	
+	.content {
+		background:unset;
+		display: block;
+	}
 	.content-title {
 		font-size: 3rem;
 		font-weight: 800;
@@ -47,8 +51,6 @@
 		width: 75%;
 		color: var(--common-text-color);
 	}
-
-
 }
 </style>
 
@@ -397,7 +399,7 @@
 
 	.ceo-message-text {
 		background: var(--bg-glass);
-		padding: calc(var(--default-container-padding) / 2);
+		padding: calc(var(--default-container-padding));
 		border-radius: 25px;
 		backdrop-filter: var(--backdrop-blur);
 		border: var(--border-glass);
@@ -597,11 +599,10 @@
 			background: var(--bg-glass);
 			padding: 30px 20px;
 			border-radius: 15px;
-			backdrop-filter: var(--backdrop-blur);
 			border: var(--border-glass);
 
 			.stat-number {
-				font-size: 2.5rem;
+				font-size: var(--h2-font-size);
 				font-weight: bold;
 				color: #667eea;
 				margin-bottom: 0.5rem;
@@ -979,6 +980,7 @@
 	/* common-container */
 	.common-container {
 		h2.content-title {
+			margin-bottom: 0;
 			font-size: 2rem;
 		}
 		.content-wrapper {
@@ -1075,6 +1077,7 @@
 	/* CEO Section 모바일 */
 	.ceo-message.common-container {
 		.ceo-content {
+			margin-top: 2rem;
 			grid-template-columns: 1fr;
 			gap: 2rem;
 		}
@@ -1093,7 +1096,7 @@
 		}
 
 		.ceo-message-text {
-			padding: calc(var(--default-container-padding) / 2);
+			padding: calc(var(--default-container-padding) * 1.5);
 
 			.message-content  {
 				h3 {
@@ -1108,6 +1111,9 @@
 	/* Coach Section 모바일 */
 
 	#about-ju-coach.common-container {
+		.content-wrapper {
+			padding: calc(var(--default-container-padding) * 1.5);
+		}
 		.coach-content {
 			grid-template-columns: 1fr;
 			gap: 2rem;
@@ -1172,11 +1178,11 @@
 	.vision.common-container {
 		.vision-content {
 			h2 {
-				font-size: 2.2rem;
+				font-size: 2rem;
 			}
 
 			p {
-				font-size: 1.125rem;
+				font-size: 1rem;
 			}
 		}
 
@@ -1186,7 +1192,6 @@
 		}
 	}
 }
-
 
 </style>
 
@@ -1396,7 +1401,6 @@ const app = {
 			}, 0)
 			.to(contentTitle, {
 				ease: "power3.out", 
-				paddingTop: "2rem",
 			}, 0)
 			.to(overlay, {
 				ease: "power3.out", 

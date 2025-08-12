@@ -35,6 +35,7 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
+        display: block;
     }
     
     .content-title {
@@ -45,6 +46,7 @@
         color: var(--strong-text-color);
         position: relative;
     }
+    
     
     h3 {
         font-size: 1.5rem;
@@ -60,6 +62,8 @@
         grid-template-columns: 1fr 1fr;
         gap: 1rem 4rem;
         align-items: start;
+        background:unset;
+        min-height: fit-content;
 
         &.image-box {
             grid-template-columns: 1fr;
@@ -147,6 +151,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 1rem;
         }
     }
 
@@ -200,11 +205,18 @@
 
 @media (max-width: 768px) {
     .common-container {
+        padding: 2rem 0;
         .content-title {
             font-size: 1.875rem;
             margin-bottom: 1rem;
         }
-        
+        .content-text p {
+            font-size: 1rem; 
+        }
+        .content {
+            margin: 0;
+        }
+
         h3 {
             font-size: 1.25rem;
         }
@@ -342,8 +354,6 @@
         <div class="content">
             <h3 class="grid-title">Vocal Studio JU 송도본점.</h3>
             <div class="content-text">
-
-                <!-- 실제 내용 -->
                  <p>
                     <strong>발성교육의 새로운 기준이 세워지는 곳.</strong> 송도본점은 JU의 시작점이자 모든 교육의 중심입니다.<br>
                     송도본점은 각 지점 코치들을 교육하고 실무경험을 쌓도록 하여 JU 전 지점에서 균일한 교육 경험을 제공하고 있습니다.<br>
