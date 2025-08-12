@@ -1,5 +1,5 @@
 /*!
- * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE
+ * END USER LICENSE AGREEMENT (EULA) FOR CSS/JS MODULE for Visual Section
  * 
  * This Software is licensed by HScomm Web dev Team ("Licensor") to the end user ("Licensee").
  * 
@@ -171,6 +171,28 @@
             padding-top: calc(var(--h3-font-size) / 2 );
         }
     }
+
+    #multi-scroll {
+
+    }
+    .multi-scroll-item {
+        width: 100lvw;
+        min-width: 100lvw;
+        height: 100lvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .horizontal-spacer {
+        height: 300lvh;
+    }
+    .horizontal-container {
+        position: sticky;
+        top:0;
+        display: flex;
+        flex-wrap:nowrap;
+    }
 }
  
 
@@ -213,6 +235,7 @@
 .sticky-element-content {
 
 }
+
 
 @media (max-width: 1280px) and (min-width: 1025px) {
     /* 1025 ~ 1280 */
