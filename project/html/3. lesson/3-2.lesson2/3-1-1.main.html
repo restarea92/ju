@@ -1,15 +1,17 @@
 <style>
 :root {
-    --primary: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary: #ec4899;
-    --accent: #f59e0b;
+    --primary: #F6A878;       /* 살구 기본톤 */
+    --primary-dark: #D9884F;  /* 조금 더 진한 살구 */
+    --secondary: #EC4899;     /* 보라빛 핑크 */
+    --accent: #F59E0B;        /* 기존 노랑 계열 유지 */
     --bg-dark: #0f172a;
     --bg-light: #f8fafc;
     --text-dark: #86868b;
     --text-light: #a6a6a9;
     --white: #ffffff;
     --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-bg: linear-gradient(135deg, rgba(246, 168, 120, 0.1) 0%, rgba(236, 72, 153, 0.1) 50%, rgba(245, 158, 11, 0.1) 100%);
+
     --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     
     /* Typography Scale in this page only*/
@@ -104,10 +106,7 @@
 
 .lesson.common-container {
     min-height: 75vh;
-    background: linear-gradient(135deg, 
-        rgba(99, 102, 241, 0.1) 0%, 
-        rgba(236, 72, 153, 0.1) 50%, 
-        rgba(245, 158, 11, 0.1) 100%);
+    background: var(--gradient-bg);
     display: flex;
     align-items: center;
     position: relative;
@@ -281,7 +280,7 @@
     <div class="content-wrapper">
         <div class="content">
             <div class="content-text">
-                <h1>커리큘럼을 강조할,<br>슬로건 영역.</h1>
+                <h1>목소리로 되찾는,<br>말할 때의 자신감.</h1>
                 <p>
                     이 커리큘럼에 대한 2~3 문장으로 구성된 설명 영역입니다. 커리큘럼의 목적과 수강 대상, 수강 이후의 기대효과를 강조할 수 있습니다. <br>
                     이 커리큘럼에 대한 2~3 문장으로 구성된 설명 영역입니다. 커리큘럼의 목적과 수강 대상, 수강 이후의 기대효과를 강조할 수 있습니다. 
@@ -292,9 +291,8 @@
                 </button>
             </div>
             <div class="content-visual">
-                <img src="https://images.pexels.com/photos/7086747/pexels-photo-7086747.jpeg" alt="">
+                <img src="https://images.pexels.com/photos/3201720/pexels-photo-3201720.jpeg" alt="">
             </div>
         </div>
     </div>
 </div>
-
