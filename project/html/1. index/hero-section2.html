@@ -1,27 +1,3 @@
-<style>
-#multi-scroll {
-
-}
-.multi-scroll-item {
-    width: 100lvw;
-    min-width: 100lvw;
-    height: 100lvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.horizontal-spacer {
-    height: 300lvh;
-}
-.horizontal-container {
-    position: sticky;
-    top:0;
-    display: flex;
-    flex-wrap:nowrap;
-}
-</style>
-
 <!-- Visual Section Start { -->
 <div class="visual-section sticky-wrapper" id="visual-section" > 
     <!-- Sticky Element Start { -->
@@ -100,14 +76,14 @@
 </div> <!-- } Visual Section End -->
 
 <script type="module">
-    import app from 'https://restarea92.github.io/ju/modules/rect-scroll.js';
+    import app from 'https://restarea92.github.io/ju/modules/visual-section/rect-scroll.js';
     document.addEventListener('DOMContentLoaded', () => {
         app.init();
     });
 </script>
 
 <script type="module">
-    import app from 'https://restarea92.github.io/ju/modules/horizontal-scroll.js';
+    import app from 'https://restarea92.github.io/ju/modules/visual-section/horizontal-scroll.js';
     document.addEventListener('DOMContentLoaded', () => {
         app.init();
     });
