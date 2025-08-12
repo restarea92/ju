@@ -209,13 +209,11 @@
     height: 100lvh;
 }
 
-
-
 .sticky-element {
     position: sticky;
-    top:calc(var(--h2-font-size) * 2);
-    top:0;
+    top:var(--header-height);
     padding: 0;
+    height: 100%;
 }
 
 .sticky-element-background {
@@ -233,6 +231,10 @@
 }
 
 .sticky-element-content {
+    .content {
+        display: flex;
+        min-height: 100vh;
+    }
 
 }
 
