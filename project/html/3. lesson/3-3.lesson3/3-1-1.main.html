@@ -199,7 +199,21 @@
             object-fit: cover;
         }
     }
-    
+    #landscapeVideo {
+        display: block;
+    }
+
+    #portraitVideo {
+        display: none;
+    }
+    @media (orientation: portrait) {
+        #landscapeVideo {
+            display: none;
+        }
+        #portraitVideo {
+            display: block;
+        }
+    }
 }
 
 /* Mobile Responsiveness */
@@ -289,12 +303,12 @@
                 </button>
             </div>
             <div class="content-visual">
-                <video id="landscapeVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
-                    <source src="https://restarea92.github.io/ju/lsvtt.mp4" type="video/mp4" />
+                <video id="landscapeVideo" autoplay muted playsinline loop style="width:100%; height:100%; object-fit: cover; filter:brightness(0.75)">
+                    <source src="https://restarea92.github.io/ju/lsvtt-compressed.mp4" type="video/mp4" />
                 </video>
 
-                <video id="portraitVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
-                    <source src="https://restarea92.github.io/ju/lsvttm.mp4" type="video/mp4" />
+                <video id="portraitVideo" autoplay muted playsinline loop style="width:100%; height:100%; object-fit: cover; filter:brightness(0.75)">
+                    <source src="https://restarea92.github.io/ju/lsvttm-compressed.mp4" type="video/mp4" />
                 </video>
             </div>
         </div>
