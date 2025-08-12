@@ -1,0 +1,265 @@
+
+/* ----------------------------------------------
+ * init default style
+ * ---------------------------------------------- */
+.hidden-comment {
+    display: none!important;
+}
+
+:root {
+  --logo-width: 100px;
+  --default-container-width: 1280px;
+  --default-content-width: 1200px;
+  --small-container-width: 1024px;
+  --small-content-width: 960px;
+  --default-container-padding: calc(var(--default-container-width) - var(--default-content-width));
+  --default-logo-margin: 20px;
+  --default-navbar-padding: 12px;
+}
+
+body {
+  padding-bottom:0!important;
+}
+
+html, body {
+  font-size:17px;
+  zoom: unset!important;
+}
+body {
+  overflow-x:clip!important;
+}
+body.doz_sys.modal-open {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
+html.clip {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
+body.clip {
+  overflow-y:clip;
+  top: var(--current-scroll-y);
+}
+
+body.doz_sys.modal-open {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
+
+
+/* ----------------------------------------------
+ * common header default style
+ * header id         - #doz_header_wrap
+ * header wrapper id - #s20250721b75480cc5aa0f
+ * header inner id   - #s20250721b75480cc5aa0f
+ *
+ * menu widget id    - #w2025072190d07aa84cf05
+ * login widget id   - #w20250721c82ad2c991d45
+ *
+ * ---------------------------------------------- */
+#s20250721b75480cc5aa0f .inline-inside {
+    max-width: var(--default-content-width);
+}
+
+#w20250721c225b846009a0 {
+    margin-right: var(--default-logo-margin);
+    padding:.5rem 0;
+}
+
+#w2025072190d07aa84cf05 {
+    font-weight:400;
+}
+#w2025072190d07aa84cf05 li.dropdown > ul.dropdown-menu {
+  ul, li, a {
+      --webkit-transition:.1s;
+      transition:.1s;
+  }
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a.active, 
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a.active {
+  font-weight:750;
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a:hover, 
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a:hover {
+    opacity: 0.5;
+}
+#w2025072190d07aa84cf05 .viewport-nav > li.dropdown > .notranslate a, #w2025072190d07aa84cf05 .viewport-nav > li.dropdown > a {
+  transition:unset;
+  padding: 0 var(--default-navbar-padding);
+}
+
+
+#dropdown_w2025072190d07aa84cf05 {
+    .tse-content {
+        max-width:var(--default-content-width);
+        width:100%;
+        margin: 0 auto;
+        > div {
+            display:contents;
+        } 
+        .mega_dropdown {
+              width:100%;
+              padding-left: calc(var(--logo-width) + var(--default-logo-margin) + var(--default-navbar-padding));
+        }
+    }
+}
+  
+#dropdown_w2025072190d07aa84cf05 .mega_dropdown_wrap {
+  .mega_dropdown {
+      display: grid; 
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, 128px);   
+        .title_menu > a {
+            font-size:15px;
+            font-weight:750;
+        }
+        .sub_menu li {
+            line-height:1;
+            height:fit-content;
+        }
+        .sub_menu a {
+            font-size:13px;
+        }
+      &.clearfix:after, &.clearfix:before {
+        content:unset;
+      }
+    > div {
+        float: unset;
+    }
+  }
+}
+  
+#doz_footer_wrap {
+  margin-top:4rem;
+}
+
+/* ----------------------------------------------
+ * common content default style
+ * ---------------------------------------------- */
+
+.common-conteiner {
+    .content-wrapper {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: nowrap;
+    }
+    .content {
+        border-radius: 1rem;
+        background: #f5f5f7;
+        min-height: 50lvh;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+         width: 100%;
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 750;
+            color: black;
+        }
+        a {
+            color: #06c;
+            &:hover {
+                text-decoration: underline;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+
+
+/* ----------------------------------------------
+ * common Footer default style
+ * ---------------------------------------------- */
+footer#custom-footer {
+    display: flex;
+    justify-content:center;
+    padding:1rem;
+    > div.footer-content {
+        width:100%;
+        max-width: var(--default-content-width);
+        font-size:12px;
+        line-height:1;
+        color:#666;
+        display:flex;
+        flex-direction:column;
+        gap:0.5rem;
+        .copyright-wrapper {
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            nav {
+                display:flex;
+            }
+            nav a {
+                padding:0 0.5rem;
+                font-weight: 600;
+                line-height:1;
+            }
+            nav a:not(:first-of-type) {
+                border-left:1px solid #666;            
+            }
+        }
+        p {
+            line-height:1.47;
+        }
+        p span {
+            white-space: nowrap;
+        }
+    }
+}
+
+  
+@media (max-width: 1280px) and (min-width: 1025px) {
+  /* 1025 ~ 1280 */
+  :root {
+    --default-container-width: 1080px;
+    --default-content-width: 1024px;
+    --small-container-width: var(--default-container-width);
+    --small-content-width: var(--default-content-width);
+  }
+}
+
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* 769 ~ 1024 */
+    :root {
+      --default-container-width: 992px;
+      --default-content-width: 944px;
+      --small-container-width: var(--default-container-width);
+      --small-content-width: var(--default-content-width);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --default-container-width: calc(100lvw - 2rem);
+        --default-content-width: calc(var(--default-container-width) - 2rem);
+        --small-container-width: var(--default-container-width);
+        --small-content-width: var(--default-content-width);
+    }
+  /* 최대 768 */
+  footer#custom-footer {
+    display: flex;
+    justify-content:center;
+    padding:1rem;
+    > div.footer-content {
+        font-size:10px;
+        gap:0.25rem;
+        .copyright-wrapper {
+            gap:1rem;
+            flex-direction:column;
+            align-items:flex-start;
+            justify-content:flex-start;
+            nav a:first-of-type {
+                padding-left:0;       
+            }
+        }
+    }
+    }
+}
