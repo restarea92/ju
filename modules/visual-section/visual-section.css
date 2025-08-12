@@ -211,7 +211,7 @@
 
 .sticky-element {
     position: sticky;
-    top:var(--header-height);
+    top:0;
     padding: 0;
     height: 100%;
 }
