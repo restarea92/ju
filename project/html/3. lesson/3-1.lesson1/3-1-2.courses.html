@@ -18,6 +18,7 @@
         font-weight: 800;
         font-size: var(--font-size-common-title);
         margin-bottom: 4rem;
+        color:black;
     }
 
     .courses-grid {
@@ -43,6 +44,12 @@
         transform-origin: center top;
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.125);
         padding: 2rem;
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
     }
 
 }
@@ -57,15 +64,16 @@
 @media (max-width: 1024px) and (min-width: 769px) {
     .courses.common-container {
         h2.content-title {
-            margin-bottom:2rem;
+            margin-bottom:2.5rem;
         }
     }
 }
 
 @media (max-width: 768px) {
     .courses.common-container {
+        padding-top: 4rem;
         h2.content-title {
-            margin-bottom:1.5rem;
+            margin-bottom:2rem;
         }
     }
 }
@@ -134,7 +142,7 @@
 <div id="courses" class="courses common-container">
     <div class="scroll-spacer">
         <div class="content-wrapper sticky-element">
-            <h2 class="content-title">JU의 보컬&발성과정은 어떻게 이루어질까요?</h2>
+            <h2 class="content-title">JU는 이렇게 교육합니다.</h2>
             <div class="courses-grid">
                 <div class="course-card" style="--course-card-i:1;">
                     <h3>코스 설명 카드 1</h3>
@@ -184,7 +192,7 @@
     <!-- Process Section -->
     <div id="process" class="process common-container">
         <div class="content-wrapper">
-            <h2 class="content-title">목표를 향한 과정.</h2>
+            <h2 class="content-title">당신의 목표는 이렇게 이뤄집니다.</h2>
             <div class="process-steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -278,7 +286,7 @@ const app = {
         gsap.set(gridCards, {
             force3D: true,
             z: 0,
-            yPercent: 10,
+            yPercent: (i) => { return 90 + (i * 5); },
             opacity: 0,
             scale: 1.1,
             filter: "brightness(1)",
@@ -290,7 +298,7 @@ const app = {
 
         gsap.set(stickyElement, {
             position: "sticky",
-            top: 0,
+            top: "1rem",
             zIndex: 1,
         });
 
@@ -299,34 +307,54 @@ const app = {
         });
 
         gridCards.forEach((card, i) => {
-            const timeline1 = this.createTimeline({
-                start:  `top+=${i * gridCardRatio}% top+=20%`,
-                end: `top+=${(i) * gridCardRatio }% 10%`,
-                markers: {
-                    startColor: "green",
-                    endColor: "red",
-                    fontSize: "12px",
-                    indent: 20,
-                }
-            });
-            timeline1.to(card, {
-                ease: "expo.inOut",
-                yPercent: 0,
-                opacity: 1,
-                scale: 1,
-                filter: "brightness(1)",
-            }, 0);
+            if (i === 0) {
+                gsap.set(card, {
+                    force3D: true,
+                    yPercent: 0,
+                    opacity: 1,
+                    scale: 1,
+                    filter: "brightness(1)",
+                });
+            }
+
+            if (i > 0) {
+                const timelineReady = this.createTimeline({
+                    scrub: true,
+                    ease: "none",
+                    start:  `top+=${(i - 1) * gridCardRatio}% top+=40%`,
+                    end: `top+=${(i -1) * gridCardRatio }% 10%`,
+
+                });
+                timelineReady.to(card, {
+                    ease: "power1.inOut",
+                    yPercent: 95,
+                    scale: 1.1,
+                    filter: "brightness(1)",
+                }, 0);
+
+                const timeline1 = this.createTimeline({
+                    start:  `top+=${i * gridCardRatio}% top+=40%`,
+                    end: `top+=${(i) * gridCardRatio }% 10%`,
+
+                });
+                timeline1.to(card, {
+                    ease: "power1.inOut",
+                    yPercent: 0,
+                    scale: 1,
+                    filter: "brightness(1)",
+                }, 0);
+
+                timeline1.to(card, {
+                    ease: "expo.out",
+                    opacity: 1,
+                }, 0);
+            }
+
 
             if (i < gridCardCount - 1) {
                 const timeline2 = this.createTimeline({
                     start:  `top+=${(i + 1) * gridCardRatio}% top+=25%`,
                     end: `top+=${(i + 1) * gridCardRatio }% 10%`,
-                    markers: {
-                        startColor: "green",
-                        endColor: "red",
-                        fontSize: "12px",
-                        indent: 100,
-                    }
                 });
                 timeline2.to(card, {
                 ease: "expo.inOut",
@@ -341,12 +369,6 @@ const app = {
                 const timeline3 = this.createTimeline({
                     start:  `top+=${(i + 2) * gridCardRatio}% top+=30%`,
                     end: `top+=${(i + 2) * gridCardRatio }% 10%`,
-                    markers: {
-                        startColor: "green",
-                        endColor: "red",
-                        fontSize: "12px",
-                        indent: 200,
-                    }
                 });
                 timeline3.to(card, {
                 ease: "expo.inOut",
@@ -361,12 +383,6 @@ const app = {
                 const timeline4 = this.createTimeline({
                     start:  `top+=${(i + 3) * gridCardRatio}% top+=35%`,
                     end: `top+=${(i + 3) * gridCardRatio }% 10%`,
-                    markers: {
-                        startColor: "green",
-                        endColor: "red",
-                        fontSize: "12px",
-                        indent: 300,
-                    }
                 });
                 
                 timeline4.to(card, {
