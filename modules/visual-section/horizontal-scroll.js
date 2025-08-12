@@ -4,7 +4,7 @@
  * @version 1.0.9
  */
 
-import { initGSAP } from './gsapUtils.js';
+import { initGSAP } from '../gsapUtils.js';
 
 const app = {
 

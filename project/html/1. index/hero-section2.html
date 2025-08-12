@@ -1,37 +1,6 @@
-
-<div class="scroll-marker top">VIEWPORT TOP</div>
-<div class="scroll-marker center">VIEWPORT CENTER</div>
-<div class="scroll-marker bottom">VIEWPORT BOTTOM</div>
-<div id="state-el"></div>
-<div class="visual-section sticky-wrapper" 
-    id="visual-section" 
->
-    <div class="sticky-element">
-        <div 
-            class="sticky-element-background"
-        >
-        <video id="landscapeVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
-            <source src="https://restarea92.github.io/ju/vttsp.mp4" type="video/mp4" />
-        </video>
-
-        <video id="portraitVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
-            <source src="https://restarea92.github.io/ju/vttsm.mp4" type="video/mp4" />
-        </video>
-        </div>
-        <div class="content-wrapper sticky-element-content">
-		  <div class="content" style="min-height:calc(100lvh - var(--default-margin) * 2); display:flex;">
-                <div class="title" style="">
-                <h2>
-                    JU가 제시하는 보컬 교육의 미래.
-                </h2>
-            </div>
-		  </div>
-        </div>
-    </div>
-    <div id="scroll-trigger" style="position:relative; min-height: 100lvh; background: transparent; user-select: none; z-index: -1;">
-    </div>
 <style>
 #multi-scroll {
+
 }
 .multi-scroll-item {
     width: 100lvw;
@@ -41,7 +10,7 @@
     align-items: center;
     justify-content: center;
 }
-  
+
 .horizontal-spacer {
     height: 300lvh;
 }
@@ -53,58 +22,40 @@
 }
 </style>
 
-    <style>
-        .scroll-marker, #state-el {
-            display: none!important;
-            font-size: 0.75rem;
-            font-weight: 900;
-            width: fit-content;
-            min-width: 200px;
-            height: fit-content;
-            border: 1px solid red;
-            position: fixed;
-            right: 0;
-            color: white;
-            z-index: 9999;
-            background: navy;
-            text-align: left;
-        }
-        #state-el {
-            top:0;
-            left:0;
-            right: unset;
-        }
-        .scroll-marker.top {
-            top:0;
-        }
-        .scroll-marker.center {
-            top:50%;
-            transform: translateY(-50%);
-        }
-        .scroll-marker.bottom {
-            bottom:0;
-        }
-        .horizontal-spacer {
-            position: relative;
-            
+<!-- Visual Section Start { -->
+<div class="visual-section sticky-wrapper" id="visual-section" > 
+    <!-- Sticky Element Start { -->
+    <div class="sticky-element">
+        <div class="sticky-element-background">
+            <video id="landscapeVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
+                <source src="https://restarea92.github.io/ju/vttsp.mp4" type="video/mp4" />
+            </video>
 
-            .scroll-marker {
-                text-align: right;
-                position: absolute;
-                margin-right: 200px;
-            }
+            <video id="portraitVideo" autoplay muted playsinline loop style="width:100%; height:100%; display:none; object-fit: cover; filter:brightness(0.75)">
+                <source src="https://restarea92.github.io/ju/vttsm.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="content-wrapper sticky-element-content">
+		    <div class="content" style="min-height:calc(100lvh - var(--default-margin) * 2); display:flex;">
+                <div class="title" style="">
+                    <h2>
+                        JU가 제시하는 보컬 교육의 미래.
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div> <!-- } Sticky Element End -->
 
+    <div id="scroll-trigger" style="position:relative; min-height: 100lvh; background: transparent; user-select: none; z-index: -1;">
+    </div>
 
-        }
-    </style>
-    <div id="multi-scroll">
+    <!-- Multi Scroll Section Start { -->
+    <div id="multi-scroll"> 
+        <!-- horizontal-spacer Start { -->
         <div class="horizontal-spacer">
-            <div class="scroll-marker top">TOP</div>
-            <div class="scroll-marker center">CENTER</div>
-            <div class="scroll-marker bottom">BOTTOM</div>
             <div class="horizontal-container" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%); backdrop-filter: blur(16px);">
+                
                 <section id="multi-scroll-item1" class="multi-scroll-item">
-
                     <div class="content">
                         <div class="content-title">
                             <h2>
@@ -123,6 +74,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section id="multi-scroll-item2" class="multi-scroll-item">
                     <div class="content second">
                         <div class="content-title">
@@ -141,23 +93,22 @@
                         </div>
                     </div>
                 </section>
+
             </div>
-        </div>
-    </div>
-<script type="module">
-import app from 'https://restarea92.github.io/ju/modules/rect-scroll.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    app.init();
-});
-
-</script>
+        </div> <!-- } horizontal-spacer End -->
+    </div> <!-- } Multi Scroll Section End -->
+</div> <!-- } Visual Section End -->
 
 <script type="module">
-    import app from 'https://restarea92.github.io/ju/modules/horizontal-scroll.js';
-
+    import app from 'https://restarea92.github.io/ju/modules/rect-scroll.js';
     document.addEventListener('DOMContentLoaded', () => {
         app.init();
     });
 </script>
 
+<script type="module">
+    import app from 'https://restarea92.github.io/ju/modules/horizontal-scroll.js';
+    document.addEventListener('DOMContentLoaded', () => {
+        app.init();
+    });
+</script>
