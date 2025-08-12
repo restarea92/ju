@@ -20,11 +20,35 @@
 body {
   padding-bottom:0!important;
 }
+
+html, body {
+  font-size:17px;
+  zoom: unset!important;
+}
+body {
+  overflow-x:clip!important;
+}
 body.doz_sys.modal-open {
   overflow-y:clip;
   max-height: 100lvh;
   min-height: 100lvh;
 }
+html.clip {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
+body.clip {
+  overflow-y:clip;
+  top: var(--current-scroll-y);
+}
+
+body.doz_sys.modal-open {
+  overflow-y:clip;
+  max-height: 100lvh;
+  min-height: 100lvh;
+}
+
 
 /* ----------------------------------------------
  * common header default style
