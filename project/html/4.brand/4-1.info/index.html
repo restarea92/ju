@@ -443,7 +443,7 @@
             &.content3 {
                 h3 {
                     grid-column: 1 / 13;
-					grid-row: 2 / 3;
+					grid-row: 1 / 2;
                 }
                 .content-text {
                     grid-column: 1 / 13;
@@ -470,7 +470,19 @@
 					}
                 }
 				.content-visual {
-					display: none;
+					padding: 0.5rem 0;
+					grid-column: 1 / 13;
+					grid-row: 2 / 3;
+					display: flex;
+					justify-content: center;
+					z-index: -1;
+					height: 100%;
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+					}
 				}
             }
         }
@@ -489,7 +501,7 @@
 			margin: 0 auto;
 
 			h2 {
-				font-size: 3rem;
+				font-size: var(--font-size-common-title);
 				color: white;
 				margin-bottom: 2rem;
 				background: linear-gradient(45deg, #ffffff, #aafff9);
@@ -1243,7 +1255,54 @@ function animateCounter(element) {
 });
 </script>
 
+<!-- Loading Spinner -->
+<div id="loadingSpinner" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+	<div style="width: 50px; height: 50px; border: 3px solid rgba(255, 255, 255, 0.1); border-top: 3px solid #4ECDC4; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+</div>
 
+<style>
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+</style>
+
+<script>
+window.addEventListener('load', () => {
+  console.log('page fully loaded');
+
+  let domTimer;
+
+  const observer = new MutationObserver((mutations) => {
+    let domAdded = false;
+
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length > 0) {
+        domAdded = true;
+      }
+    });
+
+    if (domAdded) {
+      // 첫 DOM 추가 발생 시 타이머 초기화
+      if (domTimer) clearTimeout(domTimer);
+
+      // 500ms 동안 추가 DOM이 없으면 스피너 제거
+      domTimer = setTimeout(() => {
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        if (loadingSpinner) loadingSpinner.style.display = 'none';
+        console.log('500ms 동안 DOM 추가 없음 → 스피너 제거');
+        observer.disconnect(); // 더 이상 감시 안 함
+      }, 500);
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+
+
+
+</script>
 
 
 

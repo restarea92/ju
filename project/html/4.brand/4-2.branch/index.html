@@ -55,7 +55,43 @@
         --font-size-common-title: 3rem;
         --font-size-sub-title: 1.5rem;
 	}
+@media (max-width: 1280px) and (min-width: 1025px) {
+    /* 1025 ~ 1280 */
+    :root {        
 
+        --font-size-primary-title: 3rem;
+        --font-size-common-title: 2.5rem;
+        --font-size-sub-title: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+/* 769 ~ 1024 */
+    :root {    
+        --font-size-primary-titlee: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
+        --font-size-common-title: 2rem;
+        --font-size-sub-title: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
+		--font-size-typography: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {   
+		--font-h1: 2.5rem;
+        --font-h2: 2rem;
+        --font-h3: 1.5rem;
+        --font-big: 1.25rem;
+        --font-body: 1.125rem;
+        --font-small: 1rem;
+
+
+		--font-big: 1.125rem;
+        --font-size-common-title: 1.75rem;
+        --font-size-primary-title: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
+        --font-size-sub-title: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
+		--font-size-typography: 1.5rem;
+    }
+}
 </style>
 
 <!-- Override Common Container Style-->
@@ -89,6 +125,11 @@
 		margin-bottom: 4rem;
 		color: var(--common-text-color);
 		position: relative;
+	}
+	@media (max-width: 768px) {
+		.content-title { 
+			margin-bottom: 2rem;
+		}
 	}
 	
 	h2, h3 {
