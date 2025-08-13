@@ -14,9 +14,22 @@
     <link rel="stylesheet" href="https://restarea92.github.io/ju/project/static/css/custom_style.css">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    
+<style>
+	body {
+		overflow-x: clip;
+        font-size: 17px;
+        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    * {
+        box-sizing: border-box;
+    }
+</style>
+
+
+
 <!-- Document Root Style -->
 <style>
 	:root {
@@ -42,13 +55,7 @@
         --font-size-common-title: 3rem;
         --font-size-sub-title: 1.5rem;
 	}
-    body {
-        font-size: 17px;
-        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    }
-    * {
-        box-sizing: border-box;
-    }
+
 </style>
 
 <!-- Override Common Container Style-->
@@ -171,6 +178,12 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+				span {
+					opacity: 0.6125;
+				}
+				span.highlight {
+					opacity: 1;
+				}
             }
 
             p {
@@ -191,33 +204,32 @@
 
 /* Services Section */
 .services.common-container {
+	padding: 0;
     .content-wrapper {
-        max-width: var(--small-container-width);
+        max-width: var(--default-container-width);
     }
     .content-title {
         text-align: left;
     }
     .grid-box {
         display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
+		grid-template-columns: 1fr;
         .content-title {
             grid-column: 2 / 12;
             margin: 0;
         }
         .grid-content {
+			grid-template-columns: repeat(12, minmax(0, 1fr));
             display: grid;
-            grid-template-columns: subgrid;
-			gap: 0.5rem 0;
+			gap: 0.75rem 0;
             grid-column: 1 / 13;
-            grid-auto-rows: auto;
-            margin-top: 2rem;
+            margin-top: 4rem;
             &:nth-child(n+2) {
                 margin-top: 8rem;
             }
             h3, h2 {
                 font-size: calc(var(--font-size-common-title) * 0.75);
                 grid-column: 2 / 12;
-                padding-right: 4rem;
                 word-break: keep-all;
             }
 
@@ -229,6 +241,7 @@
                     color: #333333;
                     margin: 0;
                     line-height: 1.57;
+					word-break: keep-all;
                 }
             }
 
@@ -246,33 +259,92 @@
             }
 
             &.content1 {
+				p {
+					font-weight: 700;
+					color: #86868b;
+					strong {
+						color: black;
+						font-weight: 700;
+					}
+				}
                 h3 {
-                    grid-column: 2 / 7;
-                    padding-right: 4rem;
+					text-align: center;
+					padding-right: 0;
+                    grid-column: 4 / 10;
                 }
                 .content-text {
-                    grid-column: 7 / 12;
+                    text-align: center;
+                    grid-column: 3 / 11;
                 }
             }
 
             &.content2 {
+				position: relative;
                 h3 {
-                    grid-column: 5 / 12;
+                    grid-column: 6 / 12;
+					grid-row: 1 / 3;
                 }
                 .content-text {
-                    grid-column: 5 / 12;
+                    grid-column: 6 / 12;
+					grid-row: 3 / 7;
                 }
+				.content-visual {
+					position: relative;
+					grid-column: 1 / 5;
+					grid-row: 1 / 7;
+					overflow: visible;
+					display: flex;
+					justify-content: flex-end;
+					height: 100%;
+					img {
+						border-radius: 1rem;
+						height: 90%;
+						width: 160%;
+						object-fit: cover;
+						object-position: ri;
+						position: absolute;
+						top:50%;
+						transform: translateY(-50%);
+					}
+				}
             }
 
             &.content3 {
                 h3 {
                     grid-column: 2 / 7;
+					grid-row: 1 / 3;
                 }
                 .content-text {
-                    grid-column: 2 / 7;
+                    grid-column: 2 / 8;
+					grid-row: 3 / 7;
+					a {
+						font-size: 1.25rem;
+						color: #06c;
+						text-decoration: none;
+						span {
+							text-decoration: none;
+						}
+						&:hover {
+							text-decoration: none;
+							span {
+								text-decoration: underline;
+							}
+							span.material-symbols-outlined {
+								text-decoration: none!important;
+							}
+						}
+					}
                 }
 				.content-visual {
-					grid-column: 2 / 12;
+					grid-column: 7 / 12;
+					grid-row: 2 / 7;
+					overflow: visible;
+					display: flex;
+					justify-content: flex-start;
+					img {
+						object-fit: contain;
+						object-position: left;
+					}
 				}
             }
         }
@@ -286,46 +358,46 @@
 	background: linear-gradient(135deg, #333, #2d2d2d);
 	text-align: center;
 
-	.vision-content {
-		max-width: 800px;
-		margin: 0 auto;
+		.vision-content {
+			max-width: 800px;
+			margin: 0 auto;
 
-		h2 {
-			font-size: 3rem;
-			color: white;
-			margin-bottom: 2rem;
-			background: var(--gradient-primary);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			text-align: center !important;
-		}
-
-		p {
-			font-size: 1.3rem;
-			color: #e0e0e0;
-			line-height: 1.475;
-			margin-bottom: 2rem;
-		}
-	}
-
-	.vision-stats {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 40px;
-		margin-top: 60px;
-
-		.stat {
-			background: var(--bg-glass);
-			padding: 30px 20px;
-			border-radius: 15px;
-			border: var(--border-glass);
-
-			.stat-number {
-				font-size: var(--h2-font-size);
-				font-weight: bold;
-				color: #667eea;
-				margin-bottom: 0.5rem;
+			h2 {
+				font-size: 3rem;
+				color: white;
+				margin-bottom: 2rem;
+				background: linear-gradient(45deg, #ffffff, #aafff9);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				text-align: center !important;
 			}
+
+			p {
+				font-size: 1.3rem;
+				color: #e0e0e0;
+				line-height: 1.475;
+				margin-bottom: 2rem;
+			}
+		}
+
+		.vision-stats {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 40px;
+			margin-top: 60px;
+
+			.stat {
+				background: var(--bg-glass);
+				padding: 30px 20px;
+				border-radius: 15px;
+				border: var(--border-glass);
+
+				.stat-number {
+					font-size: var(--font-h2);
+					font-weight: bold;
+					color: #4ECDC4;
+					margin-bottom: 0.5rem;
+				}
 
 			.stat-label {
 				color: #b0b0b0;
@@ -358,6 +430,88 @@
 </style>
 
 
+<style>
+.advantages.common-container {
+	background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+	
+	.advantages-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+		margin-top: 3rem;
+		
+		.advantage-card {
+			background: white;
+			padding: 2.5rem;
+			border-radius: 20px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			transition: var(--transition-smooth);
+			position: relative;
+			overflow: hidden;
+			
+			&:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+			}
+
+			.card-icon {
+				font-size: var(--font-h1);
+				margin-bottom: 1.5rem;
+				display: block;
+				span.material-symbols-outlined {
+					font-size: var(--font-h1);
+				}
+			}
+			
+			.card-title {
+				font-size: var(--font-h3);
+				font-weight: 800;
+				color: #333;
+				margin-bottom: 1rem;
+			}
+			
+			.card-description {
+				color: #666;
+				line-height: 1.6;
+				font-size: var(--font-body);
+				margin-bottom: 1.5rem;
+			}
+			
+			.card-details {
+				background: #f8f9fa;
+				padding: 1.5rem;
+				border-radius: 12px;
+				margin-top: 1.5rem;
+				
+				.detail-item {
+					display: flex;
+					align-items: flex-start;
+					margin-bottom: 0.8rem;
+					
+					&:last-child {
+						margin-bottom: 0;
+					}
+					
+					.detail-bullet {
+						color: var(--gradient-primary);
+						margin-right: 0.5rem;
+						font-weight: bold;
+						flex-shrink: 0;
+					}
+					
+					.detail-text {
+						color: #555;
+						font-size: var(--font-small);
+						line-height: 1.5;
+					}
+				}
+			}
+		}
+	}
+}
+</style>
+
 
 <!-- Business Section -->
 <div class="business common-container">
@@ -382,19 +536,19 @@
                 <div class="hero-intro-copy">
                     <div class="hero-intro-copy-inner">
                         <p>
-                            <span>기술적 발전만으로는 교육 비즈니스의 성공을 이끌어낼 수 없습니다.</span>
-                            아무리 교육자로서의 능력이 뛰어나다고 하더라도 끊임없이, 그리고 <span>빠르게 변화하는 시장의 흐름</span><span>을 따라잡지 못한다면 뒤쳐질 수 밖에 없죠.</span>
-                            그래서 JU는 고객의 요구와 시장의 변화를 이해하고, 흐름을 주시하여 그에 맞는 최적의 솔루션을 제공합니다.<br>
-                            <br>
-                            우리는 모든 파트너들이 지속 가능한 경영을 할 수 있도록, 파트너십 체결 이후에도 끊임없는 소통을 통해 함께 성장해 나가고 있습니다.
-                            이러한 지속적인 노력들이 우리가 하는 모든 일의 기반이 된다고 믿으니까요.<br>
-                            <br>
-                            우리는 목소리가 가진 힘과 가치를 누구보다 잘 알고있습니다. <br>
-                            우리는 목소리가 사람에게 얼마나 중요한지, 그리고 목소리가 사람의 삶에 어떤 가치를 더할 수 있는지에 집중합니다. <br>
-                            <br>
-                            JU는 목소리 그 자체를 다룹니다. <br>
-                            <br>
-                            내일의 기회를 위해, JU와 함께 성장할 파트너를 기다립니다.
+							<span>기술적 발전만으로는 </span><span class="highlight">교육 비즈니스의 성공</span><span>을 이끌어낼 수 없습니다.</span>
+							<span>아무리 교육자로서의 능력이 뛰어나더라도 </span><span class="highlight">끊임없이, 그리고 빠르게 변화하는 시장의 흐름</span><span>을 따라잡지 못한다면 뒤쳐질 수밖에 없죠.</span>
+							<span>그래서 JU는 </span><span class="highlight">고객의 요구, 시장의 변화와 흐름을 주시</span><span>하여 그에 맞는 </span><span class="highlight">최적의 솔루션</span><span>을 제공합니다.</span><br>
+							<br>
+							<span>우리는 모든 파트너들이 </span><span class="highlight">지속 가능한 경영</span><span>을 할 수 있도록 파트너십 체결 이후에도 </span><span class="highlight">끊임없는 소통</span><span>을 통해 함께 성장해 나가고 있습니다.</span>
+							<span>이러한 지속적인 노력들이 우리가 하는 모든 일의 기반이 된다고 믿으니까요.</span> <br>
+							<br>
+							<span>우리는 </span><span class="highlight">목소리가 가진 힘과 가치</span><span>를 누구보다 잘 알고 있습니다.</span> <br>
+							<span>우리는 목소리가 사람에게 얼마나 중요한지, 그리고 목소리가 사람의 삶에 어떤 가치를 더할 수 있는지에 집중합니다.</span> <br>
+							<br>
+							<span class="highlight">JU는 목소리 그 자체를 다룹니다.</span> <br>
+							<br>
+							<span>내일의 기회를 위해, </span><span class="highlight">JU와 함께 성장할 파트너</span><span>를 기다립니다.</span>
                         </p>
                     </div>
                 </div>
@@ -568,7 +722,7 @@ const app = {
                 scrub: 0.3,
 			}).to(overlayBackground, {
                 ease: "expo.out",
-				filter: "blur(16px) brightness(0.33)",
+				filter: "blur(16px) brightness(0.25)",
 			}, 0);
 
 		} 
@@ -602,20 +756,152 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<div class="advantages common-container" id="advantages-info">
+	<div class="content-wrapper">
+		<h2 class="content-title">JU 프랜차이즈를 선택해야하는 이유.</h2>
+		
+		<div class="advantages-grid">
+			<div class="advantage-card wide-target fade-in">
+				<div class="card-icon"> <span class="material-symbols-outlined">Crowdsource</span> </div>
+				<h3 class="card-title">폭넓은 교육 대상</h3>
+				<p class="card-description">
+					JU의 교육대상의 연령폭은 굉장히 넓습니다. 
+					10대부터 60대, 남녀노소를 가리지 않고 다양한 연령층이 JU의 교육을 받고 있습니다.
+				</p>
+				<div class="card-details">
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">코로나로 인해 목소리교정이 필요한 어린 친구들</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">보컬에 관심이 많은 20~30대</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">업무 및 커뮤니케이션을 위한 40~50대</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">자녀의 축가를 불러드리기 위한 60대까지</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="advantage-card private-space fade-in">
+				<div class="card-icon"><span class="material-symbols-outlined">lock_person</span></div>
+				<h3 class="card-title">프라이빗한 교육 공간</h3>
+				<p class="card-description">
+					JU를 찾는 이유 중 하나는 바로 프라이빗한 교육 공간입니다.
+					모든 수업은 프라이빗하게 이루어지며, 성인들을 위한 조용하고 편안한 공간을 제공합니다.
+				</p>
+				<div class="card-details">
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">1:1 맞춤형 개인 레슨</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">조용하고 집중할 수 있는 환경</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">성인 수강생을 배려한 공간 설계</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="advantage-card low-risk fade-in">
+				<div class="card-icon"><span class="material-symbols-outlined">trending_up</span></div>
+				<h3 class="card-title">합리적 투자, 큰 성공.</h3>
+				<p class="card-description">
+					JU의 창업조건과 창업비용은 업계에서 가장 합리적입니다.
+					그럼에도 충분한 수익성을 자랑하죠.
+					JU는 수 많은 사례들로 창업비용과 수익이 비례하지 않다는것을 증명했습니다. 
+				</p>
+				<div class="card-details">
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">최소 10평의 작은 공간만으로도 창업 가능</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">낮은 초기 투자비용 대비 높은 수익성</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">검증된 비즈니스 모델로 안정적 운영</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="advantage-card profit-sharing fade-in">
+				<div class="card-icon"><span class="material-symbols-outlined">diversity_2</span></div>
+				<h3 class="card-title">직원과 상생하는 수익 분배 시스템</h3>
+				<p class="card-description">
+					JU는 직원이 일할수록 수익이 늘어나도록 설계한 프리랜서 형식의 수익 분배 가이드라인을 제공합니다.
+					고용자와 직원 모두 만족할 수 있도록 만들어진 수익 분배 시스템으로,
+					강사들의 동기부여를 높이고, 인건비 부담을 줄여 안정적으로 운영할 수 있습니다.
+				</p>
+				<div class="card-details">
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">직원과 5:5 또는 6:4 비율의 수익 분배</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">프리랜서 형식의 유연한 계약 체결</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">직원의 동기부여와 상생 성장 실현</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="advantage-card marketing-support fade-in">
+				<div class="card-icon"><span class="material-symbols-outlined">youtube_activity</span></div>
+				<h3 class="card-title">체계적인 마케팅 지원</h3>
+				<p class="card-description">
+					혼자서는 하기 힘든 마케팅을 본사에서 체계적으로 지원합니다. 
+					오직 비즈니스의 운영과 교육에 집중할 수 있도록, JU가 함께합니다.
+				</p>
+				<div class="card-details">
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">본사 차원의 브랜드 마케팅 지원</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">검증된 마케팅 전략과 콘텐츠 제공</span>
+					</div>
+					<div class="detail-item">
+						<span class="detail-bullet">•</span>
+						<span class="detail-text">지속적인 브랜드 이미지 관리</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Services Section -->
 <div class="services common-container">
 	<div class="content-wrapper">
 		<div class="grid-box">
             <div class="grid-content content1">
-                <h3>경쟁력있는 비즈니스를 위한 설계.</h3>               
+                <h3>
+					브랜드 가치를 높이는 비즈니스 설계.
+				</h3>               
                 <div class="content-text">
                     <p>
-                        빠르게 변화하는 교육 시장의 트렌드. JU는 언제나 흐름을 앞서 나가며, 
+                        <strong>빠르게 변화하는 교육 시장의 트렌드.</strong> JU는 언제나 흐름을 앞서 나가며, 
                         전형적인 실용음악학원이나 보컬스튜디오와는 다른 길을 걸어왔습니다.
-						그리고 이전의 트렌드와는 다르게 현재는 입시 위주의 교육 시장에서 벗어나, 
-						목소리 관련 교육 자체에 대한 수요가 증가하고 있습니다.<br>
-						JU는 이처럼 시장의 흐름을 이해하고,
-						그에 맞춰 다양한 교육 콘텐츠와 솔루션을 제공하고자 한 발 앞서 비즈니스 모델을 설계합니다.
+						그리고 이전의 트렌드와는 다르게 현재는 입시 위주의 교육 수요에서 벗어나, 
+						목소리 관련 교육 자체에 대한 수요가 증가하고 있습니다.
+						JU는 <strong>시장의 흐름을 분석</strong>하고,
+						그에 대응할 수 있는 다양한 교육 콘텐츠와 솔루션을 제공하기 위해 <strong>한 발 앞서 비즈니스 모델을 설계</strong>합니다.
                     </p>
                 </div>
             </div>
@@ -626,27 +912,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 </h3>
                 <div class="content-text">
                     <p>
-                        우리의 목표는 파트너가 지속 가능한 경영을 할 수 있도록 돕는 것입니다.
+                        우리의 목표는 점주분들의 사업이 지속 가능하록 돕는 것입니다.
                         우리가 추구하는 가치는 "목소리 그 자체를 아우르는 교육 시스템을 만드는 것" 입니다.
-						그리고 그것은 목소리가 가진 무한한 가능성으로부터 시작된다고 믿습니다.
-						그렇기에 JU의 교육 시스템은 노래나 발성, 특정 장르나 분야에 국한되지 않으며,
-						성장 가능성을 가진 비즈니스 모델이라고 할 수 있죠.
-						JU는 단순히 교육을 제공하는 것을 넘어, 파트너와 함께 성장합니다.
+						그리고 그것은 목소리가 가진 무한한 가능성으로부터 시작된다고 믿습니다.<br>
+						<br>
+						그렇기에 JU의 교육 시스템은 노래나 발성은 물론, 특정 장르나 분야에 국한되지 않으며,
+						목소리와 관련된 모든 것을 다룹니다. 이러한 포괄적인 JU만의 교육 시스템은 기존의 좁은 수요층을 가진 전형적 보컬 학원의 시스템과는 달리,
+						다양해진 수요층과 요구에 대응할 수 있는 강력한 역량을 가지고 있습니다.<br>
+						<br>
+						JU는 보컬트레이너 혼자서는 할 수 없는 강력한 지원과 지속적인 수요와 성장 가능성을 가진 비즈니스 모델을 제공합니다.
                     </p>
                 </div>
+				<div class="content-visual">
+					<img src="https://restarea92.github.io/ju/ailogop.jpg" alt="">
+				</div>
             </div>
             <div class="grid-content content3">
                 <h3>
 					일관된 교육 경험을 위한 노력.
 				</h3>
                 <div class="content-text">
+					<div class="shape-element" style="float: right; width: 22%; height: 100%;
+						shape-outside: polygon(70% 0, 100% 0, 100% 100%, 0 100%, 50% 70%, 0 58%, 70% 20%);;
+					"></div>
                     <p>
 						일관된 교육 경험을 제공하는 것은 JU의 핵심 가치 중 하나입니다. 
 						그리고 이것이 JU의 교육 시스템이 지속적으로 발전할 수 있었던 이유입니다.
 						우리는 우리가 가진 모든 노하우와 경험, 데이터를 공유하고, 협력하여 함께 성장합니다.
+						모든 예비 창업주분들께 JU의 운영방침과 시스템, 그리고 전문가로서 활동할수 있도록 필요한 모든 교육을 제공합니다.<br>
+						<a style="display: flex; align-items: center; margin-top: 0.5rem;" href="/41">
+							<span class="material-symbols-outlined" style="font-size: 1rem!important;">arrow_insert</span> 
+							<span>전문가 양성 교육에 대해 더 알아보기</span>
+						</a>
+						<br>
 						우리는 주기적으로 전 지점의 교육 현황과 데이터를 취합하며, 이를 바탕으로 보다 나은 교육 시스템을 만들기 위해 노력합니다.
-						단순히 본사와 지점 간의 일방적인 소통이 아니라, JU 전체가 함께 성장하는 셈이죠. 
-						이러한 노력들을 통해 JU의 모든 지점은 높은 수준의 일관된 교육 경험을 제공하고, 신뢰감 있는 브랜드 이미지를 구축하고 있습니다.
+						단순히 본사와 지점 간의 일방적인 소통이 아니라, JU 전체가 함께 성장하는 셈이죠. 이러한 노력들을 통해 JU의 모든 지점은 높은 수준의 일관된 교육 경험을 제공하고, 신뢰감 있는 브랜드 이미지를 구축하고 있습니다.
                     </p>
                 </div>
 				<div class="content-visual">
@@ -656,16 +956,36 @@ document.addEventListener('DOMContentLoaded', () => {
 		</div>
 	</div>
 </div>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const g3 = document.querySelector('.grid-content.content3');
+		const g3Title = g3.querySelector('h3');
+		const g3TitleHeight = g3Title ? g3Title.getBoundingClientRect().height : 0;
+		const g3ContentVisual = g3.querySelector('.content-visual');
+		const g3ContentVisualHeight = g3ContentVisual ? g3ContentVisual.getBoundingClientRect().height : 0;
+		const floatHeight = g3ContentVisualHeight - (g3TitleHeight / 2);
+		const floatElement = g3.querySelector('.shape-element');
+		if (floatElement) {
+			floatElement.style.height = `${floatHeight}px`;
+		}
+
+	});
+
+</script>
+
+
+
 
 
 <!-- Vision Section -->
 <div id="about-ju-vision" class="vision common-container">
 	<div class="content-wrapper">
 		<div class="vision-content fade-in">
-			<h2 class="content-title">Our Vision</h2>
+			<h2 class="content-title">함께 이룬 결과들.</h2>
 			<p>
-				이것은 의미가 없는 테스트 문장입니다.
-				이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+				JU는 지금까지의 여정을 통해, 
+				목소리 교육의 새로운 패러다임을 제시하고,<br>
+				여러분과 함께 성장해 왔습니다.
 			</p>
 		</div>
 		<div class="vision-stats">
@@ -796,6 +1116,8 @@ function animateCounter(element) {
 	});
 });
 </script>
+
+
 
 
 

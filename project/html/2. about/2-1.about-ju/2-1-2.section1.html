@@ -561,65 +561,6 @@
 
 }
 
-/* Vision Section */
-.vision.common-container {
-	--common-text-color: white;
-	background: linear-gradient(135deg, #333, #2d2d2d);
-	text-align: center;
-
-	.vision-content {
-		max-width: 800px;
-		margin: 0 auto;
-
-		h2 {
-			font-size: 3rem;
-			color: white;
-			margin-bottom: 2rem;
-			background: var(--gradient-primary);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			text-align: center !important;
-		}
-
-		p {
-			font-size: 1.3rem;
-			color: #e0e0e0;
-			line-height: 1.475;
-			margin-bottom: 2rem;
-		}
-	}
-
-	.vision-stats {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 40px;
-		margin-top: 60px;
-
-		.stat {
-			background: var(--bg-glass);
-			padding: 30px 20px;
-			border-radius: 15px;
-			border: var(--border-glass);
-
-			.stat-number {
-				font-size: var(--h2-font-size);
-				font-weight: bold;
-				color: #667eea;
-				margin-bottom: 0.5rem;
-			}
-
-			.stat-label {
-				color: #b0b0b0;
-				font-size: 1rem;
-			}
-			
-			.reference {
-				color: #666669;
-				font-size: 0.75rem;
-			}
-		}
-	}
-}
 </style>
 
 
@@ -1175,22 +1116,7 @@
 		gap: 30px;
 	}
 	
-	.vision.common-container {
-		.vision-content {
-			h2 {
-				font-size: 2rem;
-			}
 
-			p {
-				font-size: 1rem;
-			}
-		}
-
-		.vision-stats {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 20px;
-		}
-	}
 }
 
 </style>
@@ -1673,41 +1599,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				<div class="service-icon">🎭</div>
 				<h4>Acting</h4>
 				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Vision Section -->
-<div id="about-ju-vision" class="vision common-container">
-	<div class="content-wrapper">
-		<div class="vision-content fade-in">
-			<h2 class="content-title">Our Vision (예시)</h2>
-			<p>
-				이것은 의미가 없는 테스트 문장입니다.
-				이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
-			</p>
-		</div>
-		<div class="vision-stats">
-			<div class="stat fade-in">
-				<div class="stat-number" data-target="15200" data-unit="+">0</div>
-				<div class="stat-label">지금까지 함께한 수강생</div>
-				<div class="reference">2024년 7월까지 집계 기준</div>
-			</div>
-			<div class="stat fade-in">
-				<div class="stat-number" data-target="8" data-unit=" 년">0</div>
-				<div class="stat-label">운영 연수</div>
-				<div class="reference">2025년 현재 기준</div>
-			</div>
-			<div class="stat fade-in">
-				<div class="stat-number" data-target="15" data-unit="+">0</div>
-				<div class="stat-label">지점 수</div>
-				<div class="reference">2025년 현재</div>
-			</div>
-			<div class="stat fade-in">
-				<div class="stat-number" data-target="98" data-unit="%">0</div>
-				<div class="stat-label">만족도</div>
-				<div class="reference">2024년 7월 온라인 후기 집계기준</div>
 			</div>
 		</div>
 	</div>
