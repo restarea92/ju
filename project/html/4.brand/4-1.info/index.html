@@ -28,22 +28,27 @@
 		--backdrop-blur: blur(20px);
 		--transition-smooth: all 0.3s ease;
 		--title-overlay-scale: 2;
+    
 
         /* Typography Scale in this page only */
         --font-h1: 3.5rem;
         --font-h2: 2.5rem;
         --font-h3: 1.75rem;
+        --font-big: 1.25rem;
         --font-body: 1.125rem;
         --font-small: 1rem;
 
         /* Typography Scale in common pages */
         --font-size-primary-title: 4rem;
         --font-size-common-title: 3rem;
-        --font-size-sub-title: 1.25rem;
+        --font-size-sub-title: 1.5rem;
 	}
     body {
         font-size: 17px;
         font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    * {
+        box-sizing: border-box;
     }
 </style>
 
@@ -96,8 +101,10 @@
 	min-height: 100svh;
 	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
 	position: relative;
-	padding-top:0;
+	padding:0;
 	.fixed-wrapper {
+        position: sticky;
+        overflow: hidden;
 		top: var(--fixed-wrapper-top);
 	}
 	.overlay-background {
@@ -113,6 +120,10 @@
             height: 100%;
         }
 	}
+    .content {
+        height: fit-content;
+        min-height: fit-content;
+    }
 	.content-wrapper {
 		z-index: 1;
 		display: flex;
@@ -126,6 +137,8 @@
         justify-content: center;
         width: 100%;
 		.content-title-text {
+            padding:1rem;
+            text-align: left;
             font-size: var(--font-size-primary-title);
             display: flex;
             flex-direction: column;
@@ -137,164 +150,121 @@
         }
 	}
 
+    .hero-intro-copy-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom:0;
+        .hero-intro-copy {
+            width: fit-content;
+            display: flex;
+            padding: 2rem;
+            height: fit-content;
+            max-height: 100svh;
+            align-items: flex-end;
+            .hero-intro-copy-inner {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
 
-	.story-content {
-		transition: 0.3s all ;
-		opacity: 0;
-		margin-top: 1rem;
-		display: grid;
-		gap: 4rem;
-		align-items: center;
-		transform: translateY(10%);
-		grid-auto-columns: 1fr;
-	}
-
-	.story-text {
-		grid-column: 1 / 2;
-		color: #e0e0e0;
-		
-		h3 {
-			font-size: 2rem;
-			color: white;
-			margin-bottom: 1.5rem;
-			background: var(--gradient-primary);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			width: 100%;
-			text-align: left;
-		}
-		
-		p {
-			font-size: 1.125rem;
-			margin-bottom: 1.5rem;
-			line-height: 1.57;
-			color: #a6a6a9;
-			font-weight: 700;
-			strong {
-				font-weight: 700;
-				color: white;
-			}
-		}
-		a {
-            color: #06c;
-            &:hover {
-                text-decoration: underline;
-                font-size: 1rem;
+            p {
+                line-height: 1.47;
+                word-break: keep-all;
+                max-width: 40ch;
+                color: white;
+                font-weight: 700;
+                font-size: 2rem;
             }
         }
-	}
-
-	.story-visual {
-		grid-column: 2 / 3;
-		position: relative;
-		background: var(--gradient-primary);
-		border-radius: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow: hidden;
-		aspect-ratio: 4 / 3;
-	}
+    }
 
 	&.scroll-end {
-		.story-content {
-			opacity: 1;
-			transform: translateY(0);
-			transition: 0.3s all ;
-		}
-		h2 {
-			.content-title-text {
-				.will-change-overflow {
-					filter: blur(16px) brightness(0.5);
-					opacity: 0;
-					transform: scale(0.5);
-					transition: 0.3s filter 0.2s ease-in-out,
-								0.3s opacity 0.2s ease-in-out,
-								0.3s transform 0.2s ease-in-out
-								;
-				}
-				.will-change-transform {
-					transform: translateX( calc(-1 * var(--will-change-overflow-width)) );
-					transition: 0.3s transform 0.2s;
-				}
-				.will-change-opacity.before {
-					opacity: 1;
-					transition: 0.3s opacity 0.5s,
-								0.3s transform 0.2s
-					;
-				}
-				.will-change-opacity.after {
-					opacity: 0;
-					transition: 0.3s opacity 0.3s,
-								0.3s transform 0.2s;
-				}
-			}
-		}
+
 	}
 }
 
 /* Services Section */
 .services.common-container {
-	--common-text-color: white;
-	background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+    .content-wrapper {
+        max-width: var(--small-container-width);
+    }
+    .content-title {
+        text-align: left;
+    }
+    .grid-box {
+        display: grid;
+        gap: 8rem 0;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        .content-title {
+            grid-column: 2 / 12;
+            margin: 0;
+        }
+        .grid-content {
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 1 / 13;
+            grid-auto-rows: auto;
 
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 40px;
-		margin-top: 60px;
-	}
+            h3 {
+                font-size: calc(var(--font-size-common-title) * 0.75);
+                grid-column: 2 / 12;
+                padding-right: 4rem;
+                margin-bottom: 2rem;
+                }
+            }
 
-	.service-card {
-		background: var(--bg-glass);
-		padding: 40px 30px;
-		border-radius: 20px;
-		text-align: center;
-		backdrop-filter: var(--backdrop-blur);
-		border: var(--border-glass);
-		transition: var(--transition-smooth);
-		position: relative;
-		overflow: hidden;
+            .content-text {
+                grid-column: 2 / 12;
+                p {
+                    font-size: var(--font-big);
+                    color: #333333;
+                    margin: 0;
+                    line-height: 1.47;
+                }
+            }
+            &.common { 
+                h3 {
+                    font-size: var(--font-size-common-title);
+                }
+                
+            }
 
-		&::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: -100%;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-			transition: left 0.3s ease;
-		}
+            &.content1 {
+                h3 {
+                    grid-column: 2 / 7;
+                    padding-right: 4rem;
+                }
+                .content-text {
+                    grid-column: 7 / 12;
+                }
+            }
 
-		&:hover {
-			transform: translateY(-10px);
-			box-shadow: var(--shadow-hover);
+            &.content2 {
+                h3 {
+                    grid-column: 5 / 12;
+                }
+                .content-text {
+                    grid-column: 5 / 12;
+                }
+            }
 
-			&::before {
-				left: 100%;
-			}
-		}
-
-		.service-icon {
-			font-size: 3rem;
-			margin-bottom: 1.5rem;
-			background: var(--gradient-primary);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
-
-		h4 {
-			font-size: 1.5rem;
-			color: white;
-			margin-bottom: 1rem;
-		}
-
-		p {
-			color: #b0b0b0;
-			line-height: 1.6;
-		}
-	}
+            &.content3 {
+                h3 {
+                    grid-column: 2 / 7
+                }
+                .content-text {
+                    grid-column: 2 / 7
+                }
+            }
+        }
+    }
 }
 
 
@@ -394,26 +364,33 @@
                             <span class="typography">당신의 성공 파트너, JU 비즈니스.</span>
 						</div>
 					</h2>
-					<div class="story-content">
-						<div class="story-text">
-							<h3>목소리에 대한 모든 것.</h3>
-							<p>
-								<strong>언제나 한 발 앞선 교육 시스템.</strong> JU 보컬&발성 전문 스튜디오는 목소리 전반을 다룹니다. 보컬 뿐만 아니라 발성, 목소리 교정, 성대 질환 후 재활 등 <strong>목소리가 필요한 모든 분야를 아우릅니다.</strong><br>
-								JU만의 자체 개발 커리큘럼은 전국 16개 지점의 수 많은 수강생들의 데이터들을 취합하여 수 많은 문제점에 체계적으로 대응하는 것은 물론, 목소리에 대한 분야라면 무엇이든 가리지 않고 적용이 가능하죠.<br>
-								이토록 복잡한 매커니즘을 이해하려 애쓰지 않아도, 자연스레 터득할 수 있도록 어려운 단어와 전문 용어보다는 <strong>쉽고 직관적인 표현으로 교육합니다.</strong><br>
-								JU의 커리큘럼이 누구에게나 이전보다 더 빠르고 효과적일 수 밖에 없는 이유가 바로 여기에 있죠. <br>
-								JU는 말 뿐이 아닌 <strong>눈에 보이는 결과로 증명합니다.</strong><br>
-							</p>
-							<!-- 수강생 결과물 보러가기 -->
-							<a href="" class="">수강생 결과물 보러가기 ></a>
-						</div>
-						<div class="story-visual fade-in"><img src="https://restarea92.github.io/ju/ailogop.jpg" width="800" style="width: 100%; height: 100%; object-fit: cover;" /></div>
-					</div>
 				</div>
 			</div>
+            <div class="hero-intro-copy-wrapper">
+                <div class="hero-intro-copy">
+                    <div class="hero-intro-copy-inner">
+                        <p>
+                            <span>기술적 발전만으로는 교육 비즈니스의 성공을 이끌어낼 수 없습니다.</span>
+                            아무리 교육자로서의 능력이 뛰어나다고 하더라도 끊임없이, 그리고 <span>빠르게 변화하는 시장의 흐름</span><span>을 따라잡지 못한다면 뒤쳐질 수 밖에 없죠.</span>
+                            그래서 JU는 고객의 요구와 시장의 변화를 이해하고, 흐름을 주시하여 그에 맞는 최적의 솔루션을 제공합니다.<br>
+                            <br>
+                            우리는 모든 파트너들이 지속가능한 경영을 할 수 있도록, 파트너십 체결 이후에도 끊임없는 소통을 통해 함께 성장해 나가고 있습니다.
+                            이러한 지속적인 노력들이 우리가 하는 모든 일의 기반이 된다고 믿으니까요.<br>
+                            <br>
+                            우리는 목소리가 가진 힘과 가치를 누구보다 잘 알고있습니다. <br>
+                            우리는 목소리가 사람에게 얼마나 중요한지, 그리고 목소리가 사람의 삶에 어떤 가치를 더할 수 있는지에 집중합니다. <br>
+                            <br>
+                            JU는 목소리 그 자체를 다룹니다. <br>
+                            <br>
+                            내일의 기회를 위해, JU와 함께 성장할 파트너를 기다립니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
+
 
 <script type="module">
 /**
@@ -433,22 +410,24 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         spacer: document.querySelector('.hero-spacer'),
-		container: document.querySelector('business.common-container'),
+		container: document.querySelector('.business.common-container'),
 		get trigger() { return this.spacer },
 		get fixedWrapper() { return this.trigger?.querySelector('.fixed-wrapper'); },
 		get content() { return this.trigger?.querySelector('.content')},
 		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper')},
+
 		get contentTitle() {return this.trigger?.querySelector('.content-title')},
 		get contentTitleText() { return this.trigger?.querySelector('.content-title-text')},
-		get overlay() { return this.trigger?.querySelector('.overlay-background'); },
-        get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text .overlay-text-wrapper'); },
-		get hiddenText() { return this.contentTitleOverlay?.querySelector('.hidden-text'); },
-		get offsetText() { return this.contentTitleOverlay?.querySelector('.offset-text'); },
+
+        get heroIntroCopyWrapper() { return this.trigger?.querySelector('.hero-intro-copy-wrapper'); },
+        get heroIntroCopy() { return this.heroIntroCopyWrapper?.querySelector('.hero-intro-copy'); },
+        get heroIntroCopyInner() { return this.heroIntroCopy?.querySelector('.hero-intro-copy-inner'); },
+
+        get overlayBackground() { return this.trigger?.querySelector('.overlay-background'); },
     },
 	
     // ========== Initialization ==========
 	init() {
-		console.log(this.CONFIG.VERSION);
 		if (!initGSAP()) return;
 
 		this.setHeaderHeightVariable();
@@ -476,7 +455,7 @@ const app = {
 					this.setHeaderHeightVariable();
 					this.initHeroScroll();
 				}
-			}, 300); // 300ms 동안 추가 resize 이벤트 없을 때 실행
+			}, 300); 
 		});
 	},
 
@@ -492,21 +471,19 @@ const app = {
 		const trigger = this.elements.trigger;
 		const container = this.elements.container;
 		const fixedWrapper = this.elements.fixedWrapper;
-		const overlay = this.elements.overlay;
-		const overlayImage = overlay?.querySelector('img');
 		const content = this.elements.content;
 		const contentWrapper = this.elements.contentWrapper;
 		const contentTitle = this.elements.contentTitle;
-		const contentTitleText = this.elements.contentTitleText;
-
-		const hiddenText = this.elements.hiddenText;
-		const offsetText = this.elements.offsetText;
-
+        const heroIntroCopyWrapper = this.elements.heroIntroCopyWrapper;
+        const heroIntroCopy = this.elements.heroIntroCopy;
+        const heroIntroCopyInner = this.elements.heroIntroCopyInner;
+        const overlayBackground = this.elements.overlayBackground;
+        
         if (trigger) {
 			gsap.set(trigger, { 
 				"--hero-scroll-inverted-progress": 1,
                 "--hero-scroll-progress": 0,
-				height: "clamp(3000px, 200svh, 5000px)",
+				height: "clamp(2000px, 200svh, 3000px)",
 			});
 
 			gsap.set(container, { 
@@ -519,39 +496,28 @@ const app = {
 				position: "sticky",
 			});
 
-			gsap.set(contentTitle, {
-				paddingTop:0,
-			});
+            gsap.set(contentTitle, {
+                opacity: 1,
+                filter: "blur(0px)",
+            });
 
-			const rect = contentTitleText.getBoundingClientRect();
-			const centerX = window.innerWidth / 2;
-			const centerY = window.innerHeight / 2;
+            gsap.set(overlayBackground, {
+                filter: "blur(0px) brightness(1)",
+            });
 
-			const offsetX = rect.left + rect.width / 2 - centerX;
-			const offsetY = content.offsetTop - centerY;
+            gsap.set(heroIntroCopyInner, {
+                opacity:0,
+                yPercent: 100,
+            });
+
 			const fixedTop = parseFloat(getComputedStyle(container)
 				.getPropertyValue('--fixed-wrapper-top')) || 0;
-			
-			const willChangeOverflow = document.querySelector('.will-change-overflow');
-			const willChangeOverflowWidth = willChangeOverflow?.clientWidth || 0;
-			gsap.set(fixedWrapper, { 
-				"--will-change-overflow-width": `${willChangeOverflowWidth}px`,
-			});
 
-
-			
-			gsap.set(overlay, {
-				willChange: "filter",
-				filter: "blur(0)",
-			});
-			gsap.set(overlayImage, {
-				willChange: "filter",
-				filter: "brightness(0.9)",
-			});
 
 			this.tl = this.createTimeline({
 				start: "top top",
-				end: "center center",
+				end: "bottom bottom+=10%",
+                scrub: 0.3,
 				onUpdate: self => {
 					if (self.progress >= 1) {
 						this.elements.container.classList.add('scroll-end');
@@ -560,6 +526,38 @@ const app = {
 					}
 				}
 			});
+
+            this.tl.to(heroIntroCopyInner, {
+				yPercent: 0,
+			});
+
+            this.createTimeline({
+				start: "top top",
+				end: "center top",
+                scrub: 0.3,
+			}).to(contentTitle, {
+                ease: "expo.out",
+                filter: "blur(16px)",
+				opacity: 0,
+			});
+
+            this.createTimeline({
+				start: "1% top",
+				end: "center center",
+                scrub: true,
+			}).to(heroIntroCopyInner, {
+                ease: "expo.out",
+				opacity: 1,
+			});
+
+            this.createTimeline({
+				start: "top top",
+				end: "center top",
+                scrub: 0.3,
+			}).to(overlayBackground, {
+                ease: "expo.out",
+				filter: "blur(16px) brightness(0.33)",
+			}, 0);
 
 		} 
 	},
@@ -592,36 +590,54 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
 <!-- Services Section -->
-<div id="about-ju-services" class="services common-container">
+<div class="services common-container">
 	<div class="content-wrapper">
-		<h2 class="content-title fade-in">Why JU?</h2>
-		<div class="services-grid">
-			<div class="service-card fade-in">
-				<div class="service-icon">🎵</div>
-				<h4>Music</h4>
-				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎙️</div>
-				<h4>Recording</h4>
-				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎧</div>
-				<h4>Headphone</h4>
-				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
-			<div class="service-card fade-in">
-				<div class="service-icon">🎭</div>
-				<h4>Acting</h4>
-				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
-			</div>
+		<div class="grid-box">
+            <div class="grid-content common">
+                <h3 >JU만의 브랜드 경쟁력.</h3>
+                <div class="content-text">
+                    <p>
+                        JU는 전형적인 실용음악학원이나 보컬스튜디오와는 다른 길을 걸어갑니다.
+                        우리가 추구하는 가치는 노래나 발성, 특정 장르나 분야에 국한되는 것이 아닙니다.
+                        우리가 추구하는 가치는 "목소리 그 자체를 아우르는 교육을 하는 것"입니다.
+                    </p>
+                </div>
+            </div>
+            <div class="grid-content content1">
+                <h3>이 영역은 제목 영역입니다.</h3>
+                <div class="content-text">
+                    <p>
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                    </p>
+                </div>
+            </div>
+            <div class="grid-content content2">
+                <h3>제목 영역입니다.</h3>
+                <div class="content-text">
+                    <p>
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                    </p>
+                </div>
+            </div>
+            <div class="grid-content content3">
+                <h3>제목 영역입니다.</h3>
+                <div class="content-text">
+                    <p>
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                    </p>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
+
 
 <!-- Vision Section -->
 <div id="about-ju-vision" class="vision common-container">
