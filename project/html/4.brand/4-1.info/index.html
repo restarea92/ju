@@ -27,9 +27,22 @@
 		--bg-glass: rgba(255, 255, 255, 0.05);
 		--backdrop-blur: blur(20px);
 		--transition-smooth: all 0.3s ease;
-		 --title-overlay-scale: 2
+		--title-overlay-scale: 2;
+
+        /* Typography Scale in this page only */
+        --font-h1: 3.5rem;
+        --font-h2: 2.5rem;
+        --font-h3: 1.75rem;
+        --font-body: 1.125rem;
+        --font-small: 1rem;
+
+        /* Typography Scale in common pages */
+        --font-size-primary-title: 4rem;
+        --font-size-common-title: 3rem;
+        --font-size-sub-title: 1.25rem;
 	}
     body {
+        font-size: 17px;
         font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     }
 </style>
@@ -76,7 +89,7 @@
 <!-- Common Content Style-->
 <style>
 /* Business Section */
-.Business.common-container {
+.business.common-container {
 	--common-text-color: white;
 	--content-title-padding-top: 0;
 	--fixed-wrapper-top: 0;
@@ -109,22 +122,18 @@
 	}
 	
 	h2.content-title {
-		display: grid;
-		grid-template-columns: 1fr;
-		width: 100%;
-		text-align: center;
-		display: flex;
-		margin: 0;
-		padding: 0;
-		position: relative;
-		line-height: 1;
-		margin: 0 auto;
-		span {
-			display: flex;
-			line-height: 1;
-		}
+        display: flex;
+        justify-content: center;
+        width: 100%;
 		.content-title-text {
-            font-size: var(--font-size-title);
+            font-size: var(--font-size-primary-title);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            span.eyebrow-typography {
+                font-size: calc(var(--font-size-primary-title) * 0.5);
+            }
         }
 	}
 
@@ -369,20 +378,20 @@
 
 
 <!-- Business Section -->
-<div class="Business common-container">
+<div class="business common-container">
 	<div class="hero-spacer">
 		<div class="fixed-wrapper">
             <div class="overlay-background">
                 <video id="landscapeVideo" autoplay muted playsinline loop>
-                    <source src="https://restarea92.github.io/ju/bsn2_compressed.mp4" type="video/mp4" />
+                    <source src="https://restarea92.github.io/ju/bsn_compressed.mp4" type="video/mp4" />
                 </video>
             </div>
 			<div class="content-wrapper">
 				<div class="content">
 					<h2 class="content-title">
 						<div class="content-title-text">
-                            <span class="eyebrow-typography">Business with JU</span>
-                            <span class="typography">비즈니스 성공 파트너, JU.</span>
+                            <span class="eyebrow-typography">Work with JU</span>
+                            <span class="typography">당신의 성공 파트너, JU 비즈니스.</span>
 						</div>
 					</h2>
 					<div class="story-content">
@@ -424,7 +433,7 @@ const app = {
     // ========== DOM Elements Cache ==========
     elements: {
         spacer: document.querySelector('.hero-spacer'),
-		container: document.querySelector('#about-ju.common-container'),
+		container: document.querySelector('business.common-container'),
 		get trigger() { return this.spacer },
 		get fixedWrapper() { return this.trigger?.querySelector('.fixed-wrapper'); },
 		get content() { return this.trigger?.querySelector('.content')},
@@ -492,9 +501,8 @@ const app = {
 
 		const hiddenText = this.elements.hiddenText;
 		const offsetText = this.elements.offsetText;
-		const contentTitleOverlay = this.elements.contentTitleOverlay;
 
-        if (trigger && contentTitleOverlay) {
+        if (trigger) {
 			gsap.set(trigger, { 
 				"--hero-scroll-inverted-progress": 1,
                 "--hero-scroll-progress": 0,
@@ -530,13 +538,7 @@ const app = {
 				"--will-change-overflow-width": `${willChangeOverflowWidth}px`,
 			});
 
-			gsap.set(contentTitleOverlay, {
-				transformOrigin: "center",
-				zIndex: 1,
-				x: -offsetX,
-				y: -offsetY - fixedTop,
-				scale: "var(--title-overlay-scale)",
-			});
+
 			
 			gsap.set(overlay, {
 				willChange: "filter",
@@ -559,26 +561,6 @@ const app = {
 				}
 			});
 
-			this.tl.to(contentTitleOverlay, {
-				ease: "power3.inOut",
-				y: 0,
-			}, 0)
-			.to(contentTitleOverlay, {
-				ease: "power3.out", 
-				x: 0,
-				scale: 1,
-			}, 0)
-			.to(contentTitle, {
-				ease: "power3.out", 
-			}, 0)
-			.to(overlay, {
-				ease: "power3.out", 
-				filter: "blur(32px)"
-			}, 0) 
-			.to(overlayImage, {
-				ease: "power3.inOut", 
-				filter: "brightness(0.33)",
-			}, 0);
 		} 
 	},
 
