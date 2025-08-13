@@ -11,15 +11,14 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/FilterBlurPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="https://restarea92.github.io/ju/project/static/css/custom_style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 </head>
 <body>
     
 <!-- Document Root Style -->
 <style>
-
 	:root {
 		--gradient-primary: linear-gradient(45deg, #667eea, #764ba2);
 		--shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.3);
@@ -85,8 +84,8 @@
 		position: relative;
 	}
 	
-	h3 {
-
+	h2, h3 {
+        font-weight: 800;
 	}
 }
 </style>
@@ -200,7 +199,6 @@
     }
     .grid-box {
         display: grid;
-        gap: 8rem 0;
         grid-template-columns: repeat(12, minmax(0, 1fr));
         .content-title {
             grid-column: 2 / 12;
@@ -209,14 +207,18 @@
         .grid-content {
             display: grid;
             grid-template-columns: subgrid;
+			gap: 0.5rem 0;
             grid-column: 1 / 13;
             grid-auto-rows: auto;
-
-            h3 {
+            margin-top: 2rem;
+            &:nth-child(n+2) {
+                margin-top: 8rem;
+            }
+            h3, h2 {
                 font-size: calc(var(--font-size-common-title) * 0.75);
                 grid-column: 2 / 12;
                 padding-right: 4rem;
-                margin-bottom: 2rem;
+                word-break: keep-all;
             }
 
 
@@ -226,13 +228,26 @@
                     font-size: var(--font-big);
                     color: #333333;
                     margin: 0;
-                    line-height: 1.47;
+                    line-height: 1.57;
                 }
             }
 
+            .content-visual {
+                grid-column: 2 / 12;
+            }
+
+
+
             &.common { 
-                h3 {
+                h2 {
                     font-size: var(--font-size-common-title);
+                    margin-bottom: 0.5rem;
+                }
+                span.subtitle {
+                    color: #86868b;
+                    font-weight: 700;
+                    font-size: var(--font-big);
+                    grid-column: 2 / 12;
                 }
             }
 
@@ -374,7 +389,7 @@
                             아무리 교육자로서의 능력이 뛰어나다고 하더라도 끊임없이, 그리고 <span>빠르게 변화하는 시장의 흐름</span><span>을 따라잡지 못한다면 뒤쳐질 수 밖에 없죠.</span>
                             그래서 JU는 고객의 요구와 시장의 변화를 이해하고, 흐름을 주시하여 그에 맞는 최적의 솔루션을 제공합니다.<br>
                             <br>
-                            우리는 모든 파트너들이 지속가능한 경영을 할 수 있도록, 파트너십 체결 이후에도 끊임없는 소통을 통해 함께 성장해 나가고 있습니다.
+                            우리는 모든 파트너들이 지속 가능한 경영을 할 수 있도록, 파트너십 체결 이후에도 끊임없는 소통을 통해 함께 성장해 나가고 있습니다.
                             이러한 지속적인 노력들이 우리가 하는 모든 일의 기반이 된다고 믿으니까요.<br>
                             <br>
                             우리는 목소리가 가진 힘과 가치를 누구보다 잘 알고있습니다. <br>
@@ -594,43 +609,47 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="services common-container">
 	<div class="content-wrapper">
 		<div class="grid-box">
-            <div class="grid-content common">
-                <h3 >JU만의 브랜드 경쟁력.</h3>
-                <div class="content-text">
-                    <p>
-                        JU는 전형적인 실용음악학원이나 보컬스튜디오와는 다른 길을 걸어갑니다.
-                        우리가 추구하는 가치는 노래나 발성, 특정 장르나 분야에 국한되는 것이 아닙니다.
-                        우리가 추구하는 가치는 "목소리 그 자체를 아우르는 교육을 하는 것"입니다.
-                    </p>
-                </div>
-            </div>
             <div class="grid-content content1">
-                <h3>이 영역은 제목 영역입니다.</h3>
+                <h3>경쟁력있는 비즈니스를 위한 설계.</h3>               
                 <div class="content-text">
                     <p>
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                        빠르게 변화하는 교육 시장의 트렌드. JU는 언제나 흐름을 앞서 나가며, 
+                        전형적인 실용음악학원이나 보컬스튜디오와는 다른 길을 걸어왔습니다.
+						그리고 이전의 트렌드와는 다르게 현재는 입시 위주의 교육 시장에서 벗어나, 
+						목소리 관련 교육 자체에 대한 수요가 증가하고 있습니다.<br>
+						JU는 이처럼 시장의 흐름을 이해하고,
+						그에 맞춰 다양한 교육 콘텐츠와 솔루션을 제공하고자 한 발 앞서 비즈니스 모델을 설계합니다.
                     </p>
                 </div>
             </div>
             <div class="grid-content content2">
-                <h3>제목 영역입니다.</h3>
+                <h3>
+                    지속 가능한 경영,<br>
+                    무한한 가능성.
+                </h3>
                 <div class="content-text">
                     <p>
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+                        우리의 목표는 파트너가 지속 가능한 경영을 할 수 있도록 돕는 것입니다.
+                        우리가 추구하는 가치는 "목소리 그 자체를 아우르는 교육 시스템을 만드는 것" 입니다.
+						그리고 그것은 목소리가 가진 무한한 가능성으로부터 시작된다고 믿습니다.
+						그렇기에 JU의 교육 시스템은 노래나 발성, 특정 장르나 분야에 국한되지 않으며,
+						성장 가능성을 가진 비즈니스 모델이라고 할 수 있죠.
+						JU는 단순히 교육을 제공하는 것을 넘어, 파트너와 함께 성장합니다.
                     </p>
                 </div>
             </div>
             <div class="grid-content content3">
-                <h3>제목 영역입니다.</h3>
+                <h3>
+					일관된 교육 경험을 위한 노력.
+				</h3>
                 <div class="content-text">
                     <p>
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
-                        내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다. 내용 영역입니다.
+						일관된 교육 경험을 제공하는 것은 JU의 핵심 가치 중 하나입니다. 
+						그리고 이것이 JU의 교육 시스템이 지속적으로 발전할 수 있었던 이유입니다.
+						우리는 우리가 가진 모든 노하우와 경험, 데이터를 공유하고, 협력하여 함께 성장합니다.
+						우리는 주기적으로 전 지점의 교육 현황과 데이터를 취합하며, 이를 바탕으로 보다 나은 교육 시스템을 만들기 위해 노력합니다.
+						단순히 본사와 지점 간의 일방적인 소통이 아니라, JU 전체가 함께 성장하는 셈이죠. 
+						이러한 노력들을 통해 JU의 모든 지점은 높은 수준의 일관된 교육 경험을 제공하고, 신뢰감 있는 브랜드 이미지를 구축하고 있습니다.
                     </p>
                 </div>
             </div>
@@ -643,7 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="about-ju-vision" class="vision common-container">
 	<div class="content-wrapper">
 		<div class="vision-content fade-in">
-			<h2 class="content-title">Our Vision (예시)</h2>
+			<h2 class="content-title">Our Vision</h2>
 			<p>
 				이것은 의미가 없는 테스트 문장입니다.
 				이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
