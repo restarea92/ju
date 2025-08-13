@@ -80,7 +80,7 @@
 	--common-text-color: white;
 	--content-title-padding-top: 0;
 	--fixed-wrapper-top: 0;
-	min-height: 100lvh;
+	min-height: 100svh;
 	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
 	position: relative;
 	padding-top:0;
@@ -105,7 +105,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 100lvh;
+		min-height: 100svh;
 	}
 	
 	h2.content-title {
@@ -498,7 +498,7 @@ const app = {
 			gsap.set(trigger, { 
 				"--hero-scroll-inverted-progress": 1,
                 "--hero-scroll-progress": 0,
-				height: "clamp(3000px, 200lvh, 5000px)",
+				height: "clamp(3000px, 200svh, 5000px)",
 			});
 
 			gsap.set(container, { 
@@ -507,7 +507,7 @@ const app = {
 		
 			gsap.set(fixedWrapper, { 
 				width:"100%",
-				minHeight:"100lvh",
+				minHeight:"100svh",
 				position: "sticky",
 			});
 
