@@ -93,6 +93,7 @@
 }
 
 #visual-section5 {
+  margin-bottom: 4rem;
   .content-wrapper {
     display: flex;
     gap: 2rem;

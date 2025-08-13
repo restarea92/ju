@@ -18,7 +18,7 @@
 </head>
 <body>
 <style>
-	body {
+	body, html {
 		overflow-x: clip;
         font-size: 17px;
         font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -41,7 +41,6 @@
 		--transition-smooth: all 0.3s ease;
 		--title-overlay-scale: 2;
     
-
         /* Typography Scale in this page only */
         --font-h1: 3.5rem;
         --font-h2: 2.5rem;
@@ -49,12 +48,40 @@
         --font-big: 1.25rem;
         --font-body: 1.125rem;
         --font-small: 1rem;
-
+		--font-size-typography: 2rem;
         /* Typography Scale in common pages */
         --font-size-primary-title: 4rem;
         --font-size-common-title: 3rem;
         --font-size-sub-title: 1.5rem;
 	}
+@media (max-width: 1280px) and (min-width: 1025px) {
+    /* 1025 ~ 1280 */
+    :root {        
+        --font-size-primary-title: 3rem;
+        --font-size-common-title: 2.5rem;
+        --font-size-sub-title: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+/* 769 ~ 1024 */
+    :root {    
+        --font-size-primary-titlee: clamp(2.5rem, max(5lvh, 5lvw), 3rem);
+        --font-size-common-title: 2rem;
+        --font-size-sub-title: clamp(1.125rem, max(3lvh, 3lvw), 1.25rem);
+		--font-size-typography: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {   
+		--font-big: 1.125rem;
+        --font-size-common-title: 1.75rem;
+        --font-size-primary-title: clamp(2rem, max(5lvh, 5lvw), 2.5rem);
+        --font-size-sub-title: clamp(1rem, max(3lvh, 3lvw), 1.125rem);
+		--font-size-typography: 1.5rem;
+    }
+}
 
 </style>
 
@@ -83,7 +110,8 @@
 	}
 
 	.content-title {
-		font-size: 3rem;
+		word-break: keep-all;
+		font-size: var(--font-size-primary-title);
 		font-weight: 800;
 		text-align: center;
 		margin-bottom: 4rem;
@@ -192,7 +220,7 @@
                 max-width: 40ch;
                 color: white;
                 font-weight: 700;
-                font-size: 2rem;
+                font-size: var(--font-size-typography);
             }
         }
     }
@@ -228,7 +256,7 @@
                 margin-top: 8rem;
             }
             h3, h2 {
-                font-size: calc(var(--font-size-common-title) * 0.75);
+                font-size: calc(var(--font-size-common-title));
                 grid-column: 2 / 12;
                 word-break: keep-all;
             }
@@ -242,6 +270,7 @@
                     margin: 0;
                     line-height: 1.57;
 					word-break: keep-all;
+					padding-bottom: 4rem;
                 }
             }
 
@@ -351,6 +380,103 @@
     }
 }
 
+@media (max-width: 1280px) and (min-width: 1025px) {
+
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+
+}
+
+@media (max-width: 768px) {
+
+/* Services Section */
+.services.common-container {
+    .grid-box {
+        .content-title {
+            grid-column: 2 / 12;
+        }
+        .grid-content {
+			grid-template-columns: repeat(12, minmax(0, 1fr));
+            display: grid;
+			gap: 0.5rem 0;
+            grid-column: 1 / 13;
+            margin-top: 4rem;
+            &:nth-child(n+2) {
+                margin-top: 4rem;
+            }
+
+            .content-text {
+                grid-column: 2 / 12;
+            }
+
+            &.content1 {
+                h3 {
+                    grid-column: 2 / 12;
+                }
+                .content-text {
+                    grid-column: 1 / 13;
+                }
+            }
+
+            &.content2 {
+                h3 {
+                    grid-column: 1 / 13;
+					grid-row: 1 / 2;
+                }
+                .content-text {
+                    grid-column: 1 / 13;
+					grid-row: 3 / 4;
+                }
+				.content-visual {
+					grid-column: 1 / 13;
+					grid-row: 2 / 3;
+					width: 100%;
+					height: 200px;
+					img {
+						height: 100%;
+						width: 100%;
+					}
+				}
+            }
+
+            &.content3 {
+                h3 {
+                    grid-column: 1 / 13;
+					grid-row: 2 / 3;
+                }
+                .content-text {
+                    grid-column: 1 / 13;
+					grid-row: 3 / 7;
+					a {
+						font-size: 0.875rem;
+						color: #06c;
+						text-decoration: none;
+						span {
+							text-decoration: none;
+						}
+						&:hover {
+							text-decoration: none;
+							span {
+								text-decoration: underline;
+							}
+							span.material-symbols-outlined {
+								text-decoration: none!important;
+							}
+						}
+					}
+					.shape-element {
+						display: none;
+					}
+                }
+				.content-visual {
+					display: none;
+				}
+            }
+        }
+    }
+}
+}
 
 /* Vision Section */
 .vision.common-container {
@@ -373,7 +499,7 @@
 			}
 
 			p {
-				font-size: 1.3rem;
+				font-size: var(--font-body);
 				color: #e0e0e0;
 				line-height: 1.475;
 				margin-bottom: 2rem;
@@ -436,7 +562,7 @@
 	
 	.advantages-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 2rem;
 		margin-top: 3rem;
 		
@@ -942,7 +1068,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						모든 예비 창업주분들께 JU의 운영방침과 시스템, 그리고 전문가로서 활동할수 있도록 필요한 모든 교육을 제공합니다.<br>
 						<a style="display: flex; align-items: center; margin-top: 0.5rem;" href="/41">
 							<span class="material-symbols-outlined" style="font-size: 1rem!important;">arrow_insert</span> 
-							<span>전문가 양성 교육에 대해 더 알아보기</span>
+							<span>전문가 과정 자세히보기</span>
 						</a>
 						<br>
 						우리는 주기적으로 전 지점의 교육 현황과 데이터를 취합하며, 이를 바탕으로 보다 나은 교육 시스템을 만들기 위해 노력합니다.
