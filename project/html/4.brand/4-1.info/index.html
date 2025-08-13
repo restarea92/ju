@@ -40,23 +40,24 @@
 .common-container {
 	position: relative;
 	z-index: 1;
-	--common-text-color: #333;
-	color: var(--common-text-color);
 	padding: 4rem 0;
+    
 	h2, h3, h4, h5 {
 		margin: 0;
 	}
-	
+
 	.content-wrapper {
 		display: block;
         max-width: var(--default-container-width);
         padding: 0 calc(var(--default-container-padding) / 2);
 		margin: 0 auto;
 	}
+    
 	.content {
 		background:unset;
 		display: block;
 	}
+
 	.content-title {
 		font-size: 3rem;
 		font-weight: 800;
@@ -67,19 +68,15 @@
 	}
 	
 	h3 {
-		font-size: 1.5rem;
-		font-weight: 700;
-		text-align: center;
-		width: 75%;
-		color: var(--common-text-color);
+
 	}
 }
 </style>
 
 <!-- Common Content Style-->
 <style>
-/* Story Section */
-.story.common-container {
+/* Business Section */
+.Business.common-container {
 	--common-text-color: white;
 	--content-title-padding-top: 0;
 	--fixed-wrapper-top: 0;
@@ -97,6 +94,11 @@
 		top:0;
 		left: 0;
 		z-index: 0;
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
 	}
 	.content-wrapper {
 		z-index: 1;
@@ -244,7 +246,7 @@
 		aspect-ratio: 4 / 3;
 	}
 
-		&.scroll-end {
+	&.scroll-end {
 		.story-content {
 			opacity: 1;
 			transform: translateY(0);
@@ -425,19 +427,21 @@
 
 
 
-<!-- Story Section -->
-<div id="about-ju" class="story common-container">
+<!-- Business Section -->
+<div class="Business common-container">
 	<div class="hero-spacer">
 		<div class="fixed-wrapper">
-		<div class="overlay-background">
-			<img src="https://images.pexels.com/photos/3990842/pexels-photo-3990842.jpeg" width="1920" style="width: 100%; height: 100%; object-fit: cover;">
-		</div>
+            <div class="overlay-background">
+                <video id="landscapeVideo" autoplay muted playsinline loop>
+                    <source src="https://restarea92.github.io/ju/bsn_compressed.mp4" type="video/mp4" />
+                </video>
+            </div>
 			<div class="content-wrapper">
 				<div class="content">
 					<h2 class="content-title">
 						<div class="content-title-text">
-                            <span class="eyebrow-typography">Business with JUs</span>
-                            <span class="typography">성공을 향한 위대한 여정, JU 비즈니스.</span>
+                            <span class="eyebrow-typography">Business with JU</span>
+                            <span class="typography">비즈니스 성공 파트너, JU.</span>
 						</div>
 					</h2>
 					<div class="story-content">
