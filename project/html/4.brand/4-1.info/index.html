@@ -124,67 +124,8 @@
 			line-height: 1;
 		}
 		.content-title-text {
-			line-height: 1;
-			width: 100%;
-			height: fit-content;
-			width: fit-content;
-			display: flex;
-			z-index: 1;
-			font-size: min(4lvw, 5rem);
-			.will-change-overflow, .will-change-opacity, .will-change-transform {
-				will-change: transform filter opacity;
-			}
-			.will-change-overflow {
-				overflow: hidden;
-				filter: blur(0) brightness(1);
-				opacity: 1;
-				transform: scale(1);
-				transition: 0.3s filter 0.2s ease-in-out,
-							0.3s opacity 0.2s ease-in-out,
-							0.3s transform 0.2s ease-in-out
-							;
-			}
-			
-			.will-change-transform {
-				transform: translateX(0);
-				transition: 0.3s transform 0.2s;;
-			}
-			.will-change-opacity.before {
-				opacity: 0;
-				transition: 0s opacity 0s,
-							0.3s transform 0.2s;
-			}
-			.will-change-opacity.after {
-				opacity: 1;
-				transition: 0s opacity 0s,
-							0.3s transform 0.2s;
-			}
-		}
-		.overlay-text-wrapper {
-			display: grid;
-			justify-content: center;
-			grid-template-columns: min-content min-content 1fr;
-			width: 100%;
-			.hidden-text {
-				visibility: hidden;
-				opacity: 0;
-			}
-			> span {
-				grid-row: 1;
-			}
-			> span:nth-child(1) {
-				grid-column: 1 / 2;
-			}
-			> span:nth-child(2) {
-				grid-column: 2 / 3;
-			}
-			> span:nth-child(3) {
-				grid-column: 3 / 4;
-			}
-			> span:nth-child(4) {
-				grid-column: 3 / 4;
-			}
-		}
+            font-size: var(--font-size-title);
+        }
 	}
 
 
@@ -433,7 +374,7 @@
 		<div class="fixed-wrapper">
             <div class="overlay-background">
                 <video id="landscapeVideo" autoplay muted playsinline loop>
-                    <source src="https://restarea92.github.io/ju/bsn_compressed.mp4" type="video/mp4" />
+                    <source src="https://restarea92.github.io/ju/bsn2_compressed.mp4" type="video/mp4" />
                 </video>
             </div>
 			<div class="content-wrapper">
