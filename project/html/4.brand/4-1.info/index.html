@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/FilterBlurPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" href="https://restarea92.github.io/ju/project/static/css/custom_style.css">
+</head>
+<body>
+    
+<!-- Document Root Style -->
+<style>
+
+	:root {
+		--gradient-primary: linear-gradient(45deg, #667eea, #764ba2);
+		--shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.3);
+		--border-glass: 1px solid rgba(255, 255, 255, 0.1);
+		--bg-glass: rgba(255, 255, 255, 0.05);
+		--backdrop-blur: blur(20px);
+		--transition-smooth: all 0.3s ease;
+		 --title-overlay-scale: 2
+	}
+    body {
+        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+</style>
+
+<!-- Override Common Container Style-->
+<style>
+/* 공통 컨테이너 스타일 */
+.common-container {
+	position: relative;
+	z-index: 1;
+	--common-text-color: #333;
+	color: var(--common-text-color);
+	padding: 4rem 0;
+	h2, h3, h4, h5 {
+		margin: 0;
+	}
+	
+	.content-wrapper {
+		display: block;
+        max-width: var(--default-container-width);
+        padding: 0 calc(var(--default-container-padding) / 2);
+		margin: 0 auto;
+	}
+	.content {
+		background:unset;
+		display: block;
+	}
+	.content-title {
+		font-size: 3rem;
+		font-weight: 800;
+		text-align: center;
+		margin-bottom: 4rem;
+		color: var(--common-text-color);
+		position: relative;
+	}
+	
+	h3 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		text-align: center;
+		width: 75%;
+		color: var(--common-text-color);
+	}
+}
+</style>
+
+<!-- Common Content Style-->
+<style>
+/* Story Section */
+.story.common-container {
+	--common-text-color: white;
+	--content-title-padding-top: 0;
+	--fixed-wrapper-top: 0;
+	min-height: 100lvh;
+	background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+	position: relative;
+	padding-top:0;
+	.fixed-wrapper {
+		top: var(--fixed-wrapper-top);
+	}
+	.overlay-background {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top:0;
+		left: 0;
+		z-index: 0;
+	}
+	.content-wrapper {
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100lvh;
+	}
+	
+	h2.content-title {
+		display: grid;
+		grid-template-columns: 1fr;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		line-height: 1;
+		margin: 0 auto;
+		span {
+			display: flex;
+			line-height: 1;
+		}
+		.content-title-text {
+			line-height: 1;
+			width: 100%;
+			height: fit-content;
+			width: fit-content;
+			display: flex;
+			z-index: 1;
+			font-size: min(4lvw, 5rem);
+			.will-change-overflow, .will-change-opacity, .will-change-transform {
+				will-change: transform filter opacity;
+			}
+			.will-change-overflow {
+				overflow: hidden;
+				filter: blur(0) brightness(1);
+				opacity: 1;
+				transform: scale(1);
+				transition: 0.3s filter 0.2s ease-in-out,
+							0.3s opacity 0.2s ease-in-out,
+							0.3s transform 0.2s ease-in-out
+							;
+			}
+			
+			.will-change-transform {
+				transform: translateX(0);
+				transition: 0.3s transform 0.2s;;
+			}
+			.will-change-opacity.before {
+				opacity: 0;
+				transition: 0s opacity 0s,
+							0.3s transform 0.2s;
+			}
+			.will-change-opacity.after {
+				opacity: 1;
+				transition: 0s opacity 0s,
+							0.3s transform 0.2s;
+			}
+		}
+		.overlay-text-wrapper {
+			display: grid;
+			justify-content: center;
+			grid-template-columns: min-content min-content 1fr;
+			width: 100%;
+			.hidden-text {
+				visibility: hidden;
+				opacity: 0;
+			}
+			> span {
+				grid-row: 1;
+			}
+			> span:nth-child(1) {
+				grid-column: 1 / 2;
+			}
+			> span:nth-child(2) {
+				grid-column: 2 / 3;
+			}
+			> span:nth-child(3) {
+				grid-column: 3 / 4;
+			}
+			> span:nth-child(4) {
+				grid-column: 3 / 4;
+			}
+		}
+	}
+
+
+	.story-content {
+		transition: 0.3s all ;
+		opacity: 0;
+		margin-top: 1rem;
+		display: grid;
+		gap: 4rem;
+		align-items: center;
+		transform: translateY(10%);
+		grid-auto-columns: 1fr;
+	}
+
+	.story-text {
+		grid-column: 1 / 2;
+		color: #e0e0e0;
+		
+		h3 {
+			font-size: 2rem;
+			color: white;
+			margin-bottom: 1.5rem;
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			width: 100%;
+			text-align: left;
+		}
+		
+		p {
+			font-size: 1.125rem;
+			margin-bottom: 1.5rem;
+			line-height: 1.57;
+			color: #a6a6a9;
+			font-weight: 700;
+			strong {
+				font-weight: 700;
+				color: white;
+			}
+		}
+		a {
+            color: #06c;
+            &:hover {
+                text-decoration: underline;
+                font-size: 1rem;
+            }
+        }
+	}
+
+	.story-visual {
+		grid-column: 2 / 3;
+		position: relative;
+		background: var(--gradient-primary);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+	}
+
+		&.scroll-end {
+		.story-content {
+			opacity: 1;
+			transform: translateY(0);
+			transition: 0.3s all ;
+		}
+		h2 {
+			.content-title-text {
+				.will-change-overflow {
+					filter: blur(16px) brightness(0.5);
+					opacity: 0;
+					transform: scale(0.5);
+					transition: 0.3s filter 0.2s ease-in-out,
+								0.3s opacity 0.2s ease-in-out,
+								0.3s transform 0.2s ease-in-out
+								;
+				}
+				.will-change-transform {
+					transform: translateX( calc(-1 * var(--will-change-overflow-width)) );
+					transition: 0.3s transform 0.2s;
+				}
+				.will-change-opacity.before {
+					opacity: 1;
+					transition: 0.3s opacity 0.5s,
+								0.3s transform 0.2s
+					;
+				}
+				.will-change-opacity.after {
+					opacity: 0;
+					transition: 0.3s opacity 0.3s,
+								0.3s transform 0.2s;
+				}
+			}
+		}
+	}
+}
+
+/* Services Section */
+.services.common-container {
+	--common-text-color: white;
+	background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 40px;
+		margin-top: 60px;
+	}
+
+	.service-card {
+		background: var(--bg-glass);
+		padding: 40px 30px;
+		border-radius: 20px;
+		text-align: center;
+		backdrop-filter: var(--backdrop-blur);
+		border: var(--border-glass);
+		transition: var(--transition-smooth);
+		position: relative;
+		overflow: hidden;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+			transition: left 0.3s ease;
+		}
+
+		&:hover {
+			transform: translateY(-10px);
+			box-shadow: var(--shadow-hover);
+
+			&::before {
+				left: 100%;
+			}
+		}
+
+		.service-icon {
+			font-size: 3rem;
+			margin-bottom: 1.5rem;
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		h4 {
+			font-size: 1.5rem;
+			color: white;
+			margin-bottom: 1rem;
+		}
+
+		p {
+			color: #b0b0b0;
+			line-height: 1.6;
+		}
+	}
+}
+
+
+/* Vision Section */
+.vision.common-container {
+	--common-text-color: white;
+	background: linear-gradient(135deg, #333, #2d2d2d);
+	text-align: center;
+
+	.vision-content {
+		max-width: 800px;
+		margin: 0 auto;
+
+		h2 {
+			font-size: 3rem;
+			color: white;
+			margin-bottom: 2rem;
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			text-align: center !important;
+		}
+
+		p {
+			font-size: 1.3rem;
+			color: #e0e0e0;
+			line-height: 1.475;
+			margin-bottom: 2rem;
+		}
+	}
+
+	.vision-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 40px;
+		margin-top: 60px;
+
+		.stat {
+			background: var(--bg-glass);
+			padding: 30px 20px;
+			border-radius: 15px;
+			border: var(--border-glass);
+
+			.stat-number {
+				font-size: var(--h2-font-size);
+				font-weight: bold;
+				color: #667eea;
+				margin-bottom: 0.5rem;
+			}
+
+			.stat-label {
+				color: #b0b0b0;
+				font-size: 1rem;
+			}
+			
+			.reference {
+				color: #666669;
+				font-size: 0.75rem;
+			}
+		}
+	}
+}
+</style>
+
+
+<style>
+
+.fade-in {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: var(--transition-smooth);
+
+	&.visible {
+		opacity: 1;
+		transform: translateY(0);
+		
+	}
+}
+</style>
+
+
+
+<!-- Story Section -->
+<div id="about-ju" class="story common-container">
+	<div class="hero-spacer">
+		<div class="fixed-wrapper">
+		<div class="overlay-background">
+			<img src="https://images.pexels.com/photos/3990842/pexels-photo-3990842.jpeg" width="1920" style="width: 100%; height: 100%; object-fit: cover;">
+		</div>
+			<div class="content-wrapper">
+				<div class="content">
+					<h2 class="content-title">
+						<div class="content-title-text">
+                            <span class="eyebrow-typography">Business with JUs</span>
+                            <span class="typography">성공을 향한 위대한 여정, JU 비즈니스.</span>
+						</div>
+					</h2>
+					<div class="story-content">
+						<div class="story-text">
+							<h3>목소리에 대한 모든 것.</h3>
+							<p>
+								<strong>언제나 한 발 앞선 교육 시스템.</strong> JU 보컬&발성 전문 스튜디오는 목소리 전반을 다룹니다. 보컬 뿐만 아니라 발성, 목소리 교정, 성대 질환 후 재활 등 <strong>목소리가 필요한 모든 분야를 아우릅니다.</strong><br>
+								JU만의 자체 개발 커리큘럼은 전국 16개 지점의 수 많은 수강생들의 데이터들을 취합하여 수 많은 문제점에 체계적으로 대응하는 것은 물론, 목소리에 대한 분야라면 무엇이든 가리지 않고 적용이 가능하죠.<br>
+								이토록 복잡한 매커니즘을 이해하려 애쓰지 않아도, 자연스레 터득할 수 있도록 어려운 단어와 전문 용어보다는 <strong>쉽고 직관적인 표현으로 교육합니다.</strong><br>
+								JU의 커리큘럼이 누구에게나 이전보다 더 빠르고 효과적일 수 밖에 없는 이유가 바로 여기에 있죠. <br>
+								JU는 말 뿐이 아닌 <strong>눈에 보이는 결과로 증명합니다.</strong><br>
+							</p>
+							<!-- 수강생 결과물 보러가기 -->
+							<a href="" class="">수강생 결과물 보러가기 ></a>
+						</div>
+						<div class="story-visual fade-in"><img src="https://restarea92.github.io/ju/ailogop.jpg" width="800" style="width: 100%; height: 100%; object-fit: cover;" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="module">
+/**
+ * Visual Scroll Animation Module
+ * Handles scroll-triggered visual effects with GSAP and ScrollTrigger
+ * @version 1.0.7
+ */
+
+import { initGSAP } from 'https://restarea92.github.io/ju/modules/gsapUtils.js';
+
+const app = {
+    // ========== Configuration ==========
+    CONFIG: {
+        VERSION: '1.0.0',
+    },
+
+    // ========== DOM Elements Cache ==========
+    elements: {
+        spacer: document.querySelector('.hero-spacer'),
+		container: document.querySelector('#about-ju.common-container'),
+		get trigger() { return this.spacer },
+		get fixedWrapper() { return this.trigger?.querySelector('.fixed-wrapper'); },
+		get content() { return this.trigger?.querySelector('.content')},
+		get contentWrapper() { return this.trigger?.querySelector('.content-wrapper')},
+		get contentTitle() {return this.trigger?.querySelector('.content-title')},
+		get contentTitleText() { return this.trigger?.querySelector('.content-title-text')},
+		get overlay() { return this.trigger?.querySelector('.overlay-background'); },
+        get contentTitleOverlay() { return this.trigger?.querySelector('.content-title-text .overlay-text-wrapper'); },
+		get hiddenText() { return this.contentTitleOverlay?.querySelector('.hidden-text'); },
+		get offsetText() { return this.contentTitleOverlay?.querySelector('.offset-text'); },
+    },
+	
+    // ========== Initialization ==========
+	init() {
+		console.log(this.CONFIG.VERSION);
+		if (!initGSAP()) return;
+
+		this.setHeaderHeightVariable();
+		this.initHeroScroll();
+
+		let resizeTimer;
+		let isTouching = false;
+
+		// 모바일 터치 감지 (pinch zoom 포함)
+		window.addEventListener("touchstart", () => {
+			isTouching = true;
+		});
+
+		window.addEventListener("touchend", () => {
+			setTimeout(() => { // 약간의 딜레이 후 터치 종료 처리
+				isTouching = false;
+			}, 500);
+		});
+
+		// 리사이즈 종료 감지 (디바운스)
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				if (!isTouching) {
+					this.setHeaderHeightVariable();
+					this.initHeroScroll();
+				}
+			}, 300); // 300ms 동안 추가 resize 이벤트 없을 때 실행
+		});
+	},
+
+
+    // ========== Hero Scroll Animation Setup ==========
+    initHeroScroll() {
+        // 기존 타임라인 kill
+        if (this.tl) {
+            this.tl.kill();
+            this.tl = null;
+        }
+
+		const trigger = this.elements.trigger;
+		const container = this.elements.container;
+		const fixedWrapper = this.elements.fixedWrapper;
+		const overlay = this.elements.overlay;
+		const overlayImage = overlay?.querySelector('img');
+		const content = this.elements.content;
+		const contentWrapper = this.elements.contentWrapper;
+		const contentTitle = this.elements.contentTitle;
+		const contentTitleText = this.elements.contentTitleText;
+
+		const hiddenText = this.elements.hiddenText;
+		const offsetText = this.elements.offsetText;
+		const contentTitleOverlay = this.elements.contentTitleOverlay;
+
+        if (trigger && contentTitleOverlay) {
+			gsap.set(trigger, { 
+				"--hero-scroll-inverted-progress": 1,
+                "--hero-scroll-progress": 0,
+				height: "clamp(3000px, 200lvh, 5000px)",
+			});
+
+			gsap.set(container, { 
+				marginTop: "calc(-1 * var(--header-height))",
+			});
+		
+			gsap.set(fixedWrapper, { 
+				width:"100%",
+				minHeight:"100lvh",
+				position: "sticky",
+			});
+
+			gsap.set(contentTitle, {
+				paddingTop:0,
+			});
+
+			const rect = contentTitleText.getBoundingClientRect();
+			const centerX = window.innerWidth / 2;
+			const centerY = window.innerHeight / 2;
+
+			const offsetX = rect.left + rect.width / 2 - centerX;
+			const offsetY = content.offsetTop - centerY;
+			const fixedTop = parseFloat(getComputedStyle(container)
+				.getPropertyValue('--fixed-wrapper-top')) || 0;
+			
+			const willChangeOverflow = document.querySelector('.will-change-overflow');
+			const willChangeOverflowWidth = willChangeOverflow?.clientWidth || 0;
+			gsap.set(fixedWrapper, { 
+				"--will-change-overflow-width": `${willChangeOverflowWidth}px`,
+			});
+
+			gsap.set(contentTitleOverlay, {
+				transformOrigin: "center",
+				zIndex: 1,
+				x: -offsetX,
+				y: -offsetY - fixedTop,
+				scale: "var(--title-overlay-scale)",
+			});
+			
+			gsap.set(overlay, {
+				willChange: "filter",
+				filter: "blur(0)",
+			});
+			gsap.set(overlayImage, {
+				willChange: "filter",
+				filter: "brightness(0.9)",
+			});
+
+			this.tl = this.createTimeline({
+				start: "top top",
+				end: "center center",
+				onUpdate: self => {
+					if (self.progress >= 1) {
+						this.elements.container.classList.add('scroll-end');
+					} else {
+						this.elements.container.classList.remove('scroll-end');
+					}
+				}
+			});
+
+			this.tl.to(contentTitleOverlay, {
+				ease: "power3.inOut",
+				y: 0,
+			}, 0)
+			.to(contentTitleOverlay, {
+				ease: "power3.out", 
+				x: 0,
+				scale: 1,
+			}, 0)
+			.to(contentTitle, {
+				ease: "power3.out", 
+			}, 0)
+			.to(overlay, {
+				ease: "power3.out", 
+				filter: "blur(32px)"
+			}, 0) 
+			.to(overlayImage, {
+				ease: "power3.inOut", 
+				filter: "brightness(0.33)",
+			}, 0);
+		} 
+	},
+
+    // ========== 상태 관리 ==========
+    setHeaderHeightVariable() {
+        const header = document.getElementById('doz_header_wrap');
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    },
+
+    createTimeline(options = {}) {
+        return gsap.timeline({
+            scrollTrigger: {
+                trigger: this.elements.trigger, 
+                start: "top bottom",
+                end: "bottom bottom",
+                scrub: 1,
+                onUpdate: self => {
+                    // 필요한 경우 progress 활용 가능
+                },
+                ...options,
+            }
+        });
+    },
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	app.init();
+});
+</script>
+
+
+
+<!-- Services Section -->
+<div id="about-ju-services" class="services common-container">
+	<div class="content-wrapper">
+		<h2 class="content-title fade-in">Why JU?</h2>
+		<div class="services-grid">
+			<div class="service-card fade-in">
+				<div class="service-icon">🎵</div>
+				<h4>Music</h4>
+				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎙️</div>
+				<h4>Recording</h4>
+				<p>이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎧</div>
+				<h4>Headphone</h4>
+				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+			</div>
+			<div class="service-card fade-in">
+				<div class="service-icon">🎭</div>
+				<h4>Acting</h4>
+				<p>이것은 의미가 없는 테스트 문장입니다. 이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 이것은 테스트 문장입니다.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Vision Section -->
+<div id="about-ju-vision" class="vision common-container">
+	<div class="content-wrapper">
+		<div class="vision-content fade-in">
+			<h2 class="content-title">Our Vision (예시)</h2>
+			<p>
+				이것은 의미가 없는 테스트 문장입니다.
+				이것은 테스트 문장입니다. 이것은 의미가 없는 테스트 문장이기 때문입니다. 
+			</p>
+		</div>
+		<div class="vision-stats">
+			<div class="stat fade-in">
+				<div class="stat-number" data-target="15200" data-unit="+">0</div>
+				<div class="stat-label">지금까지 함께한 수강생</div>
+				<div class="reference">2024년 7월까지 집계 기준</div>
+			</div>
+			<div class="stat fade-in">
+				<div class="stat-number" data-target="8" data-unit=" 년">0</div>
+				<div class="stat-label">운영 연수</div>
+				<div class="reference">2025년 현재 기준</div>
+			</div>
+			<div class="stat fade-in">
+				<div class="stat-number" data-target="15" data-unit="+">0</div>
+				<div class="stat-label">지점 수</div>
+				<div class="reference">2025년 현재</div>
+			</div>
+			<div class="stat fade-in">
+				<div class="stat-number" data-target="98" data-unit="%">0</div>
+				<div class="stat-label">만족도</div>
+				<div class="reference">2024년 7월 온라인 후기 집계기준</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+// 기존 스크롤 애니메이션 코드 + 카운터 애니메이션 추가
+const options = {
+	observerOptions: {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	},
+	transformYOffset: 30 // 예: transform: translateY(100px) 고려용
+};
+// 카운터 애니메이션 함수
+
+function animateCounter(element) {
+	const target = parseFloat(element.dataset.target);
+	const unit = element.dataset.unit || '';
+	const duration = 2000;
+	let current = 0;
+
+	const step = target / (duration / 16);
+
+	const timer = setInterval(() => {
+		current += step;
+		if (current >= target) {
+			current = target;
+			clearInterval(timer);
+		}
+
+		const isFinal = current === target;
+		let displayValue;
+
+		if (target < 1000 && current < 1000) {
+			displayValue = Math.floor(current).toString();
+
+		} else if (current < 1000) {
+			displayValue = Math.floor(current).toString();
+
+		} else {
+			const kValue = current / 1000;
+			const rounded = Math.round(kValue * 10) / 10;
+
+			if (isFinal && rounded % 1 === 0) {
+				displayValue = `${Math.floor(rounded)}k`;
+			} else {
+				displayValue = `${rounded.toFixed(1)}k`;
+			}
+		}
+
+		// unit이 '+'일 때는 마지막에만 붙임
+		if (unit === '+') {
+			element.textContent = isFinal ? displayValue + '+' : displayValue;
+		} else {
+			element.textContent = displayValue + unit;
+		}
+
+	}, 16);
+}
+
+	const observer = new IntersectionObserver(function(entries) {
+		entries.forEach(entry => {
+			const el = entry.target;
+
+			if (entry.isIntersecting) {
+				if (!el.classList.contains('visible')) {
+					el.classList.add('visible');
+
+					if (el.classList.contains('stat-number')) {
+						animateCounter(el); // 중복 실행 방지
+					}
+				}
+
+			} else {
+				const elementTop = entry.boundingClientRect.top;
+				const viewportTop = entry.rootBounds.top;
+
+				// 아래로 스크롤해 나간 경우에만 클래스 제거
+				if (elementTop > viewportTop) {
+					el.classList.remove('visible');
+				}
+			}
+		});
+	}, options.observerOptions);
+
+	document.querySelectorAll('.fade-in').forEach(el => {
+		const rect = el.getBoundingClientRect();
+		console.log(rect.bottom);
+		if (rect.bottom < 0) {
+			el.classList.add('visible');
+		}
+
+		// 관찰 시작
+		observer.observe(el);
+	});
+
+	// stat-number 개별 관찰 추가
+	document.querySelectorAll('.stat-number').forEach(el => {
+		observer.observe(el);
+	});
+});
+</script>
+
+
+
+</body>
+</html>

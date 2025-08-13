@@ -2,11 +2,26 @@
 <style>
 .courses.common-container {
     padding-top: 8rem;
-    background: var(--gradient-bg);
+    background: black;
 
     .content-wrapper {
         display: grid;
         grid-template-columns: 1fr;
+    }
+    .overlay-background {
+        position: absolute;
+        width: 100lvw;
+        height: 90%;
+        bottom: 0;
+        left:50%;
+        z-index: -1;
+        transform: translateX(-50%);
+        img {
+            filter: brightness(0.5);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
 
     h2.content-title {
@@ -15,7 +30,7 @@
         font-weight: 800;
         font-size: var(--font-size-common-title);
         margin-bottom: 4rem;
-        color:black;
+        color:white;
     }
 
     .courses-grid {
@@ -33,7 +48,8 @@
         opacity: 0;
         will-change: transform, opacity;
         border-radius: 1rem;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.125);
+        backdrop-filter: blur(8px);
         grid-column: 1;
         grid-row: 1 / span var(--grid-card-count);
         z-index: 1;
@@ -42,9 +58,13 @@
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.125);
         padding: 2rem;
         h3 {
+            color:white;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
+        }
+        p {
+            color:white;
         }
     }
 
@@ -73,18 +93,15 @@
         }
     }
 }
-
-
-/* Process Section */
+/* Process Section - Dark Theme */
 .process.common-container {
-    background: var(--white);
+    background: #121212; /* 어두운 배경 */
 
     .content-wrapper {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 40px;
     }
-
 
     .process-steps {
         display: grid;
@@ -95,15 +112,15 @@
     .step {
         text-align: center;
         padding: 2rem;
-        background: rgba(99, 102, 241, 0.02);
+        background: rgba(255, 255, 255, 0.03); /* 살짝 밝은 카드 배경 */
         border-radius: 1rem;
-        border: 1px solid rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         transition: all 0.3s ease;
     }
 
     .step:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .step-number {
@@ -124,20 +141,23 @@
         font-size: var(--font-h3);
         font-weight: 600;
         margin-bottom: 1rem;
+        color: #fff;
     }
 
     .step p {
-        color: var(--text-light);
+        color: rgba(255, 255, 255, 0.6);
     }
 }
-
 
 </style>
 
 <div id="courses" class="courses common-container">
     <div class="scroll-spacer">
         <div class="content-wrapper sticky-element">
-            <h2 class="content-title">JU는 이렇게 교육합니다.</h2>
+            <h2 class="content-title">가르치는 것, 그 이상.</h2>
+            <div class="overlay-background">
+                <img src="https://images.pexels.com/photos/7586662/pexels-photo-7586662.jpeg" alt="">
+            </div>
             <div class="courses-grid">
                 <div class="course-card" style="--course-card-i:1;">
                     <h3>코스 설명 카드 1</h3>
